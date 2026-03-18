@@ -2,7 +2,7 @@
 
 ## What This Is
 
-Personal portfolio for Branislav Benčík, Senior Product Designer. 7 pages, 5 unique templates. The goal is a deployed site on Vercel by Sunday March 23, 2026, good enough to apply to FTMO with.
+Personal portfolio for Branislav Benčík, Senior Product Designer. 7 pages, 5 unique templates.
 
 ## Tech Stack
 
@@ -97,6 +97,7 @@ Bridge gotchas: Pairing expires in 5 min. REST API is burned (free plan). Comple
 - One deliverable per session (one page, or one component system)
 - 30-40 exchanges max, then /compact or new session
 - Update the Status section below before ending each session
+- Before committing, run `git add .` — images and binary files are easy to miss with selective staging
 - If Claude gets confused: "Stop. Re-read CLAUDE.md."
 - Don't research, plan, AND build in the same session
 

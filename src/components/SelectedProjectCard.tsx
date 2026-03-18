@@ -21,13 +21,13 @@ export default function SelectedProjectCard({
   return (
     <Link href={href} className="group flex flex-col no-underline text-[#171717]" style={{ gap: "8px" }}>
       {/* Thumbnail */}
-      <div className="w-full overflow-hidden rounded-sm border border-[rgba(23,23,23,0.1)] bg-[#f5f5f5]">
+      <div className="relative w-full aspect-[3/2] overflow-hidden rounded-sm border border-[rgba(23,23,23,0.1)] bg-[#f5f5f5]">
         <Image
           src={image}
           alt={imageAlt}
-          width={2232}
-          height={1520}
-          style={{ width: "100%", height: "auto", display: "block" }}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 558px"
         />
       </div>
 

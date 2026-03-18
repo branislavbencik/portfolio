@@ -1,28 +1,23 @@
 # Portfolio Build Status
 
-## Current State
-- **Day:** 1 (Wednesday March 18)
-- **Sprint end:** Sunday March 23
-- **Last session:** Session 1 — scaffold
+**Day:** 1 of 5 (Wed Mar 18) · **Deploy:** portfolio-lac-pi-40.vercel.app · **Sprint end:** Sun Mar 23
 
-## What's Done
-- [x] Project scaffolded with create-next-app
-- [x] next.config.ts — static export, unoptimized images, MDX plugin
-- [x] @next/mdx + @mdx-js/loader + @mdx-js/react installed
-- [x] src/mdx-components.tsx created (App Router MDX requirement)
-- [x] globals.css — Figma design tokens in @theme (colors, spacing, typography)
-- [x] Route folders: /skoala, /teatime, /nnspect, /sakurabook, /about (placeholder pages)
-- [x] Directories: src/content, src/components, public/images/{skoala,teatime,nnspect,sakurabook}
-- [x] src/app/page.tsx stripped to bare "Portfolio" heading
-- [x] npm run build passes (static export)
+## Pages
+`/` → Done (landing) · `/skoala` → Stub · `/teatime` → Stub · `/nnspect` → Stub · `/sakurabook` → Stub · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-- Git push → Vercel deploy empty shell
-- Build landing page (Day 1)
+Day 2: Skoala case study page (`/skoala`)
 
-## Decisions Made
-- Tailwind v4 (create-next-app default) — tokens live in globals.css @theme, not tailwind.config.ts
-- Next.js 16.1.7 (latest at scaffold time), App Router
+## Session Log
+1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
+2. Landing page — Nav, case study cards, selected project grid (`990a8aa`)
+3. Thumbnails — added project images, pushed to git to fix Vercel display (`583a3f2`, `6a9c53c`)
 
 ## Known Issues
 (none)
+
+## Decisions
+- Tailwind v4: tokens in `globals.css @theme`, not `tailwind.config.ts`
+- Next.js 15 App Router, static export
+- MDX pages live in route folders (`/skoala/page.mdx`), not `src/content/`
+- `next/image` with `fill` + `aspect-ratio` works fine for static export — images just need to be committed
