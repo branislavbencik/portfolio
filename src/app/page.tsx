@@ -176,13 +176,13 @@ function CaseStudyCard({
       {/* Right — image ~65% */}
       <div className="flex-1 min-w-0">
         <Link href={primaryHref} className="block">
-          <div className="relative w-full aspect-[780/520] overflow-hidden rounded-md border border-[rgba(23,23,23,0.08)] bg-[#f5f5f5]">
+          <div className="w-full overflow-hidden rounded-md border border-[rgba(23,23,23,0.08)] bg-[#f5f5f5]">
             <Image
               src={image}
               alt={imageAlt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 1200px) 65vw, 780px"
+              width={2232}
+              height={1296}
+              style={{ width: "100%", height: "auto", display: "block" }}
             />
           </div>
         </Link>
