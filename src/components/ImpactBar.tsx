@@ -10,13 +10,13 @@ interface ImpactBarProps {
 export function ImpactBar({ items }: ImpactBarProps) {
   return (
     <div className="w-full bg-black py-section">
-      <div className="w-full max-w-text mx-auto flex items-start" style={{ gap: "80px" }}>
+      <div className="w-full max-w-text mx-auto flex items-start gap-impact">
         {items.map((item, i) => (
-          <div key={i} className="flex flex-col" style={{ gap: "8px" }}>
-            <span className="font-semibold text-white type-h1">
+          <div key={i} className="flex flex-col gap-selected-card">
+            <span className="type-h1 text-white">
               {item.value}
             </span>
-            <span className="text-[14px] leading-[1.5] text-grey-400">
+            <span className="type-body-s text-foreground-tertiary">
               {item.label}
             </span>
           </div>
