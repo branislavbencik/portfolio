@@ -20,6 +20,7 @@
   --foreground-secondary: var(--grey-700);
   --foreground-tertiary:  var(--grey-500);
   --background-alt:       var(--grey-100);
+  --background-alt-2:     var(--grey-200);
   --border-strong:        var(--grey-300);
   --border-light:         var(--grey-200);
 }
@@ -44,6 +45,7 @@
   --color-foreground-secondary: var(--foreground-secondary);
   --color-foreground-tertiary:  var(--foreground-tertiary);
   --color-background-alt:       var(--background-alt);
+  --color-background-alt-2:     var(--background-alt-2);
   --color-border-strong:        var(--border-strong);
   --color-border-light:         var(--border-light);
 
@@ -99,6 +101,29 @@
   --letter-spacing-h3:     -0.02em;
   --letter-spacing-h4:     -0.02em;
   --letter-spacing-allcaps: 0.05em;
+}
+
+@layer utilities {
+  .type-h1 {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-h1);
+    letter-spacing: var(--letter-spacing-h1);
+  }
+  .type-h2 {
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-h2);
+    letter-spacing: var(--letter-spacing-h2);
+  }
+  .type-h3 {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    letter-spacing: var(--letter-spacing-h3);
+  }
+  .type-h4 {
+    font-size: var(--font-size-h4);
+    line-height: var(--line-height-h4);
+    letter-spacing: var(--letter-spacing-h4);
+  }
 }
 
 body {

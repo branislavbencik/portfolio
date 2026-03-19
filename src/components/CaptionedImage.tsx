@@ -47,10 +47,7 @@ export function CaptionedImage({
         />
       </div>
       {caption && (
-        <figcaption
-          className="text-[14px] leading-[1.5] text-foreground-secondary text-center"
-          style={{ marginTop: "12px" }}
-        >
+        <figcaption className="text-[14px] leading-[1.5] text-foreground-secondary text-center mt-[12px]">
           {caption}
         </figcaption>
       )}

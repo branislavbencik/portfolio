@@ -6,15 +6,7 @@ export default function Home() {
     <main className="w-full max-w-frame mx-auto px-content-x">
       {/* ── Case Studies ───────────────────────────────────────── */}
       <section className="py-section">
-        <h1
-          className="font-semibold text-foreground"
-          style={{
-            fontSize: "64px",
-            lineHeight: "1",
-            letterSpacing: "-0.04em",
-            marginBottom: "64px",
-          }}
-        >
+        <h1 className="font-semibold text-foreground type-h1 mb-section">
           Case studies
         </h1>
 
@@ -49,15 +41,7 @@ export default function Home() {
 
       {/* ── Selected Projects ──────────────────────────────────── */}
       <section className="py-section border-t border-border-light">
-        <h2
-          className="font-semibold text-foreground"
-          style={{
-            fontSize: "64px",
-            lineHeight: "1",
-            letterSpacing: "-0.04em",
-            marginBottom: "64px",
-          }}
-        >
+        <h2 className="font-semibold text-foreground type-h1 mb-section">
           Selected projects
         </h2>
 

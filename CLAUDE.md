@@ -103,8 +103,8 @@ Bridge gotchas: Pairing expires in 5 min. REST API is burned (free plan). Comple
 
 ## Current Status
 
-**Last updated:** Not started yet
-**Current day:** Day 0
-**What's done:** Nothing
-**What's next:** Day 1 — scaffold project, build landing page
+**Last updated:** 2026-03-19
+**Current day:** Day 1
+**What's done:** Landing page (nav, case study cards, selected project cards, footer); design token system in globals.css (primitives + semantic tokens + `type-h*` utility classes); all shared components (Nav, CaseStudyCard, SelectedProjectCard, ImpactBar, CaseStudyHeader, WorkSection, CaptionedImage, ContributionList, MetadataRow, NextProject, Footer)
+**What's next:** Day 2 — Skoala case study page
 **Blockers:** None

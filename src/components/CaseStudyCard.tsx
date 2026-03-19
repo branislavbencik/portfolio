@@ -31,10 +31,7 @@ export function CaseStudyCard({
         <p className="text-[14px] font-medium leading-[1.4] tracking-[0.05em] uppercase text-foreground-secondary">
           {meta}
         </p>
-        <h2
-          className="font-semibold text-foreground"
-          style={{ fontSize: "40px", lineHeight: "1.1", letterSpacing: "-0.04em" }}
-        >
+        <h2 className="font-semibold text-foreground type-h2">
           {headline}
         </h2>
         {description && (
@@ -45,7 +42,7 @@ export function CaseStudyCard({
         {highlight && (
           <p className="text-[16px] leading-[1.5] text-foreground">{highlight}</p>
         )}
-        <div className="flex items-center gap-5 flex-wrap" style={{ marginTop: "8px" }}>
+        <div className="flex items-center gap-5 flex-wrap mt-[8px]">
           <Link
             href={primaryHref}
             className="inline-block px-5 py-3 bg-foreground text-white text-[16px] font-semibold leading-[1.4] rounded-sm no-underline hover:opacity-80 transition-opacity"

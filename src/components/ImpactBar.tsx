@@ -13,14 +13,7 @@ export function ImpactBar({ items }: ImpactBarProps) {
       <div className="w-full max-w-text mx-auto flex items-start" style={{ gap: "80px" }}>
         {items.map((item, i) => (
           <div key={i} className="flex flex-col" style={{ gap: "8px" }}>
-            <span
-              className="font-semibold text-white"
-              style={{
-                fontSize: "64px",
-                lineHeight: "1",
-                letterSpacing: "-0.04em",
-              }}
-            >
+            <span className="font-semibold text-white type-h1">
               {item.value}
             </span>
             <span className="text-[14px] leading-[1.5] text-grey-400">

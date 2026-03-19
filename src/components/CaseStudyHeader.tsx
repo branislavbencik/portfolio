@@ -23,18 +23,9 @@ export function CaseStudyHeader({
   return (
     <section className="w-full max-w-frame mx-auto px-content-x py-section">
       {/* Text block — centered reading column */}
-      <div className="max-w-text mx-auto w-full" style={{ marginBottom: heroImage ? "64px" : "0" }}>
+      <div className={`max-w-text mx-auto w-full ${heroImage ? "mb-[64px]" : ""}`}>
         <MetadataRow company={company} role={role} year={year} />
-        <h1
-          className="font-semibold text-foreground"
-          style={{
-            fontSize: "64px",
-            lineHeight: "1",
-            letterSpacing: "-0.04em",
-            marginTop: "16px",
-            marginBottom: "24px",
-          }}
-        >
+        <h1 className="font-semibold text-foreground type-h1 mt-[16px] mb-[24px]">
           {headline}
         </h1>
         <div className="text-[20px] leading-[1.5] text-foreground-secondary">
