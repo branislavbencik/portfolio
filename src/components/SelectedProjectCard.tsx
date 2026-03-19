@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { TagPill } from "./TagPill";
 
 interface SelectedProjectCardProps {
   href: string;
@@ -41,9 +42,7 @@ export default function SelectedProjectCard({
           {meta}
         </p>
         <div className="pt-1">
-          <span className="inline-block px-1.5 py-0.5 rounded-xs border border-border-light bg-background-alt-2 text-[14px] leading-normal">
-            {tag}
-          </span>
+          <TagPill>{tag}</TagPill>
         </div>
       </div>
     </Link>

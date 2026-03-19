@@ -14,6 +14,7 @@ Day 3: TeaTime case study page (`/teatime`)
 3. Thumbnails — added project images, pushed to git to fix Vercel display (`583a3f2`, `6a9c53c`)
 4. Skoala case study — MetadataRow, CaseStudyHeader, ContributionList, ImpactBar, WorkSection, CaptionedImage components + full /skoala MDX page; CaseStudyCard extracted to shared component
 5. Skoala polish — WorkSection refactored to Tailwind, description prop, 552px text column fixed (added --max-width-* to globals.css), 100px image spacing, centered captions, double border at page end (two 1px lines, 8px gap)
+6. CaseStudyCard fixes — correct image aspect ratio (744×432), TagPill shared component, space-between layout pins buttons to bottom of left column
 
 ## Known Issues
 (none)
