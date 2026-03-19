@@ -19,9 +19,9 @@ export default function SelectedProjectCard({
   meta,
 }: SelectedProjectCardProps) {
   return (
-    <Link href={href} className="group flex flex-col no-underline text-[#171717]" style={{ gap: "8px" }}>
+    <Link href={href} className="group flex flex-col no-underline text-foreground" style={{ gap: "8px" }}>
       {/* Thumbnail */}
-      <div className="relative w-full aspect-[3/2] overflow-hidden rounded-sm border border-[rgba(23,23,23,0.1)] bg-[#f5f5f5]">
+      <div className="relative w-full aspect-[3/2] overflow-hidden rounded-sm border border-border-light bg-background-alt">
         <Image
           src={image}
           alt={imageAlt}
@@ -36,11 +36,11 @@ export default function SelectedProjectCard({
         <h3 className="text-[18px] font-semibold leading-[1.5] group-hover:opacity-70 transition-opacity">
           {headline}
         </h3>
-        <p className="text-[14px] font-medium leading-[1.4] tracking-[0.05em] uppercase opacity-50">
+        <p className="text-[14px] font-medium leading-[1.4] tracking-[0.05em] uppercase text-foreground-secondary">
           {meta}
         </p>
         <div className="pt-1">
-          <span className="inline-block px-3 py-1 rounded-full border border-[#171717] text-[14px] font-medium leading-[1.4] tracking-[0.05em] uppercase">
+          <span className="inline-block px-3 py-1 rounded-full border border-foreground text-[14px] font-medium leading-[1.4] tracking-[0.05em] uppercase">
             {tag}
           </span>
         </div>

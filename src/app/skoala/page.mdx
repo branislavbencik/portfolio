@@ -1,1 +1,66 @@
-# Skoala
+import { CaseStudyHeader } from '@/components/CaseStudyHeader'
+import { ContributionList } from '@/components/ContributionList'
+import { ImpactBar } from '@/components/ImpactBar'
+import { WorkSection } from '@/components/WorkSection'
+import { CaptionedImage } from '@/components/CaptionedImage'
+import { CaseStudyCard } from '@/components/CaseStudyCard'
+
+<CaseStudyHeader
+  company="Skoala"
+  role="Lead Designer"
+  year="2024–25"
+  headline="Building yet another CMS"
+  heroImage="/images/skoala/skoala-thumb.png"
+  heroImageAlt="Skoala catalog interface"
+>
+I joined an education platform focused on financial literacy content. It offers teachers a library of lesson plans, detailed instructions and printable materials. Less than 3 months after joining, the founders decided to build their own CMS, ditching the old workflow built in Figma, including dozens of Figma files I was designing content in.
+</CaseStudyHeader>
+
+<ContributionList>
+1. UX, UI and visual design of both teacher-facing app and student-facing lessons
+2. Biz dev support via business & pitch decks, social media assets and key visuals
+3. Content design of 20+ financial literacy lesson plans and printable assets, including illustrations
+</ContributionList>
+
+<ImpactBar items={[
+  { value: "3,5K", label: "Czech schools" },
+  { value: "11K", label: "teachers" },
+  { value: "140", label: "lesson plans" }
+]} />
+
+<WorkSection
+  label="Key design decision"
+  title="One content model, four formats"
+  description="When the project started, we were building lessons in Figma files. While it provided total design freedom, it was hard to navigate, search, or reuse. So I designed a custom CMS optimized for education — structured around the teaching plan format that teachers are already used to."
+>
+<CaptionedImage src="/images/skoala/skoala-ws1-i1.png" alt="Four curriculum formats" caption="The same curriculum repackaged for 4 different views: a teacher browsing the catalog, a detailed teaching brief, an interactive student lesson, and a printable worksheet." border={false} background={false} />
+<CaptionedImage src="/images/skoala/skoala-ws1-i2.png" alt="CMS editor view" caption="Editing control content. The system controls layout." />
+</WorkSection>
+
+<WorkSection
+  label="Key design decision"
+  title="Edit live content without breaking it"
+  description="Collaborative editing is tricky — two editors each see their own draft of the same lesson plan, and the question is how to merge changes without overwriting the other's work."
+>
+<CaptionedImage src="/images/skoala/skoala-ws2-i1.png" alt="Content lifecycle diagram" caption="Content lifecycle — from first draft to active teaching life table." width={840} border={false} background={false} rounded={false} />
+<CaptionedImage src="/images/skoala/skoala-ws2-i2.png" alt="Lesson editor with status" caption="Lesson table list: status, ownership and version history at a glance." />
+</WorkSection>
+
+{/* Next project — double border (two 1px lines, 8px gap), then constrained card */}
+<div className="w-full flex flex-col gap-2">
+  <div className="border-t border-border-light" />
+  <div className="border-t border-border-light" />
+</div>
+<div className="w-full max-w-frame mx-auto px-content-x py-section">
+  <CaseStudyCard
+    meta="TEATIME · CO-OWNER · 2024–25"
+    headline="Redesigning a B2B language school"
+    description="How to give every student a different curriculum and still get comparable progress data"
+    highlight={<>🏆 Acquired <strong>12</strong> corporate clients</>}
+    primaryHref="/teatime"
+    secondaryLabel="View website"
+    secondaryHref="https://teatime.cz"
+    image="/images/teatime/teatime-thumb.png"
+    imageAlt="TeaTime language school interface"
+  />
+</div>
