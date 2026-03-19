@@ -15,6 +15,7 @@ Day 3: TeaTime case study page (`/teatime`)
 4. Skoala case study — MetadataRow, CaseStudyHeader, ContributionList, ImpactBar, WorkSection, CaptionedImage components + full /skoala MDX page; CaseStudyCard extracted to shared component
 5. Skoala polish — WorkSection refactored to Tailwind, description prop, 552px text column fixed (added --max-width-* to globals.css), 100px image spacing, centered captions, double border at page end (two 1px lines, 8px gap)
 6. CaseStudyCard fixes — correct image aspect ratio (744×432), TagPill shared component, space-between layout pins buttons to bottom of left column
+7. Design token cleanup — added type-subheadline, type-body-*, type-allcaps, type-button utilities; baked font-weight into type-h*; gap-* utilities; accent-live color token; removed all hardcoded px values and inline gap styles from all 10 components; deleted docs/figma-tokens.ts
 
 ## Known Issues
 (none)
