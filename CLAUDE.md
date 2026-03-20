@@ -77,6 +77,7 @@ Build these as shared components. Case studies reuse all of them.
 - Selected project content can be inline in page components (short enough)
 - Images in `/public/images/{project}/` at 2x export from Figma
 - Hero image pattern: `heroImage="/images/{project}/{project}-thumb.png"` — same thumbnail used on landing page cards and as the case study hero
+- Never rewrite, paraphrase, or improve page copy. All text provided in the session prompt must be copied character-for-character. Do not infer, summarize, or generate alternative copy.
 
 ## Figma Console MCP
 
@@ -105,7 +106,7 @@ Bridge gotchas: Pairing expires in 5 min. REST API is burned (free plan). Comple
 ## Current Status
 
 **Last updated:** 2026-03-20
-**Current day:** Day 3
-**What's done:** Landing page; design token system; all shared components; Skoala case study page; TeaTime case study page (3 WorkSections, 8 CaptionedImages)
-**What's next:** Day 4 — Selected project pages (`/nnspect`, `/sakurabook`)
+**Current day:** Day 4
+**What's done:** Landing page; design token system; all shared components; Skoala case study page; TeaTime case study page; NNspect overlay (Radix Dialog, 3 images)
+**What's next:** Sakurabook overlay content; /about page
 **Blockers:** None

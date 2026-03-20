@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { TagPill } from "./TagPill";
 
-interface SelectedProjectCardProps {
-  href: string;
+export interface SelectedProjectCardProps {
+  href?: string;
   image: string;
   imageAlt: string;
   tag: string;
   headline: string;
   meta: string;
+  onClick?: () => void;
 }
 
 export default function SelectedProjectCard({
@@ -18,9 +19,10 @@ export default function SelectedProjectCard({
   tag,
   headline,
   meta,
+  onClick,
 }: SelectedProjectCardProps) {
-  return (
-    <Link href={href} className="group flex flex-col no-underline text-foreground gap-selected-card">
+  const inner = (
+    <>
       {/* Thumbnail */}
       <div className="overflow-hidden rounded-sm border border-border-light bg-background-alt">
         <Image
@@ -45,6 +47,20 @@ export default function SelectedProjectCard({
           <TagPill>{tag}</TagPill>
         </div>
       </div>
-    </Link>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} className="group flex flex-col no-underline text-foreground gap-selected-card">
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="group flex flex-col no-underline text-foreground gap-selected-card cursor-pointer" onClick={onClick}>
+      {inner}
+    </div>
   );
 }
