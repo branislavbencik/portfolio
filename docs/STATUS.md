@@ -19,6 +19,7 @@ Day 4: /about page; add Sakurabook workspace images (sakurabook-ws-2.png through
 8. TeaTime case study — full /teatime MDX page: CaseStudyHeader, ContributionList, ImpactBar, 3 WorkSections (ACQUIRE/DIFFERENTIATE/AUTOMATE), 8 CaptionedImages with custom width/border/bg/rounded props, NextProject linking to /skoala
 9. Selected project overlays — Radix Dialog overlay system; ProjectOverlay + SelectedProjectContent components; NNspect overlay with 3 images wired up; stub pages deleted; Sakurabook card visible, overlay TODO; overlay refined: 1224px wide centered panel, full height, no radius, 48px padding, fade+scale animation, #000/40% backdrop
 10. Dedicated project pages — converted overlay system to /nnspect and /sakurabook dedicated pages; removed ProjectOverlay.tsx and @radix-ui/react-dialog; landing page cards link via href prop; Sakurabook content added (workspace images pending)
+11. Selected project header — 552px centered text block (metadata, headline, description, tag) matching case study hero column width
 
 ## Known Issues
 (none)
