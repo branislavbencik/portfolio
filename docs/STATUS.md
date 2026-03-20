@@ -1,12 +1,12 @@
 # Portfolio Build Status
 
-**Day:** 3 of 5 (Fri Mar 20) · **Deploy:** portfolio-lac-pi-40.vercel.app · **Sprint end:** Sun Mar 23
+**Day:** 4 of 5 (Fri Mar 20) · **Deploy:** portfolio-lac-pi-40.vercel.app · **Sprint end:** Sun Mar 23
 
 ## Pages
-`/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done (overlay from landing page) · `/sakurabook` → TODO (overlay stub visible, no content) · `/about` → Stub · `/resume` → Not started
+`/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done (dedicated page) · `/sakurabook` → Done (dedicated page, workspace images pending) · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-Day 4: Sakurabook overlay content; /about page
+Day 4: /about page; add Sakurabook workspace images (sakurabook-ws-2.png through sakurabook-ws-4.png)
 
 ## Session Log
 1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
@@ -18,6 +18,7 @@ Day 4: Sakurabook overlay content; /about page
 7. Design token cleanup — added type-subheadline, type-body-*, type-allcaps, type-button utilities; baked font-weight into type-h*; gap-* utilities; accent-live color token; removed all hardcoded px values and inline gap styles from all 10 components; deleted docs/figma-tokens.ts
 8. TeaTime case study — full /teatime MDX page: CaseStudyHeader, ContributionList, ImpactBar, 3 WorkSections (ACQUIRE/DIFFERENTIATE/AUTOMATE), 8 CaptionedImages with custom width/border/bg/rounded props, NextProject linking to /skoala
 9. Selected project overlays — Radix Dialog overlay system; ProjectOverlay + SelectedProjectContent components; NNspect overlay with 3 images wired up; stub pages deleted; Sakurabook card visible, overlay TODO; overlay refined: 1224px wide centered panel, full height, no radius, 48px padding, fade+scale animation, #000/40% backdrop
+10. Dedicated project pages — converted overlay system to /nnspect and /sakurabook dedicated pages; removed ProjectOverlay.tsx and @radix-ui/react-dialog; landing page cards link via href prop; Sakurabook content added (workspace images pending)
 
 ## Known Issues
 (none)
