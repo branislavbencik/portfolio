@@ -72,10 +72,11 @@ Build these as shared components. Case studies reuse all of them.
 
 ## Content Strategy
 
-- Case study text lives in MDX files (`src/content/skoala.mdx`, `src/content/teatime.mdx`)
+- Case study text lives in MDX files in route folders (`src/app/skoala/page.mdx`, `src/app/teatime/page.mdx`)
 - MDX imports layout components, text is editable as markdown
 - Selected project content can be inline in page components (short enough)
 - Images in `/public/images/{project}/` at 2x export from Figma
+- Hero image pattern: `heroImage="/images/{project}/{project}-thumb.png"` — same thumbnail used on landing page cards and as the case study hero
 
 ## Figma Console MCP
 
@@ -103,8 +104,8 @@ Bridge gotchas: Pairing expires in 5 min. REST API is burned (free plan). Comple
 
 ## Current Status
 
-**Last updated:** 2026-03-19
-**Current day:** Day 1
-**What's done:** Landing page (nav, case study cards, selected project cards, footer); design token system in globals.css (primitives + semantic tokens + `type-h*` utility classes); all shared components (Nav, CaseStudyCard, SelectedProjectCard, ImpactBar, CaseStudyHeader, WorkSection, CaptionedImage, ContributionList, MetadataRow, NextProject, Footer)
-**What's next:** Day 2 — Skoala case study page
+**Last updated:** 2026-03-20
+**Current day:** Day 3
+**What's done:** Landing page; design token system; all shared components; Skoala case study page; TeaTime case study page (3 WorkSections, 8 CaptionedImages)
+**What's next:** Day 4 — Selected project pages (`/nnspect`, `/sakurabook`)
 **Blockers:** None

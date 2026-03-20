@@ -1,1 +1,75 @@
-# TeaTime
+import { CaseStudyHeader } from '@/components/CaseStudyHeader'
+import { ContributionList } from '@/components/ContributionList'
+import { ImpactBar } from '@/components/ImpactBar'
+import { WorkSection } from '@/components/WorkSection'
+import { CaptionedImage } from '@/components/CaptionedImage'
+import { CaseStudyCard } from '@/components/CaseStudyCard'
+
+<CaseStudyHeader
+  company="TeaTime"
+  role="co-owner"
+  year="2024–25"
+  headline="Redesigning a B2B language school"
+  heroImage="/images/teatime/teatime-thumb.png"
+  heroImageAlt="TeaTime language school interface"
+>
+I co-founded a B2B language school offering corporate English and Czech courses. Each client company gets a custom curriculum tailored to their team's needs — which creates a challenge: how do you give every student a different learning path and still get comparable progress data across clients?
+</CaseStudyHeader>
+
+<ContributionList>
+1. End-to-end product design of the student and admin-facing application
+2. Brand identity, marketing website, and sales collateral
+3. Business development support via pitch decks and client presentations
+</ContributionList>
+
+<ImpactBar items={[
+  { value: "0.4M CZK", label: "MRR" },
+  { value: "12", label: "new clients" },
+  { value: "300+", label: "active students" }
+]} />
+
+<WorkSection
+  label="Key design decision"
+  title="Acquire: Make the pitch self-evident"
+  description="Corporate language training is a crowded market. Most schools sell on price. We needed a way to show — not just tell — that our approach was fundamentally different. The pitch deck and website had to do the heavy lifting before a sales call ever happened."
+>
+<CaptionedImage src="/images/teatime/teatime-ws1-i1.png" alt="TeaTime pitch deck slides" caption="Pitch deck used in B2B sales calls — designed to communicate the curriculum model before the demo." width={600} border={false} background={false} />
+<CaptionedImage src="/images/teatime/teatime-ws1-i2.png" alt="TeaTime marketing website" caption="Marketing website landing page — structured around the buyer journey from awareness to booking a call." />
+<CaptionedImage src="/images/teatime/teatime-ws1-i3.png" alt="TeaTime brand identity system" caption="Brand identity system — logo, color palette, and type scale applied across print and digital touchpoints." width={936} />
+<CaptionedImage src="/images/teatime/teatime-ws1-i4.png" alt="TeaTime social media assets" caption="Social media template system — reusable layouts for LinkedIn and Instagram content." />
+</WorkSection>
+
+<WorkSection
+  label="Key design decision"
+  title="Differentiate: Curriculum that adapts to each team"
+  description="Every corporate client has a different starting point — seniority mix, industry vocabulary, learning goals. We built a curriculum model that lets teachers assemble bespoke lesson sequences from a shared content library, while keeping progress metrics comparable across all students."
+>
+<CaptionedImage src="/images/teatime/teatime-ws2-i1.png" alt="Curriculum builder interface" caption="Curriculum builder — teachers drag lesson modules into a student's personal plan. Shared library, individual sequence." />
+<CaptionedImage src="/images/teatime/teatime-ws2-i2.png" alt="Student progress dashboard" caption="Progress dashboard — standardised metrics across all students regardless of curriculum path." border={false} background={false} width={818} />
+</WorkSection>
+
+<WorkSection
+  label="Key design decision"
+  title="Automate: Reduce admin to focus on teaching"
+  description="Two co-founders running a growing school can't afford to spend hours on scheduling, invoicing, and reporting. We designed an admin layer that automates the routine so teachers spend time on students, not spreadsheets."
+>
+<CaptionedImage src="/images/teatime/teatime-ws3-i1.png" alt="Admin scheduling interface" caption="Scheduling interface — lessons booked, rescheduled, and confirmed without back-and-forth emails." />
+<CaptionedImage src="/images/teatime/teatime-ws3-i2.png" alt="Automated reporting export" caption="Automated monthly report sent to HR contacts — client-ready data without manual formatting." rounded={false} border={false} />
+</WorkSection>
+
+{/* Next project — double border (two 1px lines, 8px gap), then constrained card */}
+<div className="w-full flex flex-col gap-2">
+  <div className="border-t border-border-light" />
+  <div className="border-t border-border-light" />
+</div>
+<div className="w-full max-w-frame mx-auto px-content-x py-section">
+  <CaseStudyCard
+    meta="SKOALA · LEAD DESIGNER · 2024–25"
+    headline="Building yet another CMS"
+    description="How to design a content management system for an education platform that's replacing a Figma-based workflow"
+    highlight={<>📚 Designed <strong>140</strong> lesson plans</>}
+    primaryHref="/skoala"
+    image="/images/skoala/skoala-thumb.png"
+    imageAlt="Skoala catalog interface"
+  />
+</div>

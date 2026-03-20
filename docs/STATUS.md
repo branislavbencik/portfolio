@@ -1,12 +1,12 @@
 # Portfolio Build Status
 
-**Day:** 2 of 5 (Thu Mar 19) · **Deploy:** portfolio-lac-pi-40.vercel.app · **Sprint end:** Sun Mar 23
+**Day:** 3 of 5 (Fri Mar 20) · **Deploy:** portfolio-lac-pi-40.vercel.app · **Sprint end:** Sun Mar 23
 
 ## Pages
-`/` → Done (landing) · `/skoala` → Done · `/teatime` → Stub · `/nnspect` → Stub · `/sakurabook` → Stub · `/about` → Stub · `/resume` → Not started
+`/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Stub · `/sakurabook` → Stub · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-Day 3: TeaTime case study page (`/teatime`)
+Day 4: Selected project pages (`/nnspect`, `/sakurabook`)
 
 ## Session Log
 1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
@@ -16,6 +16,7 @@ Day 3: TeaTime case study page (`/teatime`)
 5. Skoala polish — WorkSection refactored to Tailwind, description prop, 552px text column fixed (added --max-width-* to globals.css), 100px image spacing, centered captions, double border at page end (two 1px lines, 8px gap)
 6. CaseStudyCard fixes — correct image aspect ratio (744×432), TagPill shared component, space-between layout pins buttons to bottom of left column
 7. Design token cleanup — added type-subheadline, type-body-*, type-allcaps, type-button utilities; baked font-weight into type-h*; gap-* utilities; accent-live color token; removed all hardcoded px values and inline gap styles from all 10 components; deleted docs/figma-tokens.ts
+8. TeaTime case study — full /teatime MDX page: CaseStudyHeader, ContributionList, ImpactBar, 3 WorkSections (ACQUIRE/DIFFERENTIATE/AUTOMATE), 8 CaptionedImages with custom width/border/bg/rounded props, NextProject linking to /skoala
 
 ## Known Issues
 (none)
