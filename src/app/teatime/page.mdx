@@ -13,48 +13,48 @@ import { CaseStudyCard } from '@/components/CaseStudyCard'
   heroImage="/images/teatime/teatime-thumb.png"
   heroImageAlt="TeaTime language school interface"
 >
-I co-founded a B2B language school offering corporate English and Czech courses. Each client company gets a custom curriculum tailored to their team's needs — which creates a challenge: how do you give every student a different learning path and still get comparable progress data across clients?
+TeaTime is a B2B language school serving 20+ companies for over 15 years. I joined to systematize and scale the business — from client acquisition to a new AI-powered assessment product, modernizing the digital infrastructure along the way.
 </CaseStudyHeader>
 
 <ContributionList>
-1. End-to-end product design of the student and admin-facing application
-2. Brand identity, marketing website, and sales collateral
-3. Business development support via pitch decks and client presentations
+1. Built client acquisition pipeline — campaign, website, sales materials
+2. Designed personalized learning system — from assessment through curriculum planning to progress measurement
+3. Built AI evaluation and automation architecture
 </ContributionList>
 
 <ImpactBar items={[
-  { value: "0.4M CZK", label: "MRR" },
+  { value: "0.4M", label: "CZK increase in MRR" },
   { value: "12", label: "new clients" },
   { value: "300+", label: "active students" }
 ]} />
 
 <WorkSection
-  label="Key design decision"
-  title="Acquire: Make the pitch self-evident"
-  description="Corporate language training is a crowded market. Most schools sell on price. We needed a way to show — not just tell — that our approach was fundamentally different. The pitch deck and website had to do the heavy lifting before a sales call ever happened."
+  label="ACQUIRE"
+  title="HR managers don't google &quot;English language training&quot;"
+  description="Companies buy English training when someone pitches it to the right person at the right time. We could build an audience on LinkedIn or write content and wait. Instead, I designed a direct outreach pipeline: pick the company, find the decision-maker, send a personalized email. Each touchpoint treated as a design decision: what shows in the inbox preview, what they read before clicking and where they land after."
 >
-<CaptionedImage src="/images/teatime/teatime-ws1-i1.png" alt="TeaTime pitch deck slides" caption="Pitch deck used in B2B sales calls — designed to communicate the curriculum model before the demo." width={600} border={false} background={false} />
-<CaptionedImage src="/images/teatime/teatime-ws1-i2.png" alt="TeaTime marketing website" caption="Marketing website landing page — structured around the buyer journey from awareness to booking a call." />
-<CaptionedImage src="/images/teatime/teatime-ws1-i3.png" alt="TeaTime brand identity system" caption="Brand identity system — logo, color palette, and type scale applied across print and digital touchpoints." width={936} />
-<CaptionedImage src="/images/teatime/teatime-ws1-i4.png" alt="TeaTime social media assets" caption="Social media template system — reusable layouts for LinkedIn and Instagram content." />
+<CaptionedImage src="/images/teatime/teatime-ws1-i1.png" alt="TeaTime persona definition" caption="Step 0: Define persona. Every design decision in Steps 1–3 traces back to these three drivers." width={600} border={false} background={false} />
+<CaptionedImage src="/images/teatime/teatime-ws1-i2.png" alt="TeaTime inbox view" caption="Step 1: How the message lands in the inbox. Consider all the other items your message is competing with. Headline max. length limit is 70 characters and it's bold so you want to make it count." />
+<CaptionedImage src="/images/teatime/teatime-ws1-i3.png" alt="TeaTime outreach email" caption="Step 2: The email. Scannable in 30 seconds. No hard sell, just three ways to learn more." width={936} />
+<CaptionedImage src="/images/teatime/teatime-ws1-i4.png" alt="TeaTime website and one-pager" caption="Step 3: Where she ends up. The website for a quick check. The one-pager she forwards to her boss." />
 </WorkSection>
 
 <WorkSection
-  label="Key design decision"
-  title="Differentiate: Curriculum that adapts to each team"
-  description="Every corporate client has a different starting point — seniority mix, industry vocabulary, learning goals. We built a curriculum model that lets teachers assemble bespoke lesson sequences from a shared content library, while keeping progress metrics comparable across all students."
+  label="DIFFERENTIATE"
+  title="Test what you teach. Teach what you test"
+  description="Corporate clients want proof their people are improving. Industry standard is a multiple-choice quiz — meaningless for real communication and completely disconnected from lessons. We designed a closed loop: test results drive the course plan, teaching targets the gaps, and the same skills are retested six months later."
 >
-<CaptionedImage src="/images/teatime/teatime-ws2-i1.png" alt="Curriculum builder interface" caption="Curriculum builder — teachers drag lesson modules into a student's personal plan. Shared library, individual sequence." />
-<CaptionedImage src="/images/teatime/teatime-ws2-i2.png" alt="Student progress dashboard" caption="Progress dashboard — standardised metrics across all students regardless of curriculum path." border={false} background={false} width={818} />
+<CaptionedImage src="/images/teatime/teatime-ws2-i1.png" alt="TeaTime testing and teaching system" caption="Testing and teaching as a single connected system" border={false} background={false} width={818} />
+<CaptionedImage src="/images/teatime/teatime-ws2-i2.png" alt="TeaTime personalized course plan" caption="Each student gets a personalized plan — it includes work skills from test gaps and hobby topics from their interests." />
 </WorkSection>
 
 <WorkSection
-  label="Key design decision"
-  title="Automate: Reduce admin to focus on teaching"
-  description="Two co-founders running a growing school can't afford to spend hours on scheduling, invoicing, and reporting. We designed an admin layer that automates the routine so teachers spend time on students, not spreadsheets."
+  label="AUTOMATE"
+  title="Here's how a 15-minute conversation becomes a 2-page report and a personalized course plan"
+  description="The teacher records a 15-minute speaking test. From that single recording, the system transcribes, separates speakers, scores against specific skills, and generates a student report and updated course plan — no manual work."
 >
-<CaptionedImage src="/images/teatime/teatime-ws3-i1.png" alt="Admin scheduling interface" caption="Scheduling interface — lessons booked, rescheduled, and confirmed without back-and-forth emails." />
-<CaptionedImage src="/images/teatime/teatime-ws3-i2.png" alt="Automated reporting export" caption="Automated monthly report sent to HR contacts — client-ready data without manual formatting." rounded={false} border={false} />
+<CaptionedImage src="/images/teatime/teatime-ws3-i1.png" alt="TeaTime n8n automation pipeline" caption="6 key steps from a 50+ node pipeline: transcription, AI scoring, report generation, and course plan update — fully automated in n8n" />
+<CaptionedImage src="/images/teatime/teatime-ws3-i2.png" alt="TeaTime course plan with skill gaps" caption="'Developing' and 'Needs Attention' skills feed directly into the course plan — closing the loop" rounded={false} border={false} background={false}/>
 </WorkSection>
 
 {/* Next project — double border (two 1px lines, 8px gap), then constrained card */}

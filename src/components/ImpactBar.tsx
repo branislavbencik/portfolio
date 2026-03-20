@@ -7,6 +7,7 @@ interface ImpactBarProps {
   items: ImpactItem[];
 }
 
+
 export function ImpactBar({ items }: ImpactBarProps) {
   return (
     <div className="w-full bg-black py-section">
@@ -16,7 +17,8 @@ export function ImpactBar({ items }: ImpactBarProps) {
             <span className="type-h1 text-white">
               {item.value}
             </span>
-            <span className="type-body-s text-foreground-tertiary">
+            { /* TODO: create inverse color scheme in color config */ }
+            <span className="type-body-s text-grey-400">  
               {item.label}
             </span>
           </div>
