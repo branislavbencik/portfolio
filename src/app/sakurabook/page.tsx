@@ -10,19 +10,18 @@ export default function SakurabookPage() {
         tag="Ecommerce"
         images={[
           {
-            src: "/images/sakurabook/sakurabook-thumb.png",
+            src: "/images/sakurabook/sakurabook-thumb.png"
+          },
+          {
+            src: "/images/sakurabook/sakurabook-ws1.png",
             caption: "Availability states use Japanese convention: ○ available, △ limited, ✕ taken. Time picker handles overnight spans across two calendar days.",
           },
           {
-            src: "/images/sakurabook/sakurabook-ws-2.png",
-            caption: "Availability states use Japanese convention: ○ available, △ limited, ✕ taken. Time picker handles overnight spans across two calendar days.",
-          },
-          {
-            src: "/images/sakurabook/sakurabook-ws-3.png",
+            src: "/images/sakurabook/sakurabook-ws2.png",
             caption: "Designed in English for easier workflows, localized and adapted to Japanese. Japanese text truly shines, as layouts are held without one-line adjustments.",
           },
           {
-            src: "/images/sakurabook/sakurabook-ws-4.png",
+            src: "/images/sakurabook/sakurabook-ws3.png",
             caption: "The merchant-facing plugin built with Shopify's Polaris Design System and rendered after Google Classroom. Space status on the left, multi-space dashboard on the right.",
           },
         ]}

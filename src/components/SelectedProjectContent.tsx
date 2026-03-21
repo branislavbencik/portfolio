@@ -18,13 +18,11 @@ export function SelectedProjectContent({
 }: SelectedProjectProps) {
   return (
     <div>
-      <div className="mx-auto" style={{ maxWidth: "552px" }}>
-        <p className="type-allcaps text-foreground-secondary">{metadata}</p>
-        <h2 className="type-h2 mt-4">{headline}</h2>
-        <p className="type-body-l mt-6">{description}</p>
-        <div className="mt-4">
-          <TagPill>{tag}</TagPill>
-        </div>
+      <p className="type-allcaps text-foreground-secondary">{metadata}</p>
+      <h2 className="type-h2 mt-4">{headline}</h2>
+      <p className="type-body-l mt-6">{description}</p>
+      <div className="mt-4">
+        <TagPill>{tag}</TagPill>
       </div>
       <div className="mt-[60px] flex flex-col gap-[60px]">
         {images.map((img) => (

@@ -3,7 +3,7 @@ import Image from "next/image";
 interface CaptionedImageProps {
   src: string;
   alt: string;
-  caption?: string;
+  caption: string;
   border?: boolean;
   background?: boolean;
   rounded?: boolean;
