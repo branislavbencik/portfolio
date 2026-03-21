@@ -6,7 +6,9 @@
       "Bash(file /Users/branislavbencik/repos/portfolio/public/images/skoala/skoala-thumb.png && python3 -c \"\nfrom PIL import Image\nfor path in ['public/images/skoala/skoala-thumb.png','public/images/teatime/teatime-thumb.png','public/images/nnspect/nnspect-thumb.png','public/images/sakurabook/sakurabook-thumb.png']:\n    im = Image.open\\(path\\)\n    print\\(path, im.size\\)\n\" 2>/dev/null || python3 -c \"\nimport struct, zlib\ndef png_size\\(path\\):\n    with open\\(path,'rb'\\) as f:\n        f.read\\(8\\)\n        f.read\\(4\\)\n        f.read\\(4\\)\n        w = struct.unpack\\('>I', f.read\\(4\\)\\)[0]\n        h = struct.unpack\\('>I', f.read\\(4\\)\\)[0]\n        return w,h\nfor p in ['public/images/skoala/skoala-thumb.png','public/images/teatime/teatime-thumb.png','public/images/nnspect/nnspect-thumb.png','public/images/sakurabook/sakurabook-thumb.png']:\n    print\\(p, png_size\\(p\\)\\)\n\" 2>&1)",
       "Bash(npx tsc:*)",
       "Bash(grep -E \"\\\\.tsx$|\\\\.ts$\")",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(grep -E \"\\\\.tsx$\")",
+      "Bash(find /Users/branislavbencik/repos/portfolio/src -type f -name *.tsx -o -name *.ts -o -name *.mdx)"
     ]
   }
 }

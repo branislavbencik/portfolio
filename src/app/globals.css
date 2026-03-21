@@ -73,7 +73,7 @@
   /* ── Gaps ───────────────────────────────────────────────────────── */
   --gap-case-study:       48px;
   --gap-selected-project: 12px;
-  --gap-selected-card:     8px;
+  --gap-selected-card:    12px;
   --gap-impact:           80px;
 
   /* ── Typography — font sizes ────────────────────────────────────── */
@@ -86,7 +86,7 @@
   --font-size-body-l:      18px;
   --font-size-body-m:      16px;
   --font-size-body-s:      14px;
-  --font-size-allcaps:     14px;
+  --font-size-allcaps:     13px;
   --font-size-button:      16px;
 
   /* ── Typography — line heights ──────────────────────────────────── */
@@ -104,7 +104,7 @@
   --letter-spacing-h2:     -0.04em;
   --letter-spacing-h3:     -0.02em;
   --letter-spacing-h4:     -0.02em;
-  --letter-spacing-allcaps: 0.05em;
+  --letter-spacing-allcaps: 0.03em;
 }
 
 @layer utilities {

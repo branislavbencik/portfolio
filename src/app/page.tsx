@@ -45,7 +45,7 @@ export default function Home() {
           Selected projects
         </h2>
 
-        <div className="grid grid-cols-2" style={{ gap: "12px" }}>
+        <div className="grid grid-cols-2 gap-3">
           <SelectedProjectCard
             href="/nnspect"
             image="/images/nnspect/nnspect-thumb.png"
@@ -65,8 +65,6 @@ export default function Home() {
           />
         </div>
       </section>
-
-      <div className="py-section" />
     </main>
   );
 }

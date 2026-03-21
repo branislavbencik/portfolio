@@ -12,12 +12,6 @@ export default function Nav() {
         </Link>
         <div className="flex items-center gap-8">
           <Link
-            href="/about"
-            className="type-body-m text-foreground no-underline hover:opacity-60 transition-opacity"
-          >
-            About
-          </Link>
-          <Link
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"

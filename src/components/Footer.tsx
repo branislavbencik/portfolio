@@ -14,8 +14,8 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full max-w-frame mx-auto px-content-x h-16 flex items-center justify-between">
-      <div className="flex items-center gap-3 type-body-s text-foreground-secondary">
+    <footer className="w-full mx-auto px-content-x h-16 flex items-center justify-between border-t border-border-light">
+      <div className="flex max-w-frame items-center gap-3 type-body-s text-foreground-secondary">
         <span className="relative">
           <button
             onClick={handleEmailClick}
