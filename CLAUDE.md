@@ -107,6 +107,6 @@ Bridge gotchas: Pairing expires in 5 min. REST API is burned (free plan). Comple
 
 **Last updated:** 2026-03-21
 **Current day:** Day 4
-**What's done:** Landing page; design token system; all shared components; Skoala case study page; TeaTime case study page; NNspect overlay (Radix Dialog, 3 images); Sakurabook overlay content; Footer component (clipboard tooltip, Framer Motion); optional image captions; Nav/Footer Resumé → /resume.pdf
+**What's done:** Landing page; design token system; all shared components; Skoala case study page (content + image fixes); TeaTime case study page; NNspect overlay (Radix Dialog, 3 images); Sakurabook overlay content; Footer component (clipboard tooltip, Framer Motion, full-width border + content aligned to page layout); optional image captions; Nav/Footer Resumé → /resume.pdf; visual finetuning pass (spacing, globals, selected project card)
 **What's next:** /about page
 **Blockers:** None
