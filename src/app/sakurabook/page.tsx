@@ -10,7 +10,8 @@ export default function SakurabookPage() {
         tag="Ecommerce"
         images={[
           {
-            src: "/images/sakurabook/sakurabook-thumb.png"
+            src: "/images/sakurabook/sakurabook-thumb.png",
+            caption: "",
           },
           {
             src: "/images/sakurabook/sakurabook-ws1.png",
@@ -18,11 +19,11 @@ export default function SakurabookPage() {
           },
           {
             src: "/images/sakurabook/sakurabook-ws2.png",
-            caption: "Designed in English for easier workflows, localized and adapted to Japanese. Japanese text truly shines, as layouts are held without one-line adjustments.",
+            caption: "Designed in English for easier workflow, localized and shipped in Japanese. Japanese text runs shorter, so layouts are held without overflow adjustment.",
           },
           {
             src: "/images/sakurabook/sakurabook-ws3.png",
-            caption: "The merchant-facing plugin built with Shopify's Polaris Design System and rendered after Google Classroom. Space status on the left, multi-space dashboard on the right.",
+            caption: "The merchant-facing plugin, built with Shopify’s Polaris Design System and modeled after Google Calendar. Space detail on the left, multi-space dashboard on the right.",
           },
         ]}
       />
