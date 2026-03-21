@@ -6,7 +6,15 @@ export type SelectedProjectProps = {
   headline: string;
   description: string;
   tag: string;
-  images: Array<{ src: string; alt?: string; caption?: string }>;
+  images: Array<{
+    src: string;
+    alt?: string;
+    caption?: string;
+    border?: boolean;
+    background?: boolean;
+    rounded?: boolean;
+    width?: number;
+  }>;
 };
 
 export function SelectedProjectContent({
@@ -33,6 +41,10 @@ export function SelectedProjectContent({
             src={img.src}
             alt={img.alt ?? img.caption ?? ""}
             caption={img.caption}
+            {...(img.border !== undefined ? { border: img.border } : {})}
+            {...(img.background !== undefined ? { background: img.background } : {})}
+            {...(img.rounded !== undefined ? { rounded: img.rounded } : {})}
+            {...(img.width !== undefined ? { width: img.width } : {})}
           />
         ))}
       </div>

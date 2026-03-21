@@ -24,6 +24,7 @@ export default function SakurabookPage() {
           {
             src: "/images/sakurabook/sakurabook-ws3.png",
             caption: "The merchant-facing plugin, built with Shopify’s Polaris Design System and modeled after Google Calendar. Space detail on the left, multi-space dashboard on the right.",
+            background: false,
           },
         ]}
       />

@@ -102,7 +102,7 @@
   /* ── Typography — letter spacing ────────────────────────────────── */
   --letter-spacing-h1:     -0.04em;
   --letter-spacing-h2:     -0.04em;
-  --letter-spacing-h3:     -0.02em;
+  --letter-spacing-h3:     -0.03em;
   --letter-spacing-h4:     -0.02em;
   --letter-spacing-allcaps: 0.03em;
 }
