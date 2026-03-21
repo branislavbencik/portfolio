@@ -6,7 +6,7 @@ export type SelectedProjectProps = {
   headline: string;
   description: string;
   tag: string;
-  images: Array<{ src: string; caption: string }>;
+  images: Array<{ src: string; alt?: string; caption?: string }>;
 };
 
 export function SelectedProjectContent({
@@ -31,7 +31,7 @@ export function SelectedProjectContent({
           <CaptionedImage
             key={img.src}
             src={img.src}
-            alt={img.caption}
+            alt={img.alt ?? img.caption ?? ""}
             caption={img.caption}
           />
         ))}

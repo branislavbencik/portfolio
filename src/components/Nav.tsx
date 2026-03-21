@@ -6,7 +6,7 @@ export default function Nav() {
       <nav className="w-full max-w-frame mx-auto flex items-center justify-between px-nav-x py-nav-y h-16">
         <Link
           href="/"
-          className="type-button text-foreground no-underline hover:opacity-60 transition-opacity"
+          className="type-body-m text-foreground no-underline hover:opacity-60 transition-opacity"
         >
           Branislav Benčík
         </Link>
@@ -18,7 +18,9 @@ export default function Nav() {
             About
           </Link>
           <Link
-            href="/resume"
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="type-body-m text-foreground no-underline hover:opacity-60 transition-opacity"
           >
             Resumé

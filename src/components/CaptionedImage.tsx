@@ -2,8 +2,8 @@ import Image from "next/image";
 
 interface CaptionedImageProps {
   src: string;
-  alt: string;
-  caption: string;
+  alt?: string;
+  caption?: string;
   border?: boolean;
   background?: boolean;
   rounded?: boolean;
@@ -39,7 +39,7 @@ export function CaptionedImage({
       <div className={wrapperClass}>
         <Image
           src={src}
-          alt={alt}
+          alt={alt ?? ""}
           width={width ?? 1128}
           height={Math.round((width ?? 1128) * (2 / 3))}
           className="w-full h-auto block"

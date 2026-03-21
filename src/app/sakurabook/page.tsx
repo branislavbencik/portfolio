@@ -11,7 +11,7 @@ export default function SakurabookPage() {
         images={[
           {
             src: "/images/sakurabook/sakurabook-thumb.png",
-            caption: "",
+            alt: "Sakurabook booking plugin overview",
           },
           {
             src: "/images/sakurabook/sakurabook-ws1.png",
