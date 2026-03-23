@@ -67,16 +67,6 @@ Responsive changes go downward using Tailwind's built-in `max-*` variants.
 4. **Do NOT mix min-width and max-width approaches.** Every responsive override must use `max-lg:`, or `max-md:`. No exceptions.
 5. **Base styles are desktop styles.** Never wrap desktop styles in a breakpoint prefix.
 
-### Per-component responsive specs
-
-**Layout wrapper** (`max-w-frame mx-auto px-content-x`):
-- Auto-scales via CSS variables. No classes needed.
-
-**Nav** (`py-nav-y px-nav-x`, 64px height):
-- Auto-scales via CSS variables.
-- Links stay visible on all sizes — no hamburger menu (only 4–5 links).
-- max-md: check that links don't overflow. If they do, reduce gap between them.
-
 
 ## Content Strategy
 

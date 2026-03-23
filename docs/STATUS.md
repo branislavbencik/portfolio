@@ -24,6 +24,7 @@ Visual QA pass on ≤1023px breakpoint; about page; resume page
 13. Responsive styling — registered max-xl/max-lg/max-md custom variants; responsive CSS variable overrides for typography + spacing; fixed spacing utilities to use var() (mb-section, py-section, px-content-x etc.); CaseStudyCard stacked layout with condensed bar at max-xl; selected projects 1-col at max-md; ImpactBar flex-wrap; Footer stacks; all 25 e2e responsive tests pass
 14. Spacing tokens auto-scaling — moved spacing tokens from @theme inline to plain @theme; Tailwind now generates var() references for ALL derived utilities (mt-section, my-section, gap-section, pb-section, etc.); gap tokens moved to :root; removed 5 redundant custom @layer utilities spacing classes
 15. Responsive consolidation — collapsed two-breakpoint system into single max-lg; CaseStudyCard drops intermediate tablet (flex-row) layout, mobile column layout now applies at all ≤1023px; all max-md: renamed to max-lg: across Nav, Footer, ImpactBar, CaptionedImage, page.tsx
+16. CLAUDE.md rules — consolidated responsive critical rules into numbered list; clarified auto-scaling behaviour for typography, layout spacing, and nav
 
 ## Known Issues
 (none)

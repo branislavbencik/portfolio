@@ -44,7 +44,7 @@ export function CaptionedImage({
         />
       </div>
       {caption && (
-        <figcaption className="w-3/4 max-lg:w-full type-body-s text-foreground-secondary text-center mt-3">
+        <figcaption className="w-3/4 max-lg:w-full type-body-s text-foreground-secondary text-center max-md:text-left mt-3">
           {caption}
         </figcaption>
       )}

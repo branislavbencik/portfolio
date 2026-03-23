@@ -10,7 +10,7 @@ interface ImpactBarProps {
 
 export function ImpactBar({ items }: ImpactBarProps) {
   return (
-    <div className="w-full bg-black py-section">
+    <div className="px-content-x w-full bg-black py-detail">
       <div className="w-full max-w-text mx-auto flex items-start gap-16 max-lg:flex-wrap">
         {items.map((item, i) => (
           <div key={i} className="flex flex-col gap-selected-card">

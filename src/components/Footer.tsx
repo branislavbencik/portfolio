@@ -15,7 +15,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full border-t border-border-light">
-      <div className="w-full max-w-frame mx-auto px-nav-x h-16 flex items-center justify-between max-lg:h-auto max-lg:py-4 max-lg:flex-col max-lg:items-start max-lg:gap-2">
+      <div className="w-full max-w-frame mx-auto px-content-x h-16 flex items-center justify-between max-lg:h-auto max-lg:py-4 max-lg:flex-col max-lg:items-start max-lg:gap-2">
         <div className="flex items-center gap-3 type-body-s text-foreground-secondary">
           <span className="relative">
             <button

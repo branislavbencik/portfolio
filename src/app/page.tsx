@@ -11,6 +11,8 @@ export default function Home() {
         </h1>
 
         <div className="flex flex-col gap-case-study">
+          <hr className="border-0 border-t border-border-light" />
+
           <CaseStudyCard
             meta="SKOALA · LEAD DESIGNER · 2024–25"
             headline="Building yet another CMS"
