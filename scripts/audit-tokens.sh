@@ -57,7 +57,7 @@ fi
 # ── 5. min-width responsive prefixes (should use max-* only) ──
 MINWIDTH=$(echo "$FILES" | xargs grep -n ' sm:\| md:\| lg:\| xl:\| 2xl:' 2>/dev/null | grep -v '// *audit-ignore' | grep -v 'max-')
 if [ -n "$MINWIDTH" ]; then
-  echo "❌ MIN-WIDTH BREAKPOINTS (use max-xl:, max-lg:, max-md: only):"
+  echo "❌ MIN-WIDTH BREAKPOINTS (use max-lg:, max-md: only):"
   echo "$MINWIDTH"
   echo ""
   VIOLATIONS=$((VIOLATIONS + $(echo "$MINWIDTH" | wc -l)))

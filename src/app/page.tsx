@@ -3,10 +3,10 @@ import SelectedProjectCard from "@/components/SelectedProjectCard";
 
 export default function Home() {
   return (
-    <main className="w-full max-w-frame mx-auto px-content-x">
+    <main className="w-full max-w-frame mx-auto px-content-x mt-section">
       {/* ── Case Studies ───────────────────────────────────────── */}
-      <section className="pb-section">
-        <h1 className="font-semibold text-foreground type-h1 mb-section">
+      <section className="mb-section">
+        <h1 className="font-semibold text-foreground type-h1 mb-12">
           Case studies
         </h1>
 
@@ -41,8 +41,8 @@ export default function Home() {
       </section>
 
       {/* ── Selected Projects ──────────────────────────────────── */}
-      <section className="pb-section">
-        <h2 className="font-semibold text-foreground type-h1 mb-section">
+      <section className="mb-section">
+        <h2 className="font-semibold text-foreground type-h1 mb-12">
           Selected projects
         </h2>
 

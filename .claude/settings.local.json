@@ -10,7 +10,11 @@
       "Bash(grep -E \"\\\\.tsx$\")",
       "Bash(find /Users/branislavbencik/repos/portfolio/src -type f -name *.tsx -o -name *.ts -o -name *.mdx)",
       "Bash(npx playwright:*)",
-      "Bash(find . -name *.png -path */e2e/*)"
+      "Bash(find . -name *.png -path */e2e/*)",
+      "Bash(grep -r \"gap-\\\\|--gap-\\\\|--spacing-\" /Users/branislavbencik/repos/portfolio/src --include=*.tsx --include=*.ts --include=*.jsx --include=*.js --include=*.mdx)",
+      "Bash(grep -r \"gap-2\\\\|gap-3\\\\|gap-4\\\\|gap-5\\\\|gap-6\\\\|gap-8\\\\|gap-12\\\\|gap-15\\\\|gap-16\\\\|mt-15\\\\|gap-section\" /Users/branislavbencik/repos/portfolio/src --include=*.tsx --include=*.mdx)",
+      "Bash(grep -r \"py-section\\\\|px-content-x\\\\|py-nav-y\\\\|pb-section\\\\|mt-section\\\\|gap-section\" .next/static/css/*.css)",
+      "Bash(find .next -name \"*.css\" -exec grep -l \"spacing-section\" {})"
     ]
   }
 }

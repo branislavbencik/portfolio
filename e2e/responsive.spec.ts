@@ -26,7 +26,6 @@ const SCREENSHOT_DIR = path.join('e2e', 'screenshots');
 
 const VIEWPORTS = [
   { name: 'desktop',       width: 1440, height: 900,  overflowMustPass: true  },
-  { name: 'small-desktop', width: 1279, height: 900,  overflowMustPass: true  },  // just below max-xl
   { name: 'tablet',        width: 1023, height: 1024, overflowMustPass: true  },  // just below max-lg
   { name: 'mobile',        width: 767,  height: 1024, overflowMustPass: true  },  // just below max-md
   { name: 'small-mobile',  width: 375,  height: 812,  overflowMustPass: false },  // iPhone SE — warn only
