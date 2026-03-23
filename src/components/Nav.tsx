@@ -10,7 +10,7 @@ export default function Nav() {
         >
           Branislav Benčík
         </Link>
-        <div className="flex items-center gap-8 max-md:gap-4">
+        <div className="flex items-center gap-8 max-lg:gap-4">
           <Link
             href="/resume.pdf"
             target="_blank"

@@ -46,7 +46,7 @@ export default function Home() {
           Selected projects
         </h2>
 
-        <div className="grid grid-cols-2 gap-3 max-md:grid-cols-1">
+        <div className="grid grid-cols-2 gap-3 max-lg:gap-16 max-lg:grid-cols-1">
           <SelectedProjectCard
             href="/nnspect"
             image="/images/nnspect/nnspect-thumb.png"

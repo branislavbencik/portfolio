@@ -26,33 +26,28 @@ export function CaseStudyCard({
   secondaryHref,
 }: CaseStudyCardProps) {
   return (
-    <div className="flex items-stretch  gap-12 max-lg:gap-4 max-lg:flex-col-reverse">
-      {/* Left — text ~35% (desktop) / full-width horizontal bar (max-xl) / column (max-md) */}
-      <div className="flex flex-col justify-between shrink-0 grow-0 basis-[35%] max-lg:basis-auto max-lg:w-full max-lg:flex-row max-lg:flex-wrap max-lg:items-start max-lg:justify-between max-lg:gap-x-8 max-lg:gap-y-2 max-md:flex-col max-md:justify-start max-md:gap-5">
-        {/* Main content: meta above headline on desktop; meta moves below headline at max-xl via order */}
+    <div className="flex items-stretch gap-12 max-lg:gap-4 max-lg:flex-col-reverse">
+      {/* Left — text ~35% (desktop) / full-width column (max-lg) */}
+      <div className="flex flex-col justify-between shrink-0 grow-0 basis-[35%] max-lg:basis-auto max-lg:w-full max-lg:items-start max-lg:justify-start max-lg:gap-5">
+        {/* Main content */}
         <div className="flex flex-col gap-4 max-lg:flex-1 max-lg:gap-2">
-          <p className="type-allcaps text-foreground-secondary max-lg:order-last max-md:order-first">
+          <p className="type-allcaps text-foreground-secondary max-lg:order-first">
             {meta}
           </p>
           <h2 className="type-h2 text-foreground">
             {headline}
           </h2>
           {description && (
-            <p className="type-m text-foreground-secondary max-lg:hidden max-md:block">
+            <p className="type-m text-foreground-secondary">
               {description}
             </p>
           )}
           {highlight && (
-            <div className="max-lg:hidden max-md:block max-md:pt-2"><TagPill>{highlight}</TagPill></div>
+            <div className="max-lg:pt-2"><TagPill>{highlight}</TagPill></div>
           )}
         </div>
 
-        {/* Condensed right side — highlight only, visible at max-xl (hidden on desktop and max-md) */}
-        <div className="hidden max-lg:flex max-md:hidden items-start shrink-0 max-lg:pt-2">
-          {highlight && <TagPill>{highlight}</TagPill>}
-        </div>
-
-        {/* CTAs — hidden at max-xl, shown again at max-md */}
+        {/* CTAs — hidden at max-lg */}
         <div className="flex items-center gap-5 flex-wrap max-lg:hidden">
           <Link
             href={primaryHref}
