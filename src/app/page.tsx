@@ -10,7 +10,7 @@ export default function Home() {
           Case studies
         </h1>
 
-        <div className="flex flex-col" style={{ gap: "48px" }}>
+        <div className="flex flex-col gap-case-study">
           <CaseStudyCard
             meta="SKOALA · LEAD DESIGNER · 2024–25"
             headline="Building yet another CMS"

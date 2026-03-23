@@ -28,7 +28,7 @@ export function CaseStudyCard({
   return (
     <div className="flex items-stretch gap-case-study">
       {/* Left — text ~35% */}
-      <div className="flex flex-col justify-between" style={{ flex: "0 0 35%" }}>
+      <div className="flex flex-col justify-between shrink-0 grow-0 basis-[35%]">
         <div className="flex flex-col gap-5">
           <p className="type-allcaps text-foreground-secondary">
             {meta}

@@ -30,11 +30,8 @@ export function CaptionedImage({
 
   return (
     <figure
-      className="w-full flex flex-col items-center"
-      style={{
-        margin: "0",
-        ...(width ? { maxWidth: `${width}px`, marginLeft: "auto", marginRight: "auto" } : {}),
-      }}
+      className={`w-full flex flex-col items-center ${width ? "mx-auto" : ""}`}
+      style={width ? { maxWidth: `${width}px` } : undefined}
     >
       <div className={wrapperClass}>
         <Image
