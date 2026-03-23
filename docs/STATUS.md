@@ -1,12 +1,12 @@
 # Portfolio Build Status
 
-**Day:** 4 of 5 (Fri Mar 20) · **Deploy:** portfolio-lac-pi-40.vercel.app · **Sprint end:** Sun Mar 23
+**Day:** 5 of 5 (Mon Mar 23) · **Deploy:** portfolio-lac-pi-40.vercel.app · **Sprint end:** Sun Mar 23
 
 ## Pages
 `/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done (dedicated page) · `/sakurabook` → Done (dedicated page, workspace images pending) · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-Day 4: /about page; add Sakurabook workspace images (sakurabook-ws-2.png through sakurabook-ws-4.png)
+Responsive implementation (landing page, case study, selected project pages)
 
 ## Session Log
 1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
@@ -20,6 +20,7 @@ Day 4: /about page; add Sakurabook workspace images (sakurabook-ws-2.png through
 9. Selected project overlays — Radix Dialog overlay system; ProjectOverlay + SelectedProjectContent components; NNspect overlay with 3 images wired up; stub pages deleted; Sakurabook card visible, overlay TODO; overlay refined: 1224px wide centered panel, full height, no radius, 48px padding, fade+scale animation, #000/40% backdrop
 10. Dedicated project pages — converted overlay system to /nnspect and /sakurabook dedicated pages; removed ProjectOverlay.tsx and @radix-ui/react-dialog; landing page cards link via href prop; Sakurabook content added (workspace images pending)
 11. Selected project header — 552px centered text block (metadata, headline, description, tag) matching case study hero column width
+12. Token audit tooling + inline style fixes — audit-tokens.sh script; fixed all 6 inline style violations (gap-case-study, max-w-text, pl-[em], basis-[35%], CaptionedImage dynamic width); e2e responsive spec improved with overflowMustPass flag and image-load await
 
 ## Known Issues
 (none)
