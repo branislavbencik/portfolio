@@ -6,7 +6,7 @@
 `/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done (dedicated page) · `/sakurabook` → Done (dedicated page, workspace images pending) · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-Responsive implementation (landing page, case study, selected project pages)
+Visual QA pass on mobile/tablet breakpoints; about page; resume page
 
 ## Session Log
 1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
@@ -21,6 +21,7 @@ Responsive implementation (landing page, case study, selected project pages)
 10. Dedicated project pages — converted overlay system to /nnspect and /sakurabook dedicated pages; removed ProjectOverlay.tsx and @radix-ui/react-dialog; landing page cards link via href prop; Sakurabook content added (workspace images pending)
 11. Selected project header — 552px centered text block (metadata, headline, description, tag) matching case study hero column width
 12. Token audit tooling + inline style fixes — audit-tokens.sh script; fixed all 6 inline style violations (gap-case-study, max-w-text, pl-[em], basis-[35%], CaptionedImage dynamic width); e2e responsive spec improved with overflowMustPass flag and image-load await
+13. Responsive styling — registered max-xl/max-lg/max-md custom variants; responsive CSS variable overrides for typography + spacing; fixed spacing utilities to use var() (mb-section, py-section, px-content-x etc.); CaseStudyCard stacked layout with condensed bar at max-xl; selected projects 1-col at max-md; ImpactBar flex-wrap; Footer stacks; all 25 e2e responsive tests pass
 
 ## Known Issues
 (none)
