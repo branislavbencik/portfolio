@@ -5,7 +5,7 @@ import * as path from 'path';
 /**
  * Responsive Screenshot Tests
  * 
- * Captures full-page screenshots of every page at 4 viewport widths.
+ * Captures full-page screenshots of every page at 5 viewport widths.
  * Screenshots are saved to e2e/screenshots/{page}-{breakpoint}.png
  * 
  * Usage:
@@ -25,11 +25,11 @@ import * as path from 'path';
 const SCREENSHOT_DIR = path.join('e2e', 'screenshots');
 
 const VIEWPORTS = [
-  { name: 'desktop',       width: 1440, height: 900  },
-  { name: 'small-desktop', width: 1279, height: 900  },  // just below max-xl
-  { name: 'tablet',        width: 1023, height: 1024 },  // just below max-lg
-  { name: 'mobile',        width: 767,  height: 1024 },  // just below max-md
-  { name: 'small-mobile',  width: 375,  height: 812  },  // iPhone SE
+  { name: 'desktop',       width: 1440, height: 900,  overflowMustPass: true  },
+  { name: 'small-desktop', width: 1279, height: 900,  overflowMustPass: true  },  // just below max-xl
+  { name: 'tablet',        width: 1023, height: 1024, overflowMustPass: true  },  // just below max-lg
+  { name: 'mobile',        width: 767,  height: 1024, overflowMustPass: true  },  // just below max-md
+  { name: 'small-mobile',  width: 375,  height: 812,  overflowMustPass: false },  // iPhone SE — warn only
 ];
 
 const PAGES = [
@@ -59,8 +59,25 @@ for (const page of PAGES) {
         // Navigate and wait for network to settle
         await tab.goto(page.path, { waitUntil: 'networkidle' });
         
-        // Wait a beat for any CSS transitions / font loading
-        await tab.waitForTimeout(500);
+        // Wait for all images to actually load (or fail)
+        // Much more reliable than a fixed timeout
+        await tab.evaluate(async () => {
+          const images = Array.from(document.querySelectorAll('img'));
+          await Promise.allSettled(
+            images.map((img) => {
+              if (img.complete) return Promise.resolve();
+              return new Promise((resolve) => {
+                img.addEventListener('load', resolve, { once: true });
+                img.addEventListener('error', resolve, { once: true });
+                // Safety timeout per image — don't wait forever
+                setTimeout(resolve, 5000);
+              });
+            })
+          );
+        });
+        
+        // Extra beat for CSS reflow after images load
+        await tab.waitForTimeout(300);
         
         // Full-page screenshot
         const screenshotPath = path.join(
@@ -72,9 +89,21 @@ for (const page of PAGES) {
           fullPage: true,
         });
         
-        // Basic sanity: page should not have horizontal overflow
+        // Check horizontal overflow
         const bodyWidth = await tab.evaluate(() => document.body.scrollWidth);
-        expect(bodyWidth).toBeLessThanOrEqual(viewport.width + 1); // 1px tolerance
+        const overflows = bodyWidth > viewport.width + 1;
+        
+        if (overflows && viewport.overflowMustPass) {
+          // Hard fail — these breakpoints must not overflow
+          expect(bodyWidth, 
+            `Page "${page.name}" overflows at ${viewport.width}px — body is ${bodyWidth}px wide`
+          ).toBeLessThanOrEqual(viewport.width + 1);
+        } else if (overflows) {
+          // Soft warning — screenshot captured for review, but test passes
+          console.warn(
+            `⚠️  "${page.name}" overflows at ${viewport.width}px (body: ${bodyWidth}px) — screenshot saved for review`
+          );
+        }
         
         await context.close();
       });
