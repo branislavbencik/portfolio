@@ -67,8 +67,8 @@
   /* ── Spacing ────────────────────────────────────────────────────── */
   --spacing-section:   100px;  /* py-section  */
   --spacing-nav-y:      20px;  /* py-nav-y    */
-  --spacing-nav-x:      80px;  /* px-nav-x    */
-  --spacing-content-x:  80px;  /* px-content-x */
+  --spacing-nav-x:      32px;  /* px-nav-x    */
+  --spacing-content-x:  32px;  /* px-content-x */
 
   /* ── Gaps ───────────────────────────────────────────────────────── */
   --gap-case-study:       48px;

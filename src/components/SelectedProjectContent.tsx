@@ -29,12 +29,12 @@ export function SelectedProjectContent({
       <div className="mx-auto" style={{ maxWidth: "552px" }}>
         <p className="type-allcaps text-foreground-secondary">{metadata}</p>
         <h2 className="type-h2 mt-4">{headline}</h2>
-        <p className="type-body-l mt-6">{description}</p>
+        <p className="type-body-m mt-6">{description}</p>
         <div className="mt-4">
           <TagPill>{tag}</TagPill>
         </div>
       </div>
-      <div className="mt-[60px] flex flex-col gap-[60px]">
+      <div className="mt-15 flex flex-col gap-15">
         {images.map((img) => (
           <CaptionedImage
             key={img.src}

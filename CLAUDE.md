@@ -2,7 +2,7 @@
 
 ## What This Is
 
-Personal portfolio for Branislav Benčík, Senior Product Designer. 7 pages, 5 unique templates.
+Personal portfolio for Branislav Benčík, Senior Product Designer.
 
 ## Tech Stack
 
@@ -12,50 +12,102 @@ Personal portfolio for Branislav Benčík, Senior Product Designer. 7 pages, 5 u
 - `next/image` with `unoptimized: true` (lazy loading without Vercel image server)
 - Deployed to Vercel via GitHub
 - No SSR, no API routes, no database, no auth, no CMS
-- No animations until Day 4 (then Framer Motion for scroll-reveal + page transitions)
 
 ## Pages
 
-| Route | Template | Status |
-|-------|----------|--------|
-| `/` | Landing page | Not started |
-| `/skoala` | Case study | Not started |
-| `/teatime` | Case study | Not started |
-| `/nnspect` | Selected project | Not started |
-| `/sakurabook` | Selected project | Not started |
-| `/about` | About (minimal) | Not started |
-| `/resume` | PDF download link | Not started |
+| Route | Template |
+|-------|----------|
+| `/` | Landing page |
+| `/skoala` | Case study (MDX) |
+| `/teatime` | Case study (MDX) |
+| `/nnspect` | Selected project (dialog) |
+| `/sakurabook` | Selected project (dialog) |
+| `/resume.pdf` | PDF download (static file) |
 
-## Design Specs
+## Design Tokens — Single Source of Truth
 
-All values from Figma, exact.
+**`src/app/globals.css` is the single source of truth for ALL design values.**
+Do NOT hardcode pixel values, colors, or font sizes anywhere. Always use:
+- CSS custom properties (e.g., `var(--spacing-content-x)`)
+- Tailwind theme utilities (e.g., `max-w-content`, `px-content-x`, `py-section`)
+- Typography utility classes (e.g., `type-h1`, `type-body-m`, `type-allcaps`)
 
-### Layout
-- Frame max-width: 1288px
-- Content max-width: 1128px (80px horizontal padding each side)
-- Section vertical padding: 100px top and bottom
-- Nav: 20px vertical, 80px horizontal padding, 64px total height
-- Case study card gap: 48px
-- Selected project grid: 2 columns × 558px, 12px gap
-- Selected project card internal gap: 8px
+### What's defined in globals.css:
+- **Layout:** `--width-frame` (1288px), `--width-content` (1128px), `--width-text` (552px), `--spacing-section`, `--spacing-content-x`, `--spacing-nav-x`/`--spacing-nav-y`
+- **Typography:** `type-h1` through `type-body-s`, `type-allcaps`, `type-button` — all as `@layer utilities` classes with font-size, weight, line-height, and letter-spacing baked in
+- **Colors:** Primitive palette (`--black` through `--white`, `--green-500`) and semantic tokens (`--foreground`, `--foreground-secondary`, `--foreground-tertiary`, `--background`, `--background-alt`, `--border-strong`, `--border-light`, `--accent-live`)
+- **Gaps:** `--gap-case-study`, `--gap-selected-project`, `--gap-selected-card`, `--gap-impact`
+- **Responsive scaling:** Typography utilities and layout spacing variables auto-scale at breakpoints via media queries in globals.css — see Responsive Strategy below
 
-### Typography (Geist Sans, Geist Mono for code)
-- H1: 64px, SemiBold, line-height 100%, letter-spacing -0.04em
-- H2: 40px, SemiBold, line-height 110%, letter-spacing -0.04em
-- H3: 32px, SemiBold, line-height 120%, letter-spacing -0.02em
-- H4: 27px, SemiBold, line-height 120%, letter-spacing -0.02em
-- Subheadline: 20px, SemiBold, line-height 120%
-- Body XL: 20px, Regular, line-height 150%
-- Body L: 18px, Regular, line-height 150%
-- Body M: 16px, Regular, line-height 150%
-- Body S: 14px, Regular, line-height 150%
-- AllCaps: 14px, Medium, line-height 140%, letter-spacing 0.05em
-- Button: 16px, SemiBold, line-height 140%
+### Rules:
+- Always use `type-*` utility classes for text. Never set `font-size` directly.
+- Always use semantic color tokens (`--foreground`, not `#171717`; `--background`, not `#ffffff`).
+- Always use layout variables (`px-content-x`, not `px-[80px]`).
+- If you need a value that doesn't exist in globals.css, ask before inventing a new token.
 
-### Colors
-- Background: #ffffff
-- Text: #171717
-- Impact numbers bar: #0a0a0a background, #ffffff text
+## Responsive Strategy
+
+### Approach: Desktop-first with max-width overrides
+
+Base (unprefixed) styles = desktop layout. This is already built.
+Responsive changes go downward using Tailwind's built-in `max-*` variants.
+
+### Breakpoints (three levels)
+
+| Variant | Media query | Covers |
+|---------|-------------|--------|
+| `max-xl:` | `≤1279px` | Small desktop / large tablet landscape |
+| `max-lg:` | `≤1023px` | Tablet portrait |
+| `max-md:` | `≤767px` | Mobile |
+
+### Critical rules for Claude Code:
+
+1. **NEVER use min-width prefixes** (`sm:`, `md:`, `lg:`, `xl:`) for responsive changes. Always use `max-xl:`, `max-lg:`, `max-md:`.
+2. **Do NOT add responsive font-size classes.** Typography auto-scales via media queries in globals.css. Just use `type-h1` and it works at every breakpoint.
+3. **Do NOT add responsive padding to layout wrappers.** The CSS variables `--spacing-content-x`, `--spacing-section`, `--spacing-nav-x` auto-scale at breakpoints. Components using `px-content-x` and `py-section` adapt automatically.
+4. **Do NOT mix min-width and max-width approaches.** Every responsive override must use `max-xl:`, `max-lg:`, or `max-md:`. No exceptions.
+5. **Base styles are desktop styles.** Never wrap desktop styles in a breakpoint prefix.
+
+### Per-component responsive specs
+
+**Layout wrapper** (`max-w-frame mx-auto px-content-x`):
+- Auto-scales via CSS variables. No classes needed.
+
+**Nav** (`py-nav-y px-nav-x`, 64px height):
+- Auto-scales via CSS variables.
+- Links stay visible on all sizes — no hamburger menu (only 4–5 links).
+- max-md: check that links don't overflow. If they do, reduce gap between them.
+
+**Landing page — Case study cards** (text left · image right):
+This component has the most complex responsive transformation:
+- **Base (≥1280px):** Two-column layout. Left column: metadata, headline, description, highlight bullet, CTAs. Right column: hero screenshot. Separated by horizontal line below.
+- **max-xl (<1280px):** Switch to stacked layout. Full-width hero screenshot on top. Below: condensed single-line metadata bar (headline + company · role · year + highlight stat). No description paragraph visible.
+- **max-lg (<1024px):** Same as max-xl but content area is narrower. Check that metadata bar wraps gracefully if needed.
+- **max-md (<768px):** Full single-column stack. Consider showing description paragraph again since there's no space constraint. Metadata bar can wrap to 2 lines.
+
+**Landing page — Selected project grid** (2 columns, 12px gap):
+- Base: 2-column grid.
+- max-lg: still 2 columns, narrower.
+- max-md: single column. Cards go full-width.
+
+**Impact bar** (dark full-width band with metrics):
+- Base: horizontal flex with 80px gap.
+- max-lg: reduce gap (auto via CSS variable). Flex-wrap if needed.
+- max-md: stack vertically or allow natural wrapping. Numbers stay large.
+
+**Case study — Work sections** (label + title + paragraph + images):
+- Base: images at their natural width within content area.
+- max-md: all images go full-width. If any images sit side-by-side, they stack vertically.
+
+**Case study — Hero image:**
+- Always full-width within content area. No changes needed.
+
+**Footer:**
+- max-md: stack elements if they sit side by side. Full-width border.
+
+**Selected project detail pages** (NNspect, Sakurabook):
+- Simple single-column layout. Already mostly responsive.
+- max-md: images go full-width. Check caption readability.
 
 ## Reusable Components
 
@@ -79,6 +131,22 @@ Build these as shared components. Case studies reuse all of them.
 - Hero image pattern: `heroImage="/images/{project}/{project}-thumb.png"` — same thumbnail used on landing page cards and as the case study hero
 - Never rewrite, paraphrase, or improve page copy. All text provided in the session prompt must be copied character-for-character. Do not infer, summarize, or generate alternative copy.
 
+## Code Quality Rules
+
+These rules apply to EVERY edit. No exceptions.
+
+1. **Always use existing CSS variables, design tokens, and Tailwind utility classes instead of hardcoded values or inline styles.** Never introduce new tokens without explicit approval. (Claude has repeatedly used hardcoded colors, inline fontSize styles, or created unnecessary new tokens instead of using the established design system.)
+
+2. **Always read existing files before modifying or creating new ones.** Never overwrite or create a file without first checking what already exists. (Claude has missed existing props, mangled files during edits, and tried to create files without reading them first.)
+
+3. **For this Next.js project:** Use explicit width/height on `next/image` (not fill prop) for static export compatibility. Use Tailwind `@layer utilities` for custom classes, not raw JIT notation. (Two sessions hit the same gotchas — fill prop breaking static export, and JIT not generating custom utility classes.)
+
+4. **When asked to 'update skills' or 'update status', always update STATUS.md** (not SKILLS.md or other files) unless explicitly told otherwise.
+
+5. **No inline styles.** All styling through Tailwind classes or CSS utility classes defined in globals.css.
+
+6. **No new dependencies without explaining why first.**
+
 ## Figma Console MCP
 
 Desktop Bridge is available. Pair before each session (`figma_pair_plugin`). Key commands:
@@ -98,15 +166,7 @@ Bridge gotchas: Pairing expires in 5 min. REST API is burned (free plan). Comple
 
 - One deliverable per session (one page, or one component system)
 - 30-40 exchanges max, then /compact or new session
-- Update the Status section below before ending each session
-- Before committing, run `git add .` — images and binary files are easy to miss with selective staging
+- End each session with `/project:ship` — it builds, commits, pushes, and updates `docs/STATUS.md`
 - If Claude gets confused: "Stop. Re-read CLAUDE.md."
 - Don't research, plan, AND build in the same session
-
-## Current Status
-
-**Last updated:** 2026-03-21
-**Current day:** Day 4
-**What's done:** Landing page; design token system; all shared components; Skoala case study page (content + image fixes); TeaTime case study page; NNspect overlay (Radix Dialog, 3 images); Sakurabook overlay content; Footer component (clipboard tooltip, Framer Motion, full-width border + content aligned to page layout); optional image captions; Nav/Footer Resumé → /resume.pdf; visual finetuning pass (spacing, globals, selected project card)
-**What's next:** /about page
-**Blockers:** None
+- Current project status lives in `docs/STATUS.md` — not here

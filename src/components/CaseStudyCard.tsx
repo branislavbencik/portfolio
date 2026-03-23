@@ -37,7 +37,7 @@ export function CaseStudyCard({
             {headline}
           </h2>
           {description && (
-            <p className="type-body-l text-foreground-secondary">
+            <p className="type-m text-foreground-secondary">
               {description}
             </p>
           )}
