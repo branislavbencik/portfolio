@@ -10,9 +10,9 @@ export function WorkSection({ label, title, description, children }: WorkSection
     <div className="w-full">
       <div className="border-t border-border-light" />
 
-      <section className="w-full max-w-frame mx-auto px-content-x py-detail">
+      <section className="w-full max-w-frame mx-center px-content-x py-detail">
         {/* Text header — constrained to 552px reading column */}
-        <div className="max-w-text mx-auto w-full mb-detail">
+        <div className="max-w-text mx-center w-full mb-detail">
           <p className="type-allcaps text-foreground-secondary mb-4">
             {label}
           </p>

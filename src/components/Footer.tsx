@@ -14,13 +14,13 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full border-t border-border-light">
-      <div className="w-full max-w-frame mx-auto px-content-x h-16 flex items-center justify-between max-lg:h-auto max-lg:py-4 max-lg:flex-col max-lg:items-start max-lg:gap-2">
-        <div className="flex items-center gap-3 type-body-s text-foreground-secondary">
+    <footer className="w-full border-t border-border-light ">
+      <div className="w-full max-w-frame mx-center px-content-x h-16 flex items-center justify-between max-md:h-auto max-md:py-4 max-md:flex-col max-md:items-start max-md:gap-2">
+        <div className="flex items-center gap-3 type-body-s text-foreground-secondary max-md:flex-col max-md:items-start">
           <span className="relative">
             <button
               onClick={handleEmailClick}
-              className="text-foreground-secondary hover:opacity-60 transition-opacity cursor-pointer"
+              className="hover:opacity-60 transition-opacity cursor-pointer"
             >
               branislav.bencik@gmail.com
             </button>
@@ -38,28 +38,28 @@ export default function Footer() {
               )}
             </AnimatePresence>
           </span>
-          <span aria-hidden="true">·</span>
+          <span className="max-md:hidden" aria-hidden="true">·</span>
           <a
             href="https://www.linkedin.com/in/branislavbencik/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground-secondary hover:opacity-60 transition-opacity"
+            className="hover:opacity-60 transition-opacity"
           >
             LinkedIn
           </a>
-          <span aria-hidden="true">·</span>
+          <span className="max-md:hidden" aria-hidden="true">·</span>
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground-secondary hover:opacity-60 transition-opacity"
+            className="hover:opacity-60 transition-opacity"
           >
             Resumé
           </a>
         </div>
-      <p className="type-body-s text-foreground-secondary">
-        Proudly vibecoded with Claude Code
-      </p>
+        <p className="type-body-s text-foreground-tertiary max-md:mt-12">
+          Proudly vibecoded with Claude Code
+        </p>
       </div>
     </footer>
   );

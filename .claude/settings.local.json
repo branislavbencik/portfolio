@@ -15,7 +15,9 @@
       "Bash(grep -r \"gap-2\\\\|gap-3\\\\|gap-4\\\\|gap-5\\\\|gap-6\\\\|gap-8\\\\|gap-12\\\\|gap-15\\\\|gap-16\\\\|mt-15\\\\|gap-section\" /Users/branislavbencik/repos/portfolio/src --include=*.tsx --include=*.mdx)",
       "Bash(grep -r \"py-section\\\\|px-content-x\\\\|py-nav-y\\\\|pb-section\\\\|mt-section\\\\|gap-section\" .next/static/css/*.css)",
       "Bash(find .next -name \"*.css\" -exec grep -l \"spacing-section\" {})",
-      "Skill(ship)"
+      "Skill(ship)",
+      "Bash(ls -la /Users/branislavbencik/repos/portfolio/*.config.*)",
+      "Bash(grep:*)"
     ]
   }
 }

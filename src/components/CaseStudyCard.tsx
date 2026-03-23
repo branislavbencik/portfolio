@@ -27,10 +27,10 @@ export function CaseStudyCard({
 }: CaseStudyCardProps) {
   return (
     <div className="flex items-stretch gap-12 max-lg:gap-4 max-lg:flex-col-reverse">
+      <div className="flex flex-col py-6 shrink-0 grow-0 basis-[35%] max-lg:py-0 max-lg:basis-auto max-lg:w-full">
       {/* Left — text ~35% (desktop) / full-width column (max-lg) */}
-      <div className="flex flex-col justify-between shrink-0 grow-0 basis-[35%] max-lg:basis-auto max-lg:w-full max-lg:items-start max-lg:justify-start max-lg:gap-5">
         {/* Main content */}
-        <div className="flex flex-col gap-4 max-lg:flex-1 max-lg:gap-2">
+        <div className="flex flex-col gap-4 max-lg:flex-1 max-lg:gap-2 max-lg:max-w-text">
           <p className="type-allcaps text-foreground-secondary max-lg:order-first">
             {meta}
           </p>
@@ -45,30 +45,30 @@ export function CaseStudyCard({
           {highlight && (
             <div className="max-lg:pt-2"><TagPill>{highlight}</TagPill></div>
           )}
-        </div>
-
-        {/* CTAs — hidden at max-lg */}
-        <div className="flex items-center gap-5 flex-wrap max-lg:hidden">
-          <Link
-            href={primaryHref}
-            className="inline-block px-5 py-3 bg-foreground text-white type-button rounded-sm no-underline hover:opacity-80 transition-opacity"
-          >
-            View Case Study
-          </Link>
-          {secondaryLabel && secondaryHref && (
-            <a
-              href={secondaryHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 type-button text-foreground no-underline hover:opacity-60 transition-opacity"
+          {/* CTAs — hidden at max-lg */}
+          <div className="flex items-center gap-5 flex-wrap mt-4 max-lg:hidden">
+            <Link
+              href={primaryHref}
+              className="inline-block px-4 py-2 bg-foreground text-white type-button rounded-sm no-underline hover:opacity-80 transition-opacity"
             >
-              <span className="inline-block w-2 h-2 rounded-full bg-accent-live" />
-              {secondaryLabel}
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
-          )}
+              View Case Study
+            </Link>
+            {secondaryLabel && secondaryHref && (
+              <a
+                href={secondaryHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 type-button text-foreground no-underline hover:opacity-60 transition-opacity"
+              >
+                <span className="inline-block w-2 h-2 rounded-full bg-accent-live" />
+                {secondaryLabel}
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </a>
+            )}
+          </div>
+
         </div>
       </div>
 

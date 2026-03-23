@@ -30,7 +30,7 @@ export function CaptionedImage({
 
   return (
     <figure
-      className={`w-full flex flex-col items-center ${width ? "mx-auto" : ""}`}
+      className={`w-full flex flex-col items-center ${width ? "mx-center" : ""}`}
       style={width ? { maxWidth: `${width}px` } : undefined}
     >
       <div className={wrapperClass}>
@@ -44,7 +44,7 @@ export function CaptionedImage({
         />
       </div>
       {caption && (
-        <figcaption className="w-3/4 max-lg:w-full type-body-s text-foreground-secondary text-center max-md:text-left mt-3">
+        <figcaption className="w-3/4 max-lg:w-full type-body-s text-foreground-secondary text-center max-lg:text-left mt-3">
           {caption}
         </figcaption>
       )}

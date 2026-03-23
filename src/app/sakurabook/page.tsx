@@ -2,7 +2,7 @@ import { SelectedProjectContent } from "@/components/SelectedProjectContent";
 
 export default function SakurabookPage() {
   return (
-    <main className="w-full max-w-frame mx-auto px-content-x py-detail">
+    <main className="w-full max-w-frame mx-center px-content-x py-detail">
       <SelectedProjectContent
         metadata="SAKURABOOK · 2021"
         headline="Shopify plugin for per-hour booking in Japan"

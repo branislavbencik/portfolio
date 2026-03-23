@@ -21,9 +21,9 @@ export function CaseStudyHeader({
   children,
 }: CaseStudyHeaderProps) {
   return (
-    <section className="w-full max-w-frame mx-auto px-content-x py-detail">
+    <section className="w-full max-w-frame mx-center px-content-x py-detail">
       {/* Text block — centered reading column */}
-      <div className={`max-w-text mx-auto w-full ${heroImage ? "mb-16" : ""}`}>
+      <div className={`max-w-text mx-center w-full ${heroImage ? "mb-16" : ""}`}>
         <MetadataRow company={company} role={role} year={year} />
         <h1 className="type-h1 text-foreground my-4">
           {headline}

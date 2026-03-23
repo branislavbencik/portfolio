@@ -3,15 +3,15 @@ import SelectedProjectCard from "@/components/SelectedProjectCard";
 
 export default function Home() {
   return (
-    <main className="w-full max-w-frame mx-auto px-content-x mt-section">
+    <main className="w-full max-w-frame mx-center px-content-x">
       {/* ── Case Studies ───────────────────────────────────────── */}
-      <section className="mb-section">
-        <h1 className="font-semibold text-foreground type-h1 mb-12">
+      <section className="my-section">
+        <h1 className="text-foreground type-h1 pb-10">
           Case studies
         </h1>
 
         <div className="flex flex-col gap-case-study">
-          <hr className="border-0 border-t border-border-light" />
+          <hr className="border-0 border-t border-border-light max-lg:hidden" />
 
           <CaseStudyCard
             meta="SKOALA · LEAD DESIGNER · 2024–25"
@@ -19,13 +19,13 @@ export default function Home() {
             description="How to allow editors to produce diverse content at scale while keeping zero recurring development cost"
             highlight={<>🏆 Used by <strong>over 50%</strong> of Czech Schools</>}
             primaryHref="/skoala"
-            secondaryLabel="View live"
+            secondaryLabel="View website"
             secondaryHref="https://skoala.cz"
             image="/images/skoala/skoala-thumb.png"
             imageAlt="Skoala LMS interface"
           />
 
-          <hr className="border-0 border-t border-border-light" />
+          <hr className="border-0 border-t border-border-light max-lg:hidden" />
 
           <CaseStudyCard
             meta="TEATIME · CO-OWNER · 2024–25"
@@ -43,8 +43,8 @@ export default function Home() {
       </section>
 
       {/* ── Selected Projects ──────────────────────────────────── */}
-      <section className="mb-section">
-        <h2 className="font-semibold text-foreground type-h1 mb-12">
+      <section className="my-section">
+        <h2 className="text-foreground type-h1 pb-10">
           Selected projects
         </h2>
 
