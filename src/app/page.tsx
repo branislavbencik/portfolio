@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="w-full max-w-frame mx-auto px-content-x">
       {/* ── Case Studies ───────────────────────────────────────── */}
-      <section className="py-section">
+      <section className="pb-section">
         <h1 className="font-semibold text-foreground type-h1 mb-section">
           Case studies
         </h1>
@@ -36,16 +36,17 @@ export default function Home() {
             image="/images/teatime/teatime-thumb.png"
             imageAlt="TeaTime language school interface"
           />
+          <hr className="border-0 border-t border-border-light" />
         </div>
       </section>
 
       {/* ── Selected Projects ──────────────────────────────────── */}
-      <section className="py-section border-t border-border-light">
+      <section className="pb-section">
         <h2 className="font-semibold text-foreground type-h1 mb-section">
           Selected projects
         </h2>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 max-md:grid-cols-1">
           <SelectedProjectCard
             href="/nnspect"
             image="/images/nnspect/nnspect-thumb.png"

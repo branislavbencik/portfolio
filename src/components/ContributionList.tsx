@@ -6,9 +6,9 @@ export function ContributionList({ children }: ContributionListProps) {
   return (
     <section className="w-full max-w-frame mx-auto px-content-x pb-section">
       <div className="max-w-text mx-auto w-full">
-        <h4 className="type-h4 text-foreground mb-6">
+        <h2 className="type-h2 text-foreground mb-4">
           My contribution
-        </h4>
+        </h2>
         <div className="type-body-m text-foreground-secondary">
           {children}
         </div>

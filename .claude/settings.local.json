@@ -8,7 +8,9 @@
       "Bash(grep -E \"\\\\.tsx$|\\\\.ts$\")",
       "Bash(git commit:*)",
       "Bash(grep -E \"\\\\.tsx$\")",
-      "Bash(find /Users/branislavbencik/repos/portfolio/src -type f -name *.tsx -o -name *.ts -o -name *.mdx)"
+      "Bash(find /Users/branislavbencik/repos/portfolio/src -type f -name *.tsx -o -name *.ts -o -name *.mdx)",
+      "Bash(npx playwright:*)",
+      "Bash(find . -name *.png -path */e2e/*)"
     ]
   }
 }

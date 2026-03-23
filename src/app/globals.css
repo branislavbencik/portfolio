@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* ── Responsive breakpoint variants ──────────────────────────────── */
+@custom-variant max-xl (@media (max-width: 1279px));
+@custom-variant max-lg (@media (max-width: 1023px));
+@custom-variant max-md (@media (max-width: 767px));
+
 /* ── Primitive palette ────────────────────────────────────────────── */
 :root {
   --black: #0a0a0a;
@@ -54,7 +59,6 @@
 
   /* ── Fonts ──────────────────────────────────────────────────────── */
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 
   /* ── Layout widths ──────────────────────────────────────────────── */
   --width-frame:       1288px;
@@ -65,9 +69,9 @@
   --max-width-text:     552px;   /* max-w-text — centered reading column */
 
   /* ── Spacing ────────────────────────────────────────────────────── */
-  --spacing-section:   100px;  /* py-section  */
   --spacing-nav-y:      20px;  /* py-nav-y    */
   --spacing-nav-x:      32px;  /* px-nav-x    */
+  --spacing-section:   100px;  /* py-section  */
   --spacing-content-x:  32px;  /* px-content-x */
 
   /* ── Gaps ───────────────────────────────────────────────────────── */
@@ -77,10 +81,9 @@
   --gap-impact:           80px;
 
   /* ── Typography — font sizes ────────────────────────────────────── */
-  --font-size-h1:          64px;
-  --font-size-h2:          40px;
-  --font-size-h3:          32px;
-  --font-size-h4:          27px;
+  --font-size-h1:          40px;
+  --font-size-h2:          28px;
+  --font-size-h3:          20px;
   --font-size-subheadline: 20px;
   --font-size-body-xl:     20px;
   --font-size-body-l:      18px;
@@ -88,23 +91,50 @@
   --font-size-body-s:      14px;
   --font-size-allcaps:     13px;
   --font-size-button:      16px;
+  --font-size-stat:        64px;
 
   /* ── Typography — line heights ──────────────────────────────────── */
-  --line-height-h1:          1;
-  --line-height-h2:          1.1;
-  --line-height-h3:          1.2;
-  --line-height-h4:          1.2;
-  --line-height-subheadline: 1.2;
+  --line-height-h1:          1.1;
+  --line-height-h2:          1.2;
+  --line-height-h3:          1.25;
   --line-height-body:        1.5;
-  --line-height-allcaps:     1.4;
-  --line-height-button:      1.4;
+  --line-height-allcaps:     1.5;
+  --line-height-button:      1.5;
+  --line-height-stat:      1;
 
   /* ── Typography — letter spacing ────────────────────────────────── */
-  --letter-spacing-h1:     -0.04em;
-  --letter-spacing-h2:     -0.04em;
-  --letter-spacing-h3:     -0.03em;
-  --letter-spacing-h4:     -0.02em;
-  --letter-spacing-allcaps: 0.03em;
+  --letter-spacing-h1:     -4%;
+  --letter-spacing-h2:     -4%;
+  --letter-spacing-h3:     -3%;
+  --letter-spacing-allcaps: 2%;
+  --letter-spacing-stat:     -5%;
+}
+
+/* ── Responsive variable overrides ───────────────────────────────── */
+@media (max-width: 1279px) {
+  :root {
+    --spacing-section: 48px;
+  }
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --spacing-section: 24px;
+    --gap-impact: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --font-size-h1:      40px;
+    --font-size-h2:      28px;
+    --font-size-h3:      24px;
+    --font-size-body-xl: 18px;
+    --spacing-section:   16px;
+    --spacing-nav-x:     20px;
+    --spacing-content-x: 20px;
+    --gap-impact:        32px;
+  }
 }
 
 @layer utilities {
@@ -127,24 +157,9 @@
     line-height: var(--line-height-h3);
     letter-spacing: var(--letter-spacing-h3);
   }
-  .type-h4 {
-    font-size: var(--font-size-h4);
-    font-weight: 600;
-    line-height: var(--line-height-h4);
-    letter-spacing: var(--letter-spacing-h4);
-  }
-  .type-subheadline {
-    font-size: var(--font-size-subheadline);
-    font-weight: 600;
-    line-height: var(--line-height-subheadline);
-  }
+  
 
   /* ── Body ───────────────────────────────────────────────────────── */
-  .type-body-xl {
-    font-size: var(--font-size-body-xl);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-  }
   .type-body-l {
     font-size: var(--font-size-body-l);
     font-weight: 400;
@@ -174,6 +189,13 @@
     font-weight: 600;
     line-height: var(--line-height-button);
   }
+
+  /* ── Named spacing utilities (use var() so :root overrides in media queries work) */
+  .mb-section    { margin-bottom: var(--spacing-section); }
+  .py-section    { padding-top: var(--spacing-section); padding-bottom: var(--spacing-section); }
+  .px-content-x  { padding-left: var(--spacing-content-x); padding-right: var(--spacing-content-x); }
+  .px-nav-x      { padding-left: var(--spacing-nav-x); padding-right: var(--spacing-nav-x); }
+  .py-nav-y      { padding-top: var(--spacing-nav-y); padding-bottom: var(--spacing-nav-y); }
 
   /* ── Named gap utilities ────────────────────────────────────────── */
   .gap-case-study       { gap: var(--gap-case-study); }

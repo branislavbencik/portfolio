@@ -25,10 +25,10 @@ export function CaseStudyHeader({
       {/* Text block — centered reading column */}
       <div className={`max-w-text mx-auto w-full ${heroImage ? "mb-16" : ""}`}>
         <MetadataRow company={company} role={role} year={year} />
-        <h1 className="type-h1 text-foreground mt-4 mb-6">
+        <h1 className="type-h1 text-foreground my-4">
           {headline}
         </h1>
-        <div className="type-body-xl text-foreground-secondary">
+        <div className="type-l text-foreground-secondary">
           {children}
         </div>
       </div>

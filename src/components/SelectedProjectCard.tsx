@@ -37,7 +37,7 @@ export default function SelectedProjectCard({
 
       {/* Text content */}
       <div className="flex flex-col gap-2">
-        <h3 className="type-subheadline group-hover:opacity-70 transition-opacity">
+        <h3 className="type-h3 group-hover:opacity-70 transition-opacity">
           {headline}
         </h3>
         <p className="type-allcaps text-foreground-secondary">

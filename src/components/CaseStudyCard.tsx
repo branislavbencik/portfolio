@@ -26,26 +26,34 @@ export function CaseStudyCard({
   secondaryHref,
 }: CaseStudyCardProps) {
   return (
-    <div className="flex items-stretch gap-case-study">
-      {/* Left — text ~35% */}
-      <div className="flex flex-col justify-between shrink-0 grow-0 basis-[35%]">
-        <div className="flex flex-col gap-5">
-          <p className="type-allcaps text-foreground-secondary">
+    <div className="flex items-stretch  gap-12 max-xl:gap-4 max-xl:flex-col-reverse">
+      {/* Left — text ~35% (desktop) / full-width horizontal bar (max-xl) / column (max-md) */}
+      <div className="flex flex-col justify-between shrink-0 grow-0 basis-[35%] max-xl:basis-auto max-xl:w-full max-xl:flex-row max-xl:flex-wrap max-xl:items-start max-xl:justify-between max-xl:gap-x-8 max-xl:gap-y-2 max-md:flex-col max-md:justify-start max-md:gap-5">
+        {/* Main content: meta above headline on desktop; meta moves below headline at max-xl via order */}
+        <div className="flex flex-col gap-4 max-xl:flex-1 max-xl:gap-2">
+          <p className="type-allcaps text-foreground-secondary max-xl:order-last max-md:order-first">
             {meta}
           </p>
           <h2 className="type-h2 text-foreground">
             {headline}
           </h2>
           {description && (
-            <p className="type-m text-foreground-secondary">
+            <p className="type-m text-foreground-secondary max-xl:hidden max-md:block">
               {description}
             </p>
           )}
           {highlight && (
-            <div><TagPill>{highlight}</TagPill></div>
+            <div className="max-xl:hidden max-md:block max-md:pt-2"><TagPill>{highlight}</TagPill></div>
           )}
         </div>
-        <div className="flex items-center gap-5 flex-wrap">
+
+        {/* Condensed right side — highlight only, visible at max-xl (hidden on desktop and max-md) */}
+        <div className="hidden max-xl:flex max-md:hidden items-start shrink-0 max-xl:pt-2">
+          {highlight && <TagPill>{highlight}</TagPill>}
+        </div>
+
+        {/* CTAs — hidden at max-xl, shown again at max-md */}
+        <div className="flex items-center gap-5 flex-wrap max-xl:hidden">
           <Link
             href={primaryHref}
             className="inline-block px-5 py-3 bg-foreground text-white type-button rounded-sm no-underline hover:opacity-80 transition-opacity"
@@ -69,7 +77,7 @@ export function CaseStudyCard({
         </div>
       </div>
 
-      {/* Right — image ~65% */}
+      {/* Right — image ~65% (desktop) / full-width top (max-xl via flex-col-reverse) */}
       <div className="flex-1 min-w-0">
         <Link href={primaryHref} className="block">
           <div className="relative w-full aspect-[744/432] overflow-hidden rounded-md border border-border-light bg-background-alt">
@@ -78,7 +86,7 @@ export function CaseStudyCard({
               alt={imageAlt}
               fill
               className="object-cover"
-              sizes="(max-width: 1200px) 65vw, 780px"
+              sizes="(max-width: 767px) 100vw, (max-width: 1279px) 100vw, 65vw"
             />
           </div>
         </Link>

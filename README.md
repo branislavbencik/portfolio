@@ -6,7 +6,7 @@ Portfolio site.
 
 ## Stack
 
-Next.js 16 · Tailwind CSS 4 · MDX · Motion · Geist Sans/Mono · Static export on Vercel
+Next.js 16 · Tailwind CSS 4 · MDX · Motion · Geist Sans · Static export on Vercel
 
 No SSR, no API routes, no CMS. MDX files are the CMS.
 
