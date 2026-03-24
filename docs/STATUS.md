@@ -3,10 +3,10 @@
 **Day:** 5 of 5 (Mon Mar 23) · **Deploy:** portfolio-lac-pi-40.vercel.app · **Sprint end:** Sun Mar 23
 
 ## Pages
-`/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done (dedicated page) · `/sakurabook` → Done (dedicated page, workspace images pending) · `/about` → Stub · `/resume` → Not started
+`/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done · `/sakurabook` → Done · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-Visual QA pass on ≤1023px breakpoint; about page; resume page
+About page; resume page
 
 ## Session Log
 1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
@@ -25,6 +25,7 @@ Visual QA pass on ≤1023px breakpoint; about page; resume page
 14. Spacing tokens auto-scaling — moved spacing tokens from @theme inline to plain @theme; Tailwind now generates var() references for ALL derived utilities (mt-section, my-section, gap-section, pb-section, etc.); gap tokens moved to :root; removed 5 redundant custom @layer utilities spacing classes
 15. Responsive consolidation — collapsed two-breakpoint system into single max-lg; CaseStudyCard drops intermediate tablet (flex-row) layout, mobile column layout now applies at all ≤1023px; all max-md: renamed to max-lg: across Nav, Footer, ImpactBar, CaptionedImage, page.tsx
 16. CLAUDE.md rules — consolidated responsive critical rules into numbered list; clarified auto-scaling behaviour for typography, layout spacing, and nav
+17. Image lightbox + next-project linking — Lightbox component (motion/react, portal, scroll lock, Escape key); CaptionedImage auto-wired; /nnspect ↔ /sakurabook cross-link with double-border separator + SelectedProjectCard teaser (`b7f7edd`)
 
 ## Known Issues
 (none)
