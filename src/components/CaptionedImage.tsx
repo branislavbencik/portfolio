@@ -1,4 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import { Lightbox } from "./Lightbox";
 
 interface CaptionedImageProps {
   src: string;
@@ -19,8 +23,10 @@ export function CaptionedImage({
   rounded = true,
   width,
 }: CaptionedImageProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   const wrapperClass = [
-    "relative w-full overflow-hidden",
+    "relative w-full overflow-hidden cursor-zoom-in",
     rounded ? "rounded-md" : "",
     border ? "border border-border-light" : "",
     background ? "bg-background-alt" : "",
@@ -29,25 +35,34 @@ export function CaptionedImage({
     .join(" ");
 
   return (
-    <figure
-      className={`w-full flex flex-col items-center ${width ? "mx-center" : ""}`}
-      style={width ? { maxWidth: `${width}px` } : undefined}
-    >
-      <div className={wrapperClass}>
-        <Image
-          src={src}
-          alt={alt ?? ""}
-          width={width ?? 1128}
-          height={Math.round((width ?? 1128) * (2 / 3))}
-          className="w-full h-auto block"
-          unoptimized
-        />
-      </div>
-      {caption && (
-        <figcaption className="w-3/4 max-lg:w-full type-body-s text-foreground-secondary text-center max-lg:text-left mt-3">
-          {caption}
-        </figcaption>
-      )}
-    </figure>
+    <>
+      <figure
+        className={`w-full flex flex-col items-center ${width ? "mx-center" : ""}`}
+        style={width ? { maxWidth: `${width}px` } : undefined}
+      >
+        <div className={wrapperClass} onClick={() => setIsOpen(true)}>
+          <Image
+            src={src}
+            alt={alt ?? ""}
+            width={width ?? 1128}
+            height={Math.round((width ?? 1128) * (2 / 3))}
+            className="w-full h-auto block"
+            unoptimized
+          />
+        </div>
+        {caption && (
+          <figcaption className="w-3/4 max-lg:w-full type-body-s text-foreground-secondary text-center max-lg:text-left mt-3">
+            {caption}
+          </figcaption>
+        )}
+      </figure>
+
+      <Lightbox
+        src={src}
+        alt={alt ?? ""}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      />
+    </>
   );
 }
