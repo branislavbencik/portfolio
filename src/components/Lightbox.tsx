@@ -65,7 +65,7 @@ export function Lightbox({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/85"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/70 backdrop-blur-sm cursor-zoom-out"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -127,7 +127,7 @@ export function Lightbox({
 
           {/* Image + caption */}
           <motion.div
-            className="flex flex-col items-center gap-4 max-w-[90vw]"
+            className="flex flex-col items-center gap-4 max-w-[90vw] cursor-default"
             initial={{ scale: 0.97, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.97, opacity: 0 }}
@@ -141,7 +141,7 @@ export function Lightbox({
               className="max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block"
             />
             {caption && (
-              <p className="type-body-s text-white opacity-70 text-center max-w-[600px]">
+              <p className="type-body-m text-white opacity-90 text-center max-w-[600px]">
                 {caption}
               </p>
             )}

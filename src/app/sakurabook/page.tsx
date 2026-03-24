@@ -38,7 +38,7 @@ export default function SakurabookPage() {
         <div className="border-t border-border-light" />
       </div>
       <div className="w-full max-w-frame mx-center px-content-x py-detail">
-        <div className="max-w-text">
+        <div className="max-w-text mx-auto">
           <SelectedProjectCard
             href="/nnspect"
             image="/images/nnspect/nnspect-thumb.png"
