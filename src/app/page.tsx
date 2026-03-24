@@ -17,7 +17,7 @@ export default function Home() {
             meta="SKOALA · LEAD DESIGNER · 2024–25"
             headline="Building yet another CMS"
             description="How to allow editors to produce diverse content at scale while keeping zero recurring development cost"
-            highlight={<>🏆 Used by <strong>over 50%</strong> of Czech Schools</>}
+            highlight={<>🏆 Used by <strong>over 50%</strong> of Czech schools</>}
             primaryHref="/skoala"
             secondaryLabel="View website"
             secondaryHref="https://skoala.cz"
