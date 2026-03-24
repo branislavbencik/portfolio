@@ -90,7 +90,7 @@
   --line-height-body:        1.5;
   --line-height-allcaps:     1.5;
   --line-height-button:      1.5;
-  --line-height-stat:      1;
+  --line-height-stat:          1;
 
   /* ── Typography — letter spacing ────────────────────────────────── */
   --letter-spacing-h1:     -4%;
@@ -139,13 +139,13 @@
   }
   .type-h2 {
     font-size: var(--font-size-h2);
-    font-weight: 600;
+    font-weight: 500;
     line-height: var(--line-height-h2);
     letter-spacing: var(--letter-spacing-h2);
   }
   .type-h3 {
     font-size: var(--font-size-h3);
-    font-weight: 600;
+    font-weight: 500;
     line-height: var(--line-height-h3);
     letter-spacing: var(--letter-spacing-h3);
   }
