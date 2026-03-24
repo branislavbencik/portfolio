@@ -93,9 +93,9 @@
   --line-height-stat:          1;
 
   /* ── Typography — letter spacing ────────────────────────────────── */
-  --letter-spacing-h1:     -4%;
-  --letter-spacing-h2:     -4%;
-  --letter-spacing-h3:     -3%;
+  --letter-spacing-h1:     -3%;
+  --letter-spacing-h2:     -2%;
+  --letter-spacing-h3:     -1.5%;
   --letter-spacing-allcaps: 2%;
   --letter-spacing-stat:   -5%;
 }
