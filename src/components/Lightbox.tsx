@@ -65,7 +65,7 @@ export function Lightbox({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/85"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -74,14 +74,14 @@ export function Lightbox({
         >
           {/* Counter — top left */}
           {showCounter && (
-            <span className="absolute top-6 left-6 type-allcaps text-foreground-tertiary">
+            <span className="absolute top-6 left-6 type-allcaps text-white opacity-50">
               {currentIndex! + 1} / {total}
             </span>
           )}
 
           {/* Close — top right */}
           <button
-            className="absolute top-6 right-6 text-foreground opacity-40 hover:opacity-80 transition-opacity cursor-pointer"
+            className="absolute top-6 right-6 text-white opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
             onClick={onClose}
             aria-label="Close image"
           >
@@ -102,7 +102,7 @@ export function Lightbox({
           {/* Prev — left */}
           {showNav && (
             <button
-              className="absolute left-6 top-1/2 -translate-y-1/2 text-foreground opacity-40 hover:opacity-80 transition-opacity cursor-pointer"
+              className="absolute left-6 top-1/2 -translate-y-1/2 text-white opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
               onClick={(e) => { e.stopPropagation(); onPrev!(); }}
               aria-label="Previous image"
             >
@@ -115,7 +115,7 @@ export function Lightbox({
           {/* Next — right */}
           {showNav && (
             <button
-              className="absolute right-6 top-1/2 -translate-y-1/2 text-foreground opacity-40 hover:opacity-80 transition-opacity cursor-pointer"
+              className="absolute right-6 top-1/2 -translate-y-1/2 text-white opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
               onClick={(e) => { e.stopPropagation(); onNext!(); }}
               aria-label="Next image"
             >
@@ -141,7 +141,7 @@ export function Lightbox({
               className="max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block"
             />
             {caption && (
-              <p className="type-body-s text-foreground-secondary text-center max-w-[600px]">
+              <p className="type-body-s text-white opacity-70 text-center max-w-[600px]">
                 {caption}
               </p>
             )}
