@@ -1,5 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { MetadataRow } from "./MetadataRow";
+import { Lightbox } from "./Lightbox";
 
 interface CaseStudyHeaderProps {
   company: string;
@@ -20,6 +24,8 @@ export function CaseStudyHeader({
   heroImageAlt,
   children,
 }: CaseStudyHeaderProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <section className="w-full max-w-frame mx-center px-content-x py-detail">
       {/* Text block — centered reading column */}
@@ -35,16 +41,27 @@ export function CaseStudyHeader({
 
       {/* Hero image — full content width */}
       {heroImage && (
-        <div className="relative w-full overflow-hidden rounded-md border border-border-light bg-background-alt">
-          <Image
+        <>
+          <div
+            className="relative w-full overflow-hidden rounded-md border border-border-light bg-background-alt cursor-zoom-in"
+            onClick={() => setIsOpen(true)}
+          >
+            <Image
+              src={heroImage}
+              alt={heroImageAlt ?? ""}
+              width={1128}
+              height={752}
+              className="w-full h-auto block"
+              unoptimized
+            />
+          </div>
+          <Lightbox
             src={heroImage}
             alt={heroImageAlt ?? ""}
-            width={1128}
-            height={752}
-            className="w-full h-auto block"
-            unoptimized
+            isOpen={isOpen}
+            onClose={() => setIsOpen(false)}
           />
-        </div>
+        </>
       )}
     </section>
   );

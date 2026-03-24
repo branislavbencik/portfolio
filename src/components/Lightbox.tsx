@@ -45,7 +45,7 @@ export function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-white"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -53,7 +53,7 @@ export function Lightbox({ src, alt, isOpen, onClose }: LightboxProps) {
           onClick={onClose}
         >
           <button
-            className="absolute top-6 right-6 text-white opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
+            className="absolute top-6 right-6 text-foreground opacity-40 hover:opacity-80 transition-opacity cursor-pointer"
             onClick={onClose}
             aria-label="Close image"
           >
