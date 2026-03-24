@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useEffect } from "react";
 import Image from "next/image";
 import { MetadataRow } from "./MetadataRow";
-import { Lightbox } from "./Lightbox";
+import { useLightbox } from "./LightboxContext";
 
 interface CaseStudyHeaderProps {
   company: string;
@@ -24,7 +24,15 @@ export function CaseStudyHeader({
   heroImageAlt,
   children,
 }: CaseStudyHeaderProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const id = useId();
+  const { register, unregister, open } = useLightbox();
+
+  useEffect(() => {
+    if (heroImage) {
+      register({ id, src: heroImage, alt: heroImageAlt ?? "" });
+    }
+    return () => unregister(id);
+  }, [id, heroImage, heroImageAlt, register, unregister]);
 
   return (
     <section className="w-full max-w-frame mx-center px-content-x py-detail">
@@ -41,27 +49,19 @@ export function CaseStudyHeader({
 
       {/* Hero image — full content width */}
       {heroImage && (
-        <>
-          <div
-            className="relative w-full overflow-hidden rounded-md border border-border-light bg-background-alt cursor-zoom-in"
-            onClick={() => setIsOpen(true)}
-          >
-            <Image
-              src={heroImage}
-              alt={heroImageAlt ?? ""}
-              width={1128}
-              height={752}
-              className="w-full h-auto block"
-              unoptimized
-            />
-          </div>
-          <Lightbox
+        <div
+          className="relative w-full overflow-hidden rounded-md border border-border-light bg-background-alt cursor-zoom-in"
+          onClick={() => open(id)}
+        >
+          <Image
             src={heroImage}
             alt={heroImageAlt ?? ""}
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
+            width={1128}
+            height={752}
+            className="w-full h-auto block"
+            unoptimized
           />
-        </>
+        </div>
       )}
     </section>
   );

@@ -17,7 +17,8 @@
       "Bash(find .next -name \"*.css\" -exec grep -l \"spacing-section\" {})",
       "Skill(ship)",
       "Bash(ls -la /Users/branislavbencik/repos/portfolio/*.config.*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git push:*)"
     ]
   }
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { LightboxProvider } from "@/components/LightboxContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,9 +27,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} antialiased`}
       >
-        <Nav />
-        {children}
-        <Footer />
+        <LightboxProvider>
+          <Nav />
+          {children}
+          <Footer />
+        </LightboxProvider>
       </body>
     </html>
   );
