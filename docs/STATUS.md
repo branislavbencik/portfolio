@@ -26,6 +26,7 @@ About page; resume page
 15. Responsive consolidation — collapsed two-breakpoint system into single max-lg; CaseStudyCard drops intermediate tablet (flex-row) layout, mobile column layout now applies at all ≤1023px; all max-md: renamed to max-lg: across Nav, Footer, ImpactBar, CaptionedImage, page.tsx
 16. CLAUDE.md rules — consolidated responsive critical rules into numbered list; clarified auto-scaling behaviour for typography, layout spacing, and nav
 17. Image lightbox + next-project linking — Lightbox component (motion/react, portal, scroll lock, Escape key); CaptionedImage auto-wired; /nnspect ↔ /sakurabook cross-link with double-border separator + SelectedProjectCard teaser (`b7f7edd`)
+18. Gallery lightbox — LightboxContext provider in layout.tsx; all CaptionedImage + CaseStudyHeader hero self-register; prev/next arrows, ← → keyboard nav, counter, captions; dark backdrop blur, cursor-zoom-out on backdrop, cursor-default over image (`1315510`)
 
 ## Known Issues
 (none)
