@@ -8,7 +8,7 @@ export default function SakurabookPage() {
         <SelectedProjectContent
           metadata="SAKURABOOK · 2021"
           headline="Shopify plugin for per-hour booking in Japan"
-          description="Hourly booking is common in Japan not just for services but also for spaces. I built a booking plugin for Shopify that handles hourly availability, two storefront templates (one for booking, another for browsing), and the full flow from merchant setup to customer checkout."
+          description="Hourly booking is common in Japan not just for services but also for rental spaces. I built a booking plugin for Shopify that handles hourly availability, two storefront templates (one for booking, another for browsing), and the full flow from merchant setup to customer checkout."
           tag="Ecommerce"
           images={[
             {
