@@ -85,9 +85,9 @@
   --font-size-stat:        64px;
 
   /* ── Typography — line heights ──────────────────────────────────── */
-  --line-height-h1:          1.05;
-  --line-height-h2:          1.1;
-  --line-height-h3:          1.15;
+  --line-height-h1:          1.03;
+  --line-height-h2:          1.05;
+  --line-height-h3:          1.10;
   --line-height-h4:          1.15;
   --line-height-h5:          1.2;
   --line-height-body:        1.5;
@@ -96,11 +96,11 @@
   --line-height-stat:          1;
 
   /* ── Typography — letter spacing ────────────────────────────────── */
-  --letter-spacing-h1:     -4%;
+  --letter-spacing-h1:     -3.5%;
   --letter-spacing-h2:     -3.5%;
   --letter-spacing-h3:     -3%;
   --letter-spacing-h4:     -2%;
-  --letter-spacing-h5:     -1%;
+  --letter-spacing-h5:     0%;
   --letter-spacing-allcaps: 2%;
   --letter-spacing-stat:   -5%;
 }

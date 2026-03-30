@@ -6,8 +6,11 @@ export default function Home() {
     <main className="w-full max-w-frame mx-center px-content-x">
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="py-section">
+        <h1 className="type-h1 text-foreground !font-bold">
+          Product designer
+        </h1>
         <h1 className="type-h1 text-foreground">
-          Product designer <br/> with a systems mindset <br/> & technical background
+          with a systems mindset <br/> & technical background
         </h1>
       </section>
 
