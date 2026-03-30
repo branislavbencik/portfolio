@@ -27,10 +27,9 @@ export function CaseStudyCard({
 }: CaseStudyCardProps) {
   return (
     <div className="flex items-stretch gap-12 max-lg:gap-4 max-lg:flex-col-reverse">
-      <div className="flex flex-col py-6 shrink-0 grow-0 basis-[35%] max-lg:py-0 max-lg:basis-auto max-lg:w-full">
-      {/* Left — text ~35% (desktop) / full-width column (max-lg) */}
+      <div className="flex flex-col py-6 shrink-0 grow-0 basis-[30.7%] max-lg:py-0 max-lg:basis-auto max-lg:w-full">
         {/* Main content */}
-        <div className="flex flex-col gap-4 max-lg:flex-1 max-lg:gap-2 max-lg:max-w-text">
+        <div className="flex flex-col gap-4 max-lg:flex-1 max-lg:gap-2">
           <p className="type-allcaps text-foreground-secondary max-lg:order-first">
             {meta}
           </p>
@@ -38,7 +37,7 @@ export function CaseStudyCard({
             {headline}
           </h2>
           {description && (
-            <p className="type-m text-foreground-secondary">
+            <p className="type-m text-foreground-secondary max-lg:max-w-text">
               {description}
             </p>
           )}

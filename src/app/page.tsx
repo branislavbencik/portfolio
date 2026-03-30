@@ -4,9 +4,16 @@ import SelectedProjectCard from "@/components/SelectedProjectCard";
 export default function Home() {
   return (
     <main className="w-full max-w-frame mx-center px-content-x">
+      {/* ── Hero ───────────────────────────────────────────────── */}
+      <section className="py-section">
+        <h1 className="type-h1 text-foreground">
+          Product designer <br/> with a systems mindset <br/> & technical background
+        </h1>
+      </section>
+
       {/* ── Case Studies ───────────────────────────────────────── */}
       <section className="my-section">
-        <h1 className="text-foreground type-h1 pb-10">
+        <h1 className="text-foreground type-h5 pb-8">
           Case studies
         </h1>
 
@@ -15,7 +22,7 @@ export default function Home() {
 
           <CaseStudyCard
             meta="SKOALA · LEAD DESIGNER · 2024–25"
-            headline="Building yet another CMS"
+            headline="Designing a CMS from scratch"
             description="How to allow editors to produce diverse content at scale while keeping zero recurring development cost"
             highlight={<>🏆 Used by <strong>over 50%</strong> of Czech schools</>}
             primaryHref="/skoala"
@@ -44,11 +51,11 @@ export default function Home() {
 
       {/* ── Selected Projects ──────────────────────────────────── */}
       <section className="my-section">
-        <h2 className="text-foreground type-h1 pb-10">
+        <h2 className="text-foreground type-h5 pb-8">
           Selected projects
         </h2>
 
-        <div className="grid grid-cols-2 gap-3 max-lg:gap-16 max-lg:grid-cols-1">
+        <div className="grid grid-cols-2 gap-6 max-lg:gap-16 max-lg:grid-cols-1">
           <SelectedProjectCard
             href="/nnspect"
             image="/images/nnspect/nnspect-thumb.png"
