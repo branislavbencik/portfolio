@@ -38,7 +38,7 @@ export default function SakurabookPage() {
         <div className="border-t border-border-light" />
       </div>
       <div className="w-full max-w-frame mx-center px-content-x py-detail">
-        <div className="max-w-text mx-auto">
+        <div className="grid grid-cols-2 gap-6 max-lg:gap-16 max-lg:grid-cols-1">
           <SelectedProjectCard
             href="/nnspect"
             image="/images/nnspect/nnspect-thumb.png"
@@ -46,6 +46,14 @@ export default function SakurabookPage() {
             tag="Industrial AI"
             headline="ML training platform for material quality inspection"
             meta="NNSPECT · 2022"
+          />
+          <SelectedProjectCard
+            href="/crowdberry"
+            image="/images/crowdberry/crowdberry-thumb.png"
+            imageAlt="Crowdberry investment platform"
+            tag="Fintech"
+            headline="Investment crowdfunding marketplace"
+            meta="CROWDBERRY · 2020"
           />
         </div>
       </div>

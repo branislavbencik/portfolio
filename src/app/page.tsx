@@ -6,7 +6,7 @@ export default function Home() {
     <main className="w-full max-w-frame mx-center px-content-x">
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="py-section">
-        <h1 className="type-h1 text-foreground !font-semibold">
+        <h1 className="type-h1 text-foreground font-semibold!">
           Product designer
         </h1>
         <h1 className="type-h1 text-foreground">
@@ -58,7 +58,7 @@ export default function Home() {
           Selected projects
         </h2>
 
-        <div className="grid grid-cols-2 gap-6 max-lg:gap-16 max-lg:grid-cols-1">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-16 max-lg:gap-16 max-lg:grid-cols-1">
           <SelectedProjectCard
             href="/nnspect"
             image="/images/nnspect/nnspect-thumb.png"
@@ -75,6 +75,15 @@ export default function Home() {
             tag="Ecommerce"
             headline="Shopify plugin for per-hour booking in Japan"
             meta="SAKURABOOK · 2021"
+          />
+
+          <SelectedProjectCard
+            href="/crowdberry"
+            image="/images/crowdberry/crowdberry-thumb.png"
+            imageAlt="Crowdberry investment platform"
+            tag="Fintech"
+            headline="Investment crowdfunding marketplace"
+            meta="CROWDBERRY · 2020"
           />
         </div>
       </section>
