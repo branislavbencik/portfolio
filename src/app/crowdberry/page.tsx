@@ -17,11 +17,11 @@ export default function CrowdberryPage() {
             },
             {
               src: "/images/crowdberry/crowdberry-ws1.png",
-              caption: "Portfolio Dashboard. An investor sees both where their money is and where each deal stands.",
+              caption: "Split view pairs a guided walkthrough with the actual form.",
             },
             {
               src: "/images/crowdberry/crowdberry-ws2.png",
-              caption: "Split view pairs a guided walkthrough with the actual form.",
+              caption: "Portfolio Dashboard. An investor sees both where their money is and where each deal stands.",
             },
           ]}
         />
