@@ -6,7 +6,7 @@ export default function Home() {
     <main className="w-full max-w-frame mx-center px-content-x">
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="py-section">
-        <h1 className="type-h1 text-foreground !font-bold">
+        <h1 className="type-h1 text-foreground !font-semibold">
           Product designer
         </h1>
         <h1 className="type-h1 text-foreground">

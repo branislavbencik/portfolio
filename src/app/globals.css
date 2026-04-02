@@ -143,7 +143,7 @@
   /* ── Headings (font-weight baked in) ───────────────────────────── */
   .type-h1 {
     font-size: var(--font-size-h1);
-    font-weight: 400;
+    font-weight: 300;
     line-height: var(--line-height-h1);
     letter-spacing: var(--letter-spacing-h1);
   }
