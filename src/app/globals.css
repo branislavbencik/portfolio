@@ -72,31 +72,33 @@
   --max-width-text:     552px;   /* max-w-text — centered reading column */
 
   /* ── Typography — font sizes ────────────────────────────────────── */
-  --font-size-h1:          64px;
-  --font-size-h2:          45px;
+  --font-size-h1:          96px;
+  --font-size-h2:          48px;
   --font-size-h3:          32px;
   --font-size-h4:          25px;
   --font-size-h5:          20px;
+  --font-size-subheadline: 18px;
   --font-size-body-l:      18px;
   --font-size-body-m:      16px;
   --font-size-body-s:      14px;
-  --font-size-allcaps:     13px;
+  --font-size-allcaps:     14px;
   --font-size-button:      16px;
   --font-size-stat:        64px;
 
   /* ── Typography — line heights ──────────────────────────────────── */
-  --line-height-h1:          1.03;
+  --line-height-h1:          0.95;
   --line-height-h2:          1.05;
   --line-height-h3:          1.10;
   --line-height-h4:          1.15;
   --line-height-h5:          1.2;
+  --line-height-subheadline: 1.3;
   --line-height-body:        1.5;
   --line-height-allcaps:     1.5;
   --line-height-button:      1.5;
   --line-height-stat:          1;
 
   /* ── Typography — letter spacing ────────────────────────────────── */
-  --letter-spacing-h1:     -3.5%;
+  --letter-spacing-h1:     -4.5%;
   --letter-spacing-h2:     -3.5%;
   --letter-spacing-h3:     -3%;
   --letter-spacing-h4:     -2%;
@@ -120,32 +122,43 @@
 
 @media (max-width: 1024px) {
   :root {
-    --spacing-section: 64px;
-    --spacing-detail:  64px;
-    --gap-case-study:  80px;
+    --gap-case-study:  100px;
+    --font-size-h1:    88px;
   }
 }
 
 @media (max-width: 767px) {
   :root {
-    --spacing-detail:    64px;
-    --spacing-content-x: 20px;
-    --font-size-body-l:  16px;
-    --font-size-h1:      36px;
-    --font-size-h2:      27px;
+    --font-size-h1:      60px;
+    --font-size-h2:      40px;
     --font-size-h3:      27px;
     --font-size-h4:      21px;
     --font-size-h5:      17px;
+
+    --font-size-body-l:  16px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root { 
+    --font-size-h1:      40px;
+    --font-size-subheadline:   16px;
   }
 }
 
 @layer utilities {
   /* ── Headings (font-weight baked in) ───────────────────────────── */
   .type-h1 {
-    font-size: var(--font-size-h1);
-    font-weight: 300;
+    /* Fluid on desktop: scales so hero headlines never overflow two-column layout */
+    font-size: clamp(36px, calc(8.4vw - 11.7px), var(--font-size-h1));
+    font-weight: 600;
     line-height: var(--line-height-h1);
     letter-spacing: var(--letter-spacing-h1);
+  }
+  @media (max-width: 1024px) {
+    .type-h1 {
+      font-size: var(--font-size-h1); /* full size at tablet — no column constraint */
+    }
   }
   .type-h2 {
     font-size: var(--font-size-h2);
@@ -172,6 +185,12 @@
     font-weight: 700;
     line-height: var(--line-height-h5);
     letter-spacing: var(--letter-spacing-h5);
+  }
+
+  .type-subheadline {
+    font-size: var(--font-size-subheadline);
+    font-weight: 500;
+    line-height: var(--line-height-subheadline);
   }
 
   /* ── Body ───────────────────────────────────────────────────────── */

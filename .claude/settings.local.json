@@ -18,7 +18,8 @@
       "Skill(ship)",
       "Bash(ls -la /Users/branislavbencik/repos/portfolio/*.config.*)",
       "Bash(grep:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

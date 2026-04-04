@@ -6,7 +6,7 @@ export default function SakurabookPage() {
     <>
       <main className="w-full max-w-frame mx-center px-content-x py-detail">
         <SelectedProjectContent
-          metadata="SAKURABOOK · 2021"
+          metadata="Sakurabook · 2021"
           headline="Shopify plugin for per-hour booking in Japan"
           description="Hourly booking is common in Japan not just for services but also for rental spaces. I built a booking plugin for Shopify that handles hourly availability, two storefront templates (one for booking, another for browsing), and the full flow from merchant setup to customer checkout."
           tag="Ecommerce"
@@ -45,7 +45,7 @@ export default function SakurabookPage() {
             imageAlt="NNspect ML training platform"
             tag="Industrial AI"
             headline="ML training platform for material quality inspection"
-            meta="NNSPECT · 2022"
+            meta="Nnspect · 2022"
           />
           <SelectedProjectCard
             href="/crowdberry"
@@ -53,7 +53,7 @@ export default function SakurabookPage() {
             imageAlt="Crowdberry investment platform"
             tag="Fintech"
             headline="Investment crowdfunding marketplace"
-            meta="CROWDBERRY · 2020"
+            meta="Crowdberry · 2020"
           />
         </div>
       </div>

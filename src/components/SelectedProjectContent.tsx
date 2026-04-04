@@ -27,7 +27,7 @@ export function SelectedProjectContent({
   return (
     <div>
       <div className="mx-center max-w-text">
-        <p className="type-allcaps text-foreground-secondary">{metadata}</p>
+        <p className="type-body-s text-foreground-secondary">{metadata}</p>
         <h2 className="type-h2 mt-4">{headline}</h2>
         <p className="type-body-m mt-6">{description}</p>
         <div className="mt-4">

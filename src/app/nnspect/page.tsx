@@ -6,7 +6,7 @@ export default function NNspectPage() {
     <>
       <main className="w-full max-w-frame mx-center px-content-x py-detail">
         <SelectedProjectContent
-          metadata="NNSPECT · 2022"
+          metadata="Nnspect · 2022"
           headline="ML training platform for material quality inspection"
           description="A platform concept for nnaisense. The workflow covers the full pipeline from image upload and dataset preparation through model training to accuracy evaluation, spanning operators, ML engineers, and ML scientists"
           tag="Industrial AI"
@@ -40,7 +40,7 @@ export default function NNspectPage() {
             imageAlt="Crowdberry investment platform"
             tag="Fintech"
             headline="Investment crowdfunding marketplace"
-            meta="CROWDBERRY · 2020"
+            meta="Crowdberry · 2020"
           />
           <SelectedProjectCard
             href="/sakurabook"
@@ -48,7 +48,7 @@ export default function NNspectPage() {
             imageAlt="Sakurabook booking plugin overview"
             tag="Ecommerce"
             headline="Shopify plugin for per-hour booking in Japan"
-            meta="SAKURABOOK · 2021"
+            meta="Sakurabook · 2021"
           />
         </div>
       </div>

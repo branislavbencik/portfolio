@@ -6,7 +6,7 @@ export default function CrowdberryPage() {
     <>
       <main className="w-full max-w-frame mx-center px-content-x py-detail">
         <SelectedProjectContent
-          metadata="CROWDBERRY · 2020"
+          metadata="Crowdberry · 2020"
           headline="Investment crowdfunding marketplace"
           description="Designed the investor experience from opportunity browsing through the investment process to portfolio tracking. Usability tested with real investors."
           tag="Fintech"
@@ -40,7 +40,7 @@ export default function CrowdberryPage() {
             imageAlt="Sakurabook booking plugin overview"
             tag="Ecommerce"
             headline="Shopify plugin for per-hour booking in Japan"
-            meta="SAKURABOOK · 2021"
+            meta="Sakurabook · 2021"
           />
           <SelectedProjectCard
             href="/nnspect"
@@ -48,7 +48,7 @@ export default function CrowdberryPage() {
             imageAlt="NNspect ML training platform"
             tag="Industrial AI"
             headline="ML training platform for material quality inspection"
-            meta="NNSPECT · 2022"
+            meta="Nnspect · 2022"
           />
         </div>
       </div>

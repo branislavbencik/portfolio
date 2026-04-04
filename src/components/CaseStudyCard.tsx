@@ -30,7 +30,7 @@ export function CaseStudyCard({
       <div className="flex flex-col py-6 shrink-0 grow-0 basis-[30.7%] max-lg:py-0 max-lg:basis-auto max-lg:w-full">
         {/* Main content */}
         <div className="flex flex-col gap-4 max-lg:flex-1 max-lg:gap-2">
-          <p className="type-allcaps text-foreground-secondary max-lg:order-first">
+          <p className="type-m text-foreground-secondary max-lg:order-first">
             {meta}
           </p>
           <h2 className="type-h2 text-foreground">
@@ -41,9 +41,18 @@ export function CaseStudyCard({
               {description}
             </p>
           )}
+
+          { 
+          /**  
+           * 
+           * 
           {highlight && (
             <div className="max-lg:pt-2"><TagPill>{highlight}</TagPill></div>
           )}
+           * 
+           */
+           }
+          
           {/* CTAs — hidden at max-lg */}
           <div className="flex items-center gap-5 flex-wrap mt-4 max-lg:hidden">
             <Link

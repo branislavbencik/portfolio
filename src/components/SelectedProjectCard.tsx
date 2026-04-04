@@ -40,7 +40,7 @@ export default function SelectedProjectCard({
         <h3 className="type-h4 group-hover:opacity-70 transition-opacity">
           {headline}
         </h3>
-        <p className="type-allcaps text-foreground-secondary">
+        <p className="type-body-s text-foreground-secondary">
           {meta}
         </p>
         <div className="pt-1">

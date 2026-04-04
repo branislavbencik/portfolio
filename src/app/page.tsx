@@ -1,22 +1,16 @@
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import SelectedProjectCard from "@/components/SelectedProjectCard";
+import HeroStatement from "@/components/HeroStatement";
 
 export default function Home() {
   return (
     <main className="w-full max-w-frame mx-center px-content-x">
       {/* ── Hero ───────────────────────────────────────────────── */}
-      <section className="py-section">
-        <h1 className="type-h1 text-foreground font-semibold!">
-          Product designer
-        </h1>
-        <h1 className="type-h1 text-foreground">
-          with a systems mindset <br/> & technical background
-        </h1>
-      </section>
+      <HeroStatement />
 
       {/* ── Case Studies ───────────────────────────────────────── */}
       <section className="my-section">
-        <h1 className="text-foreground type-h5 pb-8">
+        <h1 className="text-foreground-tertiary type-allcaps pb-8">
           Case studies
         </h1>
 
@@ -24,7 +18,7 @@ export default function Home() {
           <hr className="border-0 border-t border-border-light max-lg:hidden" />
 
           <CaseStudyCard
-            meta="SKOALA · LEAD DESIGNER · 2024–25"
+            meta="Skoala · Lead Designer · 2024–25"
             headline="Designing a CMS from scratch"
             description="How to allow editors to produce diverse content at scale while keeping zero recurring development cost"
             highlight={<>🏆 Used by <strong>over 50%</strong> of Czech schools</>}
@@ -38,7 +32,7 @@ export default function Home() {
           <hr className="border-0 border-t border-border-light max-lg:hidden" />
 
           <CaseStudyCard
-            meta="TEATIME · CO-OWNER · 2024–25"
+            meta="Teatime · Co-owner · 2024–25"
             headline="Redesigning a B2B language school"
             description="How to give every student a different curriculum and still get comparable progress data"
             highlight={<>🏆 Acquired <strong>12</strong> corporate clients</>}
@@ -54,7 +48,7 @@ export default function Home() {
 
       {/* ── Selected Projects ──────────────────────────────────── */}
       <section className="my-section">
-        <h2 className="text-foreground type-h5 pb-8">
+        <h2 className="text-foreground-tertiary type-allcaps pb-8">
           Selected projects
         </h2>
 
@@ -65,7 +59,7 @@ export default function Home() {
             imageAlt="NNspect inspection platform"
             tag="Industrial AI"
             headline="ML training platform for material quality inspection"
-            meta="NNSPECT · 2022"
+            meta="Nnspect · 2022"
           />
 
           <SelectedProjectCard
@@ -74,7 +68,7 @@ export default function Home() {
             imageAlt="Sakurabook booking app"
             tag="Ecommerce"
             headline="Shopify plugin for per-hour booking in Japan"
-            meta="SAKURABOOK · 2021"
+            meta="Sakurabook · 2021"
           />
 
           <SelectedProjectCard
@@ -83,7 +77,7 @@ export default function Home() {
             imageAlt="Crowdberry investment platform"
             tag="Fintech"
             headline="Investment crowdfunding marketplace"
-            meta="CROWDBERRY · 2020"
+            meta="Crowdberry · 2020"
           />
         </div>
       </section>
