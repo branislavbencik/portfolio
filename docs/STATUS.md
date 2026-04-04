@@ -6,7 +6,7 @@
 `/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done · `/sakurabook` → Done · `/crowdberry` → Done · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-About page; resume page
+About page; resume page; HeroStatement copy/tooltip refinement
 
 ## Session Log
 1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
@@ -28,6 +28,7 @@ About page; resume page
 17. Image lightbox + next-project linking — Lightbox component (motion/react, portal, scroll lock, Escape key); CaptionedImage auto-wired; /nnspect ↔ /sakurabook cross-link with double-border separator + SelectedProjectCard teaser (`b7f7edd`)
 18. Gallery lightbox — LightboxContext provider in layout.tsx; all CaptionedImage + CaseStudyHeader hero self-register; prev/next arrows, ← → keyboard nav, counter, captions; dark backdrop blur, cursor-zoom-out on backdrop, cursor-default over image (`1315510`)
 19. Crowdberry selected project — /crowdberry page (Fintech, 2020) with 3 captioned images; added to landing page grid; each selected project page now shows two cards side-by-side (prev + next) forming circular chain nnspect → sakurabook → crowdberry → nnspect (`c4ce0ec`)
+20. HeroStatement component — interactive 3-line headline with infinite auto-cycling tooltips (3.5s), hover interruption + resume from last hovered row, AnimatePresence fade (150ms); desktop two-column grid with fluid clamp on type-h1; tablet collapses to full-width headlines + shared tooltip below; type-h1 uses separate clamp formulas for desktop vs tablet (`b8662f5`)
 
 ## Known Issues
 (none)
