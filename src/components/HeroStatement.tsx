@@ -10,7 +10,7 @@ const lines = [
   },
   {
     text: 'design for impact,',
-    tooltip: 'I designed platform that teaches financial\nliteracy to every 2nd Czech kid.',
+    tooltip: 'I designed platform that teaches financial\nliteracy to every 2nd kid in Czechia.',
   },
   {
     text: '& own the outcome.',
