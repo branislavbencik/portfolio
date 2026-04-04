@@ -18,7 +18,10 @@
       "Skill(ship)",
       "Bash(ls -la /Users/branislavbencik/repos/portfolio/*.config.*)",
       "Bash(grep:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(gh api:*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(i['path']\\) for i in d.get\\('items',[]\\)]\")",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

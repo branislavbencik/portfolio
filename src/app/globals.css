@@ -72,7 +72,7 @@
   --max-width-text:     552px;   /* max-w-text — centered reading column */
 
   /* ── Typography — font sizes ────────────────────────────────────── */
-  --font-size-h1:          64px;
+  --font-size-h1:          80px;
   --font-size-h2:          45px;
   --font-size-h3:          32px;
   --font-size-h4:          25px;
@@ -140,6 +140,11 @@
 }
 
 @layer utilities {
+  /* ── Hero carousel fixed height (2 lines) ──────────────────────── */
+  .min-h-hero {
+    min-height: calc(var(--font-size-h1) * var(--line-height-h1) * 3 + 10);
+  }
+
   /* ── Headings (font-weight baked in) ───────────────────────────── */
   .type-h1 {
     font-size: var(--font-size-h1);

@@ -1,19 +1,12 @@
 import { CaseStudyCard } from "@/components/CaseStudyCard";
 import SelectedProjectCard from "@/components/SelectedProjectCard";
+import HeroCarousel from "@/components/HeroCarousel";
 
 export default function Home() {
   return (
     <main className="w-full max-w-frame mx-center px-content-x">
       {/* ── Hero ───────────────────────────────────────────────── */}
-      <section className="py-section">
-        <h1 className="type-h1 text-foreground font-semibold!">
-          Product designer
-        </h1>
-        <h1 className="type-h1 text-foreground">
-          with a systems mindset <br/> & technical background
-        </h1>
-      </section>
-
+      <HeroCarousel />
       {/* ── Case Studies ───────────────────────────────────────── */}
       <section className="my-section">
         <h1 className="text-foreground type-h5 pb-8">
