@@ -42,16 +42,9 @@ export function CaseStudyCard({
             </p>
           )}
 
-          { 
-          /**  
-           * 
-           * 
           {highlight && (
             <div className="max-lg:pt-2"><TagPill>{highlight}</TagPill></div>
           )}
-           * 
-           */
-           }
           
           {/* CTAs — hidden at max-lg */}
           <div className="flex items-center gap-5 flex-wrap mt-4 max-lg:hidden">
