@@ -31,9 +31,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <LightboxProvider>
-          <Nav />
-          {children}
-          <Footer />
+          <div className="max-w-frame mx-auto min-h-dvh border-x border-zinc-200 bg-canvas">
+            <Nav />
+            {children}
+            <Footer />
+          </div>
         </LightboxProvider>
       </body>
     </html>

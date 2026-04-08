@@ -23,7 +23,7 @@ export default function SelectedProjectCard({
   const inner = (
     <>
       {/* Thumbnail — 3:2 aspect ratio */}
-      <div className="overflow-hidden rounded-lg shadow-border-subtle group-hover:shadow-border transition-shadow duration-200 bg-background-alt">
+      <div className="overflow-hidden border border-zinc-200 rounded-none bg-background-alt">
         <Image
           src={image}
           alt={imageAlt}

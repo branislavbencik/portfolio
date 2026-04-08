@@ -23,12 +23,14 @@ We use a strictly monochrome scale based on white opacity over a near-black canv
 - **Secondary Text (`text-secondary`):** `#A1A1AA` (Zinc 400) — Body copy, contextual framing.
 - **Tertiary Text (`text-tertiary`):** `#71717A` (Zinc 500) — Metadata, tags, subtle captions.
 
-### Depth & "Borders"
-We use shadow-borders. This prevents clipping on border-radius and looks optically thinner on high-DPI screens.
-- **Border Subtle (`shadow-border-subtle`):** `0 0 0 1px rgba(255, 255, 255, 0.04)`
-- **Border Standard (`shadow-border`):** `0 0 0 1px rgba(255, 255, 255, 0.08)`
-- **Border Strong (`shadow-border-strong`):** `0 0 0 1px rgba(255, 255, 255, 0.15)`
-- **Card Inner Glow:** `inset 0 1px 0 0 rgba(255, 255, 255, 0.02)` — *Critical Vercel technique applied to dark mode. Gives cards a microscopic physical edge.*
+### Structure, Borders & Radii
+We do NOT use shadow-borders or elevation. This is a structural wireframe aesthetic.
+- **Borders:** Use strict, hard 1px CSS borders (`border border-zinc-200`). Hard lines define the grid and separate content.
+- **Radii Rule:** Brutally sharp. `rounded-none` (0px) everywhere. No exceptions. Cards, images, and tags are boxes.
+
+### Tags & Metadata
+- **Tags:** Structural and monochromatic. `border border-zinc-200 text-zinc-500 font-mono text-[12px] uppercase px-2 py-0.5 rounded-none`. Zero colored backgrounds.
+- **Layout:** Metadata and tags are part of the structural grid. They remain visible at all times to balance the card's typographic weight.
 
 ## 3. Typography Scale
 

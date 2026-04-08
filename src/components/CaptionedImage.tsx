@@ -33,8 +33,8 @@ export function CaptionedImage({
 
   const wrapperClass = [
     "relative w-full overflow-hidden cursor-zoom-in",
-    rounded ? "rounded-md" : "",
-    border ? "shadow-border" : "",
+    rounded ? "rounded-none" : "",
+    border ? "border border-zinc-200" : "",
     background ? "bg-background-alt" : "",
   ]
     .filter(Boolean)

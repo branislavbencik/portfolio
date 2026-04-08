@@ -93,6 +93,8 @@ These rules apply to EVERY edit. No exceptions.
 
 6. **No new dependencies without explaining why first.**
 
+7. **THE DESIGN BIBLE:** `DESIGN.md` is the absolute source of truth for aesthetics. BEFORE editing any UI component, you MUST read `DESIGN.md`. If you find a discrepancy between `CLAUDE.md`, `globals.css`, and `DESIGN.md`, `DESIGN.md` wins. If you invent a new UI pattern that works, you MUST update `DESIGN.md` to document it.
+
 ## Figma Console MCP
 
 Desktop Bridge is available. Pair before each session (`figma_pair_plugin`). Key commands:

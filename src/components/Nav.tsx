@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Nav() {
   return (
-    <header className="w-full">
+    <header className="w-full border-b border-zinc-200">
       <nav className="w-full max-w-frame mx-center flex items-center justify-between px-content-x py-5 h-16">
         <Link
           href="/"

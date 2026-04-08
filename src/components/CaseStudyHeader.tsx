@@ -35,9 +35,9 @@ export function CaseStudyHeader({
   }, [id, heroImage, heroImageAlt, register, unregister]);
 
   return (
-    <section className="w-full max-w-frame mx-center px-content-x py-detail">
+    <section className="w-full py-detail">
       {/* Text block — centered reading column */}
-      <div className={`max-w-text mx-center w-full ${heroImage ? "mb-16" : ""}`}>
+      <div className={`px-content-x max-w-text mx-center w-full ${heroImage ? "mb-16" : ""}`}>
         <MetadataRow company={company} role={role} year={year} />
         <h1 className="type-h2 text-foreground my-4 max-w-94">
           {headline}
@@ -50,7 +50,7 @@ export function CaseStudyHeader({
       {/* Hero image — full content width */}
       {heroImage && (
         <div
-          className="relative w-full overflow-hidden rounded-md shadow-border bg-background-alt cursor-zoom-in"
+          className="relative w-full overflow-hidden border-y border-zinc-200 rounded-none bg-background-alt cursor-zoom-in"
           onClick={() => open(id)}
         >
           <Image
