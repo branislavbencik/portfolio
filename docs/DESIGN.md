@@ -5,7 +5,7 @@ This portfolio operates like a developer tool, not a marketing page. It uses dar
 
 - **Achromatic:** Zero decorative color. The work (images, case studies) provides the only color. 
 - **Engineered Typography:** Geist Sans with aggressive negative tracking makes headlines look like minified code. Geist Mono is used strictly for metadata, tags, and technical labels.
-- **Shadow-as-Border:** We do not use traditional CSS borders. All borders are rendered via `box-shadow` to create whisper-thin, anti-aliased containment without disrupting the box model.
+- **Structural Borders:** Hard 1px `border border-zinc-200` lines define the grid. This is structural wireframe aesthetics — borders are visible, intentional, and load-bearing. No `box-shadow` borders.
 - **Textured Canvas:** The deepest layer of the site accommodates subtle, AI-generated (Midjourney) dark noise/mesh textures. UI elements float above this using luminance stepping.
 
 ## 2. Color Tokens (Tailwind Config Base)
@@ -51,12 +51,14 @@ Built entirely on **Geist Sans** and **Geist Mono**.
 ## 4. Component Architecture
 
 ### Case Study Cards (The Heavy Hitters)
-- **Layout:** 100% width of the container. Zero internal padding around the image.
-- **Image Treatment:** Top-rounded `rounded-t-xl` (12px), bordered using `shadow-border`.
-- **Content Block:** Below the image. Minimalist. 
-- **Typography:** H1 (32px) for the project name.
-- **Tags:** Geist Mono 12px, `text-tertiary`, separated by `·` or grouped in subtle pills (`bg-surface-1`, `shadow-border-subtle`, `rounded-full`, px-2).
-- **Hover Interaction:** Entire card shifts up 2px. Image scales to `1.02` inside an `overflow-hidden` wrapper. `duration-300 ease-out`.
+- **Wrapper:** `border border-zinc-200 rounded-none bg-white` — complete 4-sided box, zero shadows, zero radius.
+- **Image:** Full-width, `border-b border-zinc-200` creates a hard horizontal line separating image from the data grid.
+- **Data Grid:** 12-column CSS grid `grid grid-cols-12 gap-4 p-4`.
+  - **Left (cols 1–2):** Domain tag + optional "Case Study" secondary tag. Stacked, `flex flex-col gap-1`.
+  - **Middle (cols 3–9):** H2 headline (`type-h2`) + 1-liner description (`type-body-s text-zinc-500 truncate`).
+  - **Right (cols 10–12):** Metric string, right-aligned. Empty cell if no metric.
+- **Tags:** `border border-zinc-200 text-zinc-500 font-mono text-[12px] uppercase px-2 py-0.5 rounded-none inline-block w-fit`. Zero colored backgrounds. Zero emojis.
+- **Mobile:** All three grid columns collapse to `col-span-1` (full width, stacked).
 
 ### "More Work" Grid (The Archives)
 - **Layout:** Dense 3 or 4-column CSS grid.
@@ -76,7 +78,7 @@ Strict adherence to Vercel's 8px base rhythm.
 - **Section/Gallery:** `80px`, `120px` (massive whitespace between the Hero, Case Studies, and More Work sections to create pacing).
 
 ## 6. Execution Rules (The "Do Nots")
-1. **Do not use CSS `border` properties.** Use `box-shadow` for all containment lines.
+1. **Use `border border-zinc-200` for all structural containment.** Do not use `box-shadow` for borders.
 2. **Do not use positive tracking on Geist Sans.** It must be tightly compressed at large sizes to look engineered. 
 3. **Do not use gradients on text.**
 4. **Do not add description paragraphs to the landing page cards.** If the image and the headline don't sell the click, the image is wrong.

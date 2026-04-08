@@ -2,28 +2,27 @@
 
 import { useId, useEffect } from "react";
 import Image from "next/image";
-import { MetadataRow } from "./MetadataRow";
 import { useLightbox } from "./LightboxContext";
 
-interface CaseStudyHeaderProps {
-  company: string;
+interface ProjectHeaderProps {
+  title: string;
+  domainTag?: string;
   role?: string;
-  year: string;
-  headline: string;
+  year?: string;
+  intro?: string;
   heroImage?: string;
   heroImageAlt?: string;
-  children: React.ReactNode;
 }
 
-export function CaseStudyHeader({
-  company,
+export function ProjectHeader({
+  title,
+  domainTag,
   role,
   year,
-  headline,
+  intro,
   heroImage,
   heroImageAlt,
-  children,
-}: CaseStudyHeaderProps) {
+}: ProjectHeaderProps) {
   const id = useId();
   const { register, unregister, open } = useLightbox();
 
@@ -34,20 +33,20 @@ export function CaseStudyHeader({
     return () => unregister(id);
   }, [id, heroImage, heroImageAlt, register, unregister]);
 
+  const meta = [domainTag, role, year].filter(Boolean).join(" · ");
+
   return (
     <section className="w-full py-detail">
-      {/* Text block — centered reading column */}
       <div className={`px-content-x max-w-text mx-center w-full ${heroImage ? "mb-16" : ""}`}>
-        <MetadataRow company={company} role={role} year={year} />
-        <h1 className="type-h2 text-foreground my-4 max-w-94">
-          {headline}
-        </h1>
-        <div className="type-l text-foreground-secondary">
-          {children}
-        </div>
+        {meta && (
+          <p className="type-body-s text-foreground-secondary mb-4">{meta}</p>
+        )}
+        <h1 className="type-display text-foreground">{title}</h1>
+        {intro && (
+          <p className="type-body-l text-foreground-secondary mt-6">{intro}</p>
+        )}
       </div>
 
-      {/* Hero image — full content width */}
       {heroImage && (
         <div
           className="relative w-full overflow-hidden border-y border-zinc-200 rounded-none bg-background-alt cursor-zoom-in"
@@ -56,8 +55,8 @@ export function CaseStudyHeader({
           <Image
             src={heroImage}
             alt={heroImageAlt ?? ""}
-            width={1128}
-            height={752}
+            width={1288}
+            height={748}
             className="w-full h-auto block"
             unoptimized
           />

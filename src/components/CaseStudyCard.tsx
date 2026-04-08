@@ -3,33 +3,39 @@ import Link from "next/link";
 
 interface CaseStudyCardProps {
   tag?: string;
-  meta: string;
+  type?: "case-study" | "selected";
   headline: string;
+  description?: string;
+  metric?: string;
   primaryHref: string;
   image: string;
   imageAlt: string;
-  description?: string;
+  // Legacy props kept for backward compatibility with MDX inline usage
+  meta?: string;
   highlight?: React.ReactNode;
-  secondaryLabel?: string;
-  secondaryHref?: string;
 }
 
 export function CaseStudyCard({
   tag,
-  meta,
+  type,
   headline,
+  description,
+  metric,
   primaryHref,
   image,
   imageAlt,
-  description,
+  meta,
   highlight,
 }: CaseStudyCardProps) {
+  const displayMetric = metric || (typeof highlight === "string" ? highlight : undefined);
+  const displaySub = description || meta;
+
   return (
     <Link
       href={primaryHref}
-      className="group block bg-white border-y border-zinc-200 rounded-none overflow-hidden no-underline outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
+      className="group block bg-white border border-zinc-200 rounded-none overflow-hidden no-underline outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
     >
-      {/* Image — full-width, zero padding, clipped by parent overflow-hidden */}
+      {/* Image — full-width, border-b creates a hard line above the text block */}
       <div className="overflow-hidden border-b border-zinc-200">
         <Image
           src={image}
@@ -41,20 +47,31 @@ export function CaseStudyCard({
         />
       </div>
 
-      {/* Content block */}
-      <div className="px-content-x py-6 flex flex-col gap-2">
-        {/* Metadata row: pill + meta inline */}
-        <div className="flex items-center gap-2 flex-wrap">
-          {tag && <span className="inline-flex items-center border border-zinc-200 text-zinc-500 font-mono text-[12px] uppercase px-2 py-0.5 rounded-none">{tag}</span>}
-          <p className="type-tag text-text-tertiary">{meta}</p>
+      {/* Text block — 12-column data grid */}
+      <div className="grid grid-cols-12 gap-4 p-4 max-md:grid-cols-1">
+        {/* Left (cols 1–2): stacked domain + type tags */}
+        <div className="col-span-2 flex flex-col gap-1 max-md:col-span-1">
+          {tag && (
+            <span className="border border-zinc-200 text-zinc-500 font-mono text-[12px] uppercase px-2 py-0.5 rounded-none inline-block w-fit">
+              {tag}
+            </span>
+          )}
         </div>
-        <h2 className="type-h1 text-text-primary">{headline}</h2>
-        {description && (
-          <p className="type-tag text-text-secondary line-clamp-1">{description}</p>
-        )}
-        {highlight && (
-          <p className="type-tag text-text-tertiary">{highlight}</p>
-        )}
+
+        {/* Middle (cols 3–9): headline + 1-liner */}
+        <div className="col-span-7 flex flex-col gap-1 max-md:col-span-1">
+          <h2 className="type-h2 text-text-primary">{headline}</h2>
+          {displaySub && (
+            <p className="type-body-s text-zinc-500 truncate">{displaySub}</p>
+          )}
+        </div>
+
+        {/* Right (cols 10–12): metric — empty grid cell if absent */}
+        <div className="col-span-3 flex items-start justify-end max-md:justify-start max-md:col-span-1">
+          {displayMetric && (
+            <span className="type-tag text-text-tertiary text-right">{displayMetric}</span>
+          )}
+        </div>
       </div>
     </Link>
   );

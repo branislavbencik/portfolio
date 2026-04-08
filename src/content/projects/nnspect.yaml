@@ -1,0 +1,35 @@
+title: Nnspect
+description: A platform concept for nnaisense covering the full ML pipeline from image upload to accuracy evaluation.
+domainTag: Industrial AI
+type: selected
+metric: ""
+coverImage: /images/nnspect/nnspect-thumb.png
+order: 3
+role: ""
+year: "2022"
+intro: "A platform concept for nnaisense. The workflow covers the full pipeline from image upload and dataset preparation through model training to accuracy evaluation, spanning operators, ML engineers, and ML scientists."
+contributions: []
+impactItems: []
+sections:
+  - label: ""
+    title: ""
+    description: ""
+    images:
+      - src: /images/nnspect/nnspect-thumb.png
+        alt: Dataset overview
+        caption: Dataset overview with distribution charts, image metadata, and bounding box annotations for defect labeling.
+        border: true
+        background: true
+        rounded: true
+      - src: /images/nnspect/nnspect-ws1.png
+        alt: Live training
+        caption: "Live training with validation metrics, epoch-level precision/loss curves, and progress tracking."
+        border: true
+        background: true
+        rounded: true
+      - src: /images/nnspect/nnspect-ws2.png
+        alt: Model evaluation
+        caption: Model evaluation comparing ground-truth annotations against predicted defect labels with detection confidence scores.
+        border: true
+        background: true
+        rounded: true

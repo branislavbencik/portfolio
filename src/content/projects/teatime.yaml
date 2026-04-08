@@ -1,0 +1,85 @@
+title: Teatime
+description: "Systematized a B2B language school — from acquisition pipeline to AI-powered assessment."
+domainTag: Case Study
+type: case-study
+metric: acquired 12 corporate clients
+coverImage: /images/teatime/teatime-thumb.png
+order: 2
+role: Co-owner
+year: "2024–25"
+intro: "TeaTime is a B2B language school serving 20+ companies for over 15 years. I joined to systematize and scale the business — from client acquisition to a new AI-powered assessment product, modernizing the digital infrastructure along the way."
+contributions:
+  - "Built client acquisition pipeline — campaign, website, sales materials"
+  - "Designed personalized learning system — from assessment through curriculum planning to progress measurement"
+  - Built AI evaluation and automation architecture
+impactItems:
+  - value: 0.4M
+    label: CZK increase in MRR
+  - value: "12"
+    label: new clients
+  - value: 300+
+    label: active students
+sections:
+  - label: "1. ACQUIRE"
+    title: "HR managers don't google \"English language training\""
+    description: "Companies buy English training when the right person gets the right pitch at the right time. We could have played the long game on LinkedIn, but instead, I designed a direct outreach pipeline. I treated every touchpoint as a UX challenge — optimizing the inbox preview, the reading experience, and the landing page — resulting in a 1.8% sales conversion rate."
+    images:
+      - src: /images/teatime/teatime-ws1-i1.png
+        alt: TeaTime persona definition
+        caption: "Step 0: Define persona. Every design decision in Steps 1–3 traces back to these three drivers."
+        border: false
+        background: false
+        rounded: true
+        width: 600
+      - src: /images/teatime/teatime-ws1-i2.png
+        alt: TeaTime inbox view
+        caption: "Step 1: Check how the message lands in the inbox. Consider all the other items the message is competing with. Headline max. length limit is 70 characters and it's bold so we want to make it count."
+        border: true
+        background: true
+        rounded: true
+      - src: /images/teatime/teatime-ws1-i3.png
+        alt: TeaTime outreach email
+        caption: "Step 2: The email. Scannable in 30 seconds. No hard sell, just three ways to learn more."
+        border: true
+        background: true
+        rounded: true
+        width: 936
+      - src: /images/teatime/teatime-ws1-i4.png
+        alt: TeaTime website and one-pager
+        caption: "Step 3: Where she ends up. The website for a quick check. The one-pager she forwards to her boss."
+        border: true
+        background: true
+        rounded: true
+  - label: "2. DIFFERENTIATE"
+    title: Test what you teach. Teach what you test.
+    description: "Corporate clients want proof their people are improving. Industry standard is a multiple-choice quiz — meaningless for real communication and often disconnected from lessons. We designed a closed loop: test results drive the course plan, teaching targets the gaps, and progress test confirms they've been closed."
+    images:
+      - src: /images/teatime/teatime-ws2-i1.png
+        alt: TeaTime testing and teaching system
+        caption: Testing and teaching as a single connected system
+        border: false
+        background: false
+        rounded: true
+        width: 818
+      - src: /images/teatime/teatime-ws2-i2.png
+        alt: TeaTime personalized course plan
+        caption: Each student receives a personalized plan combining work skills identified by the assessment and personal interests they've selected.
+        border: true
+        background: true
+        rounded: true
+  - label: "3. AUTOMATE"
+    title: "Here's how a 15-minute conversation becomes a 2-page report and a personalized course plan"
+    description: "Once the teacher records a 15-minute speaking test, the system takes over. It transcribes the audio, identifies speakers, assesses specific skills, and instantly delivers a student report and updated course plan."
+    images:
+      - src: /images/teatime/teatime-ws3-i1.png
+        alt: TeaTime n8n automation pipeline
+        caption: "6 key steps from a 50+ node pipeline: transcription, AI scoring, report generation, and course plan update — fully automated in n8n"
+        border: true
+        background: true
+        rounded: true
+      - src: /images/teatime/teatime-ws3-i2.png
+        alt: TeaTime course plan with skill gaps
+        caption: "'Developing' and 'Needs Attention' skills feed directly into the course plan — closing the loop"
+        border: false
+        background: false
+        rounded: false

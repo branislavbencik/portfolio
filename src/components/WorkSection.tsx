@@ -1,7 +1,7 @@
 interface WorkSectionProps {
-  label: string;
+  label?: string;
   title: string;
-  description: string;
+  description?: string;
   children: React.ReactNode;
 }
 
