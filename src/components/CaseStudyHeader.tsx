@@ -50,7 +50,7 @@ export function CaseStudyHeader({
       {/* Hero image — full content width */}
       {heroImage && (
         <div
-          className="relative w-full overflow-hidden rounded-md border border-border-light bg-background-alt cursor-zoom-in"
+          className="relative w-full overflow-hidden rounded-md shadow-border bg-background-alt cursor-zoom-in"
           onClick={() => open(id)}
         >
           <Image

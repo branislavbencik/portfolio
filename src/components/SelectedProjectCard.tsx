@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { TagPill } from "./TagPill";
 
 export interface SelectedProjectCardProps {
   href?: string;
@@ -23,43 +22,38 @@ export default function SelectedProjectCard({
 }: SelectedProjectCardProps) {
   const inner = (
     <>
-      {/* Thumbnail */}
-      <div className="overflow-hidden rounded-sm border border-border-light bg-background-alt">
+      {/* Thumbnail — 3:2 aspect ratio */}
+      <div className="overflow-hidden rounded-lg shadow-border-subtle group-hover:shadow-border transition-shadow duration-200 bg-background-alt">
         <Image
           src={image}
           alt={imageAlt}
           width={558}
-          height={380}
+          height={372}
           className="w-full h-auto block"
           unoptimized
         />
       </div>
 
-      {/* Text content */}
-      <div className="flex flex-col gap-2 pr-12">
-        <h3 className="type-h4 group-hover:opacity-70 transition-opacity">
+      {/* Text */}
+      <div className="flex flex-col gap-1">
+        <h3 className="type-label text-text-primary group-hover:opacity-70 transition-opacity duration-200">
           {headline}
         </h3>
-        <p className="type-body-s text-foreground-secondary">
-          {meta}
-        </p>
-        <div className="pt-1">
-          <TagPill>{tag}</TagPill>
-        </div>
+        <p className="type-tag text-text-tertiary">{tag} · {meta}</p>
       </div>
     </>
   );
 
   if (href) {
     return (
-      <Link href={href} className="group flex flex-col no-underline text-foreground gap-selected-card">
+      <Link href={href} className="group flex flex-col no-underline gap-selected-card outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas">
         {inner}
       </Link>
     );
   }
 
   return (
-    <div className="group flex flex-col no-underline text-foreground gap-selected-card cursor-pointer" onClick={onClick}>
+    <div className="group flex flex-col gap-selected-card cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas" onClick={onClick}>
       {inner}
     </div>
   );

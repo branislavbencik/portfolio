@@ -34,7 +34,7 @@ export function CaptionedImage({
   const wrapperClass = [
     "relative w-full overflow-hidden cursor-zoom-in",
     rounded ? "rounded-md" : "",
-    border ? "border border-border-light" : "",
+    border ? "shadow-border" : "",
     background ? "bg-background-alt" : "",
   ]
     .filter(Boolean)

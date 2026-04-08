@@ -8,8 +8,6 @@ interface WorkSectionProps {
 export function WorkSection({ label, title, description, children }: WorkSectionProps) {
   return (
     <div className="w-full">
-      <div className="border-t border-border-light" />
-
       <section className="w-full max-w-frame mx-center px-content-x py-detail">
         {/* Text header — constrained to 552px reading column */}
         <div className="max-w-text mx-center w-full mb-detail">

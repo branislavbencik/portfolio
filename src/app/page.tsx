@@ -5,54 +5,32 @@ import HeroStatement from "@/components/HeroStatement";
 export default function Home() {
   return (
     <main className="w-full max-w-frame mx-center px-content-x">
-      {/* ── Hero ───────────────────────────────────────────────── */}
       <HeroStatement />
 
-      {/* ── Case Studies ───────────────────────────────────────── */}
-      <section className="my-section">
-        <h1 className="text-foreground-tertiary type-allcaps pb-8">
-          Case studies
-        </h1>
-
+      <div className="flex flex-col gap-section pb-section">
+        {/* Case study cards — full-width */}
         <div className="flex flex-col gap-case-study">
-          <hr className="border-0 border-t border-border-light max-lg:hidden" />
-
           <CaseStudyCard
             meta="Skoala · Lead Designer · 2024–25"
             headline="Designing a CMS from scratch"
-            description="How to allow editors to produce diverse content at scale while keeping zero recurring development cost"
-            highlight={<>🏆 Used by <strong>3500+</strong> Czech schools</>}
+            highlight="used by 3500+ czech schools"
             primaryHref="/skoala"
-            secondaryLabel="View website"
-            secondaryHref="https://skoala.cz"
             image="/images/skoala/skoala-thumb.png"
             imageAlt="Skoala LMS interface"
           />
 
-          <hr className="border-0 border-t border-border-light max-lg:hidden" />
-
           <CaseStudyCard
             meta="Teatime · Co-owner · 2024–25"
             headline="Redesigning a B2B language school"
-            description="How to give every student a different curriculum and still get comparable progress data"
-            highlight={<>🏆 Acquired <strong>12</strong> corporate clients</>}
+            highlight="acquired 12 corporate clients"
             primaryHref="/teatime"
-            secondaryLabel="View website"
-            secondaryHref="https://teatime.cz"
             image="/images/teatime/teatime-thumb.png"
             imageAlt="TeaTime language school interface"
           />
-          <hr className="border-0 border-t border-border-light" />
         </div>
-      </section>
 
-      {/* ── Selected Projects ──────────────────────────────────── */}
-      <section className="my-section">
-        <h2 className="text-foreground-tertiary type-allcaps pb-8">
-          Selected projects
-        </h2>
-
-        <div className="grid grid-cols-2 gap-x-6 gap-y-16 max-lg:gap-16 max-lg:grid-cols-1">
+        {/* More Work grid */}
+        <div className="grid grid-cols-3 gap-x-6 gap-y-12 max-lg:grid-cols-2 max-md:grid-cols-1">
           <SelectedProjectCard
             href="/nnspect"
             image="/images/nnspect/nnspect-thumb.png"
@@ -80,7 +58,7 @@ export default function Home() {
             meta="Crowdberry · 2020"
           />
         </div>
-      </section>
+      </div>
     </main>
   );
 }

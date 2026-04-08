@@ -85,7 +85,7 @@ export default function HeroStatement() {
                 onMouseEnter={() => handleMouseEnter(i)}
                 onMouseLeave={() => handleMouseLeave(i)}
               >
-                <span className={`type-h1 transition-colors duration-150 ${colorClass}`}>
+                <span className={`type-display transition-colors duration-150 ${colorClass}`}>
                   {text}
                 </span>
               </div>
