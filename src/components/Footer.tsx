@@ -14,7 +14,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full border-t border-zinc-200">
+    <footer className="w-full border-y border-zinc-200">
       <div className="w-full max-w-frame mx-center px-content-x h-16 flex items-center justify-between max-md:h-auto max-md:py-4 max-md:flex-col max-md:items-start max-md:gap-2">
         <div className="flex items-center gap-3 type-body-s text-foreground-secondary max-md:flex-col max-md:items-start">
           <span className="relative">
@@ -27,7 +27,7 @@ export default function Footer() {
             <AnimatePresence>
               {copied && (
                 <motion.div
-                  className="absolute -top-8 left-1/2 -translate-x-1/2 bg-foreground text-background type-body-s px-2 py-1 rounded whitespace-nowrap"
+                  className="absolute -top-8 left-1/2 -translate-x-1/2 bg-foreground text-background type-body-s px-2 py-1 rounded-none whitespace-nowrap"
                   initial={{ opacity: 0, y: 4 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}

@@ -1,6 +1,8 @@
 title: Sakurabook
 description: Shopify plugin for per-hour space and service booking, designed for the Japanese market.
-domainTag: Ecommerce
+tags:
+  - Ecommerce
+  - Design System
 type: selected
 metric: ""
 coverImage: /images/sakurabook/sakurabook-thumb.png
@@ -18,24 +20,16 @@ sections:
       - src: /images/sakurabook/sakurabook-thumb.png
         alt: Sakurabook booking plugin overview
         caption: ""
-        border: true
         background: true
-        rounded: true
       - src: /images/sakurabook/sakurabook-ws1.png
         alt: Availability states
         caption: "Availability states use Japanese convention: ○ available, △ limited, ✕ taken. Time picker handles overnight spans across two calendar days."
-        border: true
         background: true
-        rounded: true
       - src: /images/sakurabook/sakurabook-ws2.png
         alt: Localization
         caption: Designed in English for easier workflow, localized and shipped in Japanese. Japanese text runs shorter, so layouts are held without overflow adjustment.
-        border: true
         background: true
-        rounded: true
       - src: /images/sakurabook/sakurabook-ws3.png
         alt: Merchant plugin
         caption: "The merchant-facing plugin, built with Shopify's Polaris Design System and modeled after Google Calendar. Space detail on the left, multi-space dashboard on the right."
-        border: false
         background: false
-        rounded: true

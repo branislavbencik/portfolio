@@ -1,13 +1,14 @@
 interface WorkSectionProps {
+  id?: string;
   label?: string;
   title: string;
   description?: string;
   children: React.ReactNode;
 }
 
-export function WorkSection({ label, title, description, children }: WorkSectionProps) {
+export function WorkSection({ id, label, title, description, children }: WorkSectionProps) {
   return (
-    <div className="w-full">
+    <div id={id} className="w-full">
       <section className="w-full max-w-frame mx-center px-content-x py-detail">
         {/* Text header — constrained to 552px reading column */}
         <div className="max-w-text mx-center w-full mb-detail">

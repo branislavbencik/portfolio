@@ -50,7 +50,11 @@ export function ProjectHeader({
       {heroImage && (
         <div
           className="relative w-full overflow-hidden border-y border-zinc-200 rounded-none bg-background-alt cursor-zoom-in"
+          role="button"
+          tabIndex={0}
+          aria-label="Open hero image in lightbox"
           onClick={() => open(id)}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(id); } }}
         >
           <Image
             src={heroImage}

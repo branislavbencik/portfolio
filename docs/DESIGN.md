@@ -1,85 +1,151 @@
 # Design System (`DESIGN.md`)
 
 ## 1. Core Philosophy
-This portfolio operates like a developer tool, not a marketing page. It uses darkness as the native medium, where information density is managed through subtle gradations of white opacity rather than color variation. It merges Vercel's extreme structural minimalism with Linear's dark-mode luminance stacking. 
+This portfolio operates like a high-end architectural CAD tool or a technical blueprint. It uses a **Light Technical Canvas** as the native medium, where information density is managed through structural grid lines and a tactile, paper-like texture.
 
-- **Achromatic:** Zero decorative color. The work (images, case studies) provides the only color. 
-- **Engineered Typography:** Geist Sans with aggressive negative tracking makes headlines look like minified code. Geist Mono is used strictly for metadata, tags, and technical labels.
-- **Structural Borders:** Hard 1px `border border-zinc-200` lines define the grid. This is structural wireframe aesthetics — borders are visible, intentional, and load-bearing. No `box-shadow` borders.
-- **Textured Canvas:** The deepest layer of the site accommodates subtle, AI-generated (Midjourney) dark noise/mesh textures. UI elements float above this using luminance stepping.
+- **Achromatic Canvas:** 98% of the site is monochrome. Color is strictly reserved for project-specific "Aura Glows" and the actual work screenshots.
+- **Engineered Typography:** Geist Sans with controlled negative tracking creates a compressed, high-density look. Geist Mono is used strictly for metadata, tags, and technical labels.
+- **Load-Bearing Borders:** Hard 1px `border-zinc-300` defines the grid. Borders are visible, intentional, and provide the primary structural definition.
+- **Tactile Canvas:** The background uses a procedural SVG grain filter (4% opacity) to create an "embodied" paper feel.
 
-## 2. Color Tokens (Tailwind Config Base)
+---
 
-We use a strictly monochrome scale based on white opacity over a near-black canvas.
+## 2. Color Tokens
 
-### Backgrounds (Luminance Stacking)
-- **Canvas Base (`bg-canvas`):** `#08090A` — The deepest black. Holds the Midjourney textures.
-- **Surface Level 1 (`bg-surface-1`):** `rgba(255, 255, 255, 0.02)` — Subtle cards, default states.
-- **Surface Level 2 (`bg-surface-2`):** `rgba(255, 255, 255, 0.04)` — Hover states, elevated cards.
-- **Surface Level 3 (`bg-surface-3`):** `rgba(255, 255, 255, 0.08)` — Active states, primary buttons.
+### Backgrounds (Contrast Layering)
+- **Canvas Base (`bg-canvas`):** `#F9FAFB` (Zinc 50)
+- **Surface Level 1 (`bg-surface-1`):** `#F4F4F5` (Zinc 100)
+- **Surface Level 2 (`bg-surface-2`):** `#E4E4E7` (Zinc 200)
+- **Identity Glows:** Soft `rgba` halos (10–15% opacity) behind primary case study cards using project-specific hex codes.
 
 ### Typography
-- **Primary Text (`text-primary`):** `#EDEDED` (or `rgba(255, 255, 255, 0.92)`) — Never pure white, prevents eye strain.
-- **Secondary Text (`text-secondary`):** `#A1A1AA` (Zinc 400) — Body copy, contextual framing.
-- **Tertiary Text (`text-tertiary`):** `#71717A` (Zinc 500) — Metadata, tags, subtle captions.
+- **Primary Text (`text-primary`):** `#18181B` (Zinc 900)
+- **Secondary Text (`text-secondary`):** `#52525B` (Zinc 600)
+- **Metadata/Tags (`text-tertiary`):** `#71717A` (Zinc 500)
 
 ### Structure, Borders & Radii
-We do NOT use shadow-borders or elevation. This is a structural wireframe aesthetic.
-- **Borders:** Use strict, hard 1px CSS borders (`border border-zinc-200`). Hard lines define the grid and separate content.
-- **Radii Rule:** Brutally sharp. `rounded-none` (0px) everywhere. No exceptions. Cards, images, and tags are boxes.
+- **Borders:**  
+  - Primary: `border-zinc-300` (1px)  
+  - Secondary: `border-zinc-200` (1px)
 
-### Tags & Metadata
-- **Tags:** Structural and monochromatic. `border border-zinc-200 text-zinc-500 font-mono text-[12px] uppercase px-2 py-0.5 rounded-none`. Zero colored backgrounds.
-- **Layout:** Metadata and tags are part of the structural grid. They remain visible at all times to balance the card's typographic weight.
+- **Radii Rule:**
+  - Layout surfaces: `rounded-none` (0px)
+  - Interactive elements only: `rounded-[2px–4px]`
+
+---
 
 ## 3. Typography Scale
 
-Built entirely on **Geist Sans** and **Geist Mono**. 
-*Rule: Only three weights exist in this system. 400 (read), 500 (interact), 600 (announce).*
+Built on **Geist Sans** and **Geist Mono**.
 
-| Role | Family | Size | Weight | Tracking (Letter Spacing) | Usage |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Display** | Geist Sans | 48px | 600 | `-0.05em` | Hero section |
-| **H1** | Geist Sans | 32px | 600 | `-0.04em` | Case study titles |
-| **H2** | Geist Sans | 24px | 500 | `-0.03em` | Section headers ("More Work") |
-| **Body Large** | Geist Sans | 18px | 400 | `normal` | Case study context paragraphs |
-| **Body** | Geist Sans | 16px | 400 | `normal` | Default reading text |
-| **Label** | Geist Sans | 14px | 500 | `normal` | Buttons, navigation |
-| **Tag/Meta** | Geist Mono | 12px | 500 | `normal` | `uppercase`, Domain tags, dates |
-| **Code** | Geist Mono | 14px | 400 | `normal` | Inline code, technical references |
+### Global Rules
+- Negative tracking is **only allowed on Display and H1**
+- Body text must remain **neutral tracking (0)**
+- Uppercase/meta text may use **slight positive tracking**
+- Line-height is **role-based**, not fixed
+
+---
+
+### Scale
+
+| Role | Family | Size | Weight | Tracking | Line Height | Usage |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Display** | Geist Sans | 48px | 600 | `-0.05em` | `1.1–1.15` | Hero |
+| **H1** | Geist Sans | 32px | 600 | `-0.04em` | `1.15–1.2` | Case titles |
+| **H2** | Geist Sans | 24px | 500 | `0` | `1.2–1.3` | Sections |
+| **Body Large** | Geist Sans | 18px | 400 | `0` | `1.5` | Context |
+| **Body** | Geist Sans | 16px | 400 | `0` | `1.5–1.6` | Default |
+| **Label** | Geist Sans | 14px | 500 | `0` | `1.3–1.4` | UI elements |
+| **Tag/Meta** | Geist Mono | 12px | 500 | `+0.02em` | `1.3` | Uppercase metadata |
+| **Code** | Geist Mono | 14px | 400 | `0` | `1.4` | Technical references |
+
+---
+
+### Line-Height Logic
+
+- **Headlines:** tight (1.1–1.3) → visual density
+- **Body text:** relaxed (~1.5) → readability
+- **Labels/meta:** slightly tighter → alignment precision
+
+---
 
 ## 4. Component Architecture
 
-### Case Study Cards (The Heavy Hitters)
-- **Wrapper:** `border border-zinc-200 rounded-none bg-white` — complete 4-sided box, zero shadows, zero radius.
-- **Image:** Full-width, `border-b border-zinc-200` creates a hard horizontal line separating image from the data grid.
-- **Data Grid:** 12-column CSS grid `grid grid-cols-12 gap-4 p-4`.
-  - **Left (cols 1–2):** Domain tag + optional "Case Study" secondary tag. Stacked, `flex flex-col gap-1`.
-  - **Middle (cols 3–9):** H2 headline (`type-h2`) + 1-liner description (`type-body-s text-zinc-500 truncate`).
-  - **Right (cols 10–12):** Metric string, right-aligned. Empty cell if no metric.
-- **Tags:** `border border-zinc-200 text-zinc-500 font-mono text-[12px] uppercase px-2 py-0.5 rounded-none inline-block w-fit`. Zero colored backgrounds. Zero emojis.
-- **Mobile:** All three grid columns collapse to `col-span-1` (full width, stacked).
+### Case Study "Aura" Cards
+- **Wrapper:** `border border-black/8 rounded-none bg-white` — soft 8% black border defines card edges without harsh contrast
+- **Default shadow:** `0 2px 12px rgba(0,0,0,0.04)` — diffuse, barely perceptible depth
+- **Hover shadow:** `0 12px 32px rgba(0,0,0,0.1)` + `translateY(-4px)` — snappy 150ms ease-out lift
+- **Hover bg:** shifts to `#F9F9F9` (off-white)
+- **Aura Glow:**  
+  - Absolutely positioned behind image  
+  - Project-specific `rgba` color (10–15% opacity)  
+  - `blur-[80px]` — 36s multi-axis drift (translate + scale + rotate)
+- **Layout:**  
+  - Image area: `pt-16 px-16 pb-0` — no bottom padding; metadata sits flush below at 16px gap
+  - Metadata: `px-16 pt-4 pb-6` — left edge aligned with image edge
+  - Vertical stack: tag → headline → description → metric
+  - All tags/metrics: Geist Mono
+- **No inner dividing border** between image and metadata
 
-### "More Work" Grid (The Archives)
-- **Layout:** Dense 3 or 4-column CSS grid.
-- **Thumbnail:** 3:2 aspect ratio. High contrast crops. `rounded-lg` (8px). `shadow-border-subtle`.
-- **Text:** Placed underneath the thumbnail.
-- **Typography:** 14px Geist Sans Medium (Project Name) block-stacked over 12px Geist Mono (Domain/Year).
-- **Hover Interaction:** Thumbnail `shadow-border` shifts from subtle (0.04) to standard (0.08).
+---
 
-### Buttons & Interactive Elements
-- **Ghost Button (Default):** `bg-surface-1`, `text-primary`, `shadow-border`, `rounded-md` (6px). Hover: `bg-surface-2`.
-- **Focus States:** Every interactive element must have a stark focus ring for accessibility: `outline-none ring-2 ring-zinc-500 ring-offset-2 ring-offset-[#08090A]`. 
+### Boxed Trio (Systems Grid)
+- **Structure:** 3-column grid with a single outer `border border-[#eaeaea]`. Internal dividers via `border-l border-[#eaeaea]` on cells 2 & 3 only — true 1px dividers, no double borders.
+- **Cell background:** `bg-[#fafafa]` (barely-off-white surface lift against the canvas)
+- **Hover — border highlight:** `hover:shadow-[inset_0_0_0_1px_#000000]` inset box-shadow technique — simulates full black border on hover without affecting layout
+- **Hover — top bar:** Absolutely positioned `div`, `h-[2px] bg-black`, animates `w-0 → w-full` in 300ms ease-out
+- **Hover — status text:** Bottom-right `Ln: 1  Col: N` in Geist Mono 10px; `opacity-0 group-hover:opacity-30`; data-layer decoration
+- **Labels:** `type-allcaps` (Geist Mono 12px, uppercase, +0.04em tracking)
+- **Mobile:** Cells stack (`grid-cols-1`); swap `border-l` for `border-t` on cells 2 & 3
+- **Container width:** `max-w-[840px] mx-auto` — narrower than the case study card feed for editorial contrast
 
-## 5. Spacing & Grid System
-Strict adherence to Vercel's 8px base rhythm.
-- **Micro:** `4px`, `8px` (inside buttons, between tags and titles)
-- **Component:** `16px`, `24px`, `32px` (inside cards, standard margins)
-- **Section/Gallery:** `80px`, `120px` (massive whitespace between the Hero, Case Studies, and More Work sections to create pacing).
+### Technical Canvas Grid
+- **Global Pattern:** 24px or 32px grid overlay
+- **Implementation:** 1px `border-zinc-200` lines at 10–15% opacity
+- **Feel:** Drafting board + paper grain
+
+---
+
+## 5. Spacing & Rhythm
+
+Strict 8px base system.
+
+- **Micro:** `4px`, `8px`
+- **Component:** `16px`, `24px`, `32px`
+- **Section:** `80px`, `120px`
+
+---
 
 ## 6. Execution Rules (The "Do Nots")
-1. **Use `border border-zinc-200` for all structural containment.** Do not use `box-shadow` for borders.
-2. **Do not use positive tracking on Geist Sans.** It must be tightly compressed at large sizes to look engineered. 
-3. **Do not use gradients on text.**
-4. **Do not add description paragraphs to the landing page cards.** If the image and the headline don't sell the click, the image is wrong.
-5. **Do not fade elements in slowly.** All motion should be fast, high-damping, and mechanical (`duration-200` to `duration-300` max).
+
+1. **Do not use shadows**  
+   → Use borders or Aura Glows
+
+2. **Do not apply negative tracking to body text**  
+   → Only Display / H1
+
+3. **Do not use rounded corners on layout surfaces**  
+   → Only allowed for interactive elements (2–4px)
+
+4. **Do not use gradients on text**
+
+5. **Do not use slow animations**  
+   → Motion must be fast (`duration-200`)
+
+6. **Do not introduce arbitrary colors**  
+   → Only Aura Glows define color presence
+
+---
+
+## Final Note
+
+This system is intentionally **opinionated and constrained**.
+
+It prioritizes:
+- **precision over friendliness**
+- **structure over decoration**
+- **authorship over flexibility**
+
+If executed correctly, it will read as:
+
+> “engineered interface, not styled website”

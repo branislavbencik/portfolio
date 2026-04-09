@@ -8,9 +8,9 @@ interface CaptionedImageProps {
   src: string;
   alt?: string;
   caption?: string;
-  border?: boolean;
   background?: boolean;
-  rounded?: boolean;
+  padding?: boolean;
+  bleedBottom?: boolean;
   width?: number; // max-width in px; defaults to full content width
 }
 
@@ -18,9 +18,9 @@ export function CaptionedImage({
   src,
   alt,
   caption,
-  border = true,
   background = true,
-  rounded = true,
+  padding = true,
+  bleedBottom = false,
   width,
 }: CaptionedImageProps) {
   const id = useId();
@@ -33,9 +33,9 @@ export function CaptionedImage({
 
   const wrapperClass = [
     "relative w-full overflow-hidden cursor-zoom-in",
-    rounded ? "rounded-none" : "",
-    border ? "border border-zinc-200" : "",
-    background ? "bg-background-alt" : "",
+    background ? "bg-zinc-100" : "",
+    padding ? "p-8" : "",
+    background ? (bleedBottom ? "border border-b-0 border-zinc-200" : "border border-zinc-200") : "",
   ]
     .filter(Boolean)
     .join(" ");
@@ -45,13 +45,20 @@ export function CaptionedImage({
       className={`w-full flex flex-col items-center ${width ? "mx-center" : ""}`}
       style={width ? { maxWidth: `${width}px` } : undefined}
     >
-      <div className={wrapperClass} onClick={() => open(id)}>
+      <div
+        className={wrapperClass}
+        role="button"
+        tabIndex={0}
+        aria-label="Open image in lightbox"
+        onClick={() => open(id)}
+        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(id); } }}
+      >
         <Image
           src={src}
           alt={alt ?? ""}
           width={width ?? 1128}
           height={Math.round((width ?? 1128) * (2 / 3))}
-          className="w-full h-auto block"
+          className="w-full h-auto block relative"
           unoptimized
         />
       </div>

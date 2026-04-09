@@ -1,6 +1,8 @@
 title: Crowdberry
 description: "Investor experience for a crowdfunding marketplace — from opportunity browsing to portfolio tracking."
-domainTag: Fintech
+tags:
+  - Fintech
+  - User Testing
 type: selected
 metric: ""
 coverImage: /images/crowdberry/crowdberry-thumb.png
@@ -18,18 +20,12 @@ sections:
       - src: /images/crowdberry/crowdberry-thumb.png
         alt: Investment opportunity cards
         caption: "Each card surfaces key information for quick comparisons — investment type, return rate and minimum entry."
-        border: true
         background: true
-        rounded: true
       - src: /images/crowdberry/crowdberry-ws1.png
         alt: Investment flow
         caption: Split view pairs a guided walkthrough with the actual form.
-        border: true
         background: true
-        rounded: true
       - src: /images/crowdberry/crowdberry-ws2.png
         alt: Portfolio dashboard
         caption: "Portfolio Dashboard. An investor sees both where their money is and where each deal stands."
-        border: true
         background: true
-        rounded: true

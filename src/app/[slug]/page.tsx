@@ -28,6 +28,16 @@ export default async function ProjectPage({
       ? (project.coverImage as { src: string }).src
       : (project.coverImage as string) ?? "";
 
+  type ImageEntry = {
+    src: string;
+    alt: string;
+    caption?: string | null;
+    background: boolean;
+    padding: boolean;
+    bleedBottom?: boolean | null;
+    width?: number | null;
+  };
+
   return (
     <>
       <main>
@@ -55,20 +65,17 @@ export default async function ProjectPage({
         )}
 
         {project.sections.map((section, i) => {
-          const images = (section.images as {
-            src: string;
-            alt: string;
-            caption?: string | null;
-            border: boolean;
-            background: boolean;
-            rounded: boolean;
-            width?: number | null;
-          }[]);
+          const images = (section.images as unknown as ImageEntry[]);
+
+          const sectionId = section.title
+            ? section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
+            : undefined;
 
           if (section.title) {
             return (
               <WorkSection
                 key={i}
+                id={sectionId}
                 label={section.label || undefined}
                 title={section.title}
                 description={section.description || undefined}
@@ -79,9 +86,9 @@ export default async function ProjectPage({
                     src={img.src}
                     alt={img.alt}
                     caption={img.caption || undefined}
-                    border={img.border}
                     background={img.background}
-                    rounded={img.rounded}
+                    padding={img.padding ?? true}
+                    bleedBottom={img.bleedBottom ?? false}
                     width={img.width ?? undefined}
                   />
                 ))}
@@ -101,9 +108,9 @@ export default async function ProjectPage({
                   src={img.src}
                   alt={img.alt}
                   caption={img.caption || undefined}
-                  border={img.border}
                   background={img.background}
-                  rounded={img.rounded}
+                  padding={img.padding ?? true}
+                  bleedBottom={img.bleedBottom ?? false}
                   width={img.width ?? undefined}
                 />
               ))}

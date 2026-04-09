@@ -13,10 +13,13 @@ export default config({
           label: "Description",
           description: "One-liner shown on the card.",
         }),
-        domainTag: fields.text({
-          label: "Domain Tag",
-          description: "e.g. Industrial AI, Ecommerce, Fintech",
-        }),
+        tags: fields.array(
+          fields.text({ label: "Tag" }),
+          {
+            label: "Tags",
+            description: "Up to 3 shown on the thumbnail. First tag styled as a pill if 'Case Study'.",
+          }
+        ),
         type: fields.select({
           label: "Type",
           options: [
@@ -102,9 +105,17 @@ export default config({
                   label: "Caption",
                   validation: { isRequired: false },
                 }),
-                border: fields.checkbox({ label: "Border", defaultValue: true }),
                 background: fields.checkbox({ label: "Background", defaultValue: true }),
-                rounded: fields.checkbox({ label: "Rounded", defaultValue: true }),
+                padding: fields.checkbox({
+                  label: "Padding",
+                  description: "32px inset around image. Reveals the mesh gradient.",
+                  defaultValue: true,
+                }),
+                bleedBottom: fields.checkbox({
+                  label: "Bleed Bottom",
+                  description: "Remove bottom border and padding so image bleeds off the section edge.",
+                  defaultValue: false,
+                }),
                 width: fields.integer({
                   label: "Max Width (px)",
                   description: "Optional. Leave blank for full width.",

@@ -1,6 +1,9 @@
 title: Skoala
-description: Designed a custom CMS for structured educational content used by 3,500+ Czech schools.
-domainTag: Case Study
+description: "Architected a custom CMS for structured educational content used by 3,500+ schools."
+tags:
+  - Case Study
+  - Lead Designer
+  - Design Sprint
 type: case-study
 metric: used by 3500+ czech schools
 coverImage: /images/skoala/skoala-thumb.png
@@ -27,15 +30,11 @@ sections:
       - src: /images/skoala/skoala-ws1-i1.png
         alt: Four curriculum formats
         caption: One lesson plan, four outputs. Each pulls its own subset of content blocks.
-        border: false
         background: false
-        rounded: true
       - src: /images/skoala/skoala-ws1-i2.png
         alt: CMS editor view
         caption: "A quiz question in the CMS and its rendered output on the student's phone. Editors control content. The system controls layout."
-        border: true
         background: true
-        rounded: true
   - label: Key design decision
     title: Edit live content without breaking it
     description: "Once a lesson plan is live, teachers build their week around it. You can't just edit stuff under their hands — you don't want them to open a broken slide mid-class. So we borrowed from git version control: edits happen on a branch, the live version stays untouched, and changes merge back only when ready."
@@ -43,13 +42,10 @@ sections:
       - src: /images/skoala/skoala-ws2-i1.png
         alt: Content lifecycle diagram
         caption: "Content lifecycle — from first draft to archive, with branching for safe edits."
-        border: false
         background: false
-        rounded: false
+        bleedBottom: false
         width: 840
       - src: /images/skoala/skoala-ws2-i2.png
         alt: Lesson editor with status
         caption: Lesson plan list with status, ownership, and version history.
-        border: true
         background: true
-        rounded: true

@@ -30,8 +30,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* SVG grain filter — referenced by .grain-overlay via filter: url(#grain) */}
+        <svg style={{ display: "none" }} aria-hidden="true">
+          <filter id="grain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" />
+            <feComponentTransfer>
+              <feFuncA type="linear" slope="0.08" />
+            </feComponentTransfer>
+          </filter>
+        </svg>
         <LightboxProvider>
-          <div className="max-w-frame mx-auto min-h-dvh border-x border-zinc-200 bg-canvas">
+          <div className="max-w-frame mx-auto min-h-dvh border-x my-16 border-zinc-200 bg-canvas">
             <Nav />
             {children}
             <Footer />

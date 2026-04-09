@@ -27,7 +27,9 @@
       "Bash(mkdir -p \"/Users/branislavbencik/repos/portfolio/src/app/keystatic/[[...params]]\")",
       "Bash(mkdir -p \"/Users/branislavbencik/repos/portfolio/src/app/api/keystatic/[...params]\")",
       "Bash(node:*)",
-      "Bash(NEXT_STATIC_EXPORT=true npm run build)"
+      "Bash(NEXT_STATIC_EXPORT=true npm run build)",
+      "Bash(npx next:*)",
+      "Bash(git stash:*)"
     ]
   }
 }
