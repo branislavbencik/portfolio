@@ -9,7 +9,7 @@ function HeroSkeleton() {
         <div className="h-16 w-full bg-surface-1 animate-pulse" />
         <div className="h-16 w-4/5 bg-surface-1 animate-pulse" />
       </div>
-      <div className="grid grid-cols-3 border border-surface-2 divide-x divide-surface-2">
+      <div className="grid grid-cols-3 max-md:grid-cols-1 border border-surface-2 divide-x max-md:divide-x-0 max-md:divide-y divide-surface-2">
         <div className="h-28 bg-surface-1 animate-pulse" />
         <div className="h-28 bg-surface-1 animate-pulse" />
         <div className="h-28 bg-surface-1 animate-pulse" />
@@ -26,34 +26,32 @@ export default function HeroStatement() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden pb-section">
-      {/* Animated dot grid background */}
-      <div className="hero-dot-grid absolute inset-0 pointer-events-none z-0" aria-hidden="true" />
-      {/* Fade grid to white at bottom */}
-      <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-canvas to-transparent pointer-events-none z-[1]" aria-hidden="true" />
-
-      <div className="relative z-10 max-w-column mx-auto pt-20 pb-10 flex flex-col gap-6 max-md:px-content-x">
+    <section className="pb-section">
+      <div className="max-w-column mx-auto pt-20 max-md:pt-10 pb-10 flex flex-col gap-6 max-md:px-content-x">
         {!mounted ? (
           <HeroSkeleton />
         ) : (
           <div className="animate-hero-content-in flex flex-col gap-6">
             <h1 className="type-display text-text-primary">
-              I think in systems, design for impact, & own the outcome.
+              I think in systems, design for impact & own the outcome.
             </h1>
 
-            <div className="grid grid-cols-3 max-md:grid-cols-1 border border-surface-2 divide-x max-md:divide-x-0 max-md:divide-y divide-surface-2">
-              <div className="px-6 py-6 flex flex-col gap-2">
-                <p className="type-allcaps text-text-tertiary">systems</p>
-                <p className="type-body-s text-text-secondary leading-snug">Dependencies, flows, edge cases. I map the whole problem before I open Figma.</p>
-              </div>
-              <div className="px-6 py-6 flex flex-col gap-2">
-                <p className="type-allcaps text-text-tertiary">impact</p>
-                <p className="type-body-s text-text-secondary leading-snug">50% of Czech schools use a CMS I designed. An outreach pipeline I built added 0.4M CZK MRR.</p>
-              </div>
-              <div className="px-6 py-6 flex flex-col gap-2">
-                <p className="type-allcaps text-text-tertiary">outcome</p>
-                <p className="type-body-s text-text-secondary leading-snug">Strategy, Automation, front-end code, live products. I don't stop at the handoff.</p>
-              </div>
+            <div className="grid grid-cols-3 max-md:grid-cols-1">
+              {[
+                { label: "systems", text: "Dependencies, flows, edge cases. I map the whole problem before I open Figma." },
+                { label: "impact", text: "I designed platform that teaches financial literacy to every 2nd kid in Czechia." },
+                { label: "outcome", text: "Strategy, Automation, front-end code, live products. I don't stop at the handoff." },
+              ].map((box, i) => (
+                <div
+                  key={box.label}
+                  className={`animate-hero-box hero-box-delay-${i} hero-box-text-delay-${i} border border-surface-2 ${i > 0 ? "max-md:border-t-0 border-l-0 max-md:border-l" : ""}`}
+                >
+                  <div className="px-6 py-6 max-md:px-4 max-md:py-4 flex flex-col gap-2">
+                    <p className="animate-hero-box-text type-allcaps text-text-tertiary">{box.label}</p>
+                    <p className="animate-hero-box-text type-body-s text-text-secondary leading-snug">{box.text}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         )}

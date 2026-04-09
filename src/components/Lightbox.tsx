@@ -119,7 +119,7 @@ export function Lightbox({
         >
           {/* Counter — top left */}
           {showCounter && (
-            <span className="absolute top-6 left-6 type-allcaps text-text-inverse opacity-50">
+            <span className="absolute top-5 left-5 type-allcaps text-text-inverse opacity-50">
               {currentIndex! + 1} / {total}
             </span>
           )}
@@ -127,7 +127,7 @@ export function Lightbox({
           {/* Close — top right */}
           <button
             ref={closeButtonRef}
-            className="absolute top-6 right-6 text-text-inverse opacity-60 hover:opacity-100 transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
+            className="absolute top-4 right-4 p-2.5 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
             onClick={onClose}
             aria-label="Close image"
           >
@@ -149,7 +149,7 @@ export function Lightbox({
           {showNav && (
             <button
               ref={prevButtonRef}
-              className="absolute left-6 top-1/2 -translate-y-1/2 text-text-inverse opacity-60 hover:opacity-100 transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
               onClick={(e) => { e.stopPropagation(); onPrev!(); }}
               aria-label="Previous image"
             >
@@ -163,7 +163,7 @@ export function Lightbox({
           {showNav && (
             <button
               ref={nextButtonRef}
-              className="absolute right-6 top-1/2 -translate-y-1/2 text-text-inverse opacity-60 hover:opacity-100 transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
               onClick={(e) => { e.stopPropagation(); onNext!(); }}
               aria-label="Next image"
             >

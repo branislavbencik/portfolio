@@ -32,7 +32,7 @@ export function ProjectHeader({
 
   return (
     <section className="w-full py-detail">
-      <div className={`px-content-x ${heroImage ? "mb-16" : ""}`}>
+      <div className={`px-content-x ${heroImage ? "mb-16 max-md:mb-8" : ""}`}>
         <div className="max-w-column mx-auto flex flex-col items-start gap-3">
           {tags && tags.length > 0 && <ProjectTags tags={tags} />}
           <h1 className="type-display text-text-primary">{title}</h1>

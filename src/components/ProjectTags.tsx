@@ -25,7 +25,7 @@ export function ProjectTags({ tags }: ProjectTagsProps) {
 
   others.forEach((tag, i) => {
     allParts.push(
-      <span key={`sep-${i}`} className="type-allcaps text-text-tertiary mx-2">
+      <span key={`sep-${i}`} className="type-allcaps text-text-tertiary mx-2" aria-hidden="true">
         ·
       </span>
     );

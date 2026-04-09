@@ -2,13 +2,13 @@ import { CaseStudyCard } from "@/components/CaseStudyCard";
 import HeroStatement from "@/components/HeroStatement";
 import { reader } from "@/lib/keystatic";
 
-// Project-specific Aura Glow colors (10–15% opacity rgba halos per DESIGN.md)
+// Project-specific Aura Glow colors — values live in globals.css as --aura-{slug} tokens
 const AURA_COLORS: Record<string, string> = {
-  skoala:     "rgba(20,  184, 166, 0.2)",  // Teal — matches sidebar/brand
-  teatime:    "rgba(180, 120, 60,  0.2)",  // Warm amber — earthy photography tone
-  nnspect:    "rgba(249, 115, 22,  0.2)",  // Orange — primary action accent
-  sakurabook: "rgba(139, 92,  246, 0.2)",  // Violet — calendar/buttons/logo
-  crowdberry: "rgba(236, 72,  153, 0.2)",  // Pink — berry logo mark
+  skoala:     "var(--aura-skoala)",
+  teatime:    "var(--aura-teatime)",
+  nnspect:    "var(--aura-nnspect)",
+  sakurabook: "var(--aura-sakurabook)",
+  crowdberry: "var(--aura-crowdberry)",
 };
 
 export default async function Home() {
@@ -34,7 +34,6 @@ export default async function Home() {
             key={slug}
             tags={(entry.tags as string[]).slice(0, 3)}
             headline={entry.title}
-            summary={entry.description || undefined}
             primaryHref={`/${slug}`}
             image={
               typeof entry.coverImage === "object" && entry.coverImage !== null

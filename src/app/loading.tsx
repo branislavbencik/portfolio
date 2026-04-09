@@ -7,7 +7,7 @@ export default function LandingLoading() {
           <div className="h-16 w-full bg-surface-1 animate-pulse" />
           <div className="h-16 w-4/5 bg-surface-1 animate-pulse" />
         </div>
-        <div className="grid grid-cols-3 border border-surface-2 divide-x divide-surface-2">
+        <div className="grid grid-cols-3 max-md:grid-cols-1 border border-surface-2 divide-x max-md:divide-x-0 max-md:divide-y divide-surface-2">
           <div className="h-28 bg-surface-1 animate-pulse" />
           <div className="h-28 bg-surface-1 animate-pulse" />
           <div className="h-28 bg-surface-1 animate-pulse" />

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { reader } from "@/lib/keystatic";
 import { ProjectHeader } from "@/components/ProjectHeader";
@@ -10,6 +11,43 @@ import { NextProjectCard } from "@/components/NextProjectCard";
 export async function generateStaticParams() {
   const projects = await reader.collections.projects.all();
   return projects.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await reader.collections.projects.read(slug);
+  if (!project) return {};
+
+  const coverImage =
+    typeof project.coverImage === "object" && project.coverImage !== null
+      ? (project.coverImage as { src: string }).src
+      : (project.coverImage as string) ?? "";
+
+  const title = `${project.title} — Branislav Benčík`;
+  const description = project.description || `${project.title} case study`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      images: coverImage
+        ? [{ url: coverImage, width: 1288, height: 748, alt: project.title }]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: coverImage ? [coverImage] : [],
+    },
+  };
 }
 
 export default async function ProjectPage({
@@ -50,17 +88,20 @@ export default async function ProjectPage({
           heroImageAlt={`${project.title} overview`}
         />
 
-        {isCaseStudy && project.contributions.length > 0 && (
-          <ContributionList items={project.contributions as string[]} />
-        )}
-
-        {isCaseStudy && project.impactItems.length > 0 && (
-          <ImpactBar
-            items={(project.impactItems as { value: string; label: string }[]).map((item) => ({
-              value: item.value,
-              label: item.label,
-            }))}
-          />
+        {isCaseStudy && (project.contributions.length > 0 || project.impactItems.length > 0) && (
+          <div className="border-b border-surface-2">
+            {project.contributions.length > 0 && (
+              <ContributionList items={project.contributions as string[]} />
+            )}
+            {project.impactItems.length > 0 && (
+              <ImpactBar
+                items={(project.impactItems as { value: string; label: string }[]).map((item) => ({
+                  value: item.value,
+                  label: item.label,
+                }))}
+              />
+            )}
+          </div>
         )}
 
         {project.sections.map((section, i) => {

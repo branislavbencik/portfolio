@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import CuriouserText from "@/components/CuriouserText";
+
+import ConsoleEasterEgg from "@/components/ConsoleEasterEgg";
+import TabAttention from "@/components/TabAttention";
 import { LightboxProvider } from "@/components/LightboxContext";
 import "./globals.css";
 
@@ -16,9 +18,37 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://portfolio-lac-pi-40.vercel.app";
+
 export const metadata: Metadata = {
   title: "Branislav Benčík — Product Designer",
   description: "Portfolio of Branislav Benčík, Senior Product Designer.",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "Branislav Benčík — Product Designer",
+    description: "Portfolio of Branislav Benčík, Senior Product Designer.",
+    url: siteUrl,
+    siteName: "Branislav Benčík",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/images/avatar.jpg",
+        width: 400,
+        height: 400,
+        alt: "Branislav Benčík",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary",
+    title: "Branislav Benčík — Product Designer",
+    description: "Portfolio of Branislav Benčík, Senior Product Designer.",
+    images: ["/images/avatar.jpg"],
+  },
+  icons: {
+    icon: "/images/avatar.jpg",
+  },
 };
 
 export default function RootLayout({
@@ -46,12 +76,15 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <ConsoleEasterEgg />
+        <TabAttention />
         <LightboxProvider>
-          <div className="max-w-frame mx-auto min-h-dvh border-x border-surface-2 bg-canvas">
+          <div className="min-h-dvh flex flex-col">
             <Nav />
-            {children}
+            <div className="max-w-frame mx-auto w-full flex-1 border-x border-surface-2 bg-canvas">
+              {children}
+            </div>
             <Footer />
-            <CuriouserText />
           </div>
         </LightboxProvider>
       </body>

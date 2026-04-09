@@ -20,6 +20,13 @@
   /* Accent */
   --accent-live: #22c55e;
 
+  /* Aura glow colors — project-specific identity halos */
+  --aura-skoala:     rgba(20,  184, 166, 0.2);
+  --aura-teatime:    rgba(180, 120, 60,  0.2);
+  --aura-nnspect:    rgba(249, 115, 22,  0.2);
+  --aura-sakurabook: rgba(139, 92,  246, 0.2);
+  --aura-crowdberry: rgba(236, 72,  153, 0.2);
+
   /* Highlight pill */
   --pill-bg:   #ebf5ff;
   --pill-text: #0068d6;
@@ -43,7 +50,12 @@
 
 @media (max-width: 767px) {
   :root {
-    --gap-case-study: 40px;
+    --gap-case-study:    40px;
+    --font-size-display: 36px;
+    --font-size-hero:    32px;
+    --spacing-content-x: 16px;
+    --spacing-detail:    60px;
+    --spacing-section:   40px;
   }
 }
 
@@ -113,8 +125,8 @@
   --line-height-stat:    1;
 }
 
-/* ── Spacing — @theme generates spacing utilities (py-section, etc.) */
-@theme {
+/* ── Spacing — @theme inline so values can be overridden at mobile breakpoint */
+@theme inline {
   --spacing-section:    64px;
   --spacing-detail:    100px;
   --spacing-content-x:  32px;
@@ -252,20 +264,29 @@
 
   /* ── Hero content fade-in (after skeleton) ──────────────────────── */
   .animate-hero-content-in {
-    animation: hero-content-in 240ms ease-out both;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .animate-hero-content-in { animation: none; }
+    animation: hero-content-in 300ms ease-out both;
   }
 
-  /* ── Hero dot grid background ────────────────────────────────────── */
-  .hero-dot-grid {
-    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.055) 1px, transparent 1px);
-    background-size: 24px 24px;
-    animation: hero-grid-drift 12s linear infinite;
+  /* ── Hero box staggered entrance ───────────────────────────────── */
+  .animate-hero-box {
+    clip-path: inset(0 100% 0 0);
+    animation: hero-box-reveal 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
+  .animate-hero-box-text {
+    opacity: 0;
+    animation: hero-box-text-in 280ms ease-out both;
+  }
+  .hero-box-delay-0 { animation-delay: 300ms; }
+  .hero-box-delay-1 { animation-delay: 420ms; }
+  .hero-box-delay-2 { animation-delay: 540ms; }
+  .hero-box-text-delay-0 .animate-hero-box-text { animation-delay: 440ms; }
+  .hero-box-text-delay-1 .animate-hero-box-text { animation-delay: 560ms; }
+  .hero-box-text-delay-2 .animate-hero-box-text { animation-delay: 680ms; }
+
   @media (prefers-reduced-motion: reduce) {
-    .hero-dot-grid { animation: none; }
+    .animate-hero-content-in { animation: none; }
+    .animate-hero-box { animation: none; clip-path: none; }
+    .animate-hero-box-text { animation: none; opacity: 1; }
   }
 
   /* ── Centering utility ──────────────────────────────────────────── */
@@ -288,11 +309,15 @@
   to   { opacity: 1; }
 }
 
-@keyframes hero-grid-drift {
-  from { background-position: 0 0; }
-  to   { background-position: 24px 24px; }
+@keyframes hero-box-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0% 0 0); }
 }
 
+@keyframes hero-box-text-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 /* ── Dialog animations ────────────────────────────────────────────── */
 @keyframes overlay-show {

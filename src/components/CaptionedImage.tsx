@@ -34,9 +34,9 @@ export function CaptionedImage({
   }, [id, src, alt, caption, register, unregister]);
 
   const paddingClass = !background ? "" :
-    paddingStyle === "no-bottom" ? "pt-8 px-8" :
-    paddingStyle === "top-left"  ? "pt-8 pl-8" :
-    (padding ? "p-8" : "");
+    paddingStyle === "no-bottom" ? "pt-8 px-8 max-md:pt-4 max-md:px-4" :
+    paddingStyle === "top-left"  ? "pt-8 pl-8 max-md:pt-4 max-md:pl-4" :
+    (padding ? "p-8 max-md:p-4" : "");
 
   const borderClass = !background ? "" :
     paddingStyle === "no-bottom" ? "border border-b-0 border-surface-2" :
@@ -44,7 +44,7 @@ export function CaptionedImage({
     (bleedBottom ? "border border-b-0 border-surface-2" : "border border-surface-2");
 
   const wrapperClass = [
-    "relative w-full overflow-hidden cursor-zoom-in transition-shadow duration-200 ease-out hover:shadow-[inset_0_0_0_1px_rgba(0,0,0,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2",
+    "relative w-full overflow-hidden cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2",
     background ? "bg-surface-1" : "",
     paddingClass,
     borderClass,

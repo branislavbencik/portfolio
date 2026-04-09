@@ -34,7 +34,9 @@
       "WebFetch(domain:branislavbencik.com)",
       "Bash(echo \"Exit: $?\")",
       "WebFetch(domain:www.fancycomponents.dev)",
-      "Bash(echo \"EXIT: $?\")"
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(ls:*)",
+      "Bash(pkill -f \"next dev\")"
     ]
   }
 }
