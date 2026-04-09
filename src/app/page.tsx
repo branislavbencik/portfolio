@@ -1,86 +1,61 @@
 import { CaseStudyCard } from "@/components/CaseStudyCard";
-import SelectedProjectCard from "@/components/SelectedProjectCard";
 import HeroStatement from "@/components/HeroStatement";
+import { reader } from "@/lib/keystatic";
 
-export default function Home() {
+// Project-specific Aura Glow colors — values live in globals.css as --aura-{slug} tokens
+const AURA_COLORS: Record<string, string> = {
+  skoala:     "var(--aura-skoala)",
+  teatime:    "var(--aura-teatime)",
+  nnspect:    "var(--aura-nnspect)",
+  sakurabook: "var(--aura-sakurabook)",
+  crowdberry: "var(--aura-crowdberry)",
+};
+
+export default async function Home() {
+  const allProjects = await reader.collections.projects.all();
+
+  // Sort by explicit order field; fall back to slug alphabetical
+  const projects = [...allProjects].sort(
+    (a, b) => (a.entry.order ?? 99) - (b.entry.order ?? 99)
+  );
+
   return (
-    <main className="w-full max-w-frame mx-center px-content-x">
-      {/* ── Hero ───────────────────────────────────────────────── */}
-      <HeroStatement />
+    <main id="main-content">
+      <div className="w-full max-w-frame mx-center">
+        <div className="px-content-x">
+          <HeroStatement />
+        </div>
+      </div>
 
-      {/* ── Case Studies ───────────────────────────────────────── */}
-      <section className="my-section">
-        <h1 className="text-foreground-tertiary type-allcaps pb-8">
-          Case studies
-        </h1>
-
-        <div className="flex flex-col gap-case-study">
-          <hr className="border-0 border-t border-border-light max-lg:hidden" />
-
+      {/* Unified single-column feed */}
+      <div className="w-full max-w-frame mx-center flex flex-col">
+        {projects.map(({ slug, entry }) => (
           <CaseStudyCard
-            meta="Skoala · Lead Designer · 2024–25"
-            headline="Designing a CMS from scratch"
-            description="How to allow editors to produce diverse content at scale while keeping zero recurring development cost"
-            highlight={<>🏆 Used by <strong>3500+</strong> Czech schools</>}
-            primaryHref="/skoala"
-            secondaryLabel="View website"
-            secondaryHref="https://skoala.cz"
-            image="/images/skoala/skoala-thumb.png"
-            imageAlt="Skoala LMS interface"
+            key={slug}
+            tags={(entry.tags as string[]).slice(0, 3)}
+            headline={entry.title}
+            primaryHref={`/${slug}`}
+            image={
+              typeof entry.coverImage === "object" && entry.coverImage !== null
+                ? (entry.coverImage as { src: string }).src
+                : (entry.coverImage as string) ?? ""
+            }
+            imageAlt={`${entry.title} thumbnail`}
+            auraColor={AURA_COLORS[slug]}
           />
+        ))}
+      </div>
 
-          <hr className="border-0 border-t border-border-light max-lg:hidden" />
-
-          <CaseStudyCard
-            meta="Teatime · Co-owner · 2024–25"
-            headline="Redesigning a B2B language school"
-            description="How to give every student a different curriculum and still get comparable progress data"
-            highlight={<>🏆 Acquired <strong>12</strong> corporate clients</>}
-            primaryHref="/teatime"
-            secondaryLabel="View website"
-            secondaryHref="https://teatime.cz"
-            image="/images/teatime/teatime-thumb.png"
-            imageAlt="TeaTime language school interface"
-          />
-          <hr className="border-0 border-t border-border-light" />
+      {/* Archive section — commented out until content is ready
+      <section className="px-content-x pt-section pb-section flex flex-col gap-8">
+        <p className="type-allcaps text-text-tertiary">More work</p>
+        <div className="grid grid-cols-4 gap-3 max-lg:grid-cols-2 max-md:grid-cols-2">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="aspect-3/2 bg-zinc-50 border border-zinc-200 rounded-none" />
+          ))}
         </div>
       </section>
-
-      {/* ── Selected Projects ──────────────────────────────────── */}
-      <section className="my-section">
-        <h2 className="text-foreground-tertiary type-allcaps pb-8">
-          Selected projects
-        </h2>
-
-        <div className="grid grid-cols-2 gap-x-6 gap-y-16 max-lg:gap-16 max-lg:grid-cols-1">
-          <SelectedProjectCard
-            href="/nnspect"
-            image="/images/nnspect/nnspect-thumb.png"
-            imageAlt="NNspect inspection platform"
-            tag="Industrial AI"
-            headline="ML training platform for material quality inspection"
-            meta="Nnspect · 2022"
-          />
-
-          <SelectedProjectCard
-            href="/sakurabook"
-            image="/images/sakurabook/sakurabook-thumb.png"
-            imageAlt="Sakurabook booking app"
-            tag="Ecommerce"
-            headline="Shopify plugin for per-hour booking in Japan"
-            meta="Sakurabook · 2021"
-          />
-
-          <SelectedProjectCard
-            href="/crowdberry"
-            image="/images/crowdberry/crowdberry-thumb.png"
-            imageAlt="Crowdberry investment platform"
-            tag="Fintech"
-            headline="Investment crowdfunding marketplace"
-            meta="Crowdberry · 2020"
-          />
-        </div>
-      </section>
+      */}
     </main>
   );
 }

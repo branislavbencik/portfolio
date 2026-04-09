@@ -11,6 +11,9 @@
     "audit:tokens": "bash scripts/audit-tokens.sh"
   },
   "dependencies": {
+    "@keystatic/core": "^0.5.50",
+    "@keystatic/next": "^5.0.4",
+    "@markdoc/markdoc": "^0.5.7",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^16.1.7",

@@ -8,9 +8,10 @@ interface CaptionedImageProps {
   src: string;
   alt?: string;
   caption?: string;
-  border?: boolean;
   background?: boolean;
-  rounded?: boolean;
+  padding?: boolean;
+  bleedBottom?: boolean;
+  paddingStyle?: string; // "no-bottom" | "top-left" — overrides padding/border sides
   width?: number; // max-width in px; defaults to full content width
 }
 
@@ -18,9 +19,10 @@ export function CaptionedImage({
   src,
   alt,
   caption,
-  border = true,
   background = true,
-  rounded = true,
+  padding = true,
+  bleedBottom = false,
+  paddingStyle,
   width,
 }: CaptionedImageProps) {
   const id = useId();
@@ -31,32 +33,47 @@ export function CaptionedImage({
     return () => unregister(id);
   }, [id, src, alt, caption, register, unregister]);
 
+  const paddingClass = !background ? "" :
+    paddingStyle === "no-bottom" ? "pt-8 px-8 max-md:pt-4 max-md:px-4" :
+    paddingStyle === "top-left"  ? "pt-8 pl-8 max-md:pt-4 max-md:pl-4" :
+    (padding ? "p-8 max-md:p-4" : "");
+
+  const borderClass = !background ? "" :
+    paddingStyle === "no-bottom" ? "border border-b-0 border-surface-2" :
+    paddingStyle === "top-left"  ? "border-t border-l border-surface-2" :
+    (bleedBottom ? "border border-b-0 border-surface-2" : "border border-surface-2");
+
   const wrapperClass = [
-    "relative w-full overflow-hidden cursor-zoom-in",
-    rounded ? "rounded-md" : "",
-    border ? "border border-border-light" : "",
-    background ? "bg-background-alt" : "",
+    "relative w-full overflow-hidden cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2",
+    background ? "bg-surface-1" : "",
+    paddingClass,
+    borderClass,
   ]
     .filter(Boolean)
     .join(" ");
 
   return (
     <figure
-      className={`w-full flex flex-col items-center ${width ? "mx-center" : ""}`}
+      className={`w-full flex flex-col items-center ${width ? "mx-auto" : ""}`}
       style={width ? { maxWidth: `${width}px` } : undefined}
     >
-      <div className={wrapperClass} onClick={() => open(id)}>
+      <button
+        type="button"
+        className={wrapperClass}
+        aria-label="Open image in lightbox"
+        onClick={() => open(id)}
+      >
         <Image
           src={src}
           alt={alt ?? ""}
           width={width ?? 1128}
           height={Math.round((width ?? 1128) * (2 / 3))}
-          className="w-full h-auto block"
+          className="w-full h-auto block relative"
           unoptimized
         />
-      </div>
+      </button>
       {caption && (
-        <figcaption className="w-3/4 max-lg:w-full type-body-s text-foreground-secondary text-center max-lg:text-left mt-3">
+        <figcaption className="w-3/4 max-lg:w-full type-body-s text-text-secondary text-center max-lg:text-left mt-3">
           {caption}
         </figcaption>
       )}

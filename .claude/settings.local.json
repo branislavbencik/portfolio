@@ -19,7 +19,24 @@
       "Bash(ls -la /Users/branislavbencik/repos/portfolio/*.config.*)",
       "Bash(grep:*)",
       "Bash(git push:*)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(node -e \"const k = require\\('@keystatic/next'\\); console.log\\(Object.keys\\(k\\)\\)\")",
+      "Bash(node -e \"const k = require\\('@keystatic/next/app'\\); console.log\\(Object.keys\\(k\\)\\)\")",
+      "Bash(node -e \"const k = require\\('@keystatic/next/route-handler'\\); console.log\\(Object.keys\\(k\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; pkg=json.load\\(sys.stdin\\); print\\(json.dumps\\(pkg.get\\('exports', {}\\), indent=2\\)\\)\")",
+      "Bash(mkdir -p \"/Users/branislavbencik/repos/portfolio/src/app/keystatic/[[...params]]\")",
+      "Bash(mkdir -p \"/Users/branislavbencik/repos/portfolio/src/app/api/keystatic/[...params]\")",
+      "Bash(node:*)",
+      "Bash(NEXT_STATIC_EXPORT=true npm run build)",
+      "Bash(npx next:*)",
+      "Bash(git stash:*)",
+      "Bash(npx impeccable:*)",
+      "WebFetch(domain:branislavbencik.com)",
+      "Bash(echo \"Exit: $?\")",
+      "WebFetch(domain:www.fancycomponents.dev)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(ls:*)",
+      "Bash(pkill -f \"next dev\")"
     ]
   }
 }

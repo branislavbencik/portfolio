@@ -1,132 +1,61 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect, useRef, useCallback } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { useState, useEffect } from "react";
 
-const lines = [
-  {
-    text: 'I think in systems,',
-    tooltip: 'Dependencies, flows, edge cases.\nI see what breaks before it breaks.',
-  },
-  {
-    text: 'design for impact,',
-    tooltip: 'I designed platform that teaches financial\nliteracy to every 2nd kid in Czechia.',
-  },
-  {
-    text: '& own the outcome.',
-    tooltip: "Strategy. Automation, front-end code,\n live products. I don't stop at the handoff.",
-  },
-]
-
-const CYCLE_MS = 3500
-const sequence = [0, 1, 2]
-
-function TooltipText({ text }: { text: string }) {
+function HeroSkeleton() {
   return (
-    <>
-      {text.split('\n').map((part, j) => (
-        <React.Fragment key={j}>
-          {j > 0 && <br />}
-          {part}
-        </React.Fragment>
-      ))}
-    </>
-  )
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-3">
+        <div className="h-16 w-full bg-surface-1 animate-pulse" />
+        <div className="h-16 w-4/5 bg-surface-1 animate-pulse" />
+      </div>
+      <div className="grid grid-cols-3 max-md:grid-cols-1 border border-surface-2 divide-x max-md:divide-x-0 max-md:divide-y divide-surface-2">
+        <div className="h-28 bg-surface-1 animate-pulse" />
+        <div className="h-28 bg-surface-1 animate-pulse" />
+        <div className="h-28 bg-surface-1 animate-pulse" />
+      </div>
+    </div>
+  );
 }
 
 export default function HeroStatement() {
-  const [activeIndex, setActiveIndex] = useState<number>(0)
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null)
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
-  const stepRef = useRef(1)
-
-  const startCycle = useCallback((fromStep: number) => {
-    if (intervalRef.current) clearInterval(intervalRef.current)
-    stepRef.current = fromStep
-    intervalRef.current = setInterval(() => {
-      setActiveIndex(sequence[stepRef.current % sequence.length])
-      stepRef.current++
-    }, CYCLE_MS)
-  }, [])
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setActiveIndex(0)
-    startCycle(1)
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
-  }, [startCycle])
-
-  const handleMouseEnter = (i: number) => {
-    if (intervalRef.current) clearInterval(intervalRef.current)
-    setHoverIndex(i)
-  }
-
-  const handleMouseLeave = (i: number) => {
-    setHoverIndex(null)
-    setActiveIndex(i)
-    startCycle(i + 1)
-  }
-
-  const effectiveActive = hoverIndex !== null ? hoverIndex : activeIndex
+    setMounted(true);
+  }, []);
 
   return (
-    <section className="py-section">
-      <p className="type-allcaps text-foreground-tertiary mb-4">Product Designer</p>
+    <section className="pb-section">
+      <div className="max-w-column mx-auto pt-20 max-md:pt-10 pb-10 flex flex-col gap-6 max-md:px-content-x">
+        {!mounted ? (
+          <HeroSkeleton />
+        ) : (
+          <div className="animate-hero-content-in flex flex-col gap-6">
+            <h1 className="type-display text-text-primary">
+              I think in systems, design for impact & own the outcome.
+            </h1>
 
-      {/* Desktop: 2-column grid (headlines | tooltip). Tablet: headlines only */}
-      <div className="grid grid-cols-[minmax(0,1fr)_340px] gap-x-4 max-lg:grid-cols-1">
-        {lines.map(({ text, tooltip }, i) => {
-          const isInactive = effectiveActive !== i
-          const colorClass = isInactive ? 'text-foreground opacity-30' : 'text-foreground'
-
-          return (
-            <React.Fragment key={i}>
-              <div
-                className="cursor-default"
-                onMouseEnter={() => handleMouseEnter(i)}
-                onMouseLeave={() => handleMouseLeave(i)}
-              >
-                <span className={`type-h1 transition-colors duration-150 ${colorClass}`}>
-                  {text}
-                </span>
-              </div>
-
-              {/* Desktop tooltip — hidden on tablet */}
-              <div className="flex items-end pb-1.5 max-lg:hidden">
-                <AnimatePresence>
-                  {effectiveActive === i && (
-                    <motion.p
-                      key={i}
-                      className="type-subheadline text-foreground"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      <TooltipText text={tooltip} />
-                    </motion.p>
-                  )}
-                </AnimatePresence>
-              </div>
-            </React.Fragment>
-          )
-        })}
-      </div>
-
-      {/* Tablet tooltip — shared area below all headlines, hidden on desktop */}
-      <div className="hidden max-lg:block mt-6">
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={effectiveActive}
-            className="type-subheadline text-foreground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
-            <TooltipText text={lines[effectiveActive].tooltip} />
-          </motion.p>
-        </AnimatePresence>
+            <div className="grid grid-cols-3 max-md:grid-cols-1">
+              {[
+                { label: "systems", text: "Dependencies, flows, edge cases. I map the whole problem before I open Figma." },
+                { label: "impact", text: "I designed platform that teaches financial literacy to every 2nd kid in Czechia." },
+                { label: "outcome", text: "Strategy, Automation, front-end code, live products. I don't stop at the handoff." },
+              ].map((box, i) => (
+                <div
+                  key={box.label}
+                  className={`animate-hero-box hero-box-delay-${i} hero-box-text-delay-${i} border border-surface-2 ${i > 0 ? "max-md:border-t-0 border-l-0 max-md:border-l" : ""}`}
+                >
+                  <div className="px-6 py-6 max-md:px-4 max-md:py-4 flex flex-col gap-2">
+                    <p className="animate-hero-box-text type-allcaps text-text-tertiary">{box.label}</p>
+                    <p className="animate-hero-box-text type-body-s text-text-secondary leading-snug">{box.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
-  )
+  );
 }

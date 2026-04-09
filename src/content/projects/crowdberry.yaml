@@ -1,0 +1,31 @@
+title: Investor experience for a crowdfunding marketplace
+description: "Fintech investor UX · Usability tested"
+tags:
+  - Fintech
+  - User Testing
+type: selected
+metric: ""
+coverImage: /images/crowdberry/crowdberry-thumb.png
+order: 5
+role: ""
+year: "2020"
+intro: "Designed the investor experience from opportunity browsing through the investment process to portfolio tracking. Usability tested with real investors."
+contributions: []
+impactItems: []
+sections:
+  - label: ""
+    title: ""
+    description: ""
+    images:
+      - src: /images/crowdberry/crowdberry-thumb.png
+        alt: Investment opportunity cards
+        caption: "Each card surfaces key information for quick comparisons — investment type, return rate and minimum entry."
+        background: true
+      - src: /images/crowdberry/crowdberry-ws1.png
+        alt: Investment flow
+        caption: Split view pairs a guided walkthrough with the actual form.
+        background: true
+      - src: /images/crowdberry/crowdberry-ws2.png
+        alt: Portfolio dashboard
+        caption: "Portfolio Dashboard. An investor sees both where their money is and where each deal stands."
+        background: true

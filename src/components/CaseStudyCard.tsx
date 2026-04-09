@@ -1,92 +1,60 @@
 import Image from "next/image";
 import Link from "next/link";
-import { TagPill } from "./TagPill";
+import { ProjectTags } from "./ProjectTags";
 
 interface CaseStudyCardProps {
-  meta: string;
+  tags?: string[];
   headline: string;
   primaryHref: string;
   image: string;
   imageAlt: string;
-  description?: string;
-  highlight?: React.ReactNode;
-  secondaryLabel?: string;
-  secondaryHref?: string;
+  auraColor?: string;
 }
 
 export function CaseStudyCard({
-  meta,
+  tags,
   headline,
   primaryHref,
   image,
   imageAlt,
-  description,
-  highlight,
-  secondaryLabel,
-  secondaryHref,
+  auraColor,
 }: CaseStudyCardProps) {
   return (
-    <div className="flex items-stretch gap-12 max-lg:gap-4 max-lg:flex-col-reverse">
-      <div className="flex flex-col py-6 shrink-0 grow-0 basis-[30.7%] max-lg:py-0 max-lg:basis-auto max-lg:w-full">
-        {/* Main content */}
-        <div className="flex flex-col gap-4 max-lg:flex-1 max-lg:gap-2">
-          <p className="type-m text-foreground-secondary max-lg:order-first">
-            {meta}
-          </p>
-          <h2 className="type-h2 text-foreground">
-            {headline}
-          </h2>
-          {description && (
-            <p className="type-m text-foreground-secondary max-lg:max-w-text">
-              {description}
-            </p>
-          )}
+    <Link
+      href={primaryHref}
+      className="relative py-detail flex flex-col gap-10 group block rounded-none overflow-hidden no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas border-t border-b border-surface-2 -mt-px first:mt-0"
+    >
 
-          {highlight && (
-            <div className="max-lg:pt-2"><TagPill>{highlight}</TagPill></div>
-          )}
-          
-          {/* CTAs — hidden at max-lg */}
-          <div className="flex items-center gap-5 flex-wrap mt-4 max-lg:hidden">
-            <Link
-              href={primaryHref}
-              className="inline-block px-4 py-2 bg-foreground text-white type-button rounded-sm no-underline hover:opacity-80 transition-opacity"
-            >
-              View Case Study
-            </Link>
-            {secondaryLabel && secondaryHref && (
-              <a
-                href={secondaryHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 type-button text-foreground no-underline hover:opacity-60 transition-opacity"
-              >
-                <span className="inline-block w-2 h-2 rounded-full bg-accent-live" />
-                {secondaryLabel}
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </a>
-            )}
+      {/* Image area — aura bleeds around the image via blur */}
+      <div className="relative px-content-x">
+        {auraColor && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <div
+              className="w-full h-full blur-[80px] opacity-30"
+              style={{ backgroundColor: auraColor }}
+            />
           </div>
-
+        )}
+        <div className="relative z-10 bg-surface-1 motion-safe:transition-shadow motion-safe:duration-200 ease-out group-hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]">
+          <Image
+            src={image}
+            alt={imageAlt}
+            width={1288}
+            height={748}
+            className="w-full h-auto block"
+            unoptimized
+          />
+          <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)] group-hover:shadow-[inset_0_0_0_1px_rgba(0,0,0,0.18)] transition-shadow duration-200 ease-out pointer-events-none" />
         </div>
       </div>
 
-      {/* Right — image ~65% (desktop) / full-width top (max-xl via flex-col-reverse) */}
-      <div className="flex-1 min-w-0">
-        <Link href={primaryHref} className="block">
-          <div className="relative w-full aspect-[744/432] overflow-hidden rounded-md border border-border-light bg-background-alt">
-            <Image
-              src={image}
-              alt={imageAlt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 767px) 100vw, (max-width: 1279px) 100vw, 65vw"
-            />
-          </div>
-        </Link>
+      {/* Text block — tags + headline below the image */}
+      <div className="relative z-10 px-content-x max-md:pb-5">
+        <div className="max-w-column mx-auto flex flex-col items-start gap-3">
+          {tags && tags.length > 0 && <ProjectTags tags={tags} />}
+          <h2 className="type-h1 text-text-primary">{headline}</h2>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 }

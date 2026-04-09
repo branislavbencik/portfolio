@@ -1,30 +1,29 @@
 interface WorkSectionProps {
-  label: string;
+  id?: string;
+  label?: string;
   title: string;
-  description: string;
+  description?: string;
   children: React.ReactNode;
 }
 
-export function WorkSection({ label, title, description, children }: WorkSectionProps) {
+export function WorkSection({ id, label, title, description, children }: WorkSectionProps) {
   return (
-    <div className="w-full">
-      <div className="border-t border-border-light" />
-
-      <section className="w-full max-w-frame mx-center px-content-x py-detail">
-        {/* Text header — constrained to 552px reading column */}
-        <div className="max-w-text mx-center w-full mb-detail">
-          <p className="type-allcaps text-foreground-secondary mb-4">
+    <div id={id} className="w-full border-b border-surface-2">
+      <section className="w-full max-w-frame mx-center px-content-x py-section">
+        {/* Text header — constrained to column width */}
+        <div className="max-w-column mx-auto w-full mb-12">
+          <p className="type-allcaps text-text-secondary mb-4">
             {label}
           </p>
-          <h3 className="type-h3 text-foreground mb-4">
+          <h2 className="type-h1 text-text-primary mb-4">
             {title}
-          </h3>
-          <p className="type-body-m text-foreground-secondary">
+          </h2>
+          <p className="type-body-l text-text-secondary">
             {description}
           </p>
         </div>
 
-        <div className="flex flex-col gap-detail">
+        <div className="flex flex-col gap-section">
           {children}
         </div>
       </section>
