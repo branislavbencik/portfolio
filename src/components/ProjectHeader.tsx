@@ -3,12 +3,11 @@
 import { useId, useEffect } from "react";
 import Image from "next/image";
 import { useLightbox } from "./LightboxContext";
+import { ProjectTags } from "./ProjectTags";
 
 interface ProjectHeaderProps {
   title: string;
-  domainTag?: string;
-  role?: string;
-  year?: string;
+  tags?: string[];
   intro?: string;
   heroImage?: string;
   heroImageAlt?: string;
@@ -16,9 +15,7 @@ interface ProjectHeaderProps {
 
 export function ProjectHeader({
   title,
-  domainTag,
-  role,
-  year,
+  tags,
   intro,
   heroImage,
   heroImageAlt,
@@ -33,28 +30,24 @@ export function ProjectHeader({
     return () => unregister(id);
   }, [id, heroImage, heroImageAlt, register, unregister]);
 
-  const meta = [domainTag, role, year].filter(Boolean).join(" · ");
-
   return (
     <section className="w-full py-detail">
-      <div className={`px-content-x max-w-text mx-center w-full ${heroImage ? "mb-16" : ""}`}>
-        {meta && (
-          <p className="type-body-s text-foreground-secondary mb-4">{meta}</p>
-        )}
-        <h1 className="type-display text-foreground">{title}</h1>
-        {intro && (
-          <p className="type-body-l text-foreground-secondary mt-6">{intro}</p>
-        )}
+      <div className={`px-content-x ${heroImage ? "mb-16" : ""}`}>
+        <div className="max-w-column mx-auto flex flex-col items-start gap-3">
+          {tags && tags.length > 0 && <ProjectTags tags={tags} />}
+          <h1 className="type-display text-text-primary">{title}</h1>
+          {intro && (
+            <p className="type-body-l text-text-secondary mt-3">{intro}</p>
+          )}
+        </div>
       </div>
 
       {heroImage && (
-        <div
-          className="relative w-full overflow-hidden border-y border-zinc-200 rounded-none bg-background-alt cursor-zoom-in"
-          role="button"
-          tabIndex={0}
+        <button
+          type="button"
+          className="relative w-full overflow-hidden border-y border-surface-2 rounded-none bg-background-alt cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2"
           aria-label="Open hero image in lightbox"
           onClick={() => open(id)}
-          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(id); } }}
         >
           <Image
             src={heroImage}
@@ -64,7 +57,7 @@ export function ProjectHeader({
             className="w-full h-auto block"
             unoptimized
           />
-        </div>
+        </button>
       )}
     </section>
   );

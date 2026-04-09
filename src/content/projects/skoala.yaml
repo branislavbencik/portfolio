@@ -1,5 +1,5 @@
-title: Skoala
-description: "Architected a custom CMS for structured educational content used by 3,500+ schools."
+title: CMS powering a financial literacy platform
+description: ""
 tags:
   - Case Study
   - Lead Designer
@@ -44,7 +44,7 @@ sections:
         caption: "Content lifecycle — from first draft to archive, with branching for safe edits."
         background: false
         bleedBottom: false
-        width: 840
+        width: 720
       - src: /images/skoala/skoala-ws2-i2.png
         alt: Lesson editor with status
         caption: Lesson plan list with status, ownership, and version history.

@@ -3,7 +3,6 @@ import { CaseStudyCard } from "./CaseStudyCard";
 interface NextProjectSectionProps {
   tags?: string[];
   headline: string;
-  metric?: string;
   href: string;
   image: string;
   imageAlt: string;
@@ -12,19 +11,19 @@ interface NextProjectSectionProps {
 export function NextProjectSection({
   tags,
   headline,
-  metric,
   href,
   image,
   imageAlt,
 }: NextProjectSectionProps) {
   return (
-    <div className="w-full border-t border-zinc-200">
-      <div className="w-full max-w-frame mx-center px-content-x pt-section pb-section">
-        <p className="type-allcaps text-text-tertiary mb-6">Next Project</p>
+    <div className="w-full">
+      <div className="w-full max-w-frame mx-center">
+        <div className="px-content-x pt-section">
+          <p className="type-allcaps text-text-tertiary mb-6">Next Project</p>
+        </div>
         <CaseStudyCard
           tags={tags}
           headline={headline}
-          metric={metric}
           primaryHref={href}
           image={image}
           imageAlt={imageAlt}

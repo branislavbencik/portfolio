@@ -116,6 +116,11 @@ export default config({
                   description: "Remove bottom border and padding so image bleeds off the section edge.",
                   defaultValue: false,
                 }),
+                paddingStyle: fields.text({
+                  label: "Padding Style",
+                  description: "Override padding/border sides: 'no-bottom' (all sides except bottom), 'top-left' (top and left only). Leave blank for default.",
+                  validation: { isRequired: false },
+                }),
                 width: fields.integer({
                   label: "Max Width (px)",
                   description: "Optional. Leave blank for full width.",

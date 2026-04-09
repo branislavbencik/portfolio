@@ -1,5 +1,5 @@
-title: Teatime
-description: "Systematized a B2B language school — from acquisition pipeline to AI-powered assessment."
+title: B2B language school — from acquisition to AI assessment
+description: "B2B acquisition + AI pipeline · 12 clients"
 tags:
   - Case Study
   - Co-owner
@@ -30,20 +30,20 @@ sections:
         alt: TeaTime persona definition
         caption: "Step 0: Define persona. Every design decision in Steps 1–3 traces back to these three drivers."
         background: false
-        width: 600
+        width: 720
       - src: /images/teatime/teatime-ws1-i2.png
         alt: TeaTime inbox view
         caption: "Step 1: Check how the message lands in the inbox. Consider all the other items the message is competing with. Headline max. length limit is 70 characters and it's bold so we want to make it count."
         background: true
+        paddingStyle: "no-bottom"
       - src: /images/teatime/teatime-ws1-i3.png
         alt: TeaTime outreach email
         caption: "Step 2: The email. Scannable in 30 seconds. No hard sell, just three ways to learn more."
-        background: true
-        width: 936
+        background: false
       - src: /images/teatime/teatime-ws1-i4.png
         alt: TeaTime website and one-pager
         caption: "Step 3: Where she ends up. The website for a quick check. The one-pager she forwards to her boss."
-        background: true
+        background: false
   - label: "2. DIFFERENTIATE"
     title: Test what you teach. Teach what you test.
     description: "Corporate clients want proof their people are improving. Industry standard is a multiple-choice quiz — meaningless for real communication and often disconnected from lessons. We designed a closed loop: test results drive the course plan, teaching targets the gaps, and progress test confirms they've been closed."
@@ -52,11 +52,12 @@ sections:
         alt: TeaTime testing and teaching system
         caption: Testing and teaching as a single connected system
         background: false
-        width: 818
+        width: 720
       - src: /images/teatime/teatime-ws2-i2.png
         alt: TeaTime personalized course plan
         caption: Each student receives a personalized plan combining work skills identified by the assessment and personal interests they've selected.
         background: true
+        paddingStyle: "top-left"
   - label: "3. AUTOMATE"
     title: "Here's how a 15-minute conversation becomes a 2-page report and a personalized course plan"
     description: "Once the teacher records a 15-minute speaking test, the system takes over. It transcribes the audio, identifies speakers, assesses specific skills, and instantly delivers a student report and updated course plan."

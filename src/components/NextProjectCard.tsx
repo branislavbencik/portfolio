@@ -23,9 +23,8 @@ export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
 
   return (
     <NextProjectSection
-      tags={next.entry.domainTag ? [next.entry.domainTag] : []}
-      headline={next.entry.description || next.entry.title}
-      metric={next.entry.metric || undefined}
+      tags={(next.entry.tags as string[]).slice(0, 3)}
+      headline={next.entry.title}
       href={`/${next.slug}`}
       image={image}
       imageAlt={`${next.entry.title} thumbnail`}

@@ -73,9 +73,12 @@ Built on **Geist Sans** and **Geist Mono**.
 
 ### Case Study "Aura" Cards
 - **Wrapper:** `border border-black/8 rounded-none bg-white` — soft 8% black border defines card edges without harsh contrast
-- **Default shadow:** `0 2px 12px rgba(0,0,0,0.04)` — diffuse, barely perceptible depth
-- **Hover shadow:** `0 12px 32px rgba(0,0,0,0.1)` + `translateY(-4px)` — snappy 150ms ease-out lift
-- **Hover bg:** shifts to `#F9F9F9` (off-white)
+- **Default:** top/bottom 1px `surface-2` inset lines — structural grid separators only
+- **Hover — no full card lift** (card block is too large; the grid is structural, cards don't float off it)
+- **Hover — aura bloom:** aura blur div scales `1.0 → 1.35` over `300ms ease-out` — project color halo bleeds outward into canvas
+- **Hover — image float:** image container rises `-8px` (`translateY`) over `200ms ease-out` — work surfaces, frame holds
+- **No hover border** — aura bloom + image float is the selection signal; no inset box-shadow on hover
+- Respect `prefers-reduced-motion` — all transforms wrapped in `motion-safe:` Tailwind prefix
 - **Aura Glow:**  
   - Absolutely positioned behind image  
   - Project-specific `rgba` color (10–15% opacity)  
@@ -134,6 +137,30 @@ Strict 8px base system.
 
 6. **Do not introduce arbitrary colors**  
    → Only Aura Glows define color presence
+
+---
+
+## 7. Case Study Image Modes
+
+Three canonical modes. Never use ad-hoc widths.
+
+| Mode | Width | Component | Use when |
+|------|-------|-----------|----------|
+| **hero** | 1288px (full frame, full-bleed) | `ProjectHeader` only | The project opener. Bleeds edge-to-edge, `border-y`. One per page. |
+| **content** | 1128px (default) | `CaptionedImage` no `width` | App screenshots, multi-panel composites, wide diagrams. |
+| **column** | 720px | `CaptionedImage width={720}` | Personas, single device mockups, narrow diagrams. |
+
+The `background` flag is orthogonal to width — both modes can be `true` or `false`:
+- `background: true` → `bg-surface-1` + `p-8` + `border border-zinc-200`. For product UI screenshots.
+- `background: false` → transparent, no padding, no border. For self-contained Figma composites and diagrams that have their own visual frame.
+
+### Figma Export Contract
+
+- **No external padding.** CSS applies `p-8` (32px) when `background: true`. Baked-in padding doubles it.
+- **No outer `border-radius`** on the containing frame. Inner corners on UI elements (phone bezels, browser chrome, cards) are fine.
+- **No background color baked in.** The gray surface comes from CSS. Export against white or transparent.
+- **Export at 2×.** Always. Content mode = 2256px wide. Column mode = 1440px wide.
+- Composites (multi-panel layouts) use `background: false` — the composite is its own visual frame.
 
 ---
 

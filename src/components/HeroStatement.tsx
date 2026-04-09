@@ -1,120 +1,63 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
-type Keyword = "systems" | "impact" | "outcome";
-
-const KEYWORDS: Keyword[] = ["systems", "impact", "outcome"];
-
-const reveals: Record<Keyword, string> = {
-  systems: "Dependencies, flows, edge cases. I see what breaks before it breaks.",
-  impact:  "I designed the platform that teaches financial literacy to every 2nd kid in Czechia.",
-  outcome: "Strategy. Automation, front-end code, live products. I don't stop at the handoff.",
-};
-
-function Kw({
-  word,
-  active,
-  onEnter,
-  onLeave,
-}: {
-  word: Keyword;
-  active: boolean;
-  onEnter: () => void;
-  onLeave: () => void;
-}) {
+function HeroSkeleton() {
   return (
-    <span
-      role="button"
-      tabIndex={0}
-      className={`cursor-default transition-colors duration-300 focus-visible:outline-none focus-visible:underline focus-visible:underline-offset-4 ${
-        active ? "text-text-primary" : "text-text-tertiary"
-      }`}
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      onFocus={onEnter}
-      onBlur={onLeave}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onEnter();
-        }
-      }}
-    >
-      {word}
-    </span>
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-3">
+        <div className="h-16 w-full bg-surface-1 animate-pulse" />
+        <div className="h-16 w-4/5 bg-surface-1 animate-pulse" />
+      </div>
+      <div className="grid grid-cols-3 border border-surface-2 divide-x divide-surface-2">
+        <div className="h-28 bg-surface-1 animate-pulse" />
+        <div className="h-28 bg-surface-1 animate-pulse" />
+        <div className="h-28 bg-surface-1 animate-pulse" />
+      </div>
+    </div>
   );
 }
 
 export default function HeroStatement() {
-  const [active, setActive] = useState<Keyword>("systems");
-  const [visible, setVisible] = useState(true);
-  const hoveredRef = useRef<Keyword | null>(null);
-  const indexRef = useRef(0);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Respect reduced-motion preference
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-
-    const interval = setInterval(() => {
-      if (hoveredRef.current !== null) return;
-      setVisible(false);
-      timeoutRef.current = setTimeout(() => {
-        indexRef.current = (indexRef.current + 1) % KEYWORDS.length;
-        setActive(KEYWORDS[indexRef.current]);
-        setVisible(true);
-      }, 200);
-    }, 2500);
-
-    return () => {
-      clearInterval(interval);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
+    setMounted(true);
   }, []);
 
-  function handleEnter(word: Keyword) {
-    hoveredRef.current = word;
-    indexRef.current = KEYWORDS.indexOf(word);
-    setVisible(false);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setActive(word);
-      setVisible(true);
-    }, 150);
-  }
-
-  function handleLeave() {
-    hoveredRef.current = null;
-  }
-
   return (
-    <section className="pt-32 pb-16 relative">
-      <div className="max-w-[500px] mx-auto text-center flex flex-col items-center gap-6">
-        <h1 className="type-hero text-text-tertiary">
-          I think in{" "}
-          <Kw word="systems" active={active === "systems"} onEnter={() => handleEnter("systems")} onLeave={handleLeave} />
-          {", design for "}
-          <Kw word="impact" active={active === "impact"} onEnter={() => handleEnter("impact")} onLeave={handleLeave} />
-          {", and own the "}
-          <Kw word="outcome" active={active === "outcome"} onEnter={() => handleEnter("outcome")} onLeave={handleLeave} />
-          {"."}
-        </h1>
+    <section className="relative overflow-hidden pb-section">
+      {/* Animated dot grid background */}
+      <div className="hero-dot-grid absolute inset-0 pointer-events-none z-0" aria-hidden="true" />
+      {/* Fade grid to white at bottom */}
+      <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-canvas to-transparent pointer-events-none z-[1]" aria-hidden="true" />
 
-        <p
-          className={`type-body-m text-text-secondary max-w-[360px] min-h-[3em] transition-opacity duration-200 ${visible ? "opacity-100" : "opacity-0"}`}
-        >
-          {reveals[active]}
-        </p>
+      <div className="relative z-10 max-w-column mx-auto pt-20 pb-10 flex flex-col gap-6 max-md:px-content-x">
+        {!mounted ? (
+          <HeroSkeleton />
+        ) : (
+          <div className="animate-hero-content-in flex flex-col gap-6">
+            <h1 className="type-display text-text-primary">
+              I think in systems, design for impact, & own the outcome.
+            </h1>
+
+            <div className="grid grid-cols-3 max-md:grid-cols-1 border border-surface-2 divide-x max-md:divide-x-0 max-md:divide-y divide-surface-2">
+              <div className="px-6 py-6 flex flex-col gap-2">
+                <p className="type-allcaps text-text-tertiary">systems</p>
+                <p className="type-body-s text-text-secondary leading-snug">Dependencies, flows, edge cases. I map the whole problem before I open Figma.</p>
+              </div>
+              <div className="px-6 py-6 flex flex-col gap-2">
+                <p className="type-allcaps text-text-tertiary">impact</p>
+                <p className="type-body-s text-text-secondary leading-snug">50% of Czech schools use a CMS I designed. An outreach pipeline I built added 0.4M CZK MRR.</p>
+              </div>
+              <div className="px-6 py-6 flex flex-col gap-2">
+                <p className="type-allcaps text-text-tertiary">outcome</p>
+                <p className="type-body-s text-text-secondary leading-snug">Strategy, Automation, front-end code, live products. I don't stop at the handoff.</p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-
-      {/* Border bleeds to full viewport width */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-screen border-b border-zinc-200" />
     </section>
   );
 }

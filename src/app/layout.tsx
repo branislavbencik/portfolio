@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import CuriouserText from "@/components/CuriouserText";
 import { LightboxProvider } from "@/components/LightboxContext";
 import "./globals.css";
 
@@ -39,11 +40,18 @@ export default function RootLayout({
             </feComponentTransfer>
           </filter>
         </svg>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-foreground focus:text-text-inverse focus:px-4 focus:py-2 focus:rounded-[4px] focus:type-body-m focus:outline-none"
+        >
+          Skip to content
+        </a>
         <LightboxProvider>
-          <div className="max-w-frame mx-auto min-h-dvh border-x my-16 border-zinc-200 bg-canvas">
+          <div className="max-w-frame mx-auto min-h-dvh border-x border-surface-2 bg-canvas">
             <Nav />
             {children}
             <Footer />
+            <CuriouserText />
           </div>
         </LightboxProvider>
       </body>

@@ -35,17 +35,16 @@ export default async function ProjectPage({
     background: boolean;
     padding: boolean;
     bleedBottom?: boolean | null;
+    paddingStyle?: string | null;
     width?: number | null;
   };
 
   return (
     <>
-      <main>
+      <main id="main-content">
         <ProjectHeader
           title={project.title}
-          domainTag={project.domainTag || undefined}
-          role={project.role || undefined}
-          year={project.year || undefined}
+          tags={(project.tags as string[]) || []}
           intro={project.intro || undefined}
           heroImage={coverImage}
           heroImageAlt={`${project.title} overview`}
@@ -65,7 +64,8 @@ export default async function ProjectPage({
         )}
 
         {project.sections.map((section, i) => {
-          const images = (section.images as unknown as ImageEntry[]);
+          const images = (section.images as unknown as ImageEntry[])
+            .filter(img => isCaseStudy || img.src !== coverImage);
 
           const sectionId = section.title
             ? section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")
@@ -89,6 +89,7 @@ export default async function ProjectPage({
                     background={img.background}
                     padding={img.padding ?? true}
                     bleedBottom={img.bleedBottom ?? false}
+                    paddingStyle={img.paddingStyle || undefined}
                     width={img.width ?? undefined}
                   />
                 ))}
@@ -98,9 +99,9 @@ export default async function ProjectPage({
 
           // Section without title — flat image gallery (selected projects)
           return (
-            <div
+            <section
               key={i}
-              className="w-full max-w-frame mx-center px-content-x py-detail flex flex-col gap-detail"
+              className="w-full max-w-frame mx-center px-content-x py-section flex flex-col gap-12"
             >
               {images.map((img, j) => (
                 <CaptionedImage
@@ -114,7 +115,7 @@ export default async function ProjectPage({
                   width={img.width ?? undefined}
                 />
               ))}
-            </div>
+            </section>
           );
         })}
       </main>

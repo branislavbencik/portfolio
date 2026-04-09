@@ -29,7 +29,12 @@
       "Bash(node:*)",
       "Bash(NEXT_STATIC_EXPORT=true npm run build)",
       "Bash(npx next:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(npx impeccable:*)",
+      "WebFetch(domain:branislavbencik.com)",
+      "Bash(echo \"Exit: $?\")",
+      "WebFetch(domain:www.fancycomponents.dev)",
+      "Bash(echo \"EXIT: $?\")"
     ]
   }
 }

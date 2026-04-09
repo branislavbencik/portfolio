@@ -11,6 +11,7 @@ interface CaptionedImageProps {
   background?: boolean;
   padding?: boolean;
   bleedBottom?: boolean;
+  paddingStyle?: string; // "no-bottom" | "top-left" — overrides padding/border sides
   width?: number; // max-width in px; defaults to full content width
 }
 
@@ -21,6 +22,7 @@ export function CaptionedImage({
   background = true,
   padding = true,
   bleedBottom = false,
+  paddingStyle,
   width,
 }: CaptionedImageProps) {
   const id = useId();
@@ -31,27 +33,35 @@ export function CaptionedImage({
     return () => unregister(id);
   }, [id, src, alt, caption, register, unregister]);
 
+  const paddingClass = !background ? "" :
+    paddingStyle === "no-bottom" ? "pt-8 px-8" :
+    paddingStyle === "top-left"  ? "pt-8 pl-8" :
+    (padding ? "p-8" : "");
+
+  const borderClass = !background ? "" :
+    paddingStyle === "no-bottom" ? "border border-b-0 border-surface-2" :
+    paddingStyle === "top-left"  ? "border-t border-l border-surface-2" :
+    (bleedBottom ? "border border-b-0 border-surface-2" : "border border-surface-2");
+
   const wrapperClass = [
-    "relative w-full overflow-hidden cursor-zoom-in",
-    background ? "bg-zinc-100" : "",
-    padding ? "p-8" : "",
-    background ? (bleedBottom ? "border border-b-0 border-zinc-200" : "border border-zinc-200") : "",
+    "relative w-full overflow-hidden cursor-zoom-in transition-shadow duration-200 ease-out hover:shadow-[inset_0_0_0_1px_rgba(0,0,0,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2",
+    background ? "bg-surface-1" : "",
+    paddingClass,
+    borderClass,
   ]
     .filter(Boolean)
     .join(" ");
 
   return (
     <figure
-      className={`w-full flex flex-col items-center ${width ? "mx-center" : ""}`}
+      className={`w-full flex flex-col items-center ${width ? "mx-auto" : ""}`}
       style={width ? { maxWidth: `${width}px` } : undefined}
     >
-      <div
+      <button
+        type="button"
         className={wrapperClass}
-        role="button"
-        tabIndex={0}
         aria-label="Open image in lightbox"
         onClick={() => open(id)}
-        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(id); } }}
       >
         <Image
           src={src}
@@ -61,9 +71,9 @@ export function CaptionedImage({
           className="w-full h-auto block relative"
           unoptimized
         />
-      </div>
+      </button>
       {caption && (
-        <figcaption className="w-3/4 max-lg:w-full type-body-s text-foreground-secondary text-center max-lg:text-left mt-3">
+        <figcaption className="w-3/4 max-lg:w-full type-body-s text-text-secondary text-center max-lg:text-left mt-3">
           {caption}
         </figcaption>
       )}

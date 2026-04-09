@@ -4,11 +4,11 @@ import { reader } from "@/lib/keystatic";
 
 // Project-specific Aura Glow colors (10–15% opacity rgba halos per DESIGN.md)
 const AURA_COLORS: Record<string, string> = {
-  skoala:     "rgba(139, 92, 246, 0.2)",  // Violet
-  teatime:    "rgba(239, 68,  68, 0.2)",  // Red
-  nnspect:    "rgba(14,  165, 233, 0.2)", // Sky — Industrial AI
-  sakurabook: "rgba(236, 72,  153, 0.2)", // Pink — Japanese market
-  crowdberry: "rgba(16,  185, 129, 0.2)", // Emerald — Fintech
+  skoala:     "rgba(20,  184, 166, 0.2)",  // Teal — matches sidebar/brand
+  teatime:    "rgba(180, 120, 60,  0.2)",  // Warm amber — earthy photography tone
+  nnspect:    "rgba(249, 115, 22,  0.2)",  // Orange — primary action accent
+  sakurabook: "rgba(139, 92,  246, 0.2)",  // Violet — calendar/buttons/logo
+  crowdberry: "rgba(236, 72,  153, 0.2)",  // Pink — berry logo mark
 };
 
 export default async function Home() {
@@ -20,18 +20,21 @@ export default async function Home() {
   );
 
   return (
-    <main className="w-full max-w-frame mx-center">
-      <div className="px-content-x">
-        <HeroStatement />
+    <main id="main-content">
+      <div className="w-full max-w-frame mx-center">
+        <div className="px-content-x">
+          <HeroStatement />
+        </div>
       </div>
 
       {/* Unified single-column feed */}
-      <div className="flex flex-col gap-case-study pb-section">
+      <div className="w-full max-w-frame mx-center flex flex-col">
         {projects.map(({ slug, entry }) => (
           <CaseStudyCard
             key={slug}
             tags={(entry.tags as string[]).slice(0, 3)}
-            headline={entry.description || entry.title}
+            headline={entry.title}
+            summary={entry.description || undefined}
             primaryHref={`/${slug}`}
             image={
               typeof entry.coverImage === "object" && entry.coverImage !== null
@@ -44,7 +47,7 @@ export default async function Home() {
         ))}
       </div>
 
-      {/* Archive section */}
+      {/* Archive section — commented out until content is ready
       <section className="px-content-x pt-section pb-section flex flex-col gap-8">
         <p className="type-allcaps text-text-tertiary">More work</p>
         <div className="grid grid-cols-4 gap-3 max-lg:grid-cols-2 max-md:grid-cols-2">
@@ -53,6 +56,7 @@ export default async function Home() {
           ))}
         </div>
       </section>
+      */}
     </main>
   );
 }
