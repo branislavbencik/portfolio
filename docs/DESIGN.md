@@ -3,7 +3,7 @@
 ## 1. Core Philosophy
 This portfolio operates like a high-end architectural CAD tool or a technical blueprint. It uses a **Light Technical Canvas** as the native medium, where information density is managed through structural grid lines and a tactile, paper-like texture.
 
-- **Achromatic Canvas:** 98% of the site is monochrome. Color is strictly reserved for project-specific "Aura Glows" and the actual work screenshots.
+- **Achromatic Canvas:** The site is monochrome. Color appears only in the actual work screenshots.
 - **Engineered Typography:** Geist Sans with controlled negative tracking creates a compressed, high-density look. Geist Mono is used strictly for metadata, tags, and technical labels.
 - **Load-Bearing Borders:** Hard 1px `border-zinc-300` defines the grid. Borders are visible, intentional, and provide the primary structural definition.
 - **Tactile Canvas:** The background uses a procedural SVG grain filter (4% opacity) to create an "embodied" paper feel.
@@ -71,24 +71,16 @@ Built on **Geist Sans** and **Geist Mono**.
 
 ## 4. Component Architecture
 
-### Case Study "Aura" Cards
-- **Wrapper:** `border border-black/8 rounded-none bg-white` — soft 8% black border defines card edges without harsh contrast
-- **Default:** top/bottom 1px `surface-2` inset lines — structural grid separators only
-- **Hover — no full card lift** (card block is too large; the grid is structural, cards don't float off it)
-- **Hover — aura bloom:** aura blur div scales `1.0 → 1.35` over `300ms ease-out` — project color halo bleeds outward into canvas
-- **Hover — image float:** image container rises `-8px` (`translateY`) over `200ms ease-out` — work surfaces, frame holds
-- **No hover border** — aura bloom + image float is the selection signal; no inset box-shadow on hover
-- Respect `prefers-reduced-motion` — all transforms wrapped in `motion-safe:` Tailwind prefix
-- **Aura Glow:**  
-  - Absolutely positioned behind image  
-  - Project-specific `rgba` color (10–15% opacity)  
-  - `blur-[80px]` — 36s multi-axis drift (translate + scale + rotate)
-- **Layout:**  
-  - Image area: `pt-16 px-16 pb-0` — no bottom padding; metadata sits flush below at 16px gap
-  - Metadata: `px-16 pt-4 pb-6` — left edge aligned with image edge
-  - Vertical stack: tag → headline → description → metric
-  - All tags/metrics: Geist Mono
-- **No inner dividing border** between image and metadata
+### Case Study Cards
+- **Wrapper:** `border-t border-b border-surface-2 rounded-none` — structural 1px separators; cards inherit the canvas background
+- **Hover — image hairline:** inset box-shadow on the thumbnail deepens from `rgba(0,0,0,0.06)` to `rgba(0,0,0,0.18)` over `200ms ease-out` — selection signal without card lift
+- **Hover — image shadow:** soft `0 4px 12px rgba(0,0,0,0.06)` drop on the thumbnail container
+- Respect `prefers-reduced-motion` — transitions wrapped in `motion-safe:` Tailwind prefix
+- **Layout:**
+  - Image sits on top at full `px-content-x` width
+  - Text block below at `gap-10`: metadata row → headline
+  - Metadata row: Geist Mono allcaps, `·`-separated — `[Case Study pill] · YEAR · ROLE · DOMAIN`
+  - `Case Study` pill is inverted (filled) when present; other values are tertiary mono text
 
 ---
 
@@ -121,8 +113,8 @@ Strict 8px base system.
 
 ## 6. Execution Rules (The "Do Nots")
 
-1. **Do not use shadows**  
-   → Use borders or Aura Glows
+1. **Do not use shadows as primary structure**  
+   → Use borders; reserve shadows for subtle hover feedback only
 
 2. **Do not apply negative tracking to body text**  
    → Only Display / H1
@@ -136,7 +128,7 @@ Strict 8px base system.
    → Motion must be fast (`duration-200`)
 
 6. **Do not introduce arbitrary colors**  
-   → Only Aura Glows define color presence
+   → The site is achromatic. Color only appears inside work screenshots.
 
 ---
 

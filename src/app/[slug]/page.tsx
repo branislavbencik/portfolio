@@ -82,7 +82,10 @@ export default async function ProjectPage({
       <main id="main-content">
         <ProjectHeader
           title={project.title}
-          tags={(project.tags as string[]) || []}
+          isCaseStudy={project.type === "case-study"}
+          year={project.year || undefined}
+          role={project.role || undefined}
+          domain={(project as { domain?: string }).domain || undefined}
           intro={project.intro || undefined}
           heroImage={coverImage}
           heroImageAlt={`${project.title} overview`}

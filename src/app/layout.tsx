@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = "https://portfolio-lac-pi-40.vercel.app";
+const siteUrl = "https://branislavbencik.com";
 
 export const metadata: Metadata = {
   title: "Branislav Benčík — Product Designer",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     images: ["/images/avatar.jpg"],
   },
   icons: {
-    icon: "/images/avatar.jpg",
+    icon: "/favicon.svg",
   },
 };
 

@@ -2,15 +2,6 @@ import { CaseStudyCard } from "@/components/CaseStudyCard";
 import HeroStatement from "@/components/HeroStatement";
 import { reader } from "@/lib/keystatic";
 
-// Project-specific Aura Glow colors — values live in globals.css as --aura-{slug} tokens
-const AURA_COLORS: Record<string, string> = {
-  skoala:     "var(--aura-skoala)",
-  teatime:    "var(--aura-teatime)",
-  nnspect:    "var(--aura-nnspect)",
-  sakurabook: "var(--aura-sakurabook)",
-  crowdberry: "var(--aura-crowdberry)",
-};
-
 export default async function Home() {
   const allProjects = await reader.collections.projects.all();
 
@@ -32,7 +23,10 @@ export default async function Home() {
         {projects.map(({ slug, entry }) => (
           <CaseStudyCard
             key={slug}
-            tags={(entry.tags as string[]).slice(0, 3)}
+            isCaseStudy={entry.type === "case-study"}
+            year={entry.year || undefined}
+            role={entry.role || undefined}
+            domain={(entry as { domain?: string }).domain || undefined}
             headline={entry.title}
             primaryHref={`/${slug}`}
             image={
@@ -41,7 +35,6 @@ export default async function Home() {
                 : (entry.coverImage as string) ?? ""
             }
             imageAlt={`${entry.title} thumbnail`}
-            auraColor={AURA_COLORS[slug]}
           />
         ))}
       </div>
