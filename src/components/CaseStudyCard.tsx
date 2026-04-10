@@ -29,7 +29,7 @@ export function CaseStudyCard({
       className="relative py-detail flex flex-col gap-10 group block rounded-none overflow-hidden no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas border-t border-b border-surface-2 -mt-px first:mt-0"
     >
       <div className="relative px-content-x">
-        <div className="relative z-10 bg-surface-1">
+        <div className="relative z-10 bg-surface-1 ring-1 ring-inset ring-surface-2 group-hover:ring-surface-3 transition-[box-shadow] duration-200 ease-out">
           <Image
             src={image}
             alt={imageAlt}
@@ -38,7 +38,6 @@ export function CaseStudyCard({
             className="w-full h-auto block"
             unoptimized
           />
-          <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)] group-hover:shadow-[inset_0_0_0_1px_rgba(0,0,0,0.28)] transition-shadow duration-200 ease-out pointer-events-none" />
         </div>
       </div>
 

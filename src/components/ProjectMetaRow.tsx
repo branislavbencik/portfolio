@@ -17,7 +17,7 @@ export function ProjectMetaRow({
   return (
     <div className="flex items-baseline flex-wrap">
       {isCaseStudy && (
-        <span className="bg-text-primary text-text-inverse type-tag font-semibold px-2.5 py-1 inline-block shrink-0">
+        <span className="bg-text-primary text-text-inverse type-tag px-2.5 py-1 inline-block shrink-0">
           Case Study
         </span>
       )}

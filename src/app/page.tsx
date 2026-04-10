@@ -19,7 +19,7 @@ export default async function Home() {
       </div>
 
       {/* Unified single-column feed */}
-      <div className="w-full max-w-frame mx-center flex flex-col">
+      <div id="work" className="w-full max-w-frame mx-center flex flex-col scroll-mt-20">
         {projects.map(({ slug, entry }) => (
           <CaseStudyCard
             key={slug}

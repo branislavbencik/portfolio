@@ -78,7 +78,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full max-[1320]:px-content-x ">
+    <footer className="w-full max-[1320px]:px-content-x ">
       <div
         ref={containerRef}
         className="max-w-frame mx-auto py-5 flex items-center justify-between max-md:flex-col max-md:gap-4"
@@ -88,7 +88,7 @@ export default function Footer() {
           <button
             onClick={handleEmailClick}
             aria-label={copied ? "Email copied to clipboard" : "Copy email address"}
-            className="hover:text-foreground motion-safe:transition-colors cursor-pointer"
+            className="link-underline hover:text-foreground cursor-pointer"
           >
             {copied ? "Copied!" : "branislav.bencik@gmail.com"}
           </button>
@@ -97,20 +97,28 @@ export default function Footer() {
             href="https://www.linkedin.com/in/branislavbencik/"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-foreground motion-safe:transition-colors"
+            className="link-underline hover:text-foreground inline-flex items-center"
             aria-label="LinkedIn (opens in new tab)"
           >
             LinkedIn
+            <svg aria-hidden="true" className="inline-block ml-1 align-[0.05em]" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="square">
+              <line x1="5" y1="15" x2="15" y2="5" />
+              <polyline points="7,5 15,5 15,13" />
+            </svg>
           </a>
           <span aria-hidden="true" className="opacity-40">·</span>
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-foreground motion-safe:transition-colors"
+            className="link-underline hover:text-foreground inline-flex items-center"
             aria-label="Resume (opens in new tab)"
           >
             Resume
+            <svg aria-hidden="true" className="inline-block ml-1 align-[0.05em]" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="square">
+              <line x1="5" y1="15" x2="15" y2="5" />
+              <polyline points="7,5 15,5 15,13" />
+            </svg>
           </a>
         </div>
 

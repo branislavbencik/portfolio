@@ -1,23 +1,59 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+function ExternalArrow() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="inline-block ml-1 align-[0.05em]"
+      width="14"
+      height="14"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinecap="square"
+    >
+      <line x1="5" y1="15" x2="15" y2="5" />
+      <polyline points="7,5 15,5 15,13" />
+    </svg>
+  );
+}
 
 export default function Nav() {
+  const pathname = usePathname();
+  const isDetail = pathname !== "/" && !pathname.startsWith("/keystatic");
+
   return (
-    <header className="w-full">
-      <nav className="w-full border-b border-surface-2 max-w-frame mx-center flex items-center justify-between max-[1320px]:px-content-x py-5 h-16">
-        <Link
-          href="/"
-          className="type-body-m text-foreground no-underline hover:opacity-60 motion-safe:transition-opacity"
-        >
-          Branislav Benčík
-        </Link>
+    <header className="animate-nav-in sticky top-0 z-40 w-full border-b border-surface-2 backdrop-blur-md bg-[color-mix(in_oklab,var(--canvas)_80%,transparent)]">
+      <nav className="w-full max-w-frame mx-center flex items-center justify-between max-[1320px]:px-content-x py-5 h-16">
+        {isDetail ? (
+          <Link
+            href="/#work"
+            className="link-underline type-body-m text-text-secondary hover:text-foreground no-underline inline-flex items-center gap-2"
+          >
+            <span aria-hidden="true">←</span>
+            Back
+          </Link>
+        ) : (
+          <Link
+            href="/"
+            className="link-underline type-body-m text-text-secondary hover:text-foreground no-underline"
+          >
+            Branislav Benčík
+          </Link>
+        )}
         <a
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="type-body-m text-foreground no-underline hover:opacity-60 motion-safe:transition-opacity"
+          className="link-underline type-body-m text-text-secondary hover:text-foreground no-underline inline-flex items-center"
           aria-label="Resume (opens in new tab)"
         >
-         Resume
+          Resume
+          <ExternalArrow />
         </a>
       </nav>
     </header>
