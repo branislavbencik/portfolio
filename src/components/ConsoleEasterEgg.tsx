@@ -17,7 +17,7 @@ export default function ConsoleEasterEgg() {
   │                                     │
   └─────────────────────────────────────┘
 `,
-      "font-family: monospace; color: #71717A;"
+      "font-family: monospace; color: #71717A;" // audit-ignore: console.log CSS string, not a stylesheet
     );
   }, []);
 
