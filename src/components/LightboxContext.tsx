@@ -15,6 +15,7 @@ type ImageEntry = {
   src: string;
   alt: string;
   caption?: string;
+  background?: boolean;
 };
 
 type LightboxContextValue = {
@@ -74,6 +75,7 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
           src={current.src}
           alt={current.alt}
           caption={current.caption}
+          background={current.background}
           currentIndex={currentIndex}
           total={images.length}
           onPrev={images.length > 1 ? prev : undefined}

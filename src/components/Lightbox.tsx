@@ -10,6 +10,7 @@ interface LightboxProps {
   isOpen: boolean;
   onClose: () => void;
   caption?: string;
+  background?: boolean;
   currentIndex?: number;
   total?: number;
   onPrev?: () => void;
@@ -22,6 +23,7 @@ export function Lightbox({
   isOpen,
   onClose,
   caption,
+  background = true,
   currentIndex,
   total,
   onPrev,
@@ -66,6 +68,13 @@ export function Lightbox({
 
       if (focusable.length === 0) return;
 
+      // Single focusable element: never let Tab escape the dialog
+      if (focusable.length === 1) {
+        e.preventDefault();
+        focusable[0].focus();
+        return;
+      }
+
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
 
@@ -109,7 +118,7 @@ export function Lightbox({
           role="dialog"
           aria-modal="true"
           aria-label="Image viewer"
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-foreground/80 backdrop-blur-sm cursor-zoom-out"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-text-primary cursor-zoom-out"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -119,7 +128,7 @@ export function Lightbox({
         >
           {/* Counter — top left */}
           {showCounter && (
-            <span className="absolute top-5 left-5 type-allcaps text-text-inverse opacity-50">
+            <span className="absolute top-5 left-5 type-allcaps text-text-inverse opacity-75">
               {currentIndex! + 1} / {total}
             </span>
           )}
@@ -186,10 +195,12 @@ export function Lightbox({
             <img
               src={src}
               alt={alt}
-              className="max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block"
+              className={`max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block p-6 box-border ${
+                background ? "bg-surface-1" : "bg-canvas"
+              }`}
             />
             {caption && (
-              <p className="type-body-m text-text-inverse opacity-90 text-center max-w-[600px]">
+              <p className="type-body-m text-text-inverse text-center max-w-[600px]">
                 {caption}
               </p>
             )}

@@ -19,7 +19,7 @@ export default async function Home() {
       </div>
 
       {/* Unified single-column feed */}
-      <div className="w-full max-w-frame mx-center flex flex-col">
+      <div id="work" className="w-full max-w-frame mx-center flex flex-col scroll-mt-20">
         {projects.map(({ slug, entry }) => (
           <CaseStudyCard
             key={slug}
@@ -39,16 +39,6 @@ export default async function Home() {
         ))}
       </div>
 
-      {/* Archive section — commented out until content is ready
-      <section className="px-content-x pt-section pb-section flex flex-col gap-8">
-        <p className="type-allcaps text-text-tertiary">More work</p>
-        <div className="grid grid-cols-4 gap-3 max-lg:grid-cols-2 max-md:grid-cols-2">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="aspect-3/2 bg-zinc-50 border border-zinc-200 rounded-none" />
-          ))}
-        </div>
-      </section>
-      */}
     </main>
   );
 }

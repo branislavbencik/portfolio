@@ -6,7 +6,7 @@
 `/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done · `/sakurabook` → Done · `/crowdberry` → Done · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-About page; resume page; real favicon monogram (current is placeholder); address pre-existing Footer/Lightbox lint warnings; explore additional delight moments (keyboard shortcuts overlay, status-dot pulse)
+About page; resume page; real favicon monogram (current is placeholder); address pre-existing lint warnings
 
 ## Session Log
 1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
@@ -32,6 +32,7 @@ About page; resume page; real favicon monogram (current is placeholder); address
 22. Token audit cleanup (2026-04-10) — replaced inline `display:none` on grain SVG with `className="hidden"`; annotated the two legitimate dynamic inline styles (console.log CSS string, variable-font RAF weight) with `audit-ignore`; audit now passes clean (`ab0ea25`)
 21. Critique polish pass (2026-04-10) — removed project aura glows (achromatic canvas); extracted shared ProjectMetaRow (Case Study pill · Year · Role · Domain) used on landing card + detail page header; inverted Case Study pill (bg-text-primary) on both surfaces; added `domain` field to Keystatic schema, backfilled 5 projects; added hero status line with pulsing green live indicator (`--accent-live`); fixed siteUrl + replaced JPEG favicon with SVG monogram placeholder; dropped HeroStatement skeleton; simplified card hover (dropped ambient shadow, bumped inset hairline); cleaned up dead tokens; deleted orphaned ProjectTags component
 23. Extract cleanup + workflow polish (2026-04-10) — deleted two orphaned components (`MetadataRow`, `TagPill`) with zero callers anywhere in the codebase; added a mandatory session-start branching rule to `CLAUDE.md` (never commit directly to `main`); extended the `ship` skill to handle new-branch first-push (`git push -u origin HEAD`) and added a PR-creation step via `gh pr create`, with an explicit no-merge instruction so the user approves
+24. Interaction pass (2026-04-10) — scroll-aware auto-hide nav (64px threshold, delta-based, motion-safe); contextual left slot (wordmark on `/`, `← Back` on detail pages linking to `/`); unified `type-link` utility (14px, line-height 1) so underlines sit tight under letters; nav + footer grid structure aligned; external `↗` arrow on Resume + LinkedIn (optical align tuned); lightbox parity with detail pages (background flag threaded through LightboxContext → Lightbox, 24px matte padding, fully opaque backdrop); case study card border restored via overlay div with ring; Case Study pill text softened to `/80` opacity; hero stagger simplified to single 200ms fade; footer Copied toast becomes inverted tooltip above button (no layout shift); footer `max-[1320]` → `max-[1320px]` bug fix (`0635ca2`)
 
 ## Known Issues
 (none)

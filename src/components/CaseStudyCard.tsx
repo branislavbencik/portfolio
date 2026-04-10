@@ -38,7 +38,10 @@ export function CaseStudyCard({
             className="w-full h-auto block"
             unoptimized
           />
-          <div className="absolute inset-0 shadow-[inset_0_0_0_1px_rgba(0,0,0,0.12)] group-hover:shadow-[inset_0_0_0_1px_rgba(0,0,0,0.28)] transition-shadow duration-200 ease-out pointer-events-none" />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-surface-2 group-hover:ring-surface-3 motion-safe:transition-[box-shadow] duration-200 ease-out"
+          />
         </div>
       </div>
 
