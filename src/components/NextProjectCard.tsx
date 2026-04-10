@@ -23,7 +23,10 @@ export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
 
   return (
     <NextProjectSection
-      tags={(next.entry.tags as string[]).slice(0, 3)}
+      isCaseStudy={next.entry.type === "case-study"}
+      year={next.entry.year || undefined}
+      role={next.entry.role || undefined}
+      domain={(next.entry as { domain?: string }).domain || undefined}
       headline={next.entry.title}
       href={`/${next.slug}`}
       image={image}

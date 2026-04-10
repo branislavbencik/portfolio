@@ -1,12 +1,12 @@
 # Portfolio Build Status
 
-**Day:** 5 of 5 (Mon Mar 23) · **Deploy:** portfolio-lac-pi-40.vercel.app · **Sprint end:** Sun Mar 23
+**Last update:** 2026-04-10 · **Deploy:** branislavbencik.com
 
 ## Pages
 `/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done · `/sakurabook` → Done · `/crowdberry` → Done · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-About page; resume page; HeroStatement copy/tooltip refinement
+About page; resume page; real favicon monogram (current is placeholder); address pre-existing Footer/Lightbox lint warnings
 
 ## Session Log
 1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
@@ -29,6 +29,7 @@ About page; resume page; HeroStatement copy/tooltip refinement
 18. Gallery lightbox — LightboxContext provider in layout.tsx; all CaptionedImage + CaseStudyHeader hero self-register; prev/next arrows, ← → keyboard nav, counter, captions; dark backdrop blur, cursor-zoom-out on backdrop, cursor-default over image (`1315510`)
 19. Crowdberry selected project — /crowdberry page (Fintech, 2020) with 3 captioned images; added to landing page grid; each selected project page now shows two cards side-by-side (prev + next) forming circular chain nnspect → sakurabook → crowdberry → nnspect (`c4ce0ec`)
 20. HeroStatement component — interactive 3-line headline with infinite auto-cycling tooltips (3.5s), hover interruption + resume from last hovered row, AnimatePresence fade (150ms); desktop two-column grid with fluid clamp on type-h1; tablet collapses to full-width headlines + shared tooltip below; type-h1 uses separate clamp formulas for desktop vs tablet (`b8662f5`)
+21. Critique polish pass (2026-04-10) — removed project aura glows (achromatic canvas); extracted shared ProjectMetaRow (Case Study pill · Year · Role · Domain) used on landing card + detail page header; inverted Case Study pill (bg-text-primary) on both surfaces; added `domain` field to Keystatic schema, backfilled 5 projects; added hero status line with pulsing green live indicator (`--accent-live`); fixed siteUrl + replaced JPEG favicon with SVG monogram placeholder; dropped HeroStatement skeleton; simplified card hover (dropped ambient shadow, bumped inset hairline); cleaned up dead tokens; deleted orphaned ProjectTags component
 
 ## Known Issues
 (none)

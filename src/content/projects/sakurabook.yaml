@@ -7,8 +7,9 @@ type: selected
 metric: ""
 coverImage: /images/sakurabook/sakurabook-thumb.png
 order: 4
-role: ""
+role: Solo Designer
 year: "2021"
+domain: Ecommerce
 intro: "Hourly booking is common in Japan not just for services but also for rental spaces. I built a booking plugin for Shopify that handles hourly availability, two storefront templates (one for booking, another for browsing), and the full flow from merchant setup to customer checkout."
 contributions: []
 impactItems: []

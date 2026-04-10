@@ -55,6 +55,11 @@ export default config({
           description: "e.g. 2024–25 or 2022",
           validation: { isRequired: false },
         }),
+        domain: fields.text({
+          label: "Domain",
+          description: "e.g. EdTech, Fintech, Industrial AI. Shown in the landing card metadata row.",
+          validation: { isRequired: false },
+        }),
         intro: fields.text({
           label: "Intro",
           description: "Opening paragraph on the detail page.",

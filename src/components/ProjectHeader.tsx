@@ -3,11 +3,14 @@
 import { useId, useEffect } from "react";
 import Image from "next/image";
 import { useLightbox } from "./LightboxContext";
-import { ProjectTags } from "./ProjectTags";
+import { ProjectMetaRow } from "./ProjectMetaRow";
 
 interface ProjectHeaderProps {
   title: string;
-  tags?: string[];
+  isCaseStudy?: boolean;
+  year?: string;
+  role?: string;
+  domain?: string;
   intro?: string;
   heroImage?: string;
   heroImageAlt?: string;
@@ -15,7 +18,10 @@ interface ProjectHeaderProps {
 
 export function ProjectHeader({
   title,
-  tags,
+  isCaseStudy,
+  year,
+  role,
+  domain,
   intro,
   heroImage,
   heroImageAlt,
@@ -34,7 +40,12 @@ export function ProjectHeader({
     <section className="w-full py-detail">
       <div className={`px-content-x ${heroImage ? "mb-16 max-md:mb-8" : ""}`}>
         <div className="max-w-column mx-auto flex flex-col items-start gap-3">
-          {tags && tags.length > 0 && <ProjectTags tags={tags} />}
+          <ProjectMetaRow
+            isCaseStudy={isCaseStudy}
+            year={year}
+            role={role}
+            domain={domain}
+          />
           <h1 className="type-display text-text-primary">{title}</h1>
           {intro && (
             <p className="type-body-l text-text-secondary mt-3">{intro}</p>

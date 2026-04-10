@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Nav() {
   return (
     <header className="w-full">
-      <nav className="w-full border-b border-surface-2 max-w-frame mx-center flex items-center justify-between max-[1320]:px-content-x py-5 h-16">
+      <nav className="w-full border-b border-surface-2 max-w-frame mx-center flex items-center justify-between max-[1320px]:px-content-x py-5 h-16">
         <Link
           href="/"
           className="type-body-m text-foreground no-underline hover:opacity-60 motion-safe:transition-opacity"

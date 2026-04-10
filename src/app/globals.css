@@ -20,17 +20,6 @@
   /* Accent */
   --accent-live: #22c55e;
 
-  /* Aura glow colors — project-specific identity halos */
-  --aura-skoala:     rgba(20,  184, 166, 0.2);
-  --aura-teatime:    rgba(180, 120, 60,  0.2);
-  --aura-nnspect:    rgba(249, 115, 22,  0.2);
-  --aura-sakurabook: rgba(139, 92,  246, 0.2);
-  --aura-crowdberry: rgba(236, 72,  153, 0.2);
-
-  /* Highlight pill */
-  --pill-bg:   #ebf5ff;
-  --pill-text: #0068d6;
-
   /* Semantic aliases — backward-compatible names for existing components */
   --background:           var(--canvas);
   --foreground:           var(--text-primary);
@@ -40,7 +29,6 @@
   --background-alt-2:     var(--surface-2);
 
   /* Gap values */
-  --gap-case-study:    100px;
   --gap-selected-card: 12px;
 
   /* Inverse color tokens — used on dark surfaces (e.g. ImpactBar) */
@@ -50,7 +38,6 @@
 
 @media (max-width: 767px) {
   :root {
-    --gap-case-study:    40px;
     --font-size-display: 36px;
     --font-size-hero:    32px;
     --spacing-content-x: 16px;
@@ -70,8 +57,6 @@
   --color-text-secondary: var(--text-secondary);
   --color-text-tertiary:  var(--text-tertiary);
   --color-accent-live:    var(--accent-live);
-  --color-pill-bg:        var(--pill-bg);
-  --color-pill-text:      var(--pill-text);
 
   /* Semantic aliases for backward compat */
   --color-background:           var(--background);
@@ -238,7 +223,6 @@
   }
 
   /* ── Named gap utilities ────────────────────────────────────────── */
-  .gap-case-study    { gap: var(--gap-case-study); }
   .gap-selected-card { gap: var(--gap-selected-card); }
 
   /* ── Highlight pill ────────────────────────────────────────────── */
@@ -256,10 +240,27 @@
     border-radius: 0;
   }
 
-  /* ── Grain overlay — sibling to aura bleed elements, not ::after   */
-  /* (::after on a filter:blur element also gets blurred)             */
   .grain-overlay {
     filter: url(#grain);
+  }
+
+  /* ── Status dot — slow pulsing live indicator ──────────────────── */
+  .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background-color: var(--accent-live);
+    animation: status-dot-pulse 2s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .status-dot {
+      animation: none;
+    }
+  }
+  @keyframes status-dot-pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
   }
 
   /* ── Hero content fade-in (after skeleton) ──────────────────────── */

@@ -1,7 +1,10 @@
 import { CaseStudyCard } from "./CaseStudyCard";
 
 interface NextProjectSectionProps {
-  tags?: string[];
+  isCaseStudy?: boolean;
+  year?: string;
+  role?: string;
+  domain?: string;
   headline: string;
   href: string;
   image: string;
@@ -9,7 +12,10 @@ interface NextProjectSectionProps {
 }
 
 export function NextProjectSection({
-  tags,
+  isCaseStudy,
+  year,
+  role,
+  domain,
   headline,
   href,
   image,
@@ -22,7 +28,10 @@ export function NextProjectSection({
           <p className="type-allcaps text-text-tertiary mb-6">Next Project</p>
         </div>
         <CaseStudyCard
-          tags={tags}
+          isCaseStudy={isCaseStudy}
+          year={year}
+          role={role}
+          domain={domain}
           headline={headline}
           primaryHref={href}
           image={image}
