@@ -60,7 +60,7 @@ export function CaptionedImage({
       <button
         type="button"
         className={wrapperClass}
-        aria-label="Open image in lightbox"
+        aria-label={alt ? `Open image in lightbox: ${alt}` : "Open image in lightbox"}
         onClick={() => open(id)}
       >
         <Image

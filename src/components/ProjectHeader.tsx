@@ -56,7 +56,7 @@ export function ProjectHeader({
       {heroImage && (
         <button
           type="button"
-          className="relative w-full overflow-hidden border-y border-surface-2 rounded-none bg-background-alt cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2"
+          className="relative w-full overflow-hidden border-y border-surface-2 rounded-none bg-surface-1 cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2"
           aria-label="Open hero image in lightbox"
           onClick={() => open(id)}
         >

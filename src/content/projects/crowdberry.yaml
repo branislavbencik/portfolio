@@ -5,7 +5,7 @@ tags:
   - User Testing
 type: selected
 metric: ""
-coverImage: /images/crowdberry/crowdberry-thumb.png
+coverImage: /images/crowdberry/crowdberry-thumb.jpg
 order: 5
 role: Product Designer
 year: "2020"
@@ -18,7 +18,7 @@ sections:
     title: ""
     description: ""
     images:
-      - src: /images/crowdberry/crowdberry-thumb.png
+      - src: /images/crowdberry/crowdberry-thumb.jpg
         alt: Investment opportunity cards
         caption: "Each card surfaces key information for quick comparisons — investment type, return rate and minimum entry."
         background: true

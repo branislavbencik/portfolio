@@ -9,7 +9,9 @@ export default function HeroStatement() {
             <span>Prague</span>
             <span aria-hidden="true">·</span>
             <span className="status-dot shrink-0" aria-hidden="true" />
-            <span>Open to new roles</span>
+            <span role="status">
+              <span className="sr-only">Availability: </span>Open to new roles
+            </span>
           </p>
           <h1 className="type-display text-text-primary">
             I think in systems, design for impact & own the outcome.

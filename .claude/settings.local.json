@@ -42,7 +42,17 @@
       "Bash(echo \"EXIT=$?\")",
       "Bash(bash:*)",
       "Bash(gh pr:*)",
-      "Read(//Users/branislavbencik/.claude/**)"
+      "Read(//Users/branislavbencik/.claude/**)",
+      "Bash(du -sh /Users/branislavbencik/repos/portfolio/public/images/*)",
+      "Bash(find /Users/branislavbencik/repos/portfolio/public/images -type f \\\\\\( -name \"*.png\" -o -name \"*.jpg\" -o -name \"*.webp\" \\\\\\) -size +500k -exec ls -lh {} \\\\;)",
+      "Bash(awk '{print $5, $NF}')",
+      "Bash(sips:*)",
+      "Bash(du -sh public/images/*/*.png public/images/*.jpg)",
+      "Bash(sips -Z 1288 -s format jpeg -s formatOptions 85 sakurabook/sakurabook-thumb.png --out sakurabook/sakurabook-thumb.jpg)",
+      "Bash(rm sakurabook/sakurabook-thumb.png)",
+      "Bash(sips -Z 1288 -s format jpeg -s formatOptions 85 crowdberry/crowdberry-thumb.png --out crowdberry/crowdberry-thumb.jpg)",
+      "Bash(rm crowdberry/crowdberry-thumb.png)",
+      "Bash(sips -Z 1288 -s format jpeg -s formatOptions 85 teatime/teatime-thumb.png --out teatime/teatime-thumb.jpg)"
     ]
   }
 }

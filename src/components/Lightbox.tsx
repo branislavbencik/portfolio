@@ -66,6 +66,13 @@ export function Lightbox({
 
       if (focusable.length === 0) return;
 
+      // Single focusable element: never let Tab escape the dialog
+      if (focusable.length === 1) {
+        e.preventDefault();
+        focusable[0].focus();
+        return;
+      }
+
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
 
@@ -109,7 +116,7 @@ export function Lightbox({
           role="dialog"
           aria-modal="true"
           aria-label="Image viewer"
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-foreground/80 backdrop-blur-sm cursor-zoom-out"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-text-primary/85 cursor-zoom-out"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -119,7 +126,7 @@ export function Lightbox({
         >
           {/* Counter — top left */}
           {showCounter && (
-            <span className="absolute top-5 left-5 type-allcaps text-text-inverse opacity-50">
+            <span className="absolute top-5 left-5 type-allcaps text-text-inverse opacity-75">
               {currentIndex! + 1} / {total}
             </span>
           )}

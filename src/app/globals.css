@@ -20,20 +20,11 @@
   /* Accent */
   --accent-live: #22c55e;
 
-  /* Semantic aliases — backward-compatible names for existing components */
-  --background:           var(--canvas);
-  --foreground:           var(--text-primary);
-  --foreground-secondary: var(--text-secondary);
-  --foreground-tertiary:  var(--text-tertiary);
-  --background-alt:       var(--surface-1);
-  --background-alt-2:     var(--surface-2);
+  /* Legacy alias — still referenced by nav/footer link hover states */
+  --foreground: var(--text-primary);
 
-  /* Gap values */
-  --gap-selected-card: 12px;
-
-  /* Inverse color tokens — used on dark surfaces (e.g. ImpactBar) */
-  --text-inverse:           var(--canvas);
-  --text-inverse-secondary: rgba(255, 255, 255, 0.7);
+  /* Inverse color token — used on dark surfaces (e.g. ImpactBar) */
+  --text-inverse: var(--canvas);
 }
 
 @media (max-width: 767px) {
@@ -58,17 +49,11 @@
   --color-text-tertiary:  var(--text-tertiary);
   --color-accent-live:    var(--accent-live);
 
-  /* Semantic aliases for backward compat */
-  --color-background:           var(--background);
-  --color-foreground:           var(--foreground);
-  --color-foreground-secondary: var(--foreground-secondary);
-  --color-foreground-tertiary:  var(--foreground-tertiary);
-  --color-background-alt:       var(--background-alt);
-  --color-background-alt-2:     var(--background-alt-2);
+  /* Legacy alias — still referenced by nav/footer link hover states */
+  --color-foreground: var(--foreground);
 
-  /* Inverse text tokens */
-  --color-text-inverse:           var(--text-inverse);
-  --color-text-inverse-secondary: var(--text-inverse-secondary);
+  /* Inverse text token */
+  --color-text-inverse: var(--text-inverse);
 
   /* ── Fonts ──────────────────────────────────────────────────────── */
   --font-sans: var(--font-geist-sans);
@@ -220,24 +205,6 @@
     font-weight: 600;
     line-height: var(--line-height-stat);
     letter-spacing: -0.05em;
-  }
-
-  /* ── Named gap utilities ────────────────────────────────────────── */
-  .gap-selected-card { gap: var(--gap-selected-card); }
-
-  /* ── Highlight pill ────────────────────────────────────────────── */
-  .tag-pill {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid var(--surface-2);
-    color: var(--text-tertiary);
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 0;
   }
 
   .grain-overlay {

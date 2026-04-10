@@ -24,9 +24,13 @@ export default function Footer() {
   }, []);
 
   // Variable-weight cursor proximity effect
+  const runningRef = useRef(false);
+  const atRestCountRef = useRef(0);
+
   const update = useCallback(() => {
     const { x: mx, y: my } = mouseRef.current;
     const spans = spanRefs.current;
+    let allAtRest = true;
 
     for (let i = 0; i < spans.length; i++) {
       const span = spans[i];
@@ -38,9 +42,23 @@ export default function Footer() {
 
       const dist = Math.sqrt((mx - cx) ** 2 + (my - cy) ** 2);
       const t = dist < RADIUS ? Math.exp(-((dist * dist) / (2 * (RADIUS / 2.5) ** 2))) : 0;
-      const weight = FROM_WEIGHT + t * (TO_WEIGHT - FROM_WEIGHT);
+      const weight = Math.round(FROM_WEIGHT + t * (TO_WEIGHT - FROM_WEIGHT));
 
-      span.style.fontVariationSettings = `"wght" ${Math.round(weight)}`;
+      if (weight !== FROM_WEIGHT) allAtRest = false;
+      span.style.fontVariationSettings = `"wght" ${weight}`;
+    }
+
+    // When all characters are back at the resting weight, park for a few frames
+    // then stop the RAF loop until the next mousemove re-starts it.
+    if (allAtRest) {
+      atRestCountRef.current += 1;
+      if (atRestCountRef.current > 10) {
+        runningRef.current = false;
+        rafRef.current = 0;
+        return;
+      }
+    } else {
+      atRestCountRef.current = 0;
     }
 
     rafRef.current = requestAnimationFrame(update);
@@ -50,22 +68,52 @@ export default function Footer() {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mq.matches) return;
 
+    const container = containerRef.current;
+    if (!container) return;
+
+    let visible = false;
+
+    const startIfNeeded = () => {
+      if (!visible || runningRef.current) return;
+      runningRef.current = true;
+      atRestCountRef.current = 0;
+      rafRef.current = requestAnimationFrame(update);
+    };
+
+    const stop = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = 0;
+      runningRef.current = false;
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseRef.current = { x: e.clientX, y: e.clientY };
+      startIfNeeded();
     };
 
     const handleMouseLeave = () => {
       mouseRef.current = { x: -9999, y: -9999 };
     };
 
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          visible = entry.isIntersecting;
+          if (!visible) stop();
+        }
+      },
+      { threshold: 0 }
+    );
+    io.observe(container);
+
     window.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseleave", handleMouseLeave);
-    rafRef.current = requestAnimationFrame(update);
 
     return () => {
+      io.disconnect();
       window.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
-      cancelAnimationFrame(rafRef.current);
+      stop();
     };
   }, [update]);
 
@@ -84,11 +132,11 @@ export default function Footer() {
         className="max-w-frame mx-auto py-5 flex items-center justify-between max-md:flex-col max-md:gap-4"
       >
         {/* Left: contact links */}
-        <div className="flex items-center gap-3 type-body-s text-text-secondary">
+        <div className="flex items-center flex-wrap gap-x-3 gap-y-2 type-body-s text-text-secondary">
           <button
             onClick={handleEmailClick}
             aria-label={copied ? "Email copied to clipboard" : "Copy email address"}
-            className="link-underline hover:text-foreground cursor-pointer"
+            className="link-underline hover:text-foreground cursor-pointer inline-flex items-center py-2.5"
           >
             {copied ? "Copied!" : "branislav.bencik@gmail.com"}
           </button>
@@ -97,7 +145,7 @@ export default function Footer() {
             href="https://www.linkedin.com/in/branislavbencik/"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline hover:text-foreground inline-flex items-center"
+            className="link-underline hover:text-foreground inline-flex items-center py-2.5"
             aria-label="LinkedIn (opens in new tab)"
           >
             LinkedIn
@@ -111,7 +159,7 @@ export default function Footer() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline hover:text-foreground inline-flex items-center"
+            className="link-underline hover:text-foreground inline-flex items-center py-2.5"
             aria-label="Resume (opens in new tab)"
           >
             Resume

@@ -27,20 +27,20 @@ export default function Nav() {
   const isDetail = pathname !== "/" && !pathname.startsWith("/keystatic");
 
   return (
-    <header className="animate-nav-in sticky top-0 z-40 w-full border-b border-surface-2 backdrop-blur-md bg-[color-mix(in_oklab,var(--canvas)_80%,transparent)]">
-      <nav className="w-full max-w-frame mx-center flex items-center justify-between max-[1320px]:px-content-x py-5 h-16">
+    <header className="animate-nav-in sticky top-0 z-40 w-full border-b border-surface-2 bg-canvas">
+      <nav aria-label="Primary" className="w-full max-w-frame mx-center flex items-center justify-between max-[1320px]:px-content-x py-5 h-16">
         {isDetail ? (
           <Link
             href="/#work"
-            className="link-underline type-body-m text-text-secondary hover:text-foreground no-underline inline-flex items-center gap-2"
+            className="link-underline type-body-m text-text-secondary hover:text-foreground no-underline inline-flex items-center gap-2 py-2.5"
           >
             <span aria-hidden="true">←</span>
-            Back
+            <span>Back</span>
           </Link>
         ) : (
           <Link
             href="/"
-            className="link-underline type-body-m text-text-secondary hover:text-foreground no-underline"
+            className="link-underline type-body-m text-text-secondary hover:text-foreground no-underline inline-flex items-center py-2.5"
           >
             Branislav Benčík
           </Link>
@@ -49,7 +49,7 @@ export default function Nav() {
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="link-underline type-body-m text-text-secondary hover:text-foreground no-underline inline-flex items-center"
+          className="link-underline type-body-m text-text-secondary hover:text-foreground no-underline inline-flex items-center py-2.5"
           aria-label="Resume (opens in new tab)"
         >
           Resume

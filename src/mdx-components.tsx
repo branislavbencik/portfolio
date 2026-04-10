@@ -14,7 +14,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     li: ({ children }) => (
       <li
-        className="text-body-l leading-[1.4] text-text-secondary pl-[0.25em]"
+        className="type-body-l text-text-secondary pl-[0.25em]"
       >
         {children}
       </li>
