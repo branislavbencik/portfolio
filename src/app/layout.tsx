@@ -62,7 +62,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* SVG grain filter — referenced by .grain-overlay via filter: url(#grain) */}
-        <svg style={{ display: "none" }} aria-hidden="true">
+        <svg className="hidden" aria-hidden="true">
           <filter id="grain">
             <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" />
             <feComponentTransfer>

@@ -6,7 +6,7 @@
 `/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done · `/sakurabook` → Done · `/crowdberry` → Done · `/about` → Stub · `/resume` → Not started
 
 ## What's Next
-About page; resume page; real favicon monogram (current is placeholder); address pre-existing Footer/Lightbox lint warnings
+About page; resume page; real favicon monogram (current is placeholder); address pre-existing Footer/Lightbox lint warnings; explore additional delight moments (keyboard shortcuts overlay, status-dot pulse)
 
 ## Session Log
 1. Scaffold — static export, MDX, Figma tokens, route stubs (`bd15291`)
@@ -29,7 +29,9 @@ About page; resume page; real favicon monogram (current is placeholder); address
 18. Gallery lightbox — LightboxContext provider in layout.tsx; all CaptionedImage + CaseStudyHeader hero self-register; prev/next arrows, ← → keyboard nav, counter, captions; dark backdrop blur, cursor-zoom-out on backdrop, cursor-default over image (`1315510`)
 19. Crowdberry selected project — /crowdberry page (Fintech, 2020) with 3 captioned images; added to landing page grid; each selected project page now shows two cards side-by-side (prev + next) forming circular chain nnspect → sakurabook → crowdberry → nnspect (`c4ce0ec`)
 20. HeroStatement component — interactive 3-line headline with infinite auto-cycling tooltips (3.5s), hover interruption + resume from last hovered row, AnimatePresence fade (150ms); desktop two-column grid with fluid clamp on type-h1; tablet collapses to full-width headlines + shared tooltip below; type-h1 uses separate clamp formulas for desktop vs tablet (`b8662f5`)
+22. Token audit cleanup (2026-04-10) — replaced inline `display:none` on grain SVG with `className="hidden"`; annotated the two legitimate dynamic inline styles (console.log CSS string, variable-font RAF weight) with `audit-ignore`; audit now passes clean (`ab0ea25`)
 21. Critique polish pass (2026-04-10) — removed project aura glows (achromatic canvas); extracted shared ProjectMetaRow (Case Study pill · Year · Role · Domain) used on landing card + detail page header; inverted Case Study pill (bg-text-primary) on both surfaces; added `domain` field to Keystatic schema, backfilled 5 projects; added hero status line with pulsing green live indicator (`--accent-live`); fixed siteUrl + replaced JPEG favicon with SVG monogram placeholder; dropped HeroStatement skeleton; simplified card hover (dropped ambient shadow, bumped inset hairline); cleaned up dead tokens; deleted orphaned ProjectTags component
+23. Extract cleanup + workflow polish (2026-04-10) — deleted two orphaned components (`MetadataRow`, `TagPill`) with zero callers anywhere in the codebase; added a mandatory session-start branching rule to `CLAUDE.md` (never commit directly to `main`); extended the `ship` skill to handle new-branch first-push (`git push -u origin HEAD`) and added a PR-creation step via `gh pr create`, with an explicit no-merge instruction so the user approves
 
 ## Known Issues
 (none)

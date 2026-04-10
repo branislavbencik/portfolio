@@ -112,9 +112,10 @@ Bridge gotchas: Pairing expires in 5 min. REST API is burned (free plan). Comple
 
 ## Session Rules
 
+- **Start every session by creating a new branch off `main`** (e.g. `hero-polish`, `crowdberry-content`, `critique-fixes`). Never commit directly to `main`. First action of the session: `git checkout main && git pull && git checkout -b <branch-name>`.
 - One deliverable per session (one page, or one component system)
 - 30-40 exchanges max, then /compact or new session
-- End each session with `/project:ship` — it builds, commits, pushes, and updates `docs/STATUS.md`
+- End each session with `/project:ship` — it builds, commits, pushes, updates `docs/STATUS.md`, and opens a pull request against `main`
 - If Claude gets confused: "Stop. Re-read CLAUDE.md."
 - Don't research, plan, AND build in the same session
 - Current project status lives in `docs/STATUS.md` — not here

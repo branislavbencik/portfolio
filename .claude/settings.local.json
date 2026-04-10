@@ -39,7 +39,10 @@
       "Bash(pkill -f \"next dev\")",
       "Bash(curl -sL https://branislavbencik.com/ -A \"Mozilla/5.0\" -o /tmp/portfolio.html)",
       "Read(//tmp/**)",
-      "Bash(echo \"EXIT=$?\")"
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(bash:*)",
+      "Bash(gh pr:*)",
+      "Read(//Users/branislavbencik/.claude/**)"
     ]
   }
 }

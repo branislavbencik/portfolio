@@ -123,7 +123,7 @@ export default function Footer() {
             <span
               key={i}
               ref={(el) => { spanRefs.current[i] = el; }}
-              style={{ fontVariationSettings: `"wght" ${FROM_WEIGHT}` }}
+              style={{ fontVariationSettings: `"wght" ${FROM_WEIGHT}` }} // audit-ignore: dynamic variable-font weight driven by RAF loop
               className="inline-block transition-none"
               aria-hidden="true"
             >
