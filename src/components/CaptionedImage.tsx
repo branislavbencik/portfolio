@@ -29,9 +29,9 @@ export function CaptionedImage({
   const { register, unregister, open } = useLightbox();
 
   useEffect(() => {
-    register({ id, src, alt: alt ?? "", caption });
+    register({ id, src, alt: alt ?? "", caption, background });
     return () => unregister(id);
-  }, [id, src, alt, caption, register, unregister]);
+  }, [id, src, alt, caption, background, register, unregister]);
 
   const paddingClass = !background ? "" :
     paddingStyle === "no-bottom" ? "pt-8 px-8 max-md:pt-4 max-md:px-4" :

@@ -31,7 +31,7 @@ export function ProjectHeader({
 
   useEffect(() => {
     if (heroImage) {
-      register({ id, src: heroImage, alt: heroImageAlt ?? "" });
+      register({ id, src: heroImage, alt: heroImageAlt ?? "", background: true });
     }
     return () => unregister(id);
   }, [id, heroImage, heroImageAlt, register, unregister]);

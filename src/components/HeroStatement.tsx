@@ -19,17 +19,17 @@ export default function HeroStatement() {
 
           <div className="grid grid-cols-3 max-md:grid-cols-1">
             {[
-              { label: "systems", text: "Dependencies, flows, edge cases. I map the whole problem before I open Figma." },
-              { label: "impact", text: "I designed platform that teaches financial literacy to every 2nd kid in Czechia." },
+              { label: "systems", text: "Dependencies, flows, edge cases. I architect logic for code, not just for show." },
+              { label: "impact", text: "I designed a platform that teaches financial literacy to 50% of Czech schools." },
               { label: "outcome", text: "Strategy, automation, front-end code, live products. I don't stop at the handoff." },
             ].map((box, i) => (
               <div
                 key={box.label}
-                className={`animate-hero-box hero-box-delay-${i} hero-box-text-delay-${i} border border-surface-2 ${i > 0 ? "max-md:border-t-0 border-l-0 max-md:border-l" : ""}`}
+                className={`border border-surface-2 ${i > 0 ? "max-md:border-t-0 border-l-0 max-md:border-l" : ""}`}
               >
                 <div className="px-6 py-6 max-md:px-4 max-md:py-4 flex flex-col gap-2">
-                  <p className="animate-hero-box-text type-allcaps text-text-tertiary">{box.label}</p>
-                  <p className="animate-hero-box-text type-body-s text-text-secondary leading-snug">{box.text}</p>
+                  <p className="type-allcaps text-text-tertiary">{box.label}</p>
+                  <p className="type-body-s text-text-secondary leading-snug">{box.text}</p>
                 </div>
               </div>
             ))}

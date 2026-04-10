@@ -168,6 +168,13 @@
     line-height: var(--line-height-body);
   }
 
+  /* ── Link text — line-height 1 so the underline sits tight under the text */
+  .type-link {
+    font-size: var(--font-size-body-s);
+    font-weight: 400;
+    line-height: 1;
+  }
+
   /* ── Interface type ─────────────────────────────────────────────── */
   .type-label {
     font-size: var(--font-size-label);
@@ -230,35 +237,12 @@
     50%      { opacity: 0.35; }
   }
 
-  /* ── Hero content fade-in (after skeleton) ──────────────────────── */
+  /* ── Hero content fade-in ───────────────────────────────────────── */
   .animate-hero-content-in {
-    animation: hero-content-in 300ms ease-out both;
+    animation: hero-content-in 200ms ease-out both;
   }
-
-  /* ── Hero box entrance (all three reveal together) ─────────────── */
-  .animate-hero-box {
-    clip-path: inset(0 100% 0 0);
-    animation: hero-box-reveal 240ms cubic-bezier(0.25, 1, 0.5, 1) both;
-    animation-delay: 200ms;
-  }
-  .animate-hero-box-text {
-    opacity: 0;
-    animation: hero-box-text-in 200ms ease-out both;
-    animation-delay: 300ms;
-  }
-  .hero-box-delay-0,
-  .hero-box-delay-1,
-  .hero-box-delay-2,
-  .hero-box-text-delay-0 .animate-hero-box-text,
-  .hero-box-text-delay-1 .animate-hero-box-text,
-  .hero-box-text-delay-2 .animate-hero-box-text {
-    /* legacy hooks retained — simultaneous reveal now handled on the base class */
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .animate-hero-content-in { animation: none; }
-    .animate-hero-box { animation: none; clip-path: none; }
-    .animate-hero-box-text { animation: none; opacity: 1; }
   }
 
   /* ── Nav entrance (runs every mount) ───────────────────────────── */
@@ -282,7 +266,6 @@
   /* ── Link with sliding 1px underline ────────────────────────────── */
   .link-underline {
     position: relative;
-    display: inline-block;
     transition: color 220ms cubic-bezier(0.25, 1, 0.5, 1);
   }
   .link-underline::after {
@@ -327,16 +310,6 @@
 @keyframes hero-content-in {
   from { opacity: 0; }
   to   { opacity: 1; }
-}
-
-@keyframes hero-box-reveal {
-  from { clip-path: inset(0 100% 0 0); }
-  to   { clip-path: inset(0 0% 0 0); }
-}
-
-@keyframes hero-box-text-in {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ── Dialog animations ────────────────────────────────────────────── */

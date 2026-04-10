@@ -7,6 +7,25 @@ const RADIUS = 100;
 const FROM_WEIGHT = 300;
 const TO_WEIGHT = 800;
 
+function ExternalArrow() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="inline-block ml-1 align-[-0.125em]"
+      width="12"
+      height="12"
+      viewBox="0 0 20 20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      strokeLinecap="square"
+    >
+      <line x1="5" y1="15" x2="15" y2="5" />
+      <polyline points="7,5 15,5 15,13" />
+    </svg>
+  );
+}
+
 export default function Footer() {
   const [copied, setCopied] = useState(false);
   const copyTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -126,53 +145,55 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full max-[1320px]:px-content-x ">
+    <footer className="w-full max-[1320px]:px-content-x">
       <div
         ref={containerRef}
-        className="max-w-frame mx-auto py-5 flex items-center justify-between max-md:flex-col max-md:gap-4"
+        className="w-full max-w-frame mx-center flex items-center justify-between h-16 max-md:flex-col max-md:h-auto max-md:py-5 max-md:gap-4"
       >
         {/* Left: contact links */}
-        <div className="flex items-center flex-wrap gap-x-3 gap-y-2 type-body-s text-text-secondary">
+        <div className="flex items-center flex-wrap gap-x-3 gap-y-2 type-link text-text-secondary">
           <button
             onClick={handleEmailClick}
-            aria-label={copied ? "Email copied to clipboard" : "Copy email address"}
-            className="link-underline hover:text-foreground cursor-pointer inline-flex items-center py-2.5"
+            aria-label="Copy email address"
+            className="link-underline hover:text-foreground cursor-pointer inline-flex items-center relative"
           >
-            {copied ? "Copied!" : "branislav.bencik@gmail.com"}
+            branislav.bencik@gmail.com
+            <span
+              aria-live="polite"
+              className={`pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+8px)] bg-text-primary text-text-inverse type-allcaps px-2 py-1 whitespace-nowrap motion-safe:transition-opacity duration-150 ease-out ${
+                copied ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              {copied ? "Copied" : ""}
+            </span>
           </button>
           <span aria-hidden="true" className="opacity-40">·</span>
           <a
             href="https://www.linkedin.com/in/branislavbencik/"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline hover:text-foreground inline-flex items-center py-2.5"
+            className="link-underline hover:text-foreground inline-flex items-center"
             aria-label="LinkedIn (opens in new tab)"
           >
             LinkedIn
-            <svg aria-hidden="true" className="inline-block ml-1 align-[0.05em]" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="square">
-              <line x1="5" y1="15" x2="15" y2="5" />
-              <polyline points="7,5 15,5 15,13" />
-            </svg>
+            <ExternalArrow />
           </a>
           <span aria-hidden="true" className="opacity-40">·</span>
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline hover:text-foreground inline-flex items-center py-2.5"
+            className="link-underline hover:text-foreground inline-flex items-center"
             aria-label="Resume (opens in new tab)"
           >
             Resume
-            <svg aria-hidden="true" className="inline-block ml-1 align-[0.05em]" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="square">
-              <line x1="5" y1="15" x2="15" y2="5" />
-              <polyline points="7,5 15,5 15,13" />
-            </svg>
+            <ExternalArrow />
           </a>
         </div>
 
         {/* Right: Curiouser text with variable-weight effect */}
         <p
-          className="type-body-s text-text-secondary tracking-wide select-none"
+          className="type-link text-text-secondary tracking-wide select-none"
           aria-label={LABEL}
         >
           {LABEL.split("").map((char, i) => (

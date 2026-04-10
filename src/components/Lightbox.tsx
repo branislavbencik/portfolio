@@ -10,6 +10,7 @@ interface LightboxProps {
   isOpen: boolean;
   onClose: () => void;
   caption?: string;
+  background?: boolean;
   currentIndex?: number;
   total?: number;
   onPrev?: () => void;
@@ -22,6 +23,7 @@ export function Lightbox({
   isOpen,
   onClose,
   caption,
+  background = true,
   currentIndex,
   total,
   onPrev,
@@ -116,7 +118,7 @@ export function Lightbox({
           role="dialog"
           aria-modal="true"
           aria-label="Image viewer"
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-text-primary/85 cursor-zoom-out"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-text-primary cursor-zoom-out"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -193,10 +195,12 @@ export function Lightbox({
             <img
               src={src}
               alt={alt}
-              className="max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block"
+              className={`max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block p-6 box-border ${
+                background ? "bg-surface-1" : "bg-canvas"
+              }`}
             />
             {caption && (
-              <p className="type-body-m text-text-inverse opacity-90 text-center max-w-[600px]">
+              <p className="type-body-m text-text-inverse text-center max-w-[600px]">
                 {caption}
               </p>
             )}
