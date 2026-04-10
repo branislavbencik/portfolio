@@ -41,7 +41,8 @@
       "Read(//tmp/**)",
       "Bash(echo \"EXIT=$?\")",
       "Bash(bash:*)",
-      "Bash(gh pr:*)"
+      "Bash(gh pr:*)",
+      "Read(//Users/branislavbencik/.claude/**)"
     ]
   }
 }
