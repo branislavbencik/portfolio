@@ -21,11 +21,11 @@ const geistMono = Geist_Mono({
 const siteUrl = "https://branislavbencik.com";
 
 export const metadata: Metadata = {
-  title: "Branislav Benčík — Product Designer",
+  title: "Branislav Benčík | Product Designer",
   description: "Portfolio of Branislav Benčík, Senior Product Designer.",
   metadataBase: new URL(siteUrl),
   openGraph: {
-    title: "Branislav Benčík — Product Designer",
+    title: "Branislav Benčík | Product Designer",
     description: "Portfolio of Branislav Benčík, Senior Product Designer.",
     url: siteUrl,
     siteName: "Branislav Benčík",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Branislav Benčík — Product Designer",
+    title: "Branislav Benčík | Product Designer",
     description: "Portfolio of Branislav Benčík, Senior Product Designer.",
     images: ["/images/avatar.jpg"],
   },

@@ -1,16 +1,19 @@
 export default function HeroStatement() {
   return (
     <section className="pb-section">
-      <div className="max-w-column mx-auto pt-20 max-md:pt-10 pb-10 flex flex-col gap-6 max-md:px-content-x">
+      <div className="max-w-column mx-auto pt-20 max-md:pt-10 pb-10 flex flex-col gap-6">
         <div className="animate-hero-content-in flex flex-col gap-6">
           <p className="type-allcaps text-text-tertiary flex items-center flex-wrap gap-x-2">
-            <span>Senior Product Designer</span>
-            <span aria-hidden="true">·</span>
-            <span>Prague</span>
-            <span aria-hidden="true">·</span>
-            <span className="status-dot shrink-0" aria-hidden="true" />
-            <span role="status">
-              <span className="sr-only">Availability: </span>Open to new roles
+            <span className="whitespace-nowrap">
+              Senior Product Designer <span aria-hidden="true">·</span>
+            </span>
+            <span className="whitespace-nowrap">
+              Prague / Remote <span aria-hidden="true">·</span>
+            </span>
+            <span role="status" className="whitespace-nowrap inline-flex items-center gap-2">
+              <span className="sr-only">Availability: </span>
+              <span className="status-dot shrink-0" aria-hidden="true" />
+              Open to new roles
             </span>
           </p>
           <h1 className="type-display text-text-primary">

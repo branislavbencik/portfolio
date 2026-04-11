@@ -69,13 +69,13 @@ export default function Nav() {
 
   return (
     <header
-      className={`animate-nav-in sticky top-0 z-40 w-full bg-canvas max-[1320px]:px-content-x motion-safe:transition-transform motion-safe:duration-[220ms] motion-safe:ease-[cubic-bezier(0.25,1,0.5,1)] ${
+      className={`animate-nav-in sticky top-0 z-40 w-full bg-canvas border-b border-surface-2 max-[1320px]:px-content-x motion-safe:transition-transform motion-safe:duration-[220ms] motion-safe:ease-[cubic-bezier(0.25,1,0.5,1)] ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
       <nav
         aria-label="Primary"
-        className="w-full max-w-frame mx-center flex items-center justify-between h-16 border-b border-surface-2"
+        className="w-full max-w-frame mx-center flex items-center justify-between h-16"
       >
         {isDetail ? (
           <Link

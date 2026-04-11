@@ -29,19 +29,25 @@ export function CaseStudyCard({
       className="relative py-detail flex flex-col gap-10 group block rounded-none overflow-hidden no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas border-t border-b border-surface-2 -mt-px first:mt-0"
     >
       <div className="relative px-content-x">
-        <div className="relative z-10 bg-surface-1">
-          <Image
-            src={image}
-            alt={imageAlt}
-            width={1288}
-            height={748}
-            className="w-full h-auto block"
-            unoptimized
-          />
+        <div className="group/image relative">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-surface-2 group-hover:ring-surface-3 motion-safe:transition-[box-shadow] duration-200 ease-out"
+            className="pointer-events-none absolute inset-0 border border-surface-3 bg-surface-1"
           />
+          <div className="relative motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-out motion-safe:group-hover/image:-translate-x-1.5 motion-safe:group-hover/image:-translate-y-1.5 motion-safe:group-focus-visible:-translate-x-1.5 motion-safe:group-focus-visible:-translate-y-1.5">
+            <Image
+              src={image}
+              alt={imageAlt}
+              width={1288}
+              height={748}
+              className="w-full h-auto block"
+              unoptimized
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-surface-3"
+            />
+          </div>
         </div>
       </div>
 
@@ -53,7 +59,15 @@ export function CaseStudyCard({
             role={role}
             domain={domain}
           />
-          <h2 className="type-h1 text-text-primary">{headline}</h2>
+          <h2 className="type-h1 text-text-primary">
+            {headline}
+            <span
+              aria-hidden="true"
+              className="inline-block pl-[0.25em] text-[0.8em] font-light -translate-x-1 opacity-0 motion-safe:transition-[transform,opacity] motion-safe:duration-400 motion-safe:ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100"
+            >
+              →
+            </span>
+          </h2>
         </div>
       </div>
     </Link>
