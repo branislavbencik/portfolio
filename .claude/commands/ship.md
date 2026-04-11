@@ -1,5 +1,5 @@
 ---
-description: Build, commit, push, update STATUS.md, and open a pull request. Use after completing a deliverable.
+description: Build, verify README, commit, push, update STATUS.md, and open a pull request. Use after completing a deliverable.
 allowed-tools: Bash(npm run build:*), Bash(git:*), Bash(gh:*), Read, Edit, Write
 ---
 
@@ -9,6 +9,16 @@ Follow these steps in order. Stop and report if any step fails.
 
 ## 1. Build
 Run `npm run build`. If it fails, fix the errors first. Do not proceed until build passes.
+
+## 1.5 README drift check
+Read `README.md` in full. Compare every factual claim against the current repo state:
+- Stack versions and dependencies → `package.json`
+- Scripts and commands → `package.json` scripts block
+- Pages / routes listed → `src/app/` + `docs/STATUS.md` Pages line
+- Repo map paths → verify each referenced directory still exists
+- Workflow claims (e.g. `/ship`, audit scripts) → verify the referenced files
+
+If any claim is stale, wrong, or missing (e.g. a new page shipped this session, a dependency was added/removed, a script was renamed), update `README.md` in place before proceeding. Do NOT rewrite the tone or structure — only fix factual drift. If nothing is stale, note "README verified" and continue.
 
 ## 2. Stage all changes
 Run `git add -A`. This catches images and binary files that selective staging misses.
