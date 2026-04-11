@@ -130,6 +130,11 @@ Strict 8px base system.
 6. **Do not introduce arbitrary colors**  
    → The site is achromatic. Color only appears inside work screenshots.
 
+7. **Do not use em dashes (`—`) in user-facing copy**  
+   → Page titles, meta tags, headlines, MDX body, keystatic content, tooltips, alt text, aria-labels. Em dashes have become the single most reliable AI-prose tell since 2024 and this audience notices.  
+   → Replacements: colon (`:`) for label/definition, period for two sentences, comma for a natural pause, or restructure with a verb so the sentence has a subject and an action instead of two nouns separated by a pause.  
+   → Scope: shipped copy only. Code comments, `CLAUDE.md`, `README.md`, `docs/STATUS.md`, and `.claude/` skill files are not in scope.
+
 ---
 
 ## 7. Case Study Image Modes

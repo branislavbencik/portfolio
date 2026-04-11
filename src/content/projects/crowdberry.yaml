@@ -20,7 +20,7 @@ sections:
     images:
       - src: /images/crowdberry/crowdberry-thumb.jpg
         alt: Investment opportunity cards
-        caption: "Each card surfaces key information for quick comparisons — investment type, return rate and minimum entry."
+        caption: "Each card surfaces key information for quick comparisons: investment type, return rate, and minimum entry."
         background: true
       - src: /images/crowdberry/crowdberry-ws1.png
         alt: Investment flow

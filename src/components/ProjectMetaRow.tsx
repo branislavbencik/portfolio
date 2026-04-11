@@ -15,20 +15,26 @@ export function ProjectMetaRow({
   if (!isCaseStudy && values.length === 0) return null;
 
   return (
-    <div className="flex items-baseline flex-wrap">
+    <div className="flex items-baseline flex-wrap gap-x-2 gap-y-1">
       {isCaseStudy && (
-        <span className="bg-text-primary text-text-inverse/80 type-tag px-2.5 py-1 inline-block shrink-0">
-          Case Study
-        </span>
-      )}
-      {values.map((v, i) => (
-        <span key={`v-${i}`} className="flex items-baseline">
-          {(isCaseStudy || i > 0) && (
-            <span className="type-allcaps text-text-tertiary mx-2" aria-hidden="true">
+        <span className="whitespace-nowrap inline-flex items-baseline gap-2">
+          <span className="bg-text-primary text-text-inverse/80 type-tag px-2.5 py-1 inline-block">
+            Case Study
+          </span>
+          {values.length > 0 && (
+            <span className="type-allcaps text-text-tertiary" aria-hidden="true">
               ·
             </span>
           )}
-          <span className="type-allcaps text-text-tertiary">{v}</span>
+        </span>
+      )}
+      {values.map((v, i) => (
+        <span
+          key={`v-${i}`}
+          className="type-allcaps text-text-tertiary whitespace-nowrap"
+        >
+          {v}
+          {i < values.length - 1 && <span aria-hidden="true"> ·</span>}
         </span>
       ))}
     </div>

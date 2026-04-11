@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const ORIGINAL_TITLE = "Branislav Benčík — Product Designer";
+const ORIGINAL_TITLE = "Branislav Benčík | Product Designer";
 const RETURN_TITLE = "Still here.";
 const REVERT_DELAY = 2000;
 

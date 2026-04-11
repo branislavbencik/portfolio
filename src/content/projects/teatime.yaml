@@ -1,4 +1,4 @@
-title: B2B language school — from client acquisition to an AI-powered assessment product
+title: "B2B language school: from client acquisition to an AI-powered assessment product"
 description: "B2B acquisition + AI pipeline · 12 clients"
 tags:
   - Case Study
@@ -10,10 +10,10 @@ order: 2
 role: Co-owner
 year: "2024–25"
 domain: B2B EdTech
-intro: "TeaTime is a B2B language school serving 20+ companies for over 15 years. I joined to systematize and scale the business — from client acquisition to a new AI-powered assessment product, modernizing the digital infrastructure along the way."
+intro: "TeaTime is a B2B language school serving 20+ companies for over 15 years. I joined to systematize and scale the business: from client acquisition to a new AI-powered assessment product, modernizing the digital infrastructure along the way."
 contributions:
-  - "Built client acquisition pipeline — campaign, website, sales materials"
-  - "Designed personalized learning system — from assessment through curriculum planning to progress measurement"
+  - "Built client acquisition pipeline: campaign, website, sales materials"
+  - "Designed personalized learning system spanning assessment, curriculum planning, and progress measurement"
   - Built AI evaluation and automation architecture
 impactItems:
   - value: 0.4M
@@ -25,7 +25,7 @@ impactItems:
 sections:
   - label: "1. ACQUIRE"
     title: "HR managers don't google \"English language training\""
-    description: "Companies buy English training when the right person gets the right pitch at the right time. We could have played the long game on LinkedIn, but instead, I designed a direct outreach pipeline. I treated every touchpoint as a UX challenge — optimizing the inbox preview, the reading experience, and the landing page — resulting in a 1.8% sales conversion rate."
+    description: "Companies buy English training when the right person gets the right pitch at the right time. We could have played the long game on LinkedIn, but instead, I designed a direct outreach pipeline. I treated every touchpoint as a UX challenge, optimizing the inbox preview, the reading experience, and the landing page. The result: a 1.8% sales conversion rate."
     images:
       - src: /images/teatime/teatime-ws1-i1.png
         alt: TeaTime persona definition
@@ -47,7 +47,7 @@ sections:
         background: false
   - label: "2. DIFFERENTIATE"
     title: Test what you teach. Teach what you test.
-    description: "Corporate clients want proof their people are improving. Industry standard is a multiple-choice quiz — meaningless for real communication and often disconnected from lessons. We designed a closed loop: test results drive the course plan, teaching targets the gaps, and progress test confirms they've been closed."
+    description: "Corporate clients want proof their people are improving. Industry standard is a multiple-choice quiz. Meaningless for real communication and often disconnected from lessons. We designed a closed loop: test results drive the course plan, teaching targets the gaps, and progress test confirms they've been closed."
     images:
       - src: /images/teatime/teatime-ws2-i1.png
         alt: TeaTime testing and teaching system
@@ -65,9 +65,9 @@ sections:
     images:
       - src: /images/teatime/teatime-ws3-i1.png
         alt: TeaTime n8n automation pipeline
-        caption: "6 key steps from a 50+ node pipeline: transcription, AI scoring, report generation, and course plan update — fully automated in n8n"
+        caption: "6 key steps from a 50+ node pipeline: transcription, AI scoring, report generation, and course plan update, fully automated in n8n"
         background: true
       - src: /images/teatime/teatime-ws3-i2.png
         alt: TeaTime course plan with skill gaps
-        caption: "'Developing' and 'Needs Attention' skills feed directly into the course plan — closing the loop"
+        caption: "'Developing' and 'Needs Attention' skills feed directly into the course plan, closing the loop"
         background: false

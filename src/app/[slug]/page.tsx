@@ -27,7 +27,7 @@ export async function generateMetadata({
       ? (project.coverImage as { src: string }).src
       : (project.coverImage as string) ?? "";
 
-  const title = `${project.title} — Branislav Benčík`;
+  const title = `${project.title} | Branislav Benčík`;
   const description = project.description || `${project.title} case study`;
 
   return {

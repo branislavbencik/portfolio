@@ -31,7 +31,7 @@ npm run dev
 Other scripts:
 
 ```bash
-npm run build            # static export into ./out
+npm run build            # production Next build
 npm run test:responsive  # Playwright checks across breakpoints
 npm run audit:tokens     # flags hardcoded colors / sizes / inline styles
 ```
@@ -47,7 +47,7 @@ npm run audit:tokens     # flags hardcoded colors / sizes / inline styles
 | `public/images/{project}/` | 2× Figma exports per project |
 | `docs/STATUS.md` | Living build log and session journal |
 | `CLAUDE.md` | Instruction set Claude Code reads at session start |
-| `DESIGN.md` | Design bible — absolute source of truth for aesthetics |
+| `docs/DESIGN.md` | Design bible — absolute source of truth for aesthetics |
 | `.claude/commands/ship.md` | End-of-session ship flow (build, commit, PR) |
 | `scripts/audit-tokens.sh` | Guardrail: fails on hardcoded values outside the token system |
 
@@ -55,6 +55,6 @@ npm run audit:tokens     # flags hardcoded colors / sizes / inline styles
 
 Design is extracted from Figma, implementation is driven by [Claude Code](https://docs.anthropic.com/en/docs/claude-code), and every session is reviewed and iterated by me.
 
-The repo is set up so an AI collaborator can hold its own against the codebase without drifting: [`CLAUDE.md`](CLAUDE.md) defines the token system, responsive strategy, and session rules; [`DESIGN.md`](DESIGN.md) is the aesthetic bible; [`scripts/audit-tokens.sh`](scripts/audit-tokens.sh) fails the build if hardcoded values sneak in; and [`.claude/commands/ship.md`](.claude/commands/ship.md) is the standard ship flow — build, verify the README against reality, commit, push, update `STATUS.md`, open a PR.
+The repo is set up so an AI collaborator can hold its own against the codebase without drifting: [`CLAUDE.md`](CLAUDE.md) defines the token system, responsive strategy, and session rules; [`docs/DESIGN.md`](docs/DESIGN.md) is the aesthetic bible; [`scripts/audit-tokens.sh`](scripts/audit-tokens.sh) fails the build if hardcoded values sneak in; and [`.claude/commands/ship.md`](.claude/commands/ship.md) is the standard ship flow: build, verify the README against reality, commit, push, update `STATUS.md`, open a PR.
 
 Deployed to Vercel on every merge to `main`.

@@ -11,11 +11,11 @@ order: 1
 role: Lead Designer
 year: "2024–25"
 domain: EdTech
-intro: "Skoala is an education platform focused on financial literacy content. It offers teachers a library of lesson plans, interactive presentations, videos and mini-games — about 150 teaching hours to date. Before the CMS, all of this was built by hand in Figma, requiring developer involvement for every new lesson."
+intro: "Skoala is an education platform focused on financial literacy content. It offers teachers a library of lesson plans, interactive presentations, videos and mini-games, about 150 teaching hours to date. Before the CMS, all of this was built by hand in Figma, requiring developer involvement for every new lesson."
 contributions:
   - Co-defined product direction in founding Design Sprint.
   - Designed the core platform UX.
-  - "Led CMS design — information architecture, component specification, content versioning."
+  - "Led CMS design: information architecture, component specification, content versioning."
 impactItems:
   - value: "3,5K"
     label: Czech schools
@@ -38,11 +38,11 @@ sections:
         background: true
   - label: Key design decision
     title: Edit live content without breaking it
-    description: "Once a lesson plan is live, teachers build their week around it. You can't just edit stuff under their hands — you don't want them to open a broken slide mid-class. So we borrowed from git version control: edits happen on a branch, the live version stays untouched, and changes merge back only when ready."
+    description: "Once a lesson plan is live, teachers build their week around it. You can't just edit stuff under their hands. You don't want them to open a broken slide mid-class. So we borrowed from git version control: edits happen on a branch, the live version stays untouched, and changes merge back only when ready."
     images:
       - src: /images/skoala/skoala-ws2-i1.png
         alt: Content lifecycle diagram
-        caption: "Content lifecycle — from first draft to archive, with branching for safe edits."
+        caption: "Content lifecycle: from first draft to archive, with branching for safe edits."
         background: false
         bleedBottom: false
         width: 720
