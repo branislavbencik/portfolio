@@ -7,6 +7,17 @@ allowed-tools: Bash(npm run build:*), Bash(git:*), Bash(gh:*), Read, Edit, Write
 
 Follow these steps in order. Stop and report if any step fails.
 
+## 0. Branch state pre-flight
+Before doing anything, check whether the current branch is in a shippable state:
+
+1. `git branch --show-current` — if it's `main`, STOP. Ship must run from a feature branch. Tell the user to create one.
+2. `gh pr list --head "$(git branch --show-current)" --state all --json number,state,title --limit 1` — inspect the latest PR for this branch.
+   - If the latest PR is `MERGED` or `CLOSED`, STOP. The branch is stale. Report the PR number + state and tell the user: "This branch's PR is already `MERGED`/`CLOSED`. Start a new session (`/clear`) and a new branch off `main` before shipping new work."
+   - If the latest PR is `OPEN`, continue — new commits will append to that PR.
+   - If there is no PR yet, continue — a new PR will be created at step 7.
+
+Do NOT auto-create or auto-checkout a new branch. The user must start a fresh session to reset Claude's context; silently branching here would strand uncommitted work and confuse the next session.
+
 ## 1. Build
 Run `npm run build`. If it fails, fix the errors first. Do not proceed until build passes.
 
@@ -60,3 +71,14 @@ EOF
 ```
 
 Report the PR URL and the Vercel deploy URL. Do NOT run `gh pr merge` — the user approves the merge.
+
+## 8. Reset to main
+Only run this step if every prior step succeeded.
+
+```
+git checkout main && git pull origin main
+```
+
+Leave the user on a clean, up-to-date `main`. Do NOT create a new branch — the next session's Claude Code will read `CLAUDE.md` and branch off `main` with a name that matches the next task. If `git pull` fails (e.g., merge conflict against local main), stop and report; do not force.
+
+After this step, remind the user: "Branch reset to `main`. Run `/clear` to start a fresh session before the next task."
