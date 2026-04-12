@@ -5,7 +5,7 @@ tags:
   - Co-owner
 type: case-study
 metric: acquired 12 corporate clients
-coverImage: /images/teatime/teatime-thumb.jpg
+coverImage: /images/teatime/teatime-thumb.png
 order: 2
 role: Co-owner
 year: "2024–25"
@@ -36,7 +36,7 @@ sections:
         alt: TeaTime inbox view
         caption: "Step 1: Check how the message lands in the inbox. Consider all the other items the message is competing with. Headline max. length limit is 70 characters and it's bold so we want to make it count."
         background: true
-        paddingStyle: "no-bottom"
+        paddingSides: "no-bottom"
       - src: /images/teatime/teatime-ws1-i3.png
         alt: TeaTime outreach email
         caption: "Step 2: The email. Scannable in 30 seconds. No hard sell, just three ways to learn more."
@@ -58,7 +58,7 @@ sections:
         alt: TeaTime personalized course plan
         caption: Each student receives a personalized plan combining work skills identified by the assessment and personal interests they've selected.
         background: true
-        paddingStyle: "top-left"
+        paddingSides: "top-left"
   - label: "3. AUTOMATE"
     title: "Here's how a 15-minute conversation becomes a 2-page report and a personalized course plan"
     description: "Once the teacher records a 15-minute speaking test, the system takes over. It transcribes the audio, identifies speakers, assesses specific skills, and instantly delivers a student report and updated course plan."

@@ -5,7 +5,7 @@ tags:
   - Design System
 type: selected
 metric: ""
-coverImage: /images/sakurabook/sakurabook-thumb.jpg
+coverImage: /images/sakurabook/sakurabook-thumb.png
 order: 4
 role: Solo Designer
 year: "2021"
@@ -18,7 +18,7 @@ sections:
     title: ""
     description: ""
     images:
-      - src: /images/sakurabook/sakurabook-thumb.jpg
+      - src: /images/sakurabook/sakurabook-thumb.png
         alt: Sakurabook booking plugin overview
         caption: ""
         background: true
@@ -26,7 +26,7 @@ sections:
         alt: Availability states
         caption: "Availability states use Japanese convention: ○ available, △ limited, ✕ taken. Time picker handles overnight spans across two calendar days."
         background: true
-      - src: /images/sakurabook/sakurabook-ws2.jpg
+      - src: /images/sakurabook/sakurabook-ws2.png
         alt: Localization
         caption: Designed in English for easier workflow, localized and shipped in Japanese. Japanese text runs shorter, so layouts are held without overflow adjustment.
         background: true

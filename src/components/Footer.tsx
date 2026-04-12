@@ -145,13 +145,13 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full max-[1320px]:px-content-x">
+    <footer className="w-full max-[1320px]:px-content-x border-t border-surface-2">
       <div
         ref={containerRef}
-        className="w-full max-w-frame mx-center flex items-center justify-between h-16 max-md:flex-col max-md:h-auto max-md:py-5 max-md:gap-4"
+        className="w-full max-w-frame mx-center flex items-center justify-between h-16 max-md:flex-col max-md:items-start max-md:h-auto max-md:py-5 max-md:gap-3"
       >
-        {/* Left: contact links */}
-        <div className="flex items-center flex-wrap gap-x-3 gap-y-2 type-link text-text-secondary">
+        {/* Left: email */}
+        <div className="flex items-center type-link text-text-secondary">
           <button
             onClick={handleEmailClick}
             aria-label="Copy email address"
@@ -167,7 +167,10 @@ export default function Footer() {
               {copied ? "Copied" : ""}
             </span>
           </button>
-          <span aria-hidden="true" className="opacity-40">·</span>
+        </div>
+
+        {/* Right: external links */}
+        <div className="flex items-center flex-wrap gap-x-3 gap-y-2 type-link text-text-secondary">
           <a
             href="https://www.linkedin.com/in/branislavbencik/"
             target="_blank"
@@ -191,9 +194,9 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* Right: Curiouser text with variable-weight effect */}
+        {/* Curiouser text — hidden for now, kept for future use */}
         <p
-          className="type-link text-text-secondary tracking-wide select-none"
+          className="hidden type-link text-text-secondary tracking-wide select-none"
           aria-label={LABEL}
         >
           {LABEL.split("").map((char, i) => (
