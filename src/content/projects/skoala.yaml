@@ -44,7 +44,6 @@ sections:
         alt: Content lifecycle diagram
         caption: "Content lifecycle: from first draft to archive, with branching for safe edits."
         background: false
-        bleedBottom: false
         width: 720
       - src: /images/skoala/skoala-ws2-i2.png
         alt: Lesson editor with status

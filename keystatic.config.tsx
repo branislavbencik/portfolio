@@ -111,20 +111,28 @@ export default config({
                   validation: { isRequired: false },
                 }),
                 background: fields.checkbox({ label: "Background", defaultValue: true }),
-                padding: fields.checkbox({
-                  label: "Padding",
-                  description: "32px inset around image. Reveals the mesh gradient.",
-                  defaultValue: true,
+                paddingSides: fields.select({
+                  label: "Padding Sides",
+                  description: "Which sides get 32px padding. 'Default' follows Background (on = all sides, off = none).",
+                  options: [
+                    { label: "Default (from background)", value: "" },
+                    { label: "All sides", value: "all" },
+                    { label: "All except bottom", value: "no-bottom" },
+                    { label: "Top + left only", value: "top-left" },
+                    { label: "None", value: "none" },
+                  ],
+                  defaultValue: "",
                 }),
-                bleedBottom: fields.checkbox({
-                  label: "Bleed Bottom",
-                  description: "Remove bottom border and padding so image bleeds off the section edge.",
-                  defaultValue: false,
-                }),
-                paddingStyle: fields.text({
-                  label: "Padding Style",
-                  description: "Override padding/border sides: 'no-bottom' (all sides except bottom), 'top-left' (top and left only). Leave blank for default.",
-                  validation: { isRequired: false },
+                borderSides: fields.select({
+                  label: "Border Sides",
+                  description: "Which sides get a border. 'Default' follows Background (on = all sides, off = none).",
+                  options: [
+                    { label: "Default (from background)", value: "" },
+                    { label: "All sides", value: "all" },
+                    { label: "All except bottom", value: "no-bottom" },
+                    { label: "None", value: "none" },
+                  ],
+                  defaultValue: "",
                 }),
                 width: fields.integer({
                   label: "Max Width (px)",

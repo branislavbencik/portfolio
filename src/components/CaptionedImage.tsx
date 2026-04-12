@@ -4,14 +4,16 @@ import { useId, useEffect } from "react";
 import Image from "next/image";
 import { useLightbox } from "./LightboxContext";
 
+type PaddingSides = "all" | "no-bottom" | "top-left" | "none";
+type BorderSides = "all" | "no-bottom" | "none";
+
 interface CaptionedImageProps {
   src: string;
   alt?: string;
   caption?: string;
   background?: boolean;
-  padding?: boolean;
-  bleedBottom?: boolean;
-  paddingStyle?: string; // "no-bottom" | "top-left" — overrides padding/border sides
+  paddingSides?: PaddingSides;
+  borderSides?: BorderSides;
   width?: number; // max-width in px; defaults to full content width
 }
 
@@ -20,9 +22,8 @@ export function CaptionedImage({
   alt,
   caption,
   background = true,
-  padding = true,
-  bleedBottom = false,
-  paddingStyle,
+  paddingSides,
+  borderSides,
   width,
 }: CaptionedImageProps) {
   const id = useId();
@@ -33,15 +34,19 @@ export function CaptionedImage({
     return () => unregister(id);
   }, [id, src, alt, caption, background, register, unregister]);
 
-  const paddingClass = !background ? "" :
-    paddingStyle === "no-bottom" ? "pt-8 px-8 max-md:pt-4 max-md:px-4" :
-    paddingStyle === "top-left"  ? "pt-8 pl-8 max-md:pt-4 max-md:pl-4" :
-    (padding ? "p-8 max-md:p-4" : "");
+  const resolvedPadding: PaddingSides = paddingSides ?? (background ? "all" : "none");
+  const resolvedBorder: BorderSides = borderSides ?? (background ? "all" : "none");
 
-  const borderClass = !background ? "" :
-    paddingStyle === "no-bottom" ? "border border-b-0 border-surface-2" :
-    paddingStyle === "top-left"  ? "border-t border-l border-surface-2" :
-    (bleedBottom ? "border border-b-0 border-surface-2" : "border border-surface-2");
+  const paddingClass =
+    resolvedPadding === "all"        ? "p-8 max-md:p-4" :
+    resolvedPadding === "no-bottom"  ? "pt-8 px-8 max-md:pt-4 max-md:px-4" :
+    resolvedPadding === "top-left"   ? "pt-8 pl-8 max-md:pt-4 max-md:pl-4" :
+    "";
+
+  const borderClass =
+    resolvedBorder === "all"        ? "border border-surface-2" :
+    resolvedBorder === "no-bottom"  ? "border border-b-0 border-surface-2" :
+    "";
 
   const wrapperClass = [
     "relative w-full overflow-hidden cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2",

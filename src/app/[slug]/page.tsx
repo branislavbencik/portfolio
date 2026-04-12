@@ -66,16 +66,22 @@ export default async function ProjectPage({
       ? (project.coverImage as { src: string }).src
       : (project.coverImage as string) ?? "";
 
+  type PaddingSides = "all" | "no-bottom" | "top-left" | "none";
+  type BorderSides = "all" | "no-bottom" | "none";
   type ImageEntry = {
     src: string;
     alt: string;
     caption?: string | null;
     background: boolean;
-    padding: boolean;
-    bleedBottom?: boolean | null;
-    paddingStyle?: string | null;
+    paddingSides?: string | null;
+    borderSides?: string | null;
     width?: number | null;
   };
+
+  const toPaddingSides = (v?: string | null): PaddingSides | undefined =>
+    v === "all" || v === "no-bottom" || v === "top-left" || v === "none" ? v : undefined;
+  const toBorderSides = (v?: string | null): BorderSides | undefined =>
+    v === "all" || v === "no-bottom" || v === "none" ? v : undefined;
 
   return (
     <>
@@ -108,6 +114,7 @@ export default async function ProjectPage({
         )}
 
         {project.sections.map((section, i) => {
+          const isLastSection = i === project.sections.length - 1;
           const images = (section.images as unknown as ImageEntry[])
             .filter(img => isCaseStudy || img.src !== coverImage);
 
@@ -123,6 +130,7 @@ export default async function ProjectPage({
                 label={section.label || undefined}
                 title={section.title}
                 description={section.description || undefined}
+                isLast={isLastSection}
               >
                 {images.map((img, j) => (
                   <CaptionedImage
@@ -131,9 +139,8 @@ export default async function ProjectPage({
                     alt={img.alt}
                     caption={img.caption || undefined}
                     background={img.background}
-                    padding={img.padding ?? true}
-                    bleedBottom={img.bleedBottom ?? false}
-                    paddingStyle={img.paddingStyle || undefined}
+                    paddingSides={toPaddingSides(img.paddingSides)}
+                    borderSides={toBorderSides(img.borderSides)}
                     width={img.width ?? undefined}
                   />
                 ))}
@@ -143,23 +150,22 @@ export default async function ProjectPage({
 
           // Section without title — flat image gallery (selected projects)
           return (
-            <section
-              key={i}
-              className="w-full max-w-frame mx-center px-content-x py-section flex flex-col gap-12"
-            >
-              {images.map((img, j) => (
-                <CaptionedImage
-                  key={j}
-                  src={img.src}
-                  alt={img.alt}
-                  caption={img.caption || undefined}
-                  background={img.background}
-                  padding={img.padding ?? true}
-                  bleedBottom={img.bleedBottom ?? false}
-                  width={img.width ?? undefined}
-                />
-              ))}
-            </section>
+            <div key={i} className={`w-full${isLastSection ? "" : " border-b border-surface-2"}`}>
+              <section className="w-full max-w-frame mx-center px-content-x py-section flex flex-col gap-12">
+                {images.map((img, j) => (
+                  <CaptionedImage
+                    key={j}
+                    src={img.src}
+                    alt={img.alt}
+                    caption={img.caption || undefined}
+                    background={img.background}
+                    paddingSides={toPaddingSides(img.paddingSides)}
+                    borderSides={toBorderSides(img.borderSides)}
+                    width={img.width ?? undefined}
+                  />
+                ))}
+              </section>
+            </div>
           );
         })}
       </main>

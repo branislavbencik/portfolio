@@ -54,7 +54,11 @@
       "Bash(rm crowdberry/crowdberry-thumb.png)",
       "Bash(sips -Z 1288 -s format jpeg -s formatOptions 85 teatime/teatime-thumb.png --out teatime/teatime-thumb.jpg)",
       "Bash(git fetch:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(lsof -ti:3000)",
+      "Bash(xargs kill:*)",
+      "Bash(identify public/images/sakurabook/sakurabook-thumb.jpg public/images/crowdberry/crowdberry-thumb.jpg)",
+      "Bash(find:*)"
     ]
   }
 }
