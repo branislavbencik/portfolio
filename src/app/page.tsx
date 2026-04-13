@@ -30,6 +30,7 @@ export default async function Home() {
               role={entry.role || undefined}
               domain={(entry as { domain?: string }).domain || undefined}
               headline={entry.title}
+              description={entry.type === "case-study" ? entry.description || undefined : undefined}
               primaryHref={`/${slug}`}
               image={
                 typeof entry.coverImage === "object" && entry.coverImage !== null

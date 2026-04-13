@@ -58,7 +58,19 @@
       "Bash(lsof -ti:3000)",
       "Bash(xargs kill:*)",
       "Bash(identify public/images/sakurabook/sakurabook-thumb.jpg public/images/crowdberry/crowdberry-thumb.jpg)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(cat src/content/projects/*.yaml)",
+      "Bash(git pull:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(curl -s http://localhost:3000/skoala)",
+      "Bash(curl -s http://localhost:3000/teatime)",
+      "Bash(npm install:*)",
+      "WebFetch(domain:vercel.com)",
+      "Bash(curl -s http://localhost:3000/_next/static/chunks/_6a35a0f5._.css)",
+      "Bash(curl:*)",
+      "Bash(xargs -I {} curl -s \"http://localhost:3000{}\")",
+      "Bash(file public/images/skoala/*.png public/images/teatime/*.png)"
     ]
   }
 }
