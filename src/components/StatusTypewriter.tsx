@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { GeistPixelSquare } from "geist/font/pixel";
 
-const LINE = "PRAGUE BASED | REMOTE FRIENDLY | OPEN TO NEW ROLES";
+const LINE = "PRAGUE | REMOTE FRIENDLY |\nOPEN TO NEW ROLES";
 const TYPE_MS = 60;
 const START_DELAY_MS = 220;
 
@@ -40,11 +40,11 @@ export function StatusTypewriter() {
   return (
     <span role="status" aria-live="off" className="inline-flex items-center">
       <span className="sr-only">
-        Availability: Prague based, remote friendly, open to new roles.
+        Availability: Prague, remote friendly, open to new roles.
       </span>
       <span
         aria-hidden="true"
-        className={`${GeistPixelSquare.className} type-status text-text-primary relative inline-block whitespace-nowrap`}
+        className={`${GeistPixelSquare.className} type-status text-text-primary relative inline-block whitespace-nowrap max-md:whitespace-pre-line`}
       >
         <span className="invisible">{LINE}</span>
         <span className="absolute inset-0 items-center">
