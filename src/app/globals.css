@@ -29,7 +29,7 @@
 
 @media (max-width: 767px) {
   :root {
-    --font-size-display: 36px;
+    --font-size-display: 32px;
     --font-size-hero:    32px;
     --spacing-content-x: 16px;
     --spacing-detail:    60px;
@@ -211,6 +211,13 @@
     line-height: 1.2;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+  }
+  @media (max-width: 767px) {
+    .type-status {
+      font-size: 13px;
+      line-height: 1.45;
+      letter-spacing: 0.04em;
+    }
   }
 
   /* ── Cursor blink — binary visibility flip, only while parked ── */
