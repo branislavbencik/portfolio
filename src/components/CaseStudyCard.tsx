@@ -8,6 +8,7 @@ interface CaseStudyCardProps {
   role?: string;
   domain?: string;
   headline: string;
+  description?: string;
   primaryHref: string;
   image: string;
   imageAlt: string;
@@ -19,6 +20,7 @@ export function CaseStudyCard({
   role,
   domain,
   headline,
+  description,
   primaryHref,
   image,
   imageAlt,
@@ -64,6 +66,9 @@ export function CaseStudyCard({
                 →
               </span>
             </h2>
+            {description && (
+              <p className="type-body-s text-text-secondary">{description}</p>
+            )}
           </div>
         </div>
       </div>

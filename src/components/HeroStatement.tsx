@@ -1,42 +1,22 @@
+import { StatusTypewriter } from "./StatusTypewriter";
+
 export default function HeroStatement() {
   return (
     <section className="pb-section">
       <div className="max-w-column mx-auto pt-20 max-md:pt-10 pb-10 flex flex-col gap-6">
         <div className="animate-hero-content-in flex flex-col gap-6">
-          <p className="type-allcaps text-text-tertiary flex items-center flex-wrap gap-x-2">
-            <span className="whitespace-nowrap">
-              Senior Product Designer <span aria-hidden="true">·</span>
-            </span>
-            <span className="whitespace-nowrap">
-              Prague / Remote <span aria-hidden="true">·</span>
-            </span>
-            <span role="status" className="whitespace-nowrap inline-flex items-center gap-2">
-              <span className="sr-only">Availability: </span>
-              <span className="status-dot shrink-0" aria-hidden="true" />
-              Open to new roles
-            </span>
-          </p>
           <h1 className="type-display text-text-primary">
-            I think in systems, design for impact & own the outcome.
+            <span className="sr-only">
+              Product designer fluent in B2B systems and code.
+            </span>
+            <span aria-hidden="true">
+              <span className="block">Product designer fluent</span>
+              <span className="block">in B2B systems &amp; code</span>
+            </span>
           </h1>
-
-          <div className="grid grid-cols-3 max-md:grid-cols-1">
-            {[
-              { label: "systems", text: "Dependencies, flows, edge cases. I architect logic for code, not just for show." },
-              { label: "impact", text: "I designed a platform that teaches financial literacy to 50% of Czech schools." },
-              { label: "outcome", text: "Strategy, automation, front-end code, live products. I don't stop at the handoff." },
-            ].map((box, i) => (
-              <div
-                key={box.label}
-                className={`border border-surface-2 ${i > 0 ? "max-md:border-t-0 border-l-0 max-md:border-l" : ""}`}
-              >
-                <div className="px-6 py-6 max-md:px-4 max-md:py-4 flex flex-col gap-2">
-                  <p className="type-allcaps text-text-tertiary">{box.label}</p>
-                  <p className="type-body-s text-text-secondary leading-snug">{box.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <p className="flex items-center">
+            <StatusTypewriter />
+          </p>
         </div>
       </div>
     </section>

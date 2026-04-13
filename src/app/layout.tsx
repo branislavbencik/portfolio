@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { GeistPixelSquare } from "geist/font/pixel";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
@@ -8,25 +10,15 @@ import TabAttention from "@/components/TabAttention";
 import { LightboxProvider } from "@/components/LightboxContext";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 const siteUrl = "https://branislavbencik.com";
 
 export const metadata: Metadata = {
   title: "Branislav Benčík | Product Designer",
-  description: "Portfolio of Branislav Benčík, Senior Product Designer.",
+  description: "Portfolio of Branislav Benčík. Product designer fluent in B2B systems and code.",
   metadataBase: new URL(siteUrl),
   openGraph: {
     title: "Branislav Benčík | Product Designer",
-    description: "Portfolio of Branislav Benčík, Senior Product Designer.",
+    description: "Portfolio of Branislav Benčík. Product designer fluent in B2B systems and code.",
     url: siteUrl,
     siteName: "Branislav Benčík",
     locale: "en_US",
@@ -43,7 +35,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Branislav Benčík | Product Designer",
-    description: "Portfolio of Branislav Benčík, Senior Product Designer.",
+    description: "Portfolio of Branislav Benčík. Product designer fluent in B2B systems and code.",
     images: ["/images/avatar.jpg"],
   },
   icons: {
@@ -59,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} antialiased`}
       >
         {/* SVG grain filter — referenced by .grain-overlay via filter: url(#grain) */}
         <svg className="hidden" aria-hidden="true">
