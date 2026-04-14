@@ -17,7 +17,7 @@ export function ImpactBar({ items }: ImpactBarProps) {
               key={i}
               className="flex flex-col gap-1.5 flex-1 px-8 py-8 max-md:px-4 max-md:py-5"
             >
-              <span className="type-hero text-text-primary tabular-nums">
+              <span className="type-stat text-text-primary tabular-nums">
                 {item.value}
               </span>
               <span className="type-body-s text-text-secondary">{item.label}</span>
