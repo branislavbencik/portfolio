@@ -7,6 +7,7 @@ interface NextProjectSectionProps {
   role?: string;
   domain?: string;
   headline: string;
+  description?: string;
   href: string;
   image: string;
   imageAlt: string;
@@ -18,6 +19,7 @@ export function NextProjectSection({
   role,
   domain,
   headline,
+  description,
   href,
   image,
   imageAlt,
@@ -38,6 +40,7 @@ export function NextProjectSection({
           role={role}
           domain={domain}
           headline={headline}
+          description={description}
           primaryHref={href}
           image={image}
           imageAlt={imageAlt}

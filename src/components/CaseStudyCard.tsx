@@ -67,7 +67,7 @@ export function CaseStudyCard({
               </span>
             </h2>
             {description && (
-              <p className="type-body-s text-text-secondary">{description}</p>
+              <p className="type-body-m text-text-secondary">{description}</p>
             )}
           </div>
         </div>

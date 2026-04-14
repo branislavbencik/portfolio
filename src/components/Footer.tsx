@@ -172,6 +172,17 @@ export default function Footer() {
         {/* Right: external links */}
         <div className="flex items-center flex-wrap gap-x-3 gap-y-2 type-link text-text-secondary">
           <a
+            href="https://github.com/branislavbencik/portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline hover:text-foreground inline-flex items-center"
+            aria-label="GitHub (opens in new tab)"
+          >
+            GitHub
+            <ExternalArrow />
+          </a>
+          <span aria-hidden="true" className="opacity-40">·</span>
+          <a
             href="https://www.linkedin.com/in/branislavbencik/"
             target="_blank"
             rel="noopener noreferrer"

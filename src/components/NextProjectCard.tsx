@@ -28,6 +28,7 @@ export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
       role={next.entry.role || undefined}
       domain={(next.entry as { domain?: string }).domain || undefined}
       headline={next.entry.title}
+      description={next.entry.description || undefined}
       href={`/${next.slug}`}
       image={image}
       imageAlt={`${next.entry.title} thumbnail`}
