@@ -72,5 +72,6 @@
       "Bash(xargs -I {} curl -s \"http://localhost:3000{}\")",
       "Bash(file public/images/skoala/*.png public/images/teatime/*.png)"
     ]
-  }
+  },
+  "outputStyle": "Explanatory"
 }
