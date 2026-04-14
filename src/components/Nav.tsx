@@ -5,9 +5,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 // Pin zone — nav stays visible while scrollY is within the first PIN_THRESHOLD px.
-// Past that, we listen to scroll direction with DELTA as a jitter filter.
+// Past that, any downward position change hides; any upward position change shows.
+// No velocity/jitter filter: behavior is predictable because it's tied to literal
+// pixel direction, not to how fast the user is scrolling.
 const PIN_THRESHOLD = 8;
-const DELTA = 4;
 
 function ExternalArrow() {
   return (
@@ -52,9 +53,9 @@ export default function Nav() {
 
         if (current <= PIN_THRESHOLD) {
           setHidden(false);
-        } else if (delta > DELTA) {
+        } else if (delta > 0) {
           setHidden(true);
-        } else if (delta < -DELTA) {
+        } else if (delta < 0) {
           setHidden(false);
         }
 
