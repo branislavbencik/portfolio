@@ -172,6 +172,12 @@
     font-weight: 400;
     line-height: 1;
   }
+  /* ── Nav + footer links — quieter register than body links ────── */
+  .type-nav {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+  }
 
   /* ── Interface type ─────────────────────────────────────────────── */
   .type-label {

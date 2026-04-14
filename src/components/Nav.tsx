@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react";
 // the moment the user nudges-scrolls and the nav briefly slides away.
 // Past the threshold, any downward position change hides; any upward change shows.
 // No velocity/jitter filter: behavior is tied to literal pixel direction.
-const PIN_THRESHOLD = 56;
+const PIN_THRESHOLD = 52;
 
 function ExternalArrow() {
   return (
@@ -79,12 +79,12 @@ export default function Nav() {
     >
       <nav
         aria-label="Primary"
-        className="w-full max-w-frame mx-center flex items-center justify-between h-14"
+        className="w-full max-w-frame mx-center flex items-center justify-between h-13"
       >
         {isDetail ? (
           <Link
             href="/"
-            className="link-underline type-link text-text-secondary hover:text-foreground no-underline inline-flex items-center gap-2"
+            className="link-underline type-nav text-text-secondary hover:text-foreground no-underline inline-flex items-center gap-2"
           >
             <span aria-hidden="true">←</span>
             <span>Back</span>
@@ -92,7 +92,7 @@ export default function Nav() {
         ) : (
           <Link
             href="/"
-            className="link-underline type-link text-text-secondary hover:text-foreground no-underline inline-flex items-center"
+            className="link-underline type-nav text-text-secondary hover:text-foreground no-underline inline-flex items-center"
           >
             Branislav Benčík
           </Link>
@@ -101,7 +101,7 @@ export default function Nav() {
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="link-underline type-link text-text-secondary hover:text-foreground no-underline inline-flex items-center"
+          className="link-underline type-nav text-text-secondary hover:text-foreground no-underline inline-flex items-center"
           aria-label="Resume (opens in new tab)"
         >
           Resume
