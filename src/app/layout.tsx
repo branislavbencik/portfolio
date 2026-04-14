@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { GeistPixelSquare } from "geist/font/pixel";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
@@ -51,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} antialiased`}
+        className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
       >
         {/* SVG grain filter — referenced by .grain-overlay via filter: url(#grain) */}
         <svg className="hidden" aria-hidden="true">

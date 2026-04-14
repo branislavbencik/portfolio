@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { GeistPixelSquare } from "geist/font/pixel";
 
 const LINE = "20+ APPS DESIGNED | AI-NATIVE";
 const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*<>/\\|01";
@@ -79,7 +78,7 @@ export function StatusTypewriter() {
       </span>
       <span
         aria-hidden="true"
-        className={`${GeistPixelSquare.className} type-status text-text-primary relative inline-block whitespace-nowrap`}
+        className="type-status text-text-secondary relative inline-block whitespace-nowrap"
       >
         {/* Width reservation — invisible copy of the final line keeps layout stable from first paint */}
         <span className="invisible">{LINE}</span>
