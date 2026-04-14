@@ -17,7 +17,7 @@ Live build status and the session-by-session changelog live in [`docs/STATUS.md`
 
 ## Stack
 
-Next.js 16 (App Router, Turbopack) · React 19 · Tailwind CSS 4 · [Keystatic](https://keystatic.com) (git-backed CMS) · Motion · Playwright · Geist (Sans, Mono, Pixel Square)
+Next.js 16 (App Router, Turbopack) · React 19 · Tailwind CSS 4 · [Keystatic](https://keystatic.com) (git-backed CMS) · Motion · Playwright · Geist (Sans, Mono)
 
 Content is Keystatic-backed YAML under `src/content/projects/`. Every case study and selected project is rendered from a single `src/app/[slug]/page.tsx` template via `generateStaticParams`, so all project pages are pre-rendered at build time. Keystatic's admin UI lives at `/keystatic` for local editing.
 

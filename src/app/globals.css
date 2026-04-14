@@ -96,7 +96,7 @@
 /* ── Spacing — non-inline @theme so :root media-query overrides propagate to utilities */
 @theme {
   --spacing-section:    64px;
-  --spacing-detail:    100px;
+  --spacing-detail:     64px;
   --spacing-content-x:  32px;
 }
 
@@ -169,6 +169,12 @@
   /* ── Link text — line-height 1 so the underline sits tight under the text */
   .type-link {
     font-size: var(--font-size-body-s);
+    font-weight: 400;
+    line-height: 1;
+  }
+  /* ── Nav + footer links — quieter register than body links ────── */
+  .type-nav {
+    font-size: 13px;
     font-weight: 400;
     line-height: 1;
   }

@@ -70,7 +70,12 @@
       "Bash(curl -s http://localhost:3000/_next/static/chunks/_6a35a0f5._.css)",
       "Bash(curl:*)",
       "Bash(xargs -I {} curl -s \"http://localhost:3000{}\")",
-      "Bash(file public/images/skoala/*.png public/images/teatime/*.png)"
+      "Bash(file public/images/skoala/*.png public/images/teatime/*.png)",
+      "Bash(git reset *)",
+      "Bash(git cherry-pick *)",
+      "Bash(GIT_EDITOR=true git cherry-pick --continue)",
+      "Bash(pnpm dev *)",
+      "Bash(./node_modules/.bin/next dev *)"
     ]
   },
   "outputStyle": "Explanatory"
