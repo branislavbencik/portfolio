@@ -70,7 +70,9 @@
       "Bash(curl -s http://localhost:3000/_next/static/chunks/_6a35a0f5._.css)",
       "Bash(curl:*)",
       "Bash(xargs -I {} curl -s \"http://localhost:3000{}\")",
-      "Bash(file public/images/skoala/*.png public/images/teatime/*.png)"
+      "Bash(file public/images/skoala/*.png public/images/teatime/*.png)",
+      "Read(//Users/branislavbencik/**)",
+      "Bash(zsh -n ~/.zshrc)"
     ]
   },
   "outputStyle": "Explanatory"
