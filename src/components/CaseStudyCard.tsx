@@ -37,7 +37,7 @@ export function CaseStudyCard({
       />
 
       {/* Card content — shifts on hover to reveal the offset background */}
-      <div className="relative flex flex-col gap-10 pb-detail overflow-hidden motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-out motion-safe:group-hover:-translate-x-1.5 motion-safe:group-hover:-translate-y-1.5 motion-safe:group-focus-visible:-translate-x-1.5 motion-safe:group-focus-visible:-translate-y-1.5 bg-canvas border border-transparent group-hover:border-surface-2 group-focus-visible:border-surface-2">
+      <div className="relative flex flex-col gap-6 pb-detail overflow-hidden motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-out motion-safe:group-hover:-translate-x-1.5 motion-safe:group-hover:-translate-y-1.5 motion-safe:group-focus-visible:-translate-x-1.5 motion-safe:group-focus-visible:-translate-y-1.5 bg-canvas border border-transparent group-hover:border-surface-2 group-focus-visible:border-surface-2">
         <div className="relative border-b border-surface-2">
           <Image
             src={image}
