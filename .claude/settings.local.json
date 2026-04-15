@@ -71,6 +71,8 @@
       "Bash(curl:*)",
       "Bash(xargs -I {} curl -s \"http://localhost:3000{}\")",
       "Bash(file public/images/skoala/*.png public/images/teatime/*.png)",
+s      "Read(//Users/branislavbencik/**)",
+      "Bash(zsh -n ~/.zshrc)"
       "Bash(git reset *)",
       "Bash(git cherry-pick *)",
       "Bash(GIT_EDITOR=true git cherry-pick --continue)",

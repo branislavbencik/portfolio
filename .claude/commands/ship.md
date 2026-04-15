@@ -18,6 +18,9 @@ Before doing anything, check whether the current branch is in a shippable state:
 
 Do NOT auto-create or auto-checkout a new branch. The user must start a fresh session to reset Claude's context; silently branching here would strand uncommitted work and confuse the next session.
 
+## 0.5 Worktree detection
+Run `git rev-parse --git-dir`. If the output contains `.git/worktrees/`, you are inside a git worktree. Remember this for step 8. Do NOT try to checkout `main` inside a worktree — it will fail with "already checked out" because the root checkout has `main`.
+
 ## 1. Build
 Run `npm run build`. If it fails, fix the errors first. Do not proceed until build passes.
 
@@ -72,8 +75,14 @@ EOF
 
 Report the PR URL and the Vercel deploy URL. Do NOT run `gh pr merge` — the user approves the merge.
 
-## 8. Reset to main
+## 8. Cleanup guidance (worktree-aware)
 Only run this step if every prior step succeeded.
+
+**If you detected a worktree in step 0.5:**
+- Do NOT run `git checkout main` — it will fail because the root checkout already has `main`.
+- Tell the user: "PR opened. Exit this Claude session when you're done. After the PR merges, clean up the worktree with `git worktree remove .claude/worktrees/<branch>` from the repo root (`~/repos/portfolio`). To start the next task, run `cc <new-branch>` in a fresh terminal."
+
+**If you are NOT in a worktree (classic flow):**
 
 ```
 git checkout main && git pull origin main
