@@ -7,7 +7,7 @@
 /* ── Design tokens ────────────────────────────────────────────────── */
 :root {
   /* Canvas & Surfaces */
-  --canvas:    #fff;  /* Zinc 50 */
+  --canvas:    #F4F4F5;  /* Zinc 100 */
   --surface-1: #F4F4F5;  /* Zinc 100 */
   --surface-2: #E4E4E7;  /* Zinc 200 */
   --surface-3: #D4D4D8;  /* Zinc 300 */
@@ -62,18 +62,18 @@
   /* ── Layout widths ──────────────────────────────────────────────── */
   --max-width-frame:   1080px;
   --max-width-content: 1128px;
-  --max-width-column:   720px;
+  --max-width-column:   640px;
   --max-width-text:     552px;
 
   /* ── Typography — font sizes ────────────────────────────────────── */
-  --font-size-display: 64px;
-  --font-size-stat:    32px;
-  --font-size-h1:      32px;
-  --font-size-h2:      24px;
-  --font-size-h3:      20px;
+  --font-size-display: 40px;
+  --font-size-stat:    24px;
+  --font-size-h1:      24px;
+  --font-size-h2:      20px;
+  --font-size-h3:      18px;
   --font-size-h4:      17px;
   --font-size-h5:      15px;
-  --font-size-body-l:  18px;
+  --font-size-body-l:  16px;
   --font-size-body-m:  16px;
   --font-size-body-s:  14px;
   --font-size-label:   14px;
@@ -83,7 +83,7 @@
   --font-size-button:  14px;
 
   /* ── Typography — line heights ──────────────────────────────────── */
-  --line-height-display: 1.0;
+  --line-height-display: 1.15;
   --line-height-h1:      1.1;
   --line-height-h2:      1.15;
   --line-height-h3:      1.2;
@@ -104,21 +104,21 @@
   /* ── Headings ───────────────────────────────────────────────────── */
   .type-display {
     font-size: var(--font-size-display);
-    font-weight: 600;
+    font-weight: 500;
     line-height: var(--line-height-display);
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
   }
   .type-stat {
     font-size: var(--font-size-stat);
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.1;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
   }
   .type-h1 {
     font-size: var(--font-size-h1);
-    font-weight: 600;
+    font-weight: 500;
     line-height: var(--line-height-h1);
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
   }
   .type-h2 {
     font-size: var(--font-size-h2);

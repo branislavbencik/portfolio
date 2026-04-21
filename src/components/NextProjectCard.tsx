@@ -12,26 +12,34 @@ export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
   );
 
   const currentIdx = sorted.findIndex((p) => p.slug === currentSlug);
-  const next = sorted[(currentIdx + 1) % sorted.length];
+  if (currentIdx === -1) return null;
 
-  if (!next) return null;
+  const n = sorted.length;
+  if (n <= 1) return null;
 
-  const image =
-    typeof next.entry.coverImage === "object" && next.entry.coverImage !== null
-      ? (next.entry.coverImage as { src: string }).src
-      : (next.entry.coverImage as string) ?? "";
+  const nextIdx = (currentIdx + 1) % n;
+  const prevIdx = (currentIdx - 1 + n) % n;
 
-  return (
-    <NextProjectSection
-      isCaseStudy={next.entry.type === "case-study"}
-      year={next.entry.year || undefined}
-      role={next.entry.role || undefined}
-      domain={(next.entry as { domain?: string }).domain || undefined}
-      headline={next.entry.title}
-      description={next.entry.description || undefined}
-      href={`/${next.slug}`}
-      image={image}
-      imageAlt={`${next.entry.title} thumbnail`}
-    />
-  );
+  const picks = prevIdx === nextIdx
+    ? [sorted[nextIdx]]
+    : [sorted[nextIdx], sorted[prevIdx]];
+
+  const items = picks.map((p) => {
+    const image =
+      typeof p.entry.coverImage === "object" && p.entry.coverImage !== null
+        ? (p.entry.coverImage as { src: string }).src
+        : (p.entry.coverImage as string) ?? "";
+    return {
+      slug: p.slug,
+      isCaseStudy: p.entry.type === "case-study",
+      year: p.entry.year || undefined,
+      role: p.entry.role || undefined,
+      headline: p.entry.title,
+      href: `/${p.slug}`,
+      image,
+      imageAlt: `${p.entry.title} thumbnail`,
+    };
+  });
+
+  return <NextProjectSection items={items} />;
 }

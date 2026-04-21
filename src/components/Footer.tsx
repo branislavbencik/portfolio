@@ -145,10 +145,10 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full max-[1320px]:px-content-x border-t border-surface-2">
+    <footer className="w-full">
       <div
         ref={containerRef}
-        className="w-full max-w-frame mx-center flex items-center justify-between h-13 max-md:flex-col max-md:items-start max-md:h-auto max-md:py-5 max-md:gap-3"
+        className="w-full max-w-frame mx-center px-content-x flex items-center justify-between h-13 max-md:flex-col max-md:items-start max-md:h-auto max-md:py-5 max-md:gap-3"
       >
         {/* Left: email */}
         <div className="flex items-center type-nav text-text-secondary">

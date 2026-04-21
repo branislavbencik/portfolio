@@ -1,50 +1,40 @@
 import { CaseStudyCard } from "./CaseStudyCard";
-import { FullWidthDivider } from "./FullWidthDivider";
 
-interface NextProjectSectionProps {
+interface NextProjectItem {
+  slug: string;
   isCaseStudy?: boolean;
   year?: string;
   role?: string;
-  domain?: string;
   headline: string;
-  description?: string;
   href: string;
   image: string;
   imageAlt: string;
 }
 
-export function NextProjectSection({
-  isCaseStudy,
-  year,
-  role,
-  domain,
-  headline,
-  description,
-  href,
-  image,
-  imageAlt,
-}: NextProjectSectionProps) {
+interface NextProjectSectionProps {
+  items: NextProjectItem[];
+}
+
+export function NextProjectSection({ items }: NextProjectSectionProps) {
+  if (items.length === 0) return null;
   return (
-    <div className="w-full">
-      <div className="w-full max-w-frame mx-center">
-        <div className="border-t border-surface-2" />
-        <div className="px-content-x pt-section">
-          <p className="type-allcaps text-text-tertiary mb-6">Next Project</p>
+    <div className="w-full max-w-frame mx-center px-content-x">
+      <div className="border-t border-surface-2 pt-section">
+        <p className="type-allcaps text-text-secondary mb-section">More work</p>
+        <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-6">
+          {items.map((item) => (
+            <CaseStudyCard
+              key={item.slug}
+              isCaseStudy={item.isCaseStudy}
+              year={item.year}
+              role={item.role}
+              headline={item.headline}
+              primaryHref={item.href}
+              image={item.image}
+              imageAlt={item.imageAlt}
+            />
+          ))}
         </div>
-      </div>
-      <FullWidthDivider />
-      <div className="w-full max-w-frame mx-center">
-        <CaseStudyCard
-          isCaseStudy={isCaseStudy}
-          year={year}
-          role={role}
-          domain={domain}
-          headline={headline}
-          description={description}
-          primaryHref={href}
-          image={image}
-          imageAlt={imageAlt}
-        />
       </div>
     </div>
   );

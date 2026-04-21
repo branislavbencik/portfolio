@@ -1,5 +1,4 @@
 import { CaseStudyCard } from "@/components/CaseStudyCard";
-import { FullWidthDivider } from "@/components/FullWidthDivider";
 import HeroStatement from "@/components/HeroStatement";
 import { reader } from "@/lib/keystatic";
 
@@ -17,32 +16,28 @@ export default async function Home() {
         <div className="px-content-x">
           <HeroStatement />
         </div>
-      </div>
 
-      {/* Unified single-column feed */}
-      <div id="work" className="flex flex-col scroll-mt-20">
-        {projects.map(({ slug, entry }) => (
-          <div key={slug}>
-            <FullWidthDivider />
-            <CaseStudyCard
-              isCaseStudy={entry.type === "case-study"}
-              year={entry.year || undefined}
-              role={entry.role || undefined}
-              domain={(entry as { domain?: string }).domain || undefined}
-              headline={entry.title}
-              description={entry.type === "case-study" ? entry.description || undefined : undefined}
-              primaryHref={`/${slug}`}
-              image={
-                typeof entry.coverImage === "object" && entry.coverImage !== null
-                  ? (entry.coverImage as { src: string }).src
-                  : (entry.coverImage as string) ?? ""
-              }
-              imageAlt={`${entry.title} thumbnail`}
-            />
+        <div id="work" className="scroll-mt-20 px-content-x">
+          <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-6">
+            {projects.map(({ slug, entry }) => (
+              <CaseStudyCard
+                key={slug}
+                isCaseStudy={entry.type === "case-study"}
+                year={entry.year || undefined}
+                role={entry.role || undefined}
+                headline={entry.title}
+                primaryHref={`/${slug}`}
+                image={
+                  typeof entry.coverImage === "object" && entry.coverImage !== null
+                    ? (entry.coverImage as { src: string }).src
+                    : (entry.coverImage as string) ?? ""
+                }
+                imageAlt={`${entry.title} thumbnail`}
+              />
+            ))}
           </div>
-        ))}
+        </div>
       </div>
-
     </main>
   );
 }

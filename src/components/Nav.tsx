@@ -6,9 +6,7 @@ import { useEffect, useRef, useState } from "react";
 
 // Pin zone — nav stays visible while scrollY is within the first PIN_THRESHOLD px.
 // Sized to the nav's own height so that the top of the page has a one-nav-height
-// grace zone before hide-on-scroll kicks in. This also prevents a visual artifact
-// where the content column's vertical rules appear to not reach the viewport edge
-// the moment the user nudges-scrolls and the nav briefly slides away.
+// grace zone before hide-on-scroll kicks in.
 // Past the threshold, any downward position change hides; any upward change shows.
 // No velocity/jitter filter: behavior is tied to literal pixel direction.
 const PIN_THRESHOLD = 52;
@@ -73,13 +71,13 @@ export default function Nav() {
 
   return (
     <header
-      className={`animate-nav-in sticky top-0 z-40 w-full bg-canvas border-b border-surface-2 max-[1320px]:px-content-x motion-safe:transition-transform motion-safe:duration-[220ms] motion-safe:ease-[cubic-bezier(0.25,1,0.5,1)] ${
+      className={`animate-nav-in sticky top-0 z-40 w-full bg-canvas motion-safe:transition-transform motion-safe:duration-[220ms] motion-safe:ease-[cubic-bezier(0.25,1,0.5,1)] ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
       <nav
         aria-label="Primary"
-        className="w-full max-w-frame mx-center flex items-center justify-between h-13"
+        className="w-full max-w-frame mx-center px-content-x flex items-center justify-between h-13"
       >
         {isDetail ? (
           <Link
