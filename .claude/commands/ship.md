@@ -21,6 +21,27 @@ Do NOT auto-create or auto-checkout a new branch. The user must start a fresh se
 ## 0.5 Worktree detection
 Run `git rev-parse --git-dir`. If the output contains `.git/worktrees/`, you are inside a git worktree. Remember this for step 8. Do NOT try to checkout `main` inside a worktree — it will fail with "already checked out" because the root checkout has `main`.
 
+## 0.75 Docs-consistency preflight
+
+Before building, check whether this session's UI changes have drifted from the source-of-truth docs. The rule (CLAUDE.md → §Source-of-Truth Hierarchy, Docs-consistency rule): *if UI work deviates from `positioning.md` / `docs/DESIGN.md`, update the docs in the SAME session and confirm with the user before shipping.*
+
+Perform this check even if you didn't write the original positioning docs yourself — the deviation might have been introduced by this session's code changes.
+
+1. **Inventory session UI changes.** Run `git diff main...HEAD --name-only -- 'src/**/*.tsx' 'src/**/*.ts' 'src/app/globals.css' 'src/content/**/*.yaml' 'src/content/**/*.mdx'`. Anything listed is potentially strategic-visible work.
+2. **Cross-check against the docs.** For each changed file, ask: does this session alter any of the following?
+   - Hero copy / hero typography / kicker → `positioning.md` → §Hero
+   - Landing grid layout / card wrapper / hover behavior / reveal panel → `positioning.md` → §Landing grid + `docs/DESIGN.md` → §Case Study Cards
+   - Typography scale (new size / weight / new role) → `docs/DESIGN.md` → §3 Typography Scale
+   - Color tokens / palette / new semantic color → `docs/DESIGN.md` → §2 Color Tokens
+   - Spacing scale / container widths → `docs/DESIGN.md` → §5 Spacing & Rhythm + `positioning.md` → §Visual constraints
+   - Proof stack composition (case study added / removed / reclassified) → `positioning.md` → §Proof stack
+   - Em-dash, chip styling, or any rule in DESIGN.md §6 Execution Rules
+3. **Decision.** For each drift found:
+   - If the docs are already updated this session, note "docs aligned" and proceed.
+   - If the docs are NOT yet updated, STOP. Report the drift to the user using this exact format: *"Session shipped a change in `<file>` that deviates from `<doc>` → `<section>`. Options: (a) update the doc to match the code, (b) revert the code to match the doc, (c) accept the deviation as intentional and I'll note it but not update the doc. Your call."* Wait for the answer. Execute it. Only then continue to step 1.
+
+Skip this step only for sessions that are explicitly docs-only (no files under `src/` modified) or infra-only (config files, `.claude/` skills, memory updates). In those cases, note "No UI changes; docs-consistency preflight not applicable" and continue.
+
 ## 1. Build
 Run `npm run build`. If it fails, fix the errors first. Do not proceed until build passes.
 

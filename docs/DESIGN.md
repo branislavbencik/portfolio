@@ -53,7 +53,8 @@ Built on **Geist Sans** and **Geist Mono**.
 
 | Role | Family | Size | Weight | Tracking | Line Height | Usage |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Display** | Geist Sans | 48px | 600 | `-0.05em` | `1.1–1.15` | Hero |
+| **Display** | Geist Sans | 48px | 600 | `-0.05em` | `1.1–1.15` | Case-study hero (detail page) |
+| **Hero Prose** | Geist Sans | 30px | 400 | `-0.015em` | `1.3` | Landing hero paragraph (generalist claim) |
 | **H1** | Geist Sans | 32px | 600 | `-0.04em` | `1.15–1.2` | Case titles |
 | **H2** | Geist Sans | 24px | 500 | `0` | `1.2–1.3` | Sections |
 | **Body Large** | Geist Sans | 18px | 400 | `0` | `1.5` | Context |
@@ -74,14 +75,22 @@ Built on **Geist Sans** and **Geist Mono**.
 
 ## 4. Component Architecture
 
-### Case Study Cards
-- **Wrapper:** `border-t border-b border-surface-2 rounded-none` — structural 1px separators; cards inherit the canvas background
-- **Rest state:** image (4:3 aspect), then text block below (`gap-3`): meta row → headline → description. **No tag chips at rest** — tags belong to the hover panel.
-- **Hover — bottom panel reveal:** a panel slides up from the image's bottom edge covering ~35% of image height. Panel content: tags as `.type-allcaps` on `bg-canvas`, space-dot separated, no pill border. Panel `translate-y-full` → `translate-y-0` over `200ms ease-out`. Image dims to `brightness-[0.92]` under the panel. Layout outside the tile does not shift.
-- **Hover — image opacity:** subtle opacity dip (`group-hover:opacity-90`) on the thumbnail, stacked with the brightness dim
-- Respect `prefers-reduced-motion` — transitions wrapped in `motion-safe:` Tailwind prefix
-- **Meta row (below image, at rest):** Geist Mono allcaps, `·`-separated — `[Case Study pill] · COMPANY · YEAR · ROLE`
-- `Case Study` pill is inverted (filled) when present; other values are tertiary mono text
+### Case Study Cards (v3 — no frame, 12% reveal)
+
+- **Wrapper: NONE.** Bare thumbnail + text below. No `border`, no background fill, no outer padding box. The thumbnail is itself a bounded rectangle; the text beneath doesn't need an additional frame. (Supersedes v2's `border-t border-b` structural separators.)
+- **Rest state:** thumbnail (4:3, `--max-width-frame` at landing grid width) → meta row → headline → one-line description. **Tags hidden at rest.**
+- **Meta row:** Geist Mono allcaps, `·`-separated — `[Case Study pill] · YEAR · ROLE`. `Case Study` pill inverted (filled) when present; "Selected project" otherwise; other values are tertiary mono text.
+- **Hover — reveal panel (B1 Clean baseline):**
+  - Panel slides up from thumbnail's bottom edge covering **~12% of thumbnail height** (~40px absolute at 528×396). Height matches tag-row intrinsic height — disproportion to content is a craft tell.
+  - Content: tags as `type-allcaps` (Geist Mono 12px, `·`-separated, **bare text only — no pill border, no chip padding**).
+  - Background: `--background` (continuous with canvas); border-top 1px is the only separator.
+  - `pointer-events: none` so hover doesn't flicker on panel edge.
+  - Motion: `transform: translateY(100% → 0)` over **200ms** with `cubic-bezier(0.23, 1, 0.32, 1)`.
+  - Image: `filter: brightness(0.94)` (subtler than v2's 0.92).
+- **Hover — B2 Zoom (opt-in per card):** adds `transform: scale(1.02)` on image. Apply to photo-heavy thumbnails only (Skoala, Teatime, Crowdberry). Skip on diagram-heavy (Nnspect, Schneider) where zoom crops meaningful edges.
+- **Keyboard parity:** `:focus-within` on the card link triggers the identical reveal. Tab shows tags the same as hover.
+- **Reduced motion:** wrap transitions in `motion-safe:` Tailwind prefix. `prefers-reduced-motion: reduce` → panel renders static (tags always visible), no translate / brightness / scale.
+- **Dropped v3 variants (explored, rejected):** Desaturate (breaks on already-muted thumbs), 4px title shift (below perceptual threshold), tag cascade (~520ms total — outlives the grid scan).
 
 ---
 
@@ -131,9 +140,13 @@ Strict 8px base system.
 6. **Do not introduce arbitrary colors**  
    → The site is achromatic. Color only appears inside work screenshots.
 
-7. **Do not use em dashes (`—`) in user-facing copy**  
-   → Page titles, meta tags, headlines, MDX body, keystatic content, tooltips, alt text, aria-labels. Em dashes have become the single most reliable AI-prose tell since 2024 and this audience notices.  
-   → Replacements: colon (`:`) for label/definition, period for two sentences, comma for a natural pause, or restructure with a verb so the sentence has a subject and an action instead of two nouns separated by a pause.  
+7. **Em dashes (`—`) — purpose-driven only** (softened from v2's blanket ban, 2026-04-22)
+   → **Permitted** when structurally load-bearing:
+     - Apposition: "Branislav — a generalist product designer"
+     - Register shift: "code — and down the rabbit hole to…"
+     - Parenthetical aside that a comma can't cleanly handle
+   → **Banned** when substituting for a comma or period to create AI-prose cadence (e.g. "ship features — quickly").
+   → **Reviewer test:** can you replace the dash with a comma or period without losing meaning? If yes, use that instead.
    → Scope: shipped copy only. Code comments, `CLAUDE.md`, `README.md`, `docs/STATUS.md`, and `.claude/` skill files are not in scope.
 
 ---

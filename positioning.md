@@ -1,25 +1,27 @@
 # Portfolio Positioning — Branislav Benčík
 
-**Last updated:** April 21, 2026 (v2, post-workshop + hero lock)
+**Last updated:** April 22, 2026 (v3, generalist pivot + superscript-citation hero + editorial card rebuild)
 **Status:** Locked
-**Purpose:** The positioning source of truth. When this file conflicts with existing visual drafts or copy, this file wins. For the full source-of-truth hierarchy see `CLAUDE.md` → *Source-of-Truth Hierarchy*.
+**Purpose:** Strategic claims, hero copy, proof stack, card interaction, voice, and design context for AI skills. When this file conflicts with existing visual drafts or code, this file wins. For the full source-of-truth hierarchy see `CLAUDE.md` → *Source-of-Truth Hierarchy*.
 
 ---
 
 ## The Claim
 
-**Senior product designer who thinks in systems and can code well enough to build them.**
+**Generalist product designer. Useful anywhere from strategy and systems thinking down to code and edge cases.**
 
-This is directional. The hero does not state this literally; it implies it through the "bag of things easily forgotten" concept (see Hero section below).
+The generalism is the specialty — not weakness, not jack-of-all-trades hedging. Technical fluency expands the design capability (more feasible solutions, deeper engineering collaboration); it is not a separate identity.
 
 Explicit non-goals:
-- Not "design engineer" as primary title (filters out of Senior PD searches)
-- Not "designer who codes" as hero claim (too generic, widely used)
-- Not "frontend developer who can also design" (reversal changes the offers received)
+- Not "design engineer" as primary title (filters out of Senior / generalist PD searches)
+- Not "designer who codes" (too generic, widely used)
+- Not "senior product designer specializing in X" (narrows the range the hero now claims)
+
+v2 → v3 shift (April 21 → April 22): the "bag of things easily forgotten" framing was too narrow. Skoala and TeaTime are systems-level work; the hero now matches the actual range, and superscript citations anchor every abstract claim to a real deliverable.
 
 ---
 
-## Positioning scales (0-10)
+## Positioning scales (0–10, held from v2)
 
 | Dimension | Left (0) | Right (10) | Locked |
 |---|---|---|---|
@@ -34,110 +36,179 @@ Explicit non-goals:
 | Narrative vs Tile grid | Narrative scroll | Flexible tiles | **4** |
 | Quiet vs Loud | Quiet confident | Bold statement | **3** |
 
-Resolve design questions toward the scales. Example: "Big visual hero or deliverable row?" Deliverable/Process = 1, Substance/Polish = 2, so deliverable row wins.
+Scale clarifications:
+- **Deliverable/Process = 1** — site foregrounds artifacts, not journey.
+- **Breadth/Depth = 6** — 10+ industries unified by one lens (systems).
+- **Quiet/Loud = 3** — one bold claim, everything else nuance. The hero lists five citations but makes one argument.
 
-### Scale clarifications
-
-- **Deliverable vs Process** is about what the site foregrounds (artifact vs. journey), not working style.
-- **Substance vs Polish = 2** doesn't mean sloppy. Detail orientation is real; polish lives in systems, not decoration.
-- **Thinker vs Builder = 5** acknowledges real shipping (Reprio, n8n, Apps Script). Not a retreat from "thinker."
-- **Breadth vs Depth = 6** means 10+ industries unified by one lens (systems).
-- **Quiet vs Loud = 3** means one bold claim, everything else nuance. The hero is one claim; no decorative festival.
+Resolve design questions toward the scales. Example: "big visual hero or deliverable row?" → Deliverable = 1, Substance = 2 ⇒ deliverable row wins.
 
 ---
 
 ## Hero (locked)
 
-**Headline:**
-> A bag of things easily forgotten.
+### Copy — verbatim, do not paraphrase
 
-**Subhead:**
-> Empty states, 404s, keyboard shortcuts, loading skeletons, offline behavior. The stuff that backfires if you skip it.
+> Hi, I'm Branislav — a generalist product designer. I happen to be useful anywhere from re-thinking the learning system<sup>(Blueprint↗)</sup>, to shipping the automations<sup>(n8n↗)</sup>, prototypes<sup>(Schneider↗)</sup>, and code<sup>(Reprio↗)</sup> — and down the rabbit hole to the states and exceptions<sup>(Skoala↗)</sup>, because those always backfire when skipped.
 
-**Why this works:**
+Kicker (below hero, tertiary color, sentence case):
 
-- Signals detail obsession and systems thinking without stating either directly
-- Specific list does what the claim alone cannot — proves the concern is real
-- "Backfires if you skip it" is a designer-to-designer idiom, not a recruiter phrase
-- No numbers, no "B2B," no three-part subtitle, no LinkedIn verbs
+> Previously @Applifting · Co-founded TeaTime
 
-**Typographic treatment:**
+### Citation → deliverable map
 
-- Headline: existing hero scale (~56-64px), same font weight as current
-- Subhead: smaller (~18-20px), italic or monospace, softer color
-- Left or center aligned per existing site convention — don't introduce new alignment
-- Mobile: scales down to ~36-40px; subhead may break to two lines
+| Label | Links to | Proves |
+|---|---|---|
+| Blueprint | TeaTime PRD (PDF) | Systems thinking, strategy as craft |
+| n8n | TeaTime n8n shared workflow | Automation infrastructure |
+| Schneider | Schneider Electric prototype | Design sprint + shippable prototype |
+| Reprio | reprio.vercel.app | Standalone code, built alone |
+| Skoala | Skoala case study (states/flow section) | Design states and exceptions |
 
-**Constraints (what the hero must NOT do):**
+### Why this architecture works
 
-- No illustration of the "bag" — the metaphor works implied
-- No code notation (that's reserved for About opener)
-- No animated reveal per word — breaks the quiet/loud = 3 lock
-- No numbers, no chips, no LinkedIn slogans
+- One unified argument, not a list. "Useful anywhere from X to Y — and down the rabbit hole to Z" reads as a single claim with two registers (strategic → tactical).
+- Voice is intentionally imperfect. "I happen to be useful" is the Branislav register. Do not sand this into "I am useful" or "I am a generalist who works across…"
+- Superscript citations do triple duty: proof (readers click), craft signal (academic-footnote register), range signal (five different *kinds* of evidence in one sentence).
+- Em-dashes here are load-bearing (apposition + register shift). They stay. The em-dash rule in `docs/DESIGN.md` has been softened to "purpose-driven only."
 
-**Reprio claim-to-evidence loop:** Because the hero claims edge-case obsession, the Reprio case study must include a body section surfacing edge-case details (empty state, keyboard shortcut overlay, loading skeleton, 404, offline). This closes the loop between hero and first proof.
+### Typography — hero prose (not display)
+
+| Property | Value |
+|---|---|
+| Font | Geist Sans |
+| Size | 30px |
+| Weight | 400 |
+| Line height | 130% |
+| Letter spacing | -1.5% |
+| Color | `--fg` (Zinc 900) |
+
+This is *prose*, not display. 30px in paragraph form, not a 48px banner. Register: "this is the thing you read first," not "this is the thing that shouts."
+
+Kicker: Geist Sans 14px / 140% / 0 / `--fg-tertiary`. Separator is ` · `, not em-dash.
+
+### Citation link styling (two-tier color system)
+
+- **Blue (`#0000FF` — temporary; final TBD in range `#2F4BB8`–`#3A56C2`)** = citation / proof links only. Used on hero superscripts and case-study evidence callouts.
+- **Black / inherit** = every other link on the site (nav, case-card titles, body links, footer).
+- Parentheses kept as visual scope: `(Blueprint↗)` not `Blueprint↗`.
+- Superscript position flush against the preceding word, no leading space.
+- `↗` arrow on every citation for consistency. On hover: arrow animates 2px up-and-right; `text-decoration: underline` added.
+- Hover color: one step darker than rest (same hue family, never a different color).
+
+Never introduce a third link color. If a new link class appears, it fits an existing class — or the classification is wrong.
+
+### Constraints — what the hero must NOT do
+
+- No "senior product designer" (changed from v2; generalism subsumes seniority)
+- No matrix scramble, no animated reveal per word, no zoom metaphor in visual
+- No chips, no metric badges, no LinkedIn slogans
+- No rewording. Every word was workshopped; the imperfection is deliberate.
 
 ---
 
 ## Proof stack
 
-### Tier 1 — Full case studies
+### Featured (landing grid, star-metric cards)
 
-Narrative, body sections, 4-6 screens minimum, deliverables row at top.
+1. **Skoala** — financial literacy platform for kids
+   Tags: ⭐ 50% market reach · Lead Designer · Design Sprint
+   Proves: scale, state/exception design, CMS architecture. Carries the hero's `(Skoala↗)` states-and-exceptions citation.
 
-1. **Reprio** — AI-driven task prioritization
-   - Proves: ships code, AI-native, novel interaction design, edge-case obsession
-   - Hero evidence: split-view reorder animation
-   - Deliverables: live site, GitHub, demo mode
-   - Must include: edge-case body section (closes hero loop)
-   - Status: 95% complete, publishes after shell is swapped
+2. **Teatime** — redesigning a B2B language school (co-owned)
+   Tags: ⭐ +12 B2B Clients · Service Design · Co-founder
+   Proves: full-system ownership, AI pipeline, service design, business operator. Carries two hero citations: `(Blueprint↗)` and `(n8n↗)`.
 
-2. **TeaTime** — B2B English learning (co-owned)
-   - Proves: full-system ownership, AI pipeline design, business operator, service design
-   - Hero evidence: Blueprint PRD, n8n pipeline
-   - Deliverables: live site, Blueprint PDF, n8n share URL
+3. **Crowdberry** — crowdfunding investment platform
+   Tags: ⭐ €100M+ invested · KYC & AML flows · Usability testing
+   Proves: regulated flows at enterprise scale.
 
-3. **Skoala** — Financial literacy CMS (50%+ Czech schools)
-   - Proves: scale, architecture decisions, "one content model, four outputs"
-   - Hero evidence: CMS catalog, content model diagram
-   - Deliverables: live site
+### Supporting (landing grid, no star)
 
-### Tier 2 — Short-form
+4. **Nnspect** — ML training platform for material quality inspection
+   Tags: Concept · Industrial AI · Solo Designer
 
-3 screens, one paragraph, link out. No narrative arc.
+5. **Sakurabook** — Shopify plugin for per-hour booking in Japan
+   Tags: i18n · Ecosystem of multiple apps
 
-- **Crowdberry** — keep as-is
+6. **Schneider Electric** — AI-guided panel building configurator
+   Tags: Prototype · Design Sprint
+   Note: unsuccessful commercially but strong deliverable; fills the portfolio's prototype gap. Carries hero's `(Schneider↗)` citation.
 
-### Tier 3 — Cut
+### Hero-only (not on landing grid)
 
-Sakura, Nnaisense, Shopify plugin, ML platform, assorted fintech. Concepts and smaller contributions. Default: cut. Acceptable as small tiles with one-line captions only if they genuinely serve breadth.
+- **Reprio** — reprio.vercel.app. Cited in hero as code evidence. Standalone app, no landing tile.
 
-**Explicitly cut:** client logo wall, "30+ apps" brag.
+### Explicitly cut
+
+Client logo wall. "30+ apps" brag. Assorted concept-only fintech.
 
 ---
 
 ## Landing grid
 
-2-column grid, container 1144px. Container no wider than 1144.
+### Grid
 
-Per-tile rest state:
-- Image (full tile width, 4:3 aspect ratio)
-- Title ("Reprio — AI-driven task prioritization")
-- Description (one line, softer color)
-- No chips, no tags, no shadows, no frames, no border-radius on images
+- 2 columns × 3 rows = 6 cards visible
+- Container: **1080px** (canonical; retires v2's 1144)
+- Card width: **528px** (`(1080 - 24) / 2`)
+- Gap: **24px**
 
-Per-tile hover state:
-- Panel slides up from bottom of image covering ~35% of image height
-- Panel contains tags in small monospace, same treatment as deliverable pills
-- 200ms ease-out
-- Image dims slightly (~8%) under the panel edge
-- No layout shift outside the tile
+### Per-tile rest state — no frame
+
+Bare editorial composition. **No card border, no background fill, no surrounding padding box.** The thumbnail is itself a bounded rectangle; text below doesn't need an additional frame.
+
+Vertical rhythm inside a tile:
+
+```
+[Thumbnail — 528 × 396 (4:3), sharp corners, no radius, no shadow, no frame]
+[Meta row — Geist Mono allcaps — "Case Study" (or "Selected project") · YEAR · ROLE]
+[Title — 22px Geist Sans Medium]
+[Description — 14px Geist Sans Regular, one line]
+```
+
+Tags are **hidden at rest** — they live in the hover/focus reveal panel.
+
+### Per-tile hover state — reveal panel
+
+- **Panel height ≈ 12% of thumbnail** (~40px absolute at 528 × 396). Matches the tag-row intrinsic height. Not 35%.
+- Panel content: tags as `type-allcaps` (Geist Mono 12px, `·`-separated, **no chip styling, no pill borders** — bare text only).
+- Panel background: `--background` (canvas; continuous with page). Border-top 1px is the only separator.
+- `pointer-events: none` so the panel doesn't flicker on edge.
+
+### Motion — two modes
+
+**B1 Clean — universal baseline:**
+- Panel: `transform: translateY(100% → 0)` over **200ms** with `cubic-bezier(0.23, 1, 0.32, 1)`
+- Image: `filter: brightness(0.94)` (subtler than v2's 0.92)
+
+**B2 Zoom — opt-in per card:**
+- B1 baseline plus `transform: scale(1.02)` on the image
+- Apply to photo-heavy thumbnails only: Skoala, Teatime, Crowdberry
+- Skip on diagram-heavy thumbnails (Nnspect, Schneider) — zoom crops meaningful edges
+
+**Explicitly rejected:**
+- B3 Desaturate (breaks on already-muted thumbs)
+- B4 Title shift (4px is below perceptual threshold)
+- B5 Cascade (500ms total; outlives the scan)
+
+### Keyboard parity
+
+`:focus-within` on the card link triggers the identical reveal. Tab navigation shows tags the same as hover — no assistive-tech gap.
+
+### Reduced motion
+
+`prefers-reduced-motion: reduce` → panel renders static (tags always visible); no translate, no brightness change, no scale.
+
+### Layout discipline
+
+- Cards do not shift siblings on hover (reveal panel is absolutely positioned within the thumbnail).
+- 6 cards visible immediately — no "show more," no infinite scroll.
+- Row order: three star-cards first row, three supporting second row. Left-to-right scan emphasizes headline metrics.
 
 ---
 
-## Case study detail structure
-
-Strict order:
+## Case study detail structure (unchanged from v2)
 
 ```
 [Back link]
@@ -145,7 +216,7 @@ Strict order:
 [Breadcrumb: CASE STUDY · YEAR · ROLE]
 [H1 — case study title]
 [Context paragraph, ≤80 words]
-[My contribution — 3-5 concrete bullets]
+[My contribution — 3–5 concrete bullets]
 [Optional stats strip — only if relevant]
 
 [Body section 1 — Variant B rhythm]
@@ -155,53 +226,43 @@ Strict order:
 [Next project]
 ```
 
-### Deliverables row — Variant A (locked)
+**Deliverables row (Variant A):** horizontal row of labeled link cards at top. Each card: lucide icon + monospace label (~12px) + arrow ↗. 1px border transitioning to solid fg on hover. Min-width ~180px.
 
-Horizontal row of labeled link cards at the top. Each card:
-- Small icon (lucide or inline SVG)
-- Label in monospace (~12px)
-- Arrow ↗ on right
-- 1px border, transitions to solid fg on hover
-- Min width ~180px
-
-Not inline text. The deliverables are the proof; they get visual weight.
-
-### Body section — Variant B rhythm (locked, consistent across all sections)
+**Body section (Variant B rhythm):**
 
 ```
-[Kicker — monospace, 11px, uppercase, mute]
-[H2 — ~48px, letter-spacing tight, 2 lines max, carries the insight]
+[Kicker — Geist Mono, 11px, uppercase, muted]
+[H2 — ~48px, tight letter-spacing, 2 lines max, carries the insight]
 [Paragraph — ≤50 words (80 hard cap), only constraint or rationale]
-[Image — ~900px wide, breaks out of 640 text column]
-[Caption — monospace, 12px, what the screen solves not what UI shows]
+[Image — ~800px wide, breaks out of 560 text column]
+[Caption — Geist Mono, 12px, what the screen solves]
 ```
 
-Do not alternate rhythm. Every body section same pattern.
-
-### Body cut test (hard rule)
-
-Every paragraph must pass: *does this tell me something the screenshots cannot?* If it just describes the UI, cut it.
-
-Current state fails this at roughly 40-50% of prose. Target rewrite: cut total body text by at least 40%.
+Body cut test (hard rule): every paragraph must pass — *does this tell me something the screenshots cannot?* If it just describes the UI, cut it. Target ≥40% reduction versus pre-workshop drafts.
 
 ---
 
 ## About section
 
-**Brave level: 3/10 toward brave.** Philosophically direct, personally selective.
+Brave level: 3/10 toward brave. Philosophically direct, personally selective.
 
-### Include
+### Opener
 
-- Opener metaphor: `try { ship-interface() } catch { ... }` — the catch block is where design lives. Hero's "bag of things" sits in the catch block. About makes the code notation work as extension of the hero, not replacement.
-- "Working hard is overestimated" thesis / optimize for laziness and clarity
-- "Reality is never boring. Our interpretation is."
-- The UX psychology line (say-do gap)
-- Systems / minimalism / laziness as linked ideas
-- Mentoring track record: 100h 1:1, 50h workshops, UX + HTML/CSS + React at ReactGirls Prague — single line, not a section
-- Concise mentions of cooking, DJing, circus — one sentence each
-- Monteiro quote or "Interface is no longer designed, it's engineered"
+> Design as navigating competing parameters of a system in favor of dominant evidence about the user group and its offering.
 
-### Omit
+Academic register, single-paragraph thesis. Motivates the "generalist" framing in the hero.
+
+### Opinions (with room to defend them)
+
+- **Minimal awesome product, not MVP.** Iteration isn't enough if you ship zero decent features.
+- **Skepticism of set-in-stone methodologies** (design thinking, etc.). Innovation is messy; company / product / culture override methodology every time. In favor of minimal, context-tweaked processes.
+
+### Include (from v2)
+
+- Mentoring: 100h 1:1, 50h workshops, UX + HTML/CSS + React at ReactGirls Prague — single line
+- Cooking, DJing, circus — one sentence each
+
+### Omit (from v2)
 
 - Psychonaut / psychedelics advocacy
 - ADHD self-diagnosis
@@ -213,52 +274,137 @@ First person, direct, personal. Philosophical bluntness acceptable. No performed
 
 ---
 
-## Visual constraints
+## Craft section (landing, below the grid)
 
-- Container: 1144px
-- Text column: 640px
-- Image column: up to 900px with lightbox
-- Typeface: Geist
-- No shadows on landing tiles
-- No frames around images
-- No border-radius on case study images (sharp corners signal precision)
-- Background: off-white (not pure white)
-- Em dashes: banned
-- Animations: serve content, small vocabulary, reuse consistently
-- Micro-interactions over big animations
+The original "bag of things easily forgotten" copy relocates here — not dead, correctly positioned. Introduces a small sub-grid of micro-artifacts.
+
+Sketch:
+
+> **Craft.** Every designer carries a bag of things they shouldn't forget. Mine lives here.
+>
+> [Sub-grid: empty state · 404 · loading skeleton · keyboard shortcut overlay · offline indicator]
 
 ---
 
-## What changes from pre-workshop state
+## Voice — Design Context (for `/impeccable`, `/emil-design-eng`, `/playground`)
 
-| Problem | Fix |
+> Canonical location. `.impeccable.md` is a thin pointer; do not duplicate content there.
+
+### Primary audience
+
+Design Lead / Head of Design evaluating a Senior / generalist PD hire. Design-literate, impatient with fluff, immediately recognizes craft. Target employers: FTMO, Nebius, n8n, Make, Productboard, Apify, JetBrains.
+
+### Secondary audience
+
+Recruiter as filter. Less design-literate; pattern-matches on legibility, clarity, seriousness of work.
+
+### Job to be done
+
+Full-time role evaluation. "Can this person think, and can they ship?" The portfolio answers both — strategic depth in case studies, precision in the UI itself.
+
+### Brand personality — three words
+
+**Precise · Deliberate · Personal.**
+
+- *Precise* — every element earns its place. Pixel-level discipline.
+- *Deliberate* — nothing is accidental. Every decision considered.
+- *Personal* — Branislav's voice, not a brand voice. "I happen to be useful" over "I am a product designer." Warmer than cold, more honest than polished.
+
+(Shift from v2: "Dense" moved to the DESIGN.md execution layer; "Cold" replaced by "Personal" — the generalist frame is human, not clinical.)
+
+### Aesthetic direction — Editorial Light Technical
+
+Carries forward the "Light Technical Canvas" (off-white, zinc palette, sharp corners, hard 1px structure) but removes the full-card-frame treatment. Shipping read is closer to **marijanapav.com** than Vercel: bare thumbnails, text below, no surrounding chrome. Devtool-precise, not dashboard-decorated.
+
+References:
+- **marijanapav.com** — bare-frame card treatment, editorial rhythm (primary reference v3)
+- **Vercel / Linear** — monochrome restraint, typography precision
+- **Warp** — terminal precision
+
+Anti-references:
+- Glassmorphism, animated hero parallax, marketing-voice copy, rounded "bubbly" UI, Awwwards-style decorative portfolios
+- **Chip-style tags** (new in v3) — ship bare text with `·` separators, never pill chips
+- **Full-card frames** (new in v3) — no `border` + `background: #fff` wrapper around the whole card
+
+Theme: **Light.** Color: **achromatic** except for citation blue. Color otherwise only inside work screenshots.
+
+### Design principles
+
+1. **The interface is the portfolio.** UI demonstrates the same craft as the case studies.
+2. **Density over decoration.** Show more information with better hierarchy, not whitespace-as-design.
+3. **Functional quirks only.** Motion serves clarity/feedback, never decoration.
+4. **Direct copy, no marketing voice.** Headlines are statements, not pitches.
+5. **Trust the system.** positioning.md → docs/DESIGN.md → globals.css. When layers disagree, the higher layer wins.
+
+---
+
+## Visual constraints (canonical v3)
+
+| Token | Value | Notes |
+|---|---|---|
+| Container | **1080px** | Frame width (retires v2's 1144) |
+| Card | **528px** | `(Container − Gap) / 2` |
+| Gap | **24px** | Between cards (landing grid) |
+| Text column | **560px** | Case study body prose |
+| Figure | **800px** | Default image mode |
+| Typeface | Geist Sans + Geist Mono | No other fonts |
+
+- Background: off-white (`#F9FAFB`), not pure white
+- Borders: `#D4D4D8` (Zinc 300), 1px hard
+- **Em-dashes: purpose-driven only** (apposition, register shift). Softened from v2's blanket ban. Never as AI-prose pacing.
+- No shadows on landing tiles
+- No border-radius on layout surfaces (interactive elements only: 2–4px)
+- Sharp corners on case study images
+- Animations: serve content, small motion vocabulary, reuse consistently
+
+---
+
+## v2 → v3 change log
+
+| Problem (v2, April 21) | Fix (v3, April 22) |
 |---|---|
-| Hero says "Product designer fluent in B2B systems & code" + "20+ apps designed | AI-native" | Replace with "A bag of things easily forgotten." + forgotten-things list |
-| Tag chips visible at rest on landing tiles | Move chips into hover-reveal bottom panel |
-| Case study bodies overwritten (~40% bloat) | 80-word hard cap, 50-word target, Variant B rhythm |
-| Card tiles may have shadows/frames | Remove both, clean 2-column grid |
-| No deliverables row on case studies | Add Variant A labeled cards at top |
-| Reprio not present | Build (after shell is swapped) |
-| No About section with real voice | Write with code-notation opener + locked content |
+| Hero was "A bag of things easily forgotten" — too narrow for actual range | Generalist superscript-citation paragraph; five linked deliverables |
+| "Senior product designer" as identity | "Generalist product designer" — generalism IS the specialty |
+| No chips visible at rest, hover panel covers 35% | Tags hidden at rest, hover panel covers ~12% (tag-row intrinsic height) |
+| Cards framed with `border-t + border-b` structural separators | No card frame — bare thumbnail + text below (marijanapav.com register) |
+| Em-dashes banned entirely | Allowed for apposition / register shift only |
+| Single link color | Two-tier: blue for citations, default for everything else |
+| Container 1144 / text 640 (aspirational) vs 1080 / 560 (actual) | Canonical 1080 / 560; 1144 retired |
+| Schneider Electric cut | Added as sixth landing card (fills prototype gap) |
+| Reprio as Tier 1 landing tile | Reprio cited in hero only; no landing tile |
+| "Coldly Calculated" brand register | "Precise · Deliberate · Personal" |
 
-## What does NOT change
+### What does NOT change
 
-- Existing copy voice (first person, short sentences, no em dashes)
-- Typography system (Geist)
-- Next.js 15 + Tailwind stack
+- Voice: first person, short sentences, intentional imperfections
+- Typography system: Geist Sans + Geist Mono
+- Next.js 16 + Tailwind 4 stack
 - Domain: branislavbencik.com
-- Application message voice (covered in sys prompt)
+- About page philosophy opener
+- Case study detail structure (Variant A deliverables row + Variant B body rhythm)
 
 ---
 
 ## Appendix — implementation notes
 
-This section is editorial (not workshop output). It records decisions that resolve the gap between the locked positioning above and the current codebase, so future sessions don't re-litigate them.
+### 1080 / 528 / 24 grid — canonical, 2026-04-22
 
-### Container widths — held at repo values, 2026-04-22
+v2 specified 1144 / 640 but the repo shipped 1080 / 560 (tuned for 14" MacBook fold, `docs/STATUS.md` item 30, 2026-04-14). v3 retires the 1144 target. **Canonical values are 1080 / 528 / 24.** Earlier drafts mentioning 1144 are superseded.
 
-Positioning specifies `Container: 1144px` and `Text column: 640px`. The repo currently ships `--max-width-frame: 1080px` and `--max-width-column: 560px` (see `src/app/globals.css`). The 1080 width was tuned for 14" MacBook fold in `docs/STATUS.md` item 30 (2026-04-14).
+Image column target (`--max-width-figure: 800px`) is held; the 900px aspiration from v2 is informational, not canonical.
 
-**Decision (2026-04-22):** hold the repo values. Treat positioning's 1144/640 as directional — the spirit is "don't go wider than ~1144," which 1080 satisfies. Revisit if a Tier-1 case study (Reprio) visibly suffers at 1080.
+### Em-dash softening — 2026-04-22
 
-The image column target of "~900px wide" is similarly held at `--max-width-figure: 800px`.
+v2 banned em-dashes blanket-style as an AI-prose tell. v3 workshop showed the hero's two em-dashes are load-bearing (apposition on "Branislav — a generalist product designer"; register shift on "code — and down the rabbit hole"). New rule:
+
+- Permitted when they do structural work (apposition, register shift, parenthetical aside).
+- Banned when they substitute for a comma or period to create AI-prose cadence.
+- Reviewer test: can you replace the dash with a comma or period without losing meaning? If yes, use that instead.
+
+### Link-color two-tier — 2026-04-22
+
+Blue = citation only. Black = everything else. Never add a third color — if a new link class appears, it fits an existing class or the classification is wrong. This is a systems-thinking signal, not an aesthetic choice.
+
+### Card wrapper — no-frame decision — 2026-04-22
+
+Three playgrounds (`playground/tag-variations.html`, `playground/chip-interaction-patterns.html`, `playground/hover-reveal-variants.html`) all defaulted to full 1px border + `#fff` background wrappers. The /emil-design-eng review caught this as the single biggest craft tell — fights the editorial intent. v3 locks: no wrapper, bare thumbnail + text, marijanapav.com register.

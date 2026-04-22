@@ -103,16 +103,18 @@ These rules apply to EVERY edit. No exceptions.
 
 When these files conflict, the higher layer wins:
 
-1. `positioning.md` — claims, hero copy, proof stack, body-prose caps
-2. `docs/DESIGN.md` — visual system (tokens, components, image modes, spacing)
-3. `.impeccable.md` — design context for `/impeccable`, `/emil-design-eng`, `/playground`
+1. `positioning.md` — strategic claims, hero copy, proof stack, card interaction, voice, Design Context (for AI skills)
+2. `docs/DESIGN.md` — visual execution only (tokens, typography scale, components, image modes, spacing, motion, Do-Nots)
+3. `.impeccable.md` — **pointer file.** Thin wrapper around positioning.md §Voice so `/impeccable`, `/emil-design-eng`, `/playground` can find Design Context at their hardcoded path. Do not duplicate content here.
 4. `CLAUDE.md` (this file) — tech stack, session rules, code-quality rules
 5. `README.md` — human intro to the repo
 6. `docs/STATUS.md` — session log
 
 Before a UI change, read `positioning.md` + `docs/DESIGN.md`.
 Before a repo-structure or dependency change, re-read this file.
-If you invent a new UI pattern that works, document it in `docs/DESIGN.md`.
+If you invent a new UI pattern that works, document it in `docs/DESIGN.md` (tactical) or `positioning.md` (if it changes the strategic claim).
+
+**Docs-consistency rule:** If a UI change made this session deviates from what `positioning.md` / `docs/DESIGN.md` currently specify, update the relevant doc in the SAME session and confirm the change with the user *before* running `/ship`. Two layers silently disagreeing is the worst outcome — it leaves the next session reading contradictory rules and drifting back to the old frame. The `/ship` command preflight enforces this; see `.claude/commands/ship.md` → step 0.75.
 
 ## Updating the positioning
 
