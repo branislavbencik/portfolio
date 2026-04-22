@@ -13,11 +13,11 @@ const siteUrl = "https://branislavbencik.com";
 
 export const metadata: Metadata = {
   title: "Branislav Benčík | Product Designer",
-  description: "Portfolio of Branislav Benčík. Product designer fluent in B2B systems and code.",
+  description: "Portfolio of Branislav Benčík. Senior product designer who thinks in systems and codes well enough to build them.",
   metadataBase: new URL(siteUrl),
   openGraph: {
     title: "Branislav Benčík | Product Designer",
-    description: "Portfolio of Branislav Benčík. Product designer fluent in B2B systems and code.",
+    description: "Portfolio of Branislav Benčík. Senior product designer who thinks in systems and codes well enough to build them.",
     url: siteUrl,
     siteName: "Branislav Benčík",
     locale: "en_US",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Branislav Benčík | Product Designer",
-    description: "Portfolio of Branislav Benčík. Product designer fluent in B2B systems and code.",
+    description: "Portfolio of Branislav Benčík. Senior product designer who thinks in systems and codes well enough to build them.",
     images: ["/images/avatar.jpg"],
   },
   icons: {

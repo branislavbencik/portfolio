@@ -206,27 +206,6 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
-  /* ── Live status readout — mono caption, terminal-line register ── */
-  .type-status {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  /* ── Cursor blink — binary visibility flip, only while parked ── */
-  .animate-cursor-blink {
-    animation: cursor-blink 1s infinite;
-  }
-  @keyframes cursor-blink {
-    0%, 49.99%  { visibility: visible; }
-    50%, 100%   { visibility: hidden; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .animate-cursor-blink { animation: none; }
-  }
   .type-button {
     font-size: var(--font-size-button);
     font-weight: 500;
@@ -234,35 +213,6 @@
   }
   .grain-overlay {
     filter: url(#grain);
-  }
-
-  /* ── Status dot — slow pulsing live indicator ──────────────────── */
-  .status-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 9999px;
-    background-color: var(--accent-live);
-    animation: status-dot-pulse 2s ease-in-out infinite;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .status-dot {
-      animation: none;
-    }
-  }
-  @keyframes status-dot-pulse {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0.35; }
-  }
-
-  /* ── Terminal cursor — static block, mounted only while typing ── */
-  .status-cursor {
-    display: inline-block;
-    width: 0.5em;
-    height: 1em;
-    margin-left: 2px;
-    background-color: currentColor;
-    vertical-align: -0.08em;
   }
 
   /* ── Hero content entrance — slide up + fade, unified block rise ── */
