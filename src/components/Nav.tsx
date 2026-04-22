@@ -77,16 +77,29 @@ export default function Nav() {
             Branislav Benčík
           </Link>
         )}
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="link-underline type-nav text-text-secondary hover:text-foreground no-underline inline-flex items-center"
-          aria-label="Resume (opens in new tab)"
-        >
-          Resume
-          <ExternalArrow />
-        </a>
+        <div className="flex items-center gap-x-3 type-nav text-text-secondary">
+          <a
+            href="https://github.com/branislavbencik/portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline hover:text-foreground no-underline inline-flex items-center"
+            aria-label="GitHub (opens in new tab)"
+          >
+            GitHub
+            <ExternalArrow />
+          </a>
+          <span aria-hidden="true" className="opacity-40">·</span>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-underline hover:text-foreground no-underline inline-flex items-center"
+            aria-label="Resume (opens in new tab)"
+          >
+            Resume
+            <ExternalArrow />
+          </a>
+        </div>
       </nav>
     </header>
   );
