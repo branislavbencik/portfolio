@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1080, initial-scale=1" />
+<title>Hover-reveal variants · Pattern B explorations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --canvas: #F9FAFB;
+    --fg: #18181B;
+    --fg-secondary: #52525B;
+    --fg-tertiary: #71717A;
+    --border: #D4D4D8;
+    --panel: #F9FAFB;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--canvas);
+    color: var(--fg);
+    font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .mono { font-family: "Geist Mono", ui-monospace, monospace; }
+
+  .stage {
+    width: 1080px;
+    margin: 0 auto;
+    padding: 48px 48px 96px;
+  }
+
+  /* ───────── Switcher strip ───────── */
+  .strip {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    background: #fff;
+    margin-bottom: 16px;
+  }
+
+  .strip-label {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+  }
+
+  .strip-buttons {
+    display: flex;
+    gap: 4px;
+  }
+
+  .strip button {
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--fg-secondary);
+    cursor: pointer;
+    transition: background 120ms, color 120ms, border-color 120ms;
+  }
+  .strip button:hover { color: var(--fg); border-color: var(--fg); }
+  .strip button[aria-pressed="true"] {
+    background: var(--fg);
+    color: #fff;
+    border-color: var(--fg);
+  }
+
+  .strip .shortcut {
+    margin-left: auto;
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    color: var(--fg-tertiary);
+  }
+
+  /* ───────── Annotation ───────── */
+  .annotation {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 16px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-top: none;
+    background: #fff;
+    margin-bottom: 40px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .annotation-tag {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+    padding-top: 2px;
+  }
+  .annotation-body { color: var(--fg-secondary); }
+  .annotation-body strong { color: var(--fg); font-weight: 500; }
+
+  .rm-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    font-family: "Geist Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+  }
+  .rm-indicator[data-active="true"] {
+    color: var(--fg);
+    border-color: var(--fg);
+  }
+  .rm-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fg-tertiary);
+  }
+  .rm-indicator[data-active="true"] .rm-dot { background: #16A34A; }
+
+  /* ───────── Grid ───────── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  /* ───────── Card ───────── */
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--border);
+  }
+
+  .card-image {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.9);
+    font-family: "Geist Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transform-origin: center center;
+    transition:
+      filter 200ms ease-out,
+      transform 200ms ease-out;
+    will-change: filter, transform;
+  }
+
+  /* Distinct placeholder palettes per project */
+  .img-skoala      { background: linear-gradient(135deg, #1E3A8A, #3B82F6); }
+  .img-teatime     { background: linear-gradient(135deg, #064E3B, #10B981); }
+  .img-crowdberry  { background: linear-gradient(135deg, #7C2D12, #F59E0B); }
+  .img-nnspect     { background: linear-gradient(135deg, #1F2937, #6B7280); }
+  .img-sakurabook  { background: linear-gradient(135deg, #831843, #EC4899); }
+  .img-schneider   { background: linear-gradient(135deg, #0F172A, #64748B); }
+
+  /* Panel that slides up on hover */
+  .card-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 35%;
+    background: var(--panel);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    transform: translateY(100%);
+    transition: transform 200ms ease-out;
+    will-change: transform;
+    border-top: 1px solid var(--border);
+  }
+
+  .card-tags {
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg);
+    line-height: 1.4;
+  }
+  .card-tags .tag { display: inline; }
+  .card-tags .sep {
+    display: inline;
+    padding: 0 8px;
+    color: var(--fg-tertiary);
+  }
+  .card-tags .star {
+    color: var(--fg);
+    margin-right: 4px;
+  }
+
+  /* Card body — meta / title / desc */
+  .card-body {
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform 200ms ease-out;
+    will-change: transform;
+  }
+  .card-meta {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+    display: flex;
+    gap: 8px;
+  }
+  .card-meta .dot { color: var(--fg-tertiary); }
+  .card-title {
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+  }
+  .card-desc {
+    font-size: 14px;
+    color: var(--fg-secondary);
+    line-height: 1.45;
+  }
+
+  /* ───────── Variant behavior (applied to .stage[data-variant]) ───────── */
+
+  /* Default hover = B1 baseline: panel slides up, image dims */
+  .card:hover .card-panel { transform: translateY(0); }
+  .card:hover .card-image { filter: brightness(0.92); }
+
+  /* B2 — panel + image subtle zoom */
+  .stage[data-variant="B2"] .card:hover .card-image {
+    filter: brightness(0.92);
+    transform: scale(1.03);
+  }
+
+  /* B3 — panel + image desaturation */
+  .stage[data-variant="B3"] .card:hover .card-image {
+    filter: brightness(0.92) saturate(0.6);
+  }
+
+  /* B4 — panel + title/desc shift up 4px */
+  .stage[data-variant="B4"] .card:hover .card-body {
+    transform: translateY(-4px);
+  }
+
+  /* B5 — panel slides first, then tags cascade in */
+  .stage[data-variant="B5"] .card-tags {
+    display: inline-block;
+    width: 100%;
+  }
+  .stage[data-variant="B5"] .card-tags .tag-item {
+    display: inline-block;
+    opacity: 0;
+    transform: translateX(-4px);
+    transition:
+      opacity 160ms ease-out,
+      transform 160ms ease-out;
+  }
+  .stage[data-variant="B5"] .card-tags .sep-item {
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 120ms ease-out;
+    padding: 0 8px;
+    color: var(--fg-tertiary);
+  }
+  .stage[data-variant="B5"] .card:hover .card-tags .tag-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .stage[data-variant="B5"] .card:hover .card-tags .sep-item {
+    opacity: 1;
+  }
+  /* Cascade delays — panel motion is 200ms, first tag starts at 200ms */
+  .stage[data-variant="B5"] .card:hover .card-tags .tag-item:nth-child(1) { transition-delay: 200ms; }
+  .stage[data-variant="B5"] .card:hover .card-tags .sep-item:nth-child(2) { transition-delay: 280ms; }
+  .stage[data-variant="B5"] .card:hover .card-tags .tag-item:nth-child(3) { transition-delay: 280ms; }
+  .stage[data-variant="B5"] .card:hover .card-tags .sep-item:nth-child(4) { transition-delay: 360ms; }
+  .stage[data-variant="B5"] .card:hover .card-tags .tag-item:nth-child(5) { transition-delay: 360ms; }
+
+  /* In B5, while idle, tags remain hidden in static form; when panel exits, snap them back */
+  .stage[data-variant="B5"] .card .card-tags .tag-item,
+  .stage[data-variant="B5"] .card .card-tags .sep-item {
+    transition-delay: 0ms;
+  }
+
+  /* ───────── Reduced-motion fallback ───────── */
+  @media (prefers-reduced-motion: reduce) {
+    .card-panel,
+    .card-image,
+    .card-body,
+    .stage[data-variant="B5"] .card-tags .tag-item,
+    .stage[data-variant="B5"] .card-tags .sep-item {
+      transition: none !important;
+    }
+    .card:hover .card-panel { transform: translateY(0); }
+    .card:hover .card-image { filter: none !important; transform: none !important; }
+    .card:hover .card-body { transform: none !important; }
+    .stage .card:hover .card-tags .tag-item,
+    .stage .card:hover .card-tags .sep-item {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  /* JS-forced reduced motion (for users who want to preview without OS setting) */
+  .stage[data-force-static="true"] .card-panel,
+  .stage[data-force-static="true"] .card-image,
+  .stage[data-force-static="true"] .card-body,
+  .stage[data-force-static="true"] .card-tags .tag-item,
+  .stage[data-force-static="true"] .card-tags .sep-item {
+    transition: none !important;
+  }
+  .stage[data-force-static="true"] .card:hover .card-image {
+    filter: none !important;
+    transform: none !important;
+  }
+  .stage[data-force-static="true"] .card:hover .card-body {
+    transform: none !important;
+  }
+  .stage[data-force-static="true"] .card:hover .card-tags .tag-item,
+  .stage[data-force-static="true"] .card:hover .card-tags .sep-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* ───────── Page-intro header ───────── */
+  .intro {
+    margin-bottom: 24px;
+  }
+  .intro h1 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin-bottom: 4px;
+  }
+  .intro p {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+  }
+</style>
+</head>
+<body>
+  <main class="stage" data-variant="B1" data-force-static="false" id="stage">
+
+    <section class="intro">
+      <h1>Hover-reveal variants</h1>
+      <p>Pattern B · panel slide-up · 5 motion treatments</p>
+    </section>
+
+    <div class="strip" role="tablist" aria-label="Variant switcher">
+      <span class="strip-label">Variant</span>
+      <div class="strip-buttons" id="buttons">
+        <button data-variant="B1" aria-pressed="true">B1 · Clean</button>
+        <button data-variant="B2" aria-pressed="false">B2 · Zoom</button>
+        <button data-variant="B3" aria-pressed="false">B3 · Desaturate</button>
+        <button data-variant="B4" aria-pressed="false">B4 · Title shift</button>
+        <button data-variant="B5" aria-pressed="false">B5 · Cascade</button>
+      </div>
+      <span class="shortcut">press 1–5 · R toggles static</span>
+      <span class="rm-indicator" id="rmIndicator" data-active="false" aria-live="polite">
+        <span class="rm-dot"></span>
+        <span id="rmLabel">Motion on</span>
+      </span>
+    </div>
+
+    <div class="annotation">
+      <span class="annotation-tag" id="annoTag">B1 · Clean</span>
+      <span class="annotation-body" id="annoBody">
+        <strong>The control.</strong> Panel slides up, image dims to 0.92 brightness. Nothing else moves. Cheapest to render, lowest novelty — the reveal itself is the whole message. Safe baseline; if this reads flat on certain thumbnails, try B2 or B3.
+      </span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+  </main>
+
+<script>
+  // ───────── Data ─────────
+  const cards = [
+    {
+      slug: "skoala",
+      title: "Skoala",
+      meta: ["Case study", "2023"],
+      desc: "Platform for tutors and students across Slovakia.",
+      tags: [
+        { text: "⭐ 50% market reach", star: true },
+        { text: "Lead Designer" },
+        { text: "Design Sprint" },
+      ],
+      imgClass: "img-skoala",
+    },
+    {
+      slug: "teatime",
+      title: "TeaTime",
+      meta: ["Case study", "2022"],
+      desc: "Scheduling and service design for B2B teams.",
+      tags: [
+        { text: "⭐ +12 B2B Clients", star: true },
+        { text: "Service Design" },
+        { text: "Co-founder" },
+      ],
+      imgClass: "img-teatime",
+    },
+    {
+      slug: "crowdberry",
+      title: "Crowdberry",
+      meta: ["Selected project", "2021"],
+      desc: "Investment onboarding and KYC for retail investors.",
+      tags: [
+        { text: "⭐ €100M+ invested", star: true },
+        { text: "KYC & AML flows" },
+        { text: "Usability testing" },
+      ],
+      imgClass: "img-crowdberry",
+    },
+    {
+      slug: "nnspect",
+      title: "Nnspect",
+      meta: ["Selected project", "2024"],
+      desc: "Neural-network inspection tool for industrial AI.",
+      tags: [
+        { text: "Concept" },
+        { text: "Industrial AI" },
+        { text: "Solo Designer" },
+      ],
+      imgClass: "img-nnspect",
+    },
+    {
+      slug: "sakurabook",
+      title: "Sakurabook",
+      meta: ["Selected project", "2020"],
+      desc: "Publishing ecosystem for Japanese-language learners.",
+      tags: [
+        { text: "i18n" },
+        { text: "Ecosystem of multiple apps" },
+      ],
+      imgClass: "img-sakurabook",
+    },
+    {
+      slug: "schneider",
+      title: "Schneider Electric",
+      meta: ["Selected project", "2019"],
+      desc: "Field-service prototype from a week-long sprint.",
+      tags: [
+        { text: "Prototype" },
+        { text: "Design Sprint" },
+      ],
+      imgClass: "img-schneider",
+    },
+  ];
+
+  // ───────── Render tags ─────────
+  // Structure uses .tag-item + .sep-item spans so B5 can cascade them independently.
+  function renderTags(tags) {
+    const parts = [];
+    tags.forEach((t, i) => {
+      if (i > 0) {
+        parts.push(`<span class="sep-item">·</span>`);
+      }
+      if (t.star) {
+        // Split star from label so star lands first visually
+        const label = t.text.replace(/^⭐\s*/, "");
+        parts.push(`<span class="tag-item tag"><span class="star">⭐</span>${label}</span>`);
+      } else {
+        parts.push(`<span class="tag-item tag">${t.text}</span>`);
+      }
+    });
+    return parts.join("");
+  }
+
+  // ───────── Render cards ─────────
+  const grid = document.getElementById("grid");
+  grid.innerHTML = cards.map(c => `
+    <article class="card">
+      <div class="card-media">
+        <div class="card-image ${c.imgClass}">${c.slug}</div>
+        <div class="card-panel">
+          <div class="card-tags">${renderTags(c.tags)}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">
+          ${c.meta.map((m,i) => (i>0?`<span class="dot">·</span><span>${m}</span>`:`<span>${m}</span>`)).join("")}
+        </div>
+        <div class="card-title">${c.title}</div>
+        <div class="card-desc">${c.desc}</div>
+      </div>
+    </article>
+  `).join("");
+
+  // ───────── Variant switching ─────────
+  const stage = document.getElementById("stage");
+  const buttons = Array.from(document.querySelectorAll("#buttons button"));
+  const annoTag = document.getElementById("annoTag");
+  const annoBody = document.getElementById("annoBody");
+
+  const annotations = {
+    B1: {
+      label: "B1 · Clean",
+      html: `<strong>The control.</strong> Panel slides up, image dims to 0.92 brightness. Nothing else moves. Cheapest to render, lowest novelty — the reveal itself is the whole message. Safe baseline; if this reads flat on certain thumbnails, try B2 or B3.`,
+    },
+    B2: {
+      label: "B2 · Panel + image subtle zoom",
+      html: `<strong>Push feeling.</strong> Image scales 1.0 → 1.03 under the panel. Makes the card feel physical and eager — the photo leans into the cursor. Costs: slight crop of image edges, and on screenshots with text near the edge the zoom can clip something meaningful. Worth it for photo-heavy thumbnails.`,
+    },
+    B3: {
+      label: "B3 · Panel + image desaturation",
+      html: `<strong>Focus shift.</strong> Image drops to saturate(0.6) while the tags light up. Reads as "the tags are the payload now." Strongest hierarchical move of the five. Costs: on already-low-contrast or monochrome thumbnails it looks broken, not intentional. Verify against every thumbnail before shipping.`,
+    },
+    B4: {
+      label: "B4 · Panel + title/desc shift",
+      html: `<strong>Lift.</strong> Title + description nudge up 4px. Whole card feels elevated, not just the panel. Subtlest of the five — users may not consciously register it, which is the point. Costs: with tight vertical rhythm between cards, the shift can make the row look uneven. Pair with generous row gaps.`,
+    },
+    B5: {
+      label: "B5 · Panel slides + tags cascade",
+      html: `<strong>Reveal-within-reveal.</strong> Panel arrives in 200ms, then tags fade/slide in left-to-right with 80ms stagger — star anchor lands first. Makes each tag feel like a separate piece of evidence. Costs: total reveal takes ~500ms, slow enough that fast mouse movement through the grid feels laggy. Best at rest, worst in scan mode.`,
+    },
+  };
+
+  function setVariant(v) {
+    stage.dataset.variant = v;
+    buttons.forEach(b => b.setAttribute("aria-pressed", b.dataset.variant === v ? "true" : "false"));
+    annoTag.textContent = annotations[v].label;
+    annoBody.innerHTML = annotations[v].html;
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener("click", () => setVariant(b.dataset.variant));
+  });
+
+  // ───────── Keyboard shortcuts ─────────
+  const keyMap = { "1": "B1", "2": "B2", "3": "B3", "4": "B4", "5": "B5" };
+  window.addEventListener("keydown", (e) => {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    if (keyMap[e.key]) {
+      setVariant(keyMap[e.key]);
+    } else if (e.key === "r" || e.key === "R") {
+      toggleStatic();
+    }
+  });
+
+  // ───────── Reduced-motion indicator + toggle ─────────
+  const rmIndicator = document.getElementById("rmIndicator");
+  const rmLabel = document.getElementById("rmLabel");
+
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let forcedStatic = false;
+
+  function updateRMIndicator() {
+    const osReduced = mq.matches;
+    const active = osReduced || forcedStatic;
+    rmIndicator.dataset.active = active ? "true" : "false";
+    stage.dataset.forceStatic = forcedStatic ? "true" : "false";
+    if (osReduced) rmLabel.textContent = "Reduced motion (OS)";
+    else if (forcedStatic) rmLabel.textContent = "Static preview (R)";
+    else rmLabel.textContent = "Motion on";
+  }
+
+  function toggleStatic() {
+    forcedStatic = !forcedStatic;
+    updateRMIndicator();
+  }
+
+  mq.addEventListener ? mq.addEventListener("change", updateRMIndicator) : mq.addListener(updateRMIndicator);
+  rmIndicator.addEventListener("click", toggleStatic);
+  rmIndicator.style.cursor = "pointer";
+  updateRMIndicator();
+</script>
+</body>
+</html>

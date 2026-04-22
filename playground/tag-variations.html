@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1080" />
+<title>Tag variations · How tags appear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #F9FAFB;
+    --fg: #18181B;
+    --fg-2: #52525B;
+    --fg-3: #71717A;
+    --border: #D4D4D8;
+    --accent: #0000FF;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Geist", ui-sans-serif, system-ui, -apple-system, "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .mono {
+    font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  /* ---------- Shell ---------- */
+  .shell {
+    width: 1080px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+
+  /* ---------- Control strip ---------- */
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 12px 16px;
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    color: var(--fg-2);
+  }
+
+  .controls .label {
+    text-transform: uppercase;
+    color: var(--fg-3);
+    letter-spacing: 0.08em;
+  }
+
+  .controls-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .controls-group .radios {
+    display: flex;
+    gap: 4px;
+  }
+
+  .controls button {
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--fg-2);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
+    border-radius: 2px;
+  }
+
+  .controls button:hover {
+    color: var(--fg);
+    border-color: var(--fg);
+  }
+
+  .controls button[aria-pressed="true"] {
+    background: var(--fg);
+    border-color: var(--fg);
+    color: #fff;
+  }
+
+  .controls .replay {
+    color: var(--fg);
+  }
+
+  .controls .desc {
+    font-size: 11px;
+    color: var(--fg-3);
+  }
+
+  /* ---------- Section header ---------- */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0 0 16px;
+  }
+  .section-head h2 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    margin: 0;
+    letter-spacing: 0.02em;
+  }
+  .section-head .caption {
+    font-size: 11px;
+    color: var(--fg-3);
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- Grid of cards ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 528px);
+    gap: 24px;
+  }
+
+  .card {
+    width: 528px;
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 28px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card .thumb {
+    width: 100%;
+    height: 220px;
+    background: #EEEEF0;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .card .thumb::after {
+    content: attr(data-label);
+    position: absolute;
+    inset: auto 12px 10px auto;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--fg-3);
+    text-transform: uppercase;
+  }
+
+  .card .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card .eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--fg-3);
+  }
+  .card h3 {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin: 0;
+  }
+  .card .lede {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--fg-2);
+    margin: 0;
+  }
+
+  /* ---------- Tag row ---------- */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
+    font-size: 12px;
+    letter-spacing: 0.01em;
+    color: var(--fg-3);
+    min-height: 20px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition:
+      opacity 260ms ease,
+      color 260ms ease;
+    will-change: opacity, color, transform;
+  }
+
+  .tag .star {
+    display: inline-block;
+    color: var(--fg);
+    transform-origin: 50% 55%;
+    transition: transform 520ms cubic-bezier(.2,.8,.2,1);
+  }
+
+  .tag .sep {
+    color: var(--border);
+  }
+
+  /* A single tag entry: optional star + text. We use a wrapper span for the "text" part so V3 can clip it. */
+  .tag .text {
+    display: inline-block;
+    white-space: nowrap;
+    color: inherit;
+  }
+
+  /* =====================================================
+     V1 · Hover focus
+     Static at rest. On card hover:
+       - non-star tags soften to 55% opacity
+       - star tags darken to --fg
+       - star glyph gets scale + rotate nudge (520ms)
+     ===================================================== */
+  .mode-v1 .card:hover .tag:not(.tag--star) {
+    opacity: 0.55;
+  }
+  .mode-v1 .card:hover .tag.tag--star {
+    color: var(--fg);
+  }
+  .mode-v1 .card:hover .tag.tag--star .star {
+    transform: scale(1.12) rotate(-12deg);
+  }
+
+  /* =====================================================
+     V2 · Staggered scroll cascade
+     IntersectionObserver toggles .in-view on each card.
+     Tags enter L→R: 90ms per-tag stagger, 140ms per-card stagger,
+     6px translateY + opacity.
+     ===================================================== */
+  .mode-v2 .card .tag {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  .mode-v2 .card.in-view .tag {
+    opacity: 1;
+    transform: translateY(0);
+    transition:
+      opacity 420ms ease,
+      transform 420ms cubic-bezier(.2,.8,.2,1);
+    transition-delay: var(--tag-delay, 0ms);
+  }
+
+  /* =====================================================
+     V3 · Typewriter reveal + star underline
+     On replay/load: tags clip in from the left via inline-grid
+     transitioning grid-template-columns 0fr → 1fr.
+     On hover of a star tag: 1px L→R underline sweep (scaleX).
+     ===================================================== */
+  .mode-v3 .card .tag .text {
+    display: inline-grid;
+    grid-template-columns: 0fr;
+    overflow: hidden;
+    transition: grid-template-columns 520ms cubic-bezier(.2,.8,.2,1);
+    transition-delay: var(--tag-delay, 0ms);
+  }
+  .mode-v3 .card .tag .text > span {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .mode-v3 .card.in-view .tag .text {
+    grid-template-columns: 1fr;
+  }
+
+  /* Star + underline sweep only visible in V3 */
+  .tag--star .underline {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .tag--star .underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--fg);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 480ms cubic-bezier(.2,.8,.2,1);
+  }
+  /* Only show the sweep in V3 (keep V1/V2 semantics clean) */
+  .mode-v1 .tag--star .underline::after,
+  .mode-v2 .tag--star .underline::after {
+    content: none;
+  }
+  .mode-v3 .card .tag--star:hover .underline::after {
+    transform: scaleX(1);
+  }
+
+  /* V3: give the star tag a darkened hue on hover too, for readability */
+  .mode-v3 .card .tag--star:hover {
+    color: var(--fg);
+  }
+
+  /* =====================================================
+     prefers-reduced-motion: hard override
+     ===================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    .tag,
+    .tag .star,
+    .tag .text,
+    .tag--star .underline::after {
+      transition: none !important;
+      transform: none !important;
+    }
+    .mode-v2 .card .tag,
+    .mode-v3 .card .tag .text {
+      opacity: 1 !important;
+      transform: none !important;
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  /* Small footnote */
+  .foot {
+    margin-top: 48px;
+    font-size: 11px;
+    color: var(--fg-3);
+    line-height: 1.6;
+  }
+  .foot .kbd {
+    display: inline-block;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 2px;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 10px;
+    color: var(--fg-2);
+  }
+</style>
+</head>
+<body>
+  <main class="shell" id="shell">
+
+    <div class="controls mono" role="toolbar" aria-label="Tag animation mode">
+      <div class="controls-group">
+        <span class="label">MODE</span>
+        <div class="radios" id="mode-radios">
+          <button type="button" data-mode="v1" aria-pressed="true">V1 · hover focus</button>
+          <button type="button" data-mode="v2" aria-pressed="false">V2 · scroll cascade</button>
+          <button type="button" data-mode="v3" aria-pressed="false">V3 · typewriter</button>
+        </div>
+      </div>
+      <div class="controls-group">
+        <span class="desc" id="mode-desc">Static at rest. Hover a card.</span>
+        <button type="button" class="replay" id="replay">Replay ↻</button>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h2>Selected work</h2>
+      <span class="caption mono">6 cards · 528 × · 2 cols · gap 24</span>
+    </div>
+
+    <div class="grid" id="grid">
+
+      <!-- Skoala -->
+      <article class="card" data-card-index="0">
+        <div class="thumb" data-label="skoala"></div>
+        <div class="meta">
+          <span class="eyebrow">Case study</span>
+          <h3>Skoala — rebuilding a grading platform.</h3>
+          <p class="lede">Lead designer on a redesign that took the product from a compliance tool to one teachers reach for.</p>
+        </div>
+        <div class="tags" data-card="skoala">
+          <span class="tag tag--star" style="--tag-index:0"><span class="star">★</span><span class="text"><span class="underline">50% market reach</span></span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:1"><span class="text">Lead Designer</span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:2"><span class="text">Design Sprint</span></span>
+        </div>
+      </article>
+
+      <!-- Teatime -->
+      <article class="card" data-card-index="1">
+        <div class="thumb" data-label="teatime"></div>
+        <div class="meta">
+          <span class="eyebrow">Case study</span>
+          <h3>Teatime — service design for a growing studio.</h3>
+          <p class="lede">Co-founded a design studio and grew its B2B client base by systemising service delivery.</p>
+        </div>
+        <div class="tags" data-card="teatime">
+          <span class="tag tag--star" style="--tag-index:0"><span class="star">★</span><span class="text"><span class="underline">+12 B2B Clients</span></span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:1"><span class="text">Service Design</span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:2"><span class="text">Co-founder</span></span>
+        </div>
+      </article>
+
+      <!-- Crowdberry -->
+      <article class="card" data-card-index="2">
+        <div class="thumb" data-label="crowdberry"></div>
+        <div class="meta">
+          <span class="eyebrow">Case study</span>
+          <h3>Crowdberry — KYC &amp; AML for private investors.</h3>
+          <p class="lede">Designed the onboarding and compliance flows behind €100M+ of private capital.</p>
+        </div>
+        <div class="tags" data-card="crowdberry">
+          <span class="tag tag--star" style="--tag-index:0"><span class="star">★</span><span class="text"><span class="underline">€100M+ invested</span></span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:1"><span class="text">KYC &amp; AML flows</span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:2"><span class="text">Usability testing</span></span>
+        </div>
+      </article>
+
+      <!-- Nnspect -->
+      <article class="card" data-card-index="3">
+        <div class="thumb" data-label="nnspect"></div>
+        <div class="meta">
+          <span class="eyebrow">Selected project</span>
+          <h3>Nnspect — industrial AI, concept phase.</h3>
+          <p class="lede">Solo concept exploring how operators would supervise an AI inspection model on a factory floor.</p>
+        </div>
+        <div class="tags" data-card="nnspect">
+          <span class="tag" style="--tag-index:0"><span class="text">Concept</span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:1"><span class="text">Industrial AI</span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:2"><span class="text">Solo Designer</span></span>
+        </div>
+      </article>
+
+      <!-- Sakurabook -->
+      <article class="card" data-card-index="4">
+        <div class="thumb" data-label="sakurabook"></div>
+        <div class="meta">
+          <span class="eyebrow">Selected project</span>
+          <h3>Sakurabook — an ecosystem of reading apps.</h3>
+          <p class="lede">Unified three consumer apps under one visual &amp; interaction language, shipping in multiple locales.</p>
+        </div>
+        <div class="tags" data-card="sakurabook">
+          <span class="tag" style="--tag-index:0"><span class="text">i18n</span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:1"><span class="text">Ecosystem of multiple apps</span></span>
+        </div>
+      </article>
+
+      <!-- Schneider Electric -->
+      <article class="card" data-card-index="5">
+        <div class="thumb" data-label="schneider"></div>
+        <div class="meta">
+          <span class="eyebrow">Selected project</span>
+          <h3>Schneider Electric — a 4-day design sprint.</h3>
+          <p class="lede">Prototyped a configurator for industrial switchgear in a time-boxed sprint with engineering.</p>
+        </div>
+        <div class="tags" data-card="schneider">
+          <span class="tag" style="--tag-index:0"><span class="text">Prototype</span></span>
+          <span class="sep">·</span>
+          <span class="tag" style="--tag-index:1"><span class="text">Design Sprint</span></span>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="foot mono">
+      Keys: <span class="kbd">1</span> V1 · <span class="kbd">2</span> V2 · <span class="kbd">3</span> V3 · <span class="kbd">R</span> replay. Honors <span class="kbd">prefers-reduced-motion</span>.
+    </p>
+  </main>
+
+<script>
+  (function () {
+    const shell = document.getElementById("shell");
+    const grid = document.getElementById("grid");
+    const radios = document.querySelectorAll("#mode-radios button");
+    const replayBtn = document.getElementById("replay");
+    const modeDesc = document.getElementById("mode-desc");
+
+    const DESCRIPTIONS = {
+      v1: "Static at rest. Hover a card — non-stars fade, star sharpens.",
+      v2: "Scroll-in cascade · 90ms per tag · 140ms per card.",
+      v3: "Typewriter clip-in. Hover a star tag for the underline sweep."
+    };
+
+    const PREFERS_REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Assign per-tag transition delay custom property (used by V2 + V3)
+    function assignTagDelays() {
+      const cards = grid.querySelectorAll(".card");
+      cards.forEach((card, cardIdx) => {
+        const cardDelay = cardIdx * 140;
+        card.querySelectorAll(".tag").forEach((tag) => {
+          const i = parseInt(tag.style.getPropertyValue("--tag-index"), 10) || 0;
+          const delay = cardDelay + i * 90;
+          tag.style.setProperty("--tag-delay", delay + "ms");
+        });
+      });
+    }
+
+    // Set / swap mode
+    function setMode(mode) {
+      shell.classList.remove("mode-v1", "mode-v2", "mode-v3");
+      shell.classList.add("mode-" + mode);
+      radios.forEach((r) => {
+        r.setAttribute("aria-pressed", r.dataset.mode === mode ? "true" : "false");
+      });
+      modeDesc.textContent = DESCRIPTIONS[mode];
+
+      // For V2/V3 we manage entrance via .in-view
+      const cards = grid.querySelectorAll(".card");
+      cards.forEach((c) => c.classList.remove("in-view"));
+
+      if (PREFERS_REDUCED) {
+        // Reduced motion: always show final state; no IO.
+        cards.forEach((c) => c.classList.add("in-view"));
+        return;
+      }
+
+      if (mode === "v1") {
+        // V1 has no entrance — ensure in-view is set so nothing is hidden in edge cases
+        cards.forEach((c) => c.classList.add("in-view"));
+      } else {
+        // V2/V3: use IntersectionObserver to trigger entrance once in view
+        observeEntrance();
+      }
+    }
+
+    let io = null;
+    function observeEntrance() {
+      if (io) {
+        io.disconnect();
+        io = null;
+      }
+      io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in-view");
+          }
+        });
+      }, { threshold: 0.15 });
+      grid.querySelectorAll(".card").forEach((c) => io.observe(c));
+    }
+
+    function replay() {
+      const mode = shell.classList.contains("mode-v3")
+        ? "v3"
+        : shell.classList.contains("mode-v2")
+          ? "v2"
+          : "v1";
+      if (mode === "v1" || PREFERS_REDUCED) {
+        // For V1, briefly "flash" the hover state on the first row as a visual ping.
+        const firstRow = grid.querySelectorAll(".card");
+        [firstRow[0], firstRow[1]].forEach((card) => {
+          if (!card) return;
+          card.classList.add("force-hover");
+          // No force-hover CSS hook shipped — fall back to toggling a quick class
+          // (kept as a no-op to avoid visual noise; replay of V1 is a no-op by design)
+          card.classList.remove("force-hover");
+        });
+        return;
+      }
+      // V2 / V3 — re-trigger entrance
+      const cards = grid.querySelectorAll(".card");
+      cards.forEach((c) => c.classList.remove("in-view"));
+      // Force reflow so transitions restart cleanly
+      void grid.offsetWidth;
+      // Re-add after a tick; use rAF for smoothness
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          cards.forEach((c) => c.classList.add("in-view"));
+        });
+      });
+    }
+
+    // Wire radios
+    radios.forEach((btn) => {
+      btn.addEventListener("click", () => setMode(btn.dataset.mode));
+    });
+
+    // Replay
+    replayBtn.addEventListener("click", replay);
+
+    // Keyboard shortcuts
+    window.addEventListener("keydown", (e) => {
+      if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA")) return;
+      if (e.key === "1") setMode("v1");
+      else if (e.key === "2") setMode("v2");
+      else if (e.key === "3") setMode("v3");
+      else if (e.key === "r" || e.key === "R") replay();
+    });
+
+    // Init
+    assignTagDelays();
+    setMode("v1");
+  })();
+</script>
+</body>
+</html>

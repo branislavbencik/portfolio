@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1200, initial-scale=1" />
+<title>Chip Interaction Patterns — When are tags visible?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #F9FAFB;
+    --fg: #18181B;
+    --fg-secondary: #52525B;
+    --fg-tertiary: #71717A;
+    --border: #D4D4D8;
+    --accent: #0000FF;
+    --canvas: 1080px;
+    --card-w: 528px;
+    --gap: 24px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Geist", ui-sans-serif, system-ui, -apple-system, Inter, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+    padding: 48px 0 96px;
+  }
+
+  .shell {
+    width: var(--canvas);
+    margin: 0 auto;
+  }
+
+  /* ---------- Header + meta ---------- */
+  header.meta {
+    margin-bottom: 32px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 48px;
+  }
+  .meta-left { max-width: 640px; }
+  .meta-eyebrow {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+    margin: 0 0 8px;
+  }
+  .meta-title {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    color: var(--fg);
+  }
+  .meta-sub {
+    font-size: 14px;
+    color: var(--fg-secondary);
+    margin: 0;
+  }
+  .meta-sub cite {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .meta-right {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-tertiary);
+    text-align: right;
+    line-height: 1.6;
+  }
+  .meta-right strong {
+    color: var(--fg);
+    font-weight: 500;
+  }
+  #rm-indicator.rm-on { color: var(--accent); }
+
+  /* ---------- Pattern switch strip ---------- */
+  .switch {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 12px;
+  }
+  .switch button {
+    appearance: none;
+    background: transparent;
+    border: 0;
+    border-right: 1px solid var(--border);
+    padding: 16px 20px;
+    text-align: left;
+    font: inherit;
+    color: var(--fg-secondary);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: background 120ms linear, color 120ms linear;
+  }
+  .switch button:last-child { border-right: 0; }
+  .switch button:hover { background: #F1F1F3; color: var(--fg); }
+  .switch button[aria-pressed="true"] {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  .switch .key {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+  .switch .label {
+    font-size: 13px;
+    letter-spacing: -0.005em;
+  }
+
+  /* ---------- Annotation block ---------- */
+  .annotation {
+    border: 1px solid var(--border);
+    border-top: 0;
+    padding: 16px 20px 18px;
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+    background: #fff;
+  }
+  .annotation h3 {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+    margin: 0 0 6px;
+    font-weight: 500;
+  }
+  .annotation p, .annotation li {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--fg-secondary);
+    margin: 0;
+  }
+  .annotation .col strong {
+    color: var(--fg);
+    font-weight: 500;
+  }
+  .annotation ul {
+    margin: 0;
+    padding-left: 16px;
+  }
+  .annotation ul li + li { margin-top: 2px; }
+
+  /* ---------- Card grid ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, var(--card-w));
+    gap: var(--gap);
+  }
+
+  .card {
+    width: var(--card-w);
+    border: 1px solid var(--border);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #E4E4E7;
+  }
+  .thumb-art {
+    position: absolute;
+    inset: 0;
+    transition: opacity 200ms ease-out, filter 200ms ease-out;
+  }
+
+  /* Per-project art — flat, no gradients, system palette-only */
+  .art-skoala   { background: #E4E4E7; }
+  .art-skoala::before {
+    content: ""; position: absolute; inset: 14% 12% 14% 12%;
+    background:
+      linear-gradient(#18181B, #18181B) left 0 top 24% / 100% 1px no-repeat,
+      linear-gradient(#18181B, #18181B) left 0 top 60% / 100% 1px no-repeat,
+      linear-gradient(#18181B, #18181B) left 0 top 82% / 100% 1px no-repeat;
+    opacity: 0.85;
+  }
+  .art-skoala::after {
+    content: "Skoala"; position: absolute; left: 12%; top: 10%;
+    font-family: "Geist Mono", monospace; font-size: 11px;
+    color: var(--fg); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .art-teatime  { background: #D4D4D8; }
+  .art-teatime::before {
+    content: ""; position: absolute; left: 14%; right: 14%; top: 18%; bottom: 18%;
+    border: 1px solid #18181B;
+  }
+  .art-teatime::after {
+    content: "Teatime"; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+    font-family: "Geist Mono", monospace; font-size: 12px; color: var(--fg);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .art-crowd    { background: #E4E4E7; }
+  .art-crowd::before {
+    content: ""; position: absolute; left: 10%; right: 10%; top: 66%; height: 1px; background: #18181B;
+  }
+  .art-crowd::after {
+    content: ""; position: absolute; left: 10%; top: 20%; width: 80%; height: 44%;
+    background:
+      repeating-linear-gradient(90deg, #18181B 0 2px, transparent 2px 48px);
+    opacity: 0.65;
+  }
+  .art-crowd .crowd-label {
+    position: absolute; left: 10%; bottom: 10%;
+    font-family: "Geist Mono", monospace; font-size: 11px; color: var(--fg);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .art-nnspect  { background: #D4D4D8; }
+  .art-nnspect::before {
+    content: ""; position: absolute; left: 50%; top: 50%; width: 50%; height: 50%;
+    transform: translate(-50%,-50%) rotate(45deg);
+    border: 1px solid #18181B;
+  }
+  .art-nnspect::after {
+    content: "NNspect"; position: absolute; left: 10%; top: 10%;
+    font-family: "Geist Mono", monospace; font-size: 11px; color: var(--fg);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .art-sakura   { background: #E4E4E7; }
+  .art-sakura::before {
+    content: ""; position: absolute; left: 14%; right: 14%; top: 20%; bottom: 20%;
+    background:
+      linear-gradient(#18181B,#18181B) left top / 24% 1px no-repeat,
+      linear-gradient(#18181B,#18181B) right top / 24% 1px no-repeat,
+      linear-gradient(#18181B,#18181B) left bottom / 24% 1px no-repeat,
+      linear-gradient(#18181B,#18181B) right bottom / 24% 1px no-repeat,
+      linear-gradient(#18181B,#18181B) left top / 1px 24% no-repeat,
+      linear-gradient(#18181B,#18181B) right top / 1px 24% no-repeat,
+      linear-gradient(#18181B,#18181B) left bottom / 1px 24% no-repeat,
+      linear-gradient(#18181B,#18181B) right bottom / 1px 24% no-repeat;
+  }
+  .art-sakura::after {
+    content: "Sakurabook"; position: absolute; left: 14%; top: 8%;
+    font-family: "Geist Mono", monospace; font-size: 11px; color: var(--fg);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .art-schneider { background: #D4D4D8; }
+  .art-schneider::before {
+    content: ""; position: absolute; left: 12%; right: 12%; top: 12%; bottom: 12%;
+    background:
+      repeating-linear-gradient(0deg, transparent 0 23px, #18181B 23px 24px),
+      repeating-linear-gradient(90deg, transparent 0 31px, #18181B 31px 32px);
+    opacity: 0.45;
+  }
+  .art-schneider::after {
+    content: "Schneider Electric"; position: absolute; left: 12%; bottom: 8%;
+    font-family: "Geist Mono", monospace; font-size: 11px; color: var(--fg);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* Pattern B: hover panel */
+  .hover-panel {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 35%;
+    background: #fff;
+    border-top: 1px solid var(--border);
+    transform: translateY(100%);
+    transition: transform 200ms ease-out;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    pointer-events: none;
+  }
+  .hover-panel .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* ---------- Card body ---------- */
+  .body {
+    padding: 20px 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .eyebrow {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+  }
+  .title {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    margin: 0;
+    color: var(--fg);
+  }
+  .desc {
+    font-size: 14px;
+    color: var(--fg-secondary);
+    margin: 0;
+    line-height: 1.55;
+    max-width: 44ch;
+  }
+
+  /* ---------- Tags (shared) ---------- */
+  .tags-row {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    min-height: 26px; /* reserve space so layout doesn't shift across patterns */
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 9px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 12px;
+    color: var(--fg-tertiary);
+    line-height: 1.4;
+    background: #fff;
+    transition:
+      opacity 180ms ease-out,
+      transform 180ms ease-out,
+      color 180ms ease-out,
+      border-color 180ms ease-out,
+      font-weight 180ms ease-out;
+    white-space: nowrap;
+  }
+  .chip .star {
+    color: var(--fg);
+    font-size: 11px;
+    line-height: 1;
+  }
+
+  /* ====================================================================
+     PATTERN STATES — toggled via [data-pattern] on .shell
+     Each pattern overrides default card/chip behavior.
+     ==================================================================== */
+
+  /* Default (A): all visible at rest, hover dims non-star */
+  .shell[data-pattern="A"] .tags-row .chip { opacity: 1; transform: none; color: var(--fg-tertiary); }
+  .shell[data-pattern="A"] .card:hover .chip { opacity: 0.35; }
+  .shell[data-pattern="A"] .card:hover .chip.is-star { opacity: 1; color: var(--fg); border-color: var(--fg); }
+
+  /* B: hover panel, no tags at rest */
+  .shell[data-pattern="B"] .tags-row { display: none; }
+  .shell[data-pattern="B"] .card:hover .hover-panel { transform: translateY(0); }
+  .shell[data-pattern="B"] .card:hover .thumb-art { opacity: 0.55; }
+  .shell[data-pattern="B"] .hover-panel .chip { opacity: 1; }
+
+  /* C: hybrid anchor — first anchor visible, others fade+rise on hover */
+  .shell[data-pattern="C"] .tags-row .chip { opacity: 0; transform: translateY(2px); transition-duration: 180ms; }
+  .shell[data-pattern="C"] .tags-row .chip.is-anchor { opacity: 1; transform: none; }
+  .shell[data-pattern="C"] .card:hover .tags-row .chip { opacity: 1; transform: none; }
+  .shell[data-pattern="C"] .card:hover .tags-row .chip.is-anchor { color: var(--fg); border-color: var(--fg); }
+
+  /* D: muted to full — 50% opacity at rest, 100% on hover, star bolds up */
+  .shell[data-pattern="D"] .tags-row .chip { opacity: 0.5; }
+  .shell[data-pattern="D"] .card:hover .tags-row .chip { opacity: 1; }
+  .shell[data-pattern="D"] .card:hover .tags-row .chip.is-star {
+    color: var(--fg);
+    border-color: var(--fg);
+    font-weight: 500;
+  }
+
+  /* Hide hover panel when not pattern B */
+  .shell:not([data-pattern="B"]) .hover-panel { display: none; }
+
+  /* Reveal it on all cards when pattern B is active */
+  .shell[data-pattern="B"] .hover-panel { display: flex; }
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .chip, .thumb-art, .hover-panel, .switch button {
+      transition: none !important;
+    }
+    .shell[data-pattern="C"] .tags-row .chip { transform: none; }
+    .shell[data-pattern="B"] .hover-panel { transform: translateY(0); }
+  }
+  /* Class-based fallback the JS also sets, so we can honour the user toggle */
+  .shell.reduce-motion .chip,
+  .shell.reduce-motion .thumb-art,
+  .shell.reduce-motion .hover-panel,
+  .shell.reduce-motion .switch button {
+    transition: none !important;
+  }
+
+  /* ---------- Footnote ---------- */
+  footer.foot {
+    margin-top: 48px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--fg-tertiary);
+    display: flex;
+    justify-content: space-between;
+  }
+  footer.foot a { color: var(--accent); text-decoration: none; }
+
+</style>
+</head>
+<body>
+
+<div class="shell" data-pattern="A" id="shell">
+
+  <header class="meta">
+    <div class="meta-left">
+      <p class="meta-eyebrow">Playground · Interaction pattern study</p>
+      <h1 class="meta-title">Chip visibility on case-study cards</h1>
+      <p class="meta-sub">Four patterns for the question <cite>"when are tags visible?"</cite> — rest, hover, or hybrid. Sibling study handles motion.</p>
+    </div>
+    <div class="meta-right">
+      <div><strong>Canvas</strong> 1080 · 2-col · 24px</div>
+      <div><strong>Cards</strong> 6 (3 star · 3 no-star)</div>
+      <div id="rm-indicator"><strong>Reduced motion</strong> <span id="rm-state">off</span></div>
+    </div>
+  </header>
+
+  <nav class="switch" role="tablist" aria-label="Pattern switch">
+    <button type="button" data-pat="A" aria-pressed="true">
+      <span class="key">A · shortcut A</span>
+      <span class="label">All visible at rest</span>
+    </button>
+    <button type="button" data-pat="B" aria-pressed="false">
+      <span class="key">B · shortcut B</span>
+      <span class="label">Hover panel</span>
+    </button>
+    <button type="button" data-pat="C" aria-pressed="false">
+      <span class="key">C · shortcut C</span>
+      <span class="label">Hybrid anchor</span>
+    </button>
+    <button type="button" data-pat="D" aria-pressed="false">
+      <span class="key">D · shortcut D</span>
+      <span class="label">Muted → full</span>
+    </button>
+  </nav>
+
+  <section class="annotation" id="annotation" aria-live="polite">
+    <!-- filled by JS -->
+  </section>
+
+  <section class="grid" aria-label="Case study cards">
+
+    <!-- 1. Skoala — 3 tags, star -->
+    <article class="card" data-project="skoala">
+      <div class="thumb">
+        <div class="thumb-art art-skoala" aria-hidden="true"></div>
+        <div class="hover-panel" aria-hidden="true">
+          <div class="tags">
+            <span class="chip is-star is-anchor"><span class="star">&#9733;</span>50% market reach</span>
+            <span class="chip">Lead Designer</span>
+            <span class="chip">Design Sprint</span>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <span class="eyebrow">Case study · 2023</span>
+        <h2 class="title">Skoala</h2>
+        <p class="desc">Czech K-12 LMS rebuilt from scratch. Shipped the MVP that hit half the national market in the first school year.</p>
+        <div class="tags-row">
+          <span class="chip is-star is-anchor"><span class="star">&#9733;</span>50% market reach</span>
+          <span class="chip">Lead Designer</span>
+          <span class="chip">Design Sprint</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 2. Teatime — 3 tags, star -->
+    <article class="card" data-project="teatime">
+      <div class="thumb">
+        <div class="thumb-art art-teatime" aria-hidden="true"></div>
+        <div class="hover-panel" aria-hidden="true">
+          <div class="tags">
+            <span class="chip is-star is-anchor"><span class="star">&#9733;</span>+12 B2B Clients</span>
+            <span class="chip">Service Design</span>
+            <span class="chip">Co-founder</span>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <span class="eyebrow">Case study · 2019–</span>
+        <h2 class="title">Teatime</h2>
+        <p class="desc">Design studio co-founded in Prague. Twelve B2B clients shipped through a service-design-led process.</p>
+        <div class="tags-row">
+          <span class="chip is-star is-anchor"><span class="star">&#9733;</span>+12 B2B Clients</span>
+          <span class="chip">Service Design</span>
+          <span class="chip">Co-founder</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 3. Crowdberry — 3 tags, star -->
+    <article class="card" data-project="crowdberry">
+      <div class="thumb">
+        <div class="thumb-art art-crowd" aria-hidden="true">
+          <span class="crowd-label">Crowdberry</span>
+        </div>
+        <div class="hover-panel" aria-hidden="true">
+          <div class="tags">
+            <span class="chip is-star is-anchor"><span class="star">&#9733;</span>&euro;100M+ invested</span>
+            <span class="chip">KYC &amp; AML flows</span>
+            <span class="chip">Usability testing</span>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <span class="eyebrow">Selected project</span>
+        <h2 class="title">Crowdberry</h2>
+        <p class="desc">Private-equity platform for retail investors. Regulated flows — KYC, AML, subscription — validated through lab testing.</p>
+        <div class="tags-row">
+          <span class="chip is-star is-anchor"><span class="star">&#9733;</span>&euro;100M+ invested</span>
+          <span class="chip">KYC &amp; AML flows</span>
+          <span class="chip">Usability testing</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 4. NNspect — 3 tags, no star -->
+    <article class="card" data-project="nnspect">
+      <div class="thumb">
+        <div class="thumb-art art-nnspect" aria-hidden="true"></div>
+        <div class="hover-panel" aria-hidden="true">
+          <div class="tags">
+            <span class="chip is-anchor">Concept</span>
+            <span class="chip">Industrial AI</span>
+            <span class="chip">Solo Designer</span>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <span class="eyebrow">Selected project</span>
+        <h2 class="title">NNspect</h2>
+        <p class="desc">Concept interface for an industrial AI vision system. Solo end-to-end design, from research sketches to high-fidelity.</p>
+        <div class="tags-row">
+          <span class="chip is-anchor">Concept</span>
+          <span class="chip">Industrial AI</span>
+          <span class="chip">Solo Designer</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 5. Sakurabook — 2 tags, no star -->
+    <article class="card" data-project="sakurabook">
+      <div class="thumb">
+        <div class="thumb-art art-sakura" aria-hidden="true"></div>
+        <div class="hover-panel" aria-hidden="true">
+          <div class="tags">
+            <span class="chip is-anchor">i18n</span>
+            <span class="chip">Ecosystem of multiple apps</span>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <span class="eyebrow">Selected project</span>
+        <h2 class="title">Sakurabook</h2>
+        <p class="desc">Multilingual ecosystem of reading apps. Shared design language across mobile, tablet, and web.</p>
+        <div class="tags-row">
+          <span class="chip is-anchor">i18n</span>
+          <span class="chip">Ecosystem of multiple apps</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 6. Schneider Electric — 2 tags, no star -->
+    <article class="card" data-project="schneider">
+      <div class="thumb">
+        <div class="thumb-art art-schneider" aria-hidden="true"></div>
+        <div class="hover-panel" aria-hidden="true">
+          <div class="tags">
+            <span class="chip is-anchor">Prototype</span>
+            <span class="chip">Design Sprint</span>
+          </div>
+        </div>
+      </div>
+      <div class="body">
+        <span class="eyebrow">Selected project</span>
+        <h2 class="title">Schneider Electric</h2>
+        <p class="desc">Sprint-driven prototype for a field operations tool. Stakeholders aligned in a single facilitated week.</p>
+        <div class="tags-row">
+          <span class="chip is-anchor">Prototype</span>
+          <span class="chip">Design Sprint</span>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <footer class="foot">
+    <span>chip-interaction-patterns.html · Branislav Ben&ccaron;&iacute;k · portfolio playground</span>
+    <span>Press <strong style="color:var(--fg)">A</strong> · <strong style="color:var(--fg)">B</strong> · <strong style="color:var(--fg)">C</strong> · <strong style="color:var(--fg)">D</strong></span>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var shell = document.getElementById("shell");
+    var buttons = document.querySelectorAll(".switch button");
+    var annotation = document.getElementById("annotation");
+    var rmState = document.getElementById("rm-state");
+    var rmIndicator = document.getElementById("rm-indicator");
+
+    var copy = {
+      A: {
+        title: "Pattern A · All visible at rest",
+        sell: "Maximum scanability. Every chip earns its weight from load — recruiters skimming in 8 seconds see outcomes before they decide to click.",
+        pros: ["Zero interaction needed to read proof", "Works on touch devices identically to desktop", "Hover dims non-star chips to re-focus attention"],
+        cons: ["Densest visual weight — card competes with title", "Uneven card heights when tag counts vary (2 vs 3)", "Metric stars live next to mode tags, flattening hierarchy"]
+      },
+      B: {
+        title: "Pattern B · Hover panel",
+        sell: "Thumbnail-first. Card reads as an image at rest; hover reveals the full metadata panel like a figure caption sliding in.",
+        pros: ["Cleanest resting state — portfolio feels gallery-like", "Lets the visual do primary work", "Best when thumbnails are strong"],
+        cons: ["Zero signal on touch / keyboard-only", "Recruiters skimming without hovering see no proof", "200ms delay before metric is visible"]
+      },
+      C: {
+        title: "Pattern C · Hybrid anchor",
+        sell: "One chip anchors the card at rest — the star metric, or the lead mode for no-metric projects. Hover reveals supporting tags.",
+        pros: ["Strongest outcome per project always visible", "Supporting mode-tags stay quiet until engaged", "Normalizes 2-tag and 3-tag cards visually"],
+        cons: ["Extra CSS branching between star / no-star cards", "Hidden tags invisible to touch users unless tap reveals", "Requires author discipline to pick one anchor"]
+      },
+      D: {
+        title: "Pattern D · Muted to full",
+        sell: "All tags shown at 50% opacity at rest — hover lifts them to full and bolds the metric. No content is hidden, only softened.",
+        pros: ["Nothing is hidden — full AT / touch parity", "Single uniform rule across star and no-star cards", "Cheap to implement"],
+        cons: ["50% grey text fails WCAG on white backgrounds unless color shifts", "Rest state feels washed — can read as disabled", "Less visual delta between metric and mode tags"]
+      }
+    };
+
+    function render(p) {
+      var c = copy[p];
+      annotation.innerHTML =
+        '<div class="col" style="grid-column: 1 / 2;">' +
+          '<h3>Pattern ' + p + '</h3>' +
+          '<p><strong>' + c.title.split("· ")[1] + '</strong></p>' +
+        '</div>' +
+        '<div class="col" style="grid-column: 2 / 3;">' +
+          '<h3>Bet</h3>' +
+          '<p>' + c.sell + '</p>' +
+        '</div>' +
+        '<div class="col" style="grid-column: 3 / 4;">' +
+          '<h3>Pros</h3>' +
+          '<ul>' + c.pros.map(function (x) { return "<li>" + x + "</li>"; }).join("") + '</ul>' +
+        '</div>' +
+        '<div class="col" style="grid-column: 4 / 5;">' +
+          '<h3>Cons</h3>' +
+          '<ul>' + c.cons.map(function (x) { return "<li>" + x + "</li>"; }).join("") + '</ul>' +
+        '</div>';
+    }
+
+    function setPattern(p) {
+      if (!copy[p]) return;
+      shell.setAttribute("data-pattern", p);
+      buttons.forEach(function (b) {
+        b.setAttribute("aria-pressed", b.dataset.pat === p ? "true" : "false");
+      });
+      render(p);
+    }
+
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () { setPattern(b.dataset.pat); });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var k = e.key.toUpperCase();
+      if (k === "A" || k === "B" || k === "C" || k === "D") {
+        setPattern(k);
+      }
+    });
+
+    // Reduced motion detection + degrade
+    var mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function syncMotion() {
+      if (mq.matches) {
+        shell.classList.add("reduce-motion");
+        rmState.textContent = "on — transitions skipped";
+        rmIndicator.classList.add("rm-on");
+      } else {
+        shell.classList.remove("reduce-motion");
+        rmState.textContent = "off";
+        rmIndicator.classList.remove("rm-on");
+      }
+    }
+    syncMotion();
+    if (mq.addEventListener) mq.addEventListener("change", syncMotion);
+    else if (mq.addListener) mq.addListener(syncMotion);
+
+    // Initial render
+    setPattern("A");
+  })();
+</script>
+
+</body>
+</html>
