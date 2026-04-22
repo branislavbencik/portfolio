@@ -1,13 +1,16 @@
 title: Shopify plugin for per-hour booking in Japan
 description: "Shopify plugin · Hourly booking · Shipped in Japanese"
 tags:
-  - Ecommerce
-  - Design System
+  - text: "i18n"
+    highlight: false
+  - text: "Ecosystem of multiple apps"
+    highlight: false
 type: selected
 metric: ""
 coverImage: /images/sakurabook/sakurabook-thumb.png
 order: 4
 company: Sakurabook
+tagline: Shopify plugin for per-hour booking in Japan
 role: Solo Designer
 year: "2021"
 domain: Ecommerce

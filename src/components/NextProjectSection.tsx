@@ -1,13 +1,10 @@
-import { CaseStudyCard } from "./CaseStudyCard";
+import { CaseStudyCard, type CardTag } from "./CaseStudyCard";
 
 interface NextProjectItem {
   slug: string;
-  isCaseStudy?: boolean;
-  company?: string;
-  year?: string;
-  role?: string;
-  headline: string;
-  tags?: readonly string[];
+  company: string;
+  tagline: string;
+  tags?: readonly CardTag[];
   href: string;
   image: string;
   imageAlt: string;
@@ -27,11 +24,8 @@ export function NextProjectSection({ items }: NextProjectSectionProps) {
           {items.map((item) => (
             <CaseStudyCard
               key={item.slug}
-              isCaseStudy={item.isCaseStudy}
               company={item.company}
-              year={item.year}
-              role={item.role}
-              headline={item.headline}
+              tagline={item.tagline}
               tags={item.tags}
               primaryHref={item.href}
               image={item.image}

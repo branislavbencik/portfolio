@@ -59,7 +59,7 @@ export default function Nav() {
     >
       <nav
         aria-label="Primary"
-        className="w-full max-w-frame mx-center px-content-x flex items-center justify-between h-13"
+        className="w-full max-w-frame mx-center max-lg:px-content-x flex items-center justify-between h-13"
       >
         {isDetail ? (
           <Link

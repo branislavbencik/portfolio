@@ -75,22 +75,24 @@ Built on **Geist Sans** and **Geist Mono**.
 
 ## 4. Component Architecture
 
-### Case Study Cards (v3 — no frame, 12% reveal)
+### Case Study Cards (v3.2 — minimal rest, image-only scale + reveal hover)
 
-- **Wrapper: NONE.** Bare thumbnail + text below. No `border`, no background fill, no outer padding box. The thumbnail is itself a bounded rectangle; the text beneath doesn't need an additional frame. (Supersedes v2's `border-t border-b` structural separators.)
-- **Rest state:** thumbnail (4:3, `--max-width-frame` at landing grid width) → meta row → headline → one-line description. **Tags hidden at rest.**
-- **Meta row:** Geist Mono allcaps, `·`-separated — `[Case Study pill] · YEAR · ROLE`. `Case Study` pill inverted (filled) when present; "Selected project" otherwise; other values are tertiary mono text.
-- **Hover — reveal panel (B1 Clean baseline):**
-  - Panel slides up from thumbnail's bottom edge covering **~12% of thumbnail height** (~40px absolute at 528×396). Height matches tag-row intrinsic height — disproportion to content is a craft tell.
-  - Content: tags as `type-allcaps` (Geist Mono 12px, `·`-separated, **bare text only — no pill border, no chip padding**).
-  - Background: `--background` (continuous with canvas); border-top 1px is the only separator.
+- **Wrapper: NONE.** Bare thumbnail + text below. No `border`, no background fill, no outer padding box. The thumbnail is itself a bounded rectangle; the text beneath doesn't need an additional frame.
+- **Rest state:** thumbnail (**3:2** via `aspect-[3/2]` + `object-cover`, full card width) → 16px gap → single-line headline `**Company** — Tagline`. **Nothing else visible.** No meta row at rest (Case Study pill, year, role all live in the hover reveal or on the detail page). No description line. No tags.
+- **Headline composition:** `<strong class="text-text-primary font-semibold">{company}</strong><span class="text-text-secondary font-normal"> — {tagline}</span>`. Uses the `type-card-title` utility: **16px**, weight 400 base, line-height 1.4, letter-spacing -0.005em. Company overrides to 600 + primary color; tagline stays 400 + secondary color. Two-level hierarchy in one line, no second font size.
+- **Hover — reveal panel:**
+  - Panel slides up from thumbnail's bottom edge. Height is content-driven (~40px = `py-2.5` + mono allcaps line-height).
+  - Content: up to 3 tags as `type-allcaps` (Geist Mono 12px, `·`-separated, **bare text only — no pill border, no chip padding**). First tag can carry `highlight: true` which renders a `★` prefix (U+2605, inherits text color — monochrome, on-palette).
+  - Background: `--canvas` (continuous with page); no border-top — panel relies on canvas-background contrast against the photo underneath for separation.
   - `pointer-events: none` so hover doesn't flicker on panel edge.
   - Motion: `transform: translateY(100% → 0)` over **200ms** with `cubic-bezier(0.23, 1, 0.32, 1)`.
-  - Image: `filter: brightness(0.94)` (subtler than v2's 0.92).
-- **Hover — B2 Zoom (opt-in per card):** adds `transform: scale(1.02)` on image. Apply to photo-heavy thumbnails only (Skoala, Teatime, Crowdberry). Skip on diagram-heavy (Nnspect, Schneider) where zoom crops meaningful edges.
-- **Keyboard parity:** `:focus-within` on the card link triggers the identical reveal. Tab shows tags the same as hover.
-- **Reduced motion:** wrap transitions in `motion-safe:` Tailwind prefix. `prefers-reduced-motion: reduce` → panel renders static (tags always visible), no translate / brightness / scale.
-- **Dropped v3 variants (explored, rejected):** Desaturate (breaks on already-muted thumbs), 4px title shift (below perceptual threshold), tag cascade (~520ms total — outlives the grid scan).
+- **Hover — image lift:** `transform: scale(1.02)` on the `<Image>` only (NOT the whole card) over **300ms** with `cubic-bezier(0.25, 1, 0.5, 1)`. Image scales beneath the overflow-hidden thumbnail container; photo appears to push forward toward the viewer. Card layout (thumbnail container + headline block) stays pixel-stable, so no sibling-gap bleed.
+- **No brightness, no shadow, no whole-card scale.** Two properties, one story: image pushes toward viewer, panel rises from bottom. Whole-card scale was tested (v3.1) and rejected — it bled into the 24px grid gap and created visual overflow. Brightness was tested and rejected — washed-out on off-white canvas. Shadow was considered but incongruous with the "load-bearing borders" system (see §6 Do-Nots).
+- **Tag schema:** `tags: { text: string; highlight?: boolean }[]` in YAML/Keystatic. `highlight: true` renders `★ ` before the tag text (accessibility: `aria-hidden` on the star glyph).
+- **Keyboard parity:** `:focus-within` on the card link triggers the identical reveal + image scale. Tab shows tags the same as hover.
+- **Reduced motion:** wrap transitions in `motion-safe:` Tailwind prefix. `prefers-reduced-motion: reduce` → panel renders static (tags always visible), no scale transform.
+- **Dropped variants (explored, rejected across v3.0 → v3.2):** B1 brightness (washed-out on off-white), B3 desaturate (breaks on already-muted thumbs), 4px title shift (below perceptual threshold), tag cascade (~520ms total — outlives the grid scan), hover shadow (incongruous with hard-1px-border structural system), whole-card scale (layout bleed into grid gap), reveal-panel `border-t` (floating-seam artifact in motion).
+- **Component reuse:** `CaseStudyCard` is the single source of truth — rendered by both the landing grid (`src/app/page.tsx`) and the detail-page "More work" row (`src/components/NextProjectSection.tsx`). Register parity guaranteed by shared code.
 
 ---
 

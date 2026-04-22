@@ -1,4 +1,4 @@
-import { CaseStudyCard } from "@/components/CaseStudyCard";
+import { CaseStudyCard, type CardTag } from "@/components/CaseStudyCard";
 import HeroStatement from "@/components/HeroStatement";
 import { reader } from "@/lib/keystatic";
 
@@ -12,22 +12,17 @@ export default async function Home() {
 
   return (
     <main id="main-content">
-      <div className="w-full max-w-frame mx-center">
-        <div className="px-content-x">
-          <HeroStatement />
-        </div>
+      <div className="w-full max-w-frame mx-center max-lg:px-content-x">
+        <HeroStatement />
 
-        <div id="work" className="scroll-mt-20 px-content-x">
+        <div id="work" className="scroll-mt-20">
           <div className="grid grid-cols-2 max-lg:grid-cols-1 gap-6">
             {projects.map(({ slug, entry }) => (
               <CaseStudyCard
                 key={slug}
-                isCaseStudy={entry.type === "case-study"}
-                company={entry.company || undefined}
-                year={entry.year || undefined}
-                role={entry.role || undefined}
-                headline={entry.title}
-                tags={entry.tags}
+                company={entry.company || ""}
+                tagline={entry.tagline || entry.title}
+                tags={entry.tags as readonly CardTag[]}
                 primaryHref={`/${slug}`}
                 image={
                   typeof entry.coverImage === "object" && entry.coverImage !== null

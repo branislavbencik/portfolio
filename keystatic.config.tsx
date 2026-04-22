@@ -14,10 +14,18 @@ export default config({
           description: "One-liner shown on the card.",
         }),
         tags: fields.array(
-          fields.text({ label: "Tag" }),
+          fields.object({
+            text: fields.text({ label: "Tag text" }),
+            highlight: fields.checkbox({
+              label: "Highlight (⭐)",
+              description: "Renders ⭐ prefix in the hover reveal. Typically first tag only.",
+              defaultValue: false,
+            }),
+          }),
           {
             label: "Tags",
-            description: "Up to 3 shown on the thumbnail. First tag styled as a pill if 'Case Study'.",
+            description: "Up to 3 tags shown in the hover reveal panel. First can be highlighted with a star.",
+            itemLabel: (props) => props.fields.text.value || "Tag",
           }
         ),
         type: fields.select({
@@ -48,6 +56,11 @@ export default config({
         company: fields.text({
           label: "Company / Product",
           description: "Short identifier shown in the landing card meta row (e.g. Skoala, TeaTime, NNspect).",
+          validation: { isRequired: false },
+        }),
+        tagline: fields.text({
+          label: "Card tagline",
+          description: "Product-level one-liner shown on the landing card after the em-dash (e.g. 'Financial literacy platform for kids').",
           validation: { isRequired: false },
         }),
         role: fields.text({

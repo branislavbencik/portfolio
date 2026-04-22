@@ -1,13 +1,18 @@
 title: Corporate language learning system
 description: "Built acquisition pipeline (+12 corporate clients) and AI-evaluated speaking test automated with n8n."
 tags:
-  - +12 clients
-  - EdTech
+  - text: "+12 B2B Clients"
+    highlight: true
+  - text: "Service Design"
+    highlight: false
+  - text: "Co-founder"
+    highlight: false
 type: case-study
 metric: acquired 12 corporate clients
 coverImage: /images/teatime/teatime-thumb.png
 order: 2
 company: TeaTime
+tagline: Redesigning a B2B language school
 role: Co-owner
 year: "2024–25"
 domain: ""

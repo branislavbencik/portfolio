@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1080, initial-scale=1" />
+<title>Landing-card interaction · Effect-stack × reveal-style</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --canvas:       #F9FAFB;
+    --fg:           #18181B;
+    --fg-secondary: #52525B;
+    --fg-tertiary:  #71717A;
+    --border:       #D4D4D8;
+    --border-soft:  #E4E4E7;
+    --panel:        #F9FAFB;
+    --ease-out:     cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--canvas);
+    color: var(--fg);
+    font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .mono { font-family: "Geist Mono", ui-monospace, monospace; }
+
+  .stage {
+    width: 1080px;
+    margin: 0 auto;
+    padding: 48px 48px 96px;
+  }
+
+  /* ───────── Strip ───────── */
+  .strip {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    background: #fff;
+  }
+  .strip + .strip { border-top: none; }
+
+  .strip-label {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+    min-width: 80px;
+  }
+
+  .strip-buttons { display: flex; gap: 4px; flex-wrap: wrap; }
+  .strip button {
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--fg-secondary);
+    cursor: pointer;
+    transition: background 120ms, color 120ms, border-color 120ms;
+  }
+  .strip button:hover { color: var(--fg); border-color: var(--fg); }
+  .strip button[aria-pressed="true"] {
+    background: var(--fg);
+    color: #fff;
+    border-color: var(--fg);
+  }
+
+  .strip .shortcut {
+    margin-left: auto;
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    color: var(--fg-tertiary);
+  }
+
+  /* ───────── Annotation ───────── */
+  .annotation {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 16px;
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-top: none;
+    background: #fff;
+    margin-bottom: 40px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .annotation-tag {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+    padding-top: 2px;
+  }
+  .annotation-body { color: var(--fg-secondary); }
+  .annotation-body strong { color: var(--fg); font-weight: 500; }
+
+  .rm-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+    padding: 2px 8px;
+    border: 1px solid var(--border);
+    font-family: "Geist Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+    cursor: pointer;
+  }
+  .rm-indicator[data-active="true"] {
+    color: var(--fg);
+    border-color: var(--fg);
+  }
+  .rm-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--fg-tertiary);
+  }
+  .rm-indicator[data-active="true"] .rm-dot { background: #16A34A; }
+
+  /* ───────── Intro ───────── */
+  .intro { margin-bottom: 24px; }
+  .intro h1 {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--fg);
+    margin-bottom: 4px;
+  }
+  .intro p {
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+  }
+
+  /* ───────── Grid ───────── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  /* ───────── Card ───────── */
+  .card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--border-soft);
+  }
+
+  .card-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center center;
+    transition:
+      filter 200ms var(--ease-out),
+      transform 200ms var(--ease-out);
+    will-change: filter, transform;
+  }
+
+  /* Panel that reveals tags */
+  .card-panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    transition:
+      transform 200ms var(--ease-out),
+      opacity 200ms var(--ease-out);
+    will-change: transform, opacity;
+  }
+
+  .card-tags {
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fg-secondary);
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Card body */
+  .card-body {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card-meta {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+  }
+  .card-meta .pill {
+    background: var(--fg);
+    color: #fff;
+    padding: 3px 10px;
+  }
+  .card-title {
+    font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--fg);
+  }
+  .card-title strong {
+    font-weight: 600;
+    color: var(--fg);
+  }
+  .card-title .tagline {
+    font-weight: 400;
+    color: var(--fg-secondary);
+  }
+
+  /* ───────── Reveal styles (Axis 2) ───────── */
+  /* Default reveal-style = slide */
+  .card-panel {
+    transform: translateY(100%);
+    opacity: 1;
+  }
+  .stage[data-reveal="fade"] .card-panel {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  .stage[data-reveal="slide-fade"] .card-panel {
+    transform: translateY(40%);
+    opacity: 0;
+    transition:
+      transform 240ms var(--ease-out),
+      opacity 240ms var(--ease-out);
+  }
+
+  /* Hover → reveal */
+  .card:hover .card-panel,
+  .card:focus-within .card-panel {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* ───────── Effect stack (Axis 1) ───────── */
+  /* Default = reveal-brightness (ship target) */
+  .stage[data-effect="reveal"] .card:hover .card-image {
+    filter: none;
+    transform: none;
+  }
+  .stage[data-effect="reveal-brightness"] .card:hover .card-image,
+  .stage[data-effect="reveal-brightness"] .card:focus-within .card-image {
+    filter: brightness(0.94);
+  }
+  .stage[data-effect="reveal-zoom"] .card:hover .card-image,
+  .stage[data-effect="reveal-zoom"] .card:focus-within .card-image {
+    transform: scale(1.02);
+  }
+  .stage[data-effect="reveal-brightness-zoom"] .card:hover .card-image,
+  .stage[data-effect="reveal-brightness-zoom"] .card:focus-within .card-image {
+    filter: brightness(0.94);
+    transform: scale(1.02);
+  }
+
+  /* ───────── Empty cell ───────── */
+  .card-empty {
+    border: 1px dashed var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 9;
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+  }
+
+  /* ───────── Reduced-motion ───────── */
+  @media (prefers-reduced-motion: reduce) {
+    .card-panel,
+    .card-image {
+      transition: none !important;
+    }
+    .card-panel {
+      transform: translateY(0) !important;
+      opacity: 1 !important;
+    }
+    .card:hover .card-image,
+    .card:focus-within .card-image {
+      filter: none !important;
+      transform: none !important;
+    }
+  }
+
+  /* JS-forced static */
+  .stage[data-force-static="true"] .card-panel,
+  .stage[data-force-static="true"] .card-image {
+    transition: none !important;
+  }
+  .stage[data-force-static="true"] .card-panel {
+    transform: translateY(0) !important;
+    opacity: 1 !important;
+  }
+  .stage[data-force-static="true"] .card:hover .card-image,
+  .stage[data-force-static="true"] .card:focus-within .card-image {
+    filter: none !important;
+    transform: none !important;
+  }
+
+  /* ───────── Footer ───────── */
+  .foot {
+    margin-top: 48px;
+    font-family: "Geist Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg-tertiary);
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+  <main
+    class="stage"
+    data-effect="reveal-brightness"
+    data-reveal="slide"
+    data-force-static="false"
+    id="stage"
+  >
+    <section class="intro">
+      <h1>Landing-card interaction</h1>
+      <p>Effect-stack × reveal-style · v3 card rebuild preview</p>
+    </section>
+
+    <div class="strip" role="tablist" aria-label="Effect stack">
+      <span class="strip-label">Effect</span>
+      <div class="strip-buttons" id="effectButtons">
+        <button data-effect="reveal"                    aria-pressed="false">1 · Reveal only</button>
+        <button data-effect="reveal-brightness"         aria-pressed="true">2 · Reveal + brightness</button>
+        <button data-effect="reveal-zoom"               aria-pressed="false">3 · Reveal + zoom</button>
+        <button data-effect="reveal-brightness-zoom"    aria-pressed="false">4 · Reveal + brightness + zoom</button>
+      </div>
+      <span class="shortcut">keys 1–4 · Q/W/E · R toggles static</span>
+      <span class="rm-indicator" id="rmIndicator" data-active="false" aria-live="polite">
+        <span class="rm-dot"></span>
+        <span id="rmLabel">Motion on</span>
+      </span>
+    </div>
+
+    <div class="strip" role="tablist" aria-label="Reveal style">
+      <span class="strip-label">Reveal</span>
+      <div class="strip-buttons" id="revealButtons">
+        <button data-reveal="slide"      aria-pressed="true">Q · Slide</button>
+        <button data-reveal="fade"       aria-pressed="false">W · Fade</button>
+        <button data-reveal="slide-fade" aria-pressed="false">E · Slide + fade</button>
+      </div>
+    </div>
+
+    <div class="annotation">
+      <span class="annotation-tag" id="annoTag">reveal-brightness · slide</span>
+      <span class="annotation-body" id="annoBody">
+        <strong>Two properties, one story.</strong> The image recedes to brightness(0.94) while the tag panel rises from the bottom edge. One motion beat, one mental model. Emil's purpose test passes cleanly — each effect carries distinct information.
+      </span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <div class="foot">
+      <span>playground/landing-card-interaction.html</span>
+      <span>Branislav Benčík · landing-card-refresh</span>
+    </div>
+  </main>
+
+<script>
+  // ───────── Data (mirrors /src/content/projects/*.yaml) ─────────
+  const cards = [
+    {
+      slug: "skoala",
+      company: "Skoala",
+      tagline: "Financial literacy platform for kids",
+      isCaseStudy: true,
+      year: "2024–25",
+      role: "Lead Designer",
+      tags: ["3,5K schools", "EdTech"],
+      image: "../public/images/skoala/skoala-thumb.png",
+    },
+    {
+      slug: "teatime",
+      company: "TeaTime",
+      tagline: "Redesigning a B2B language school",
+      isCaseStudy: true,
+      year: "2024–25",
+      role: "Co-owner",
+      tags: ["+12 clients", "EdTech"],
+      image: "../public/images/teatime/teatime-thumb.png",
+    },
+    {
+      slug: "nnspect",
+      company: "NNspect",
+      tagline: "ML training platform for material quality inspection",
+      isCaseStudy: false,
+      year: "2022",
+      role: "Solo Designer",
+      tags: ["Concept", "Industrial AI"],
+      image: "../public/images/nnspect/nnspect-thumb.png",
+    },
+    {
+      slug: "sakurabook",
+      company: "Sakurabook",
+      tagline: "Shopify plugin for per-hour booking in Japan",
+      isCaseStudy: false,
+      year: "2021",
+      role: "Solo Designer",
+      tags: ["Ecommerce", "Design System"],
+      image: "../public/images/sakurabook/sakurabook-thumb.png",
+    },
+    {
+      slug: "crowdberry",
+      company: "Crowdberry",
+      tagline: "Crowdfunding investment platform",
+      isCaseStudy: false,
+      year: "2020",
+      role: "Product Designer",
+      tags: ["Fintech", "User Testing"],
+      image: "../public/images/crowdberry/crowdberry-thumb.png",
+    },
+  ];
+
+  // ───────── Render ─────────
+  function renderMeta(c) {
+    const leading = c.isCaseStudy
+      ? `<span class="pill">Case Study</span>`
+      : `<span>Selected project</span>`;
+    const rest = [c.year, c.role].filter(Boolean).map(v => `<span>${v}</span>`).join(`<span aria-hidden="true">·</span>`);
+    return `${leading}<span aria-hidden="true">·</span>${rest}`;
+  }
+
+  function renderCard(c) {
+    return `
+      <a class="card" href="#${c.slug}">
+        <div class="card-media">
+          <img class="card-image" src="${c.image}" alt="${c.company} thumbnail" />
+          <div class="card-panel">
+            <div class="card-tags">${c.tags.join(" · ")}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">${renderMeta(c)}</div>
+          <h2 class="card-title"><strong>${c.company}</strong><span class="tagline"> — ${c.tagline}</span></h2>
+        </div>
+      </a>
+    `;
+  }
+
+  const grid = document.getElementById("grid");
+  grid.innerHTML =
+    cards.map(renderCard).join("") +
+    `<div class="card-empty">6th cell · Schneider deferred</div>`;
+
+  // ───────── Axis 1: Effect stack ─────────
+  const stage = document.getElementById("stage");
+  const effectButtons = Array.from(document.querySelectorAll("#effectButtons button"));
+  const revealButtons = Array.from(document.querySelectorAll("#revealButtons button"));
+  const annoTag = document.getElementById("annoTag");
+  const annoBody = document.getElementById("annoBody");
+
+  const effectAnnotations = {
+    "reveal": "Purest form. Panel rises, image unchanged. Trusts the panel alone to carry the feedback. Risk: on ambiguous thumbnails, the change can feel too subtle.",
+    "reveal-brightness": "Two properties, one story. Image recedes to brightness(0.94) while the panel rises. Emil's purpose test passes — each effect carries distinct information.",
+    "reveal-zoom": "Panel rises, image scales 1.02. Adds 'alive/pressable' feeling. Costs: crops meaningful edges on diagram-heavy thumbs (Nnspect). Three simultaneous motion properties if combined with translate.",
+    "reveal-brightness-zoom": "All three: reveal + brightness + scale. Maximal feedback but three concurrent motion properties on a 200ms budget. Emil: 'one story' principle argues this fragments attention.",
+  };
+
+  function setEffect(value) {
+    stage.dataset.effect = value;
+    effectButtons.forEach(b => b.setAttribute("aria-pressed", b.dataset.effect === value ? "true" : "false"));
+    updateAnnotation();
+  }
+
+  effectButtons.forEach(b => b.addEventListener("click", () => setEffect(b.dataset.effect)));
+
+  // ───────── Axis 2: Reveal style ─────────
+  const revealAnnotations = {
+    "slide":      "translateY(100% → 0) over 200ms. Direction communicates 'supporting info comes from below the image.'",
+    "fade":       "opacity(0 → 1) over 200ms. Panel appears in place. Softer; loses the spatial cue of 'rising from below.'",
+    "slide-fade": "translateY(40% → 0) + opacity(0 → 1) over 240ms. Compromise: subtle motion plus fade. Slightly slower total duration.",
+  };
+
+  function setReveal(value) {
+    stage.dataset.reveal = value;
+    revealButtons.forEach(b => b.setAttribute("aria-pressed", b.dataset.reveal === value ? "true" : "false"));
+    updateAnnotation();
+  }
+
+  revealButtons.forEach(b => b.addEventListener("click", () => setReveal(b.dataset.reveal)));
+
+  function updateAnnotation() {
+    const e = stage.dataset.effect;
+    const r = stage.dataset.reveal;
+    annoTag.textContent = `${e} · ${r}`;
+    annoBody.innerHTML = `<strong>${effectAnnotations[e].split(".")[0]}.</strong> ${effectAnnotations[e].split(".").slice(1).join(".").trim()} <em style="color:var(--fg-tertiary)">· Reveal: ${revealAnnotations[r]}</em>`;
+  }
+
+  // ───────── Keyboard shortcuts ─────────
+  const effectKeys  = { "1": "reveal", "2": "reveal-brightness", "3": "reveal-zoom", "4": "reveal-brightness-zoom" };
+  const revealKeys  = { "q": "slide", "w": "fade", "e": "slide-fade" };
+
+  window.addEventListener("keydown", (ev) => {
+    if (ev.target.tagName === "INPUT" || ev.target.tagName === "TEXTAREA") return;
+    const k = ev.key.toLowerCase();
+    if (effectKeys[k]) setEffect(effectKeys[k]);
+    else if (revealKeys[k]) setReveal(revealKeys[k]);
+    else if (k === "r") toggleStatic();
+  });
+
+  // ───────── Reduced-motion ─────────
+  const rmIndicator = document.getElementById("rmIndicator");
+  const rmLabel = document.getElementById("rmLabel");
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let forcedStatic = false;
+
+  function updateRMIndicator() {
+    const osReduced = mq.matches;
+    const active = osReduced || forcedStatic;
+    rmIndicator.dataset.active = active ? "true" : "false";
+    stage.dataset.forceStatic = forcedStatic ? "true" : "false";
+    if (osReduced) rmLabel.textContent = "Reduced motion (OS)";
+    else if (forcedStatic) rmLabel.textContent = "Static preview (R)";
+    else rmLabel.textContent = "Motion on";
+  }
+  function toggleStatic() {
+    forcedStatic = !forcedStatic;
+    updateRMIndicator();
+  }
+  mq.addEventListener ? mq.addEventListener("change", updateRMIndicator) : mq.addListener(updateRMIndicator);
+  rmIndicator.addEventListener("click", toggleStatic);
+  updateRMIndicator();
+  updateAnnotation();
+</script>
+</body>
+</html>

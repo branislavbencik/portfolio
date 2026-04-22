@@ -1,4 +1,5 @@
 import { reader } from "@/lib/keystatic";
+import type { CardTag } from "./CaseStudyCard";
 import { NextProjectSection } from "./NextProjectSection";
 
 interface NextProjectCardProps {
@@ -31,12 +32,9 @@ export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
         : (p.entry.coverImage as string) ?? "";
     return {
       slug: p.slug,
-      isCaseStudy: p.entry.type === "case-study",
-      company: p.entry.company || undefined,
-      year: p.entry.year || undefined,
-      role: p.entry.role || undefined,
-      headline: p.entry.title,
-      tags: p.entry.tags,
+      company: p.entry.company || "",
+      tagline: p.entry.tagline || p.entry.title,
+      tags: p.entry.tags as readonly CardTag[],
       href: `/${p.slug}`,
       image,
       imageAlt: `${p.entry.title} thumbnail`,
