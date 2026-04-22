@@ -29,11 +29,12 @@
 
 @media (max-width: 767px) {
   :root {
-    --font-size-display: 32px;
-    --font-size-h1:      24px;
-    --spacing-content-x: 20px;
-    --spacing-detail:    60px;
-    --spacing-section:   40px;
+    --font-size-display:    32px;
+    --font-size-section-h2: 32px;
+    --font-size-h1:         24px;
+    --spacing-content-x:    20px;
+    --spacing-detail:       60px;
+    --spacing-section:      40px;
   }
 }
 
@@ -66,10 +67,11 @@
   --max-width-column:   560px;
 
   /* ── Typography — font sizes ────────────────────────────────────── */
-  --font-size-display: 40px;
-  --font-size-stat:    24px;
-  --font-size-h1:      24px;
-  --font-size-h2:      20px;
+  --font-size-display:    40px;
+  --font-size-section-h2: 40px;  /* Variant B body-section headline; 32px on mobile */
+  --font-size-stat:       24px;
+  --font-size-h1:         24px;
+  --font-size-h2:         20px;
   --font-size-h3:      18px;
   --font-size-h4:      17px;
   --font-size-h5:      15px;
@@ -113,6 +115,13 @@
     font-weight: 500;
     line-height: 1.1;
     letter-spacing: -0.02em;
+  }
+  /* Variant B body-section H2 — carries the insight; ~40px desktop, 32px mobile */
+  .type-section-h2 {
+    font-size: var(--font-size-section-h2);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
   }
   .type-h1 {
     font-size: var(--font-size-h1);
