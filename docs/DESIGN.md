@@ -1,5 +1,7 @@
 # Design System (`DESIGN.md`)
 
+> **Scope.** Visual execution only — tokens, components, image modes, spacing, motion. Strategic claims (what the portfolio says, hero copy, proof stack, body-prose caps) live in `positioning.md`. When claims/copy conflict with this file, `positioning.md` wins. See `CLAUDE.md` → *Source-of-Truth Hierarchy*.
+
 ## 1. Core Philosophy
 This portfolio operates like a high-end architectural CAD tool or a technical blueprint. It uses a **Light Technical Canvas** as the native medium, where information density is managed through structural grid lines and a tactile, paper-like texture.
 
@@ -16,7 +18,8 @@ This portfolio operates like a high-end architectural CAD tool or a technical bl
 - **Canvas Base (`bg-canvas`):** `#F9FAFB` (Zinc 50)
 - **Surface Level 1 (`bg-surface-1`):** `#F4F4F5` (Zinc 100)
 - **Surface Level 2 (`bg-surface-2`):** `#E4E4E7` (Zinc 200)
-- **Identity Glows:** Soft `rgba` halos (10–15% opacity) behind primary case study cards using project-specific hex codes.
+
+The canvas is achromatic. Case study cards do NOT use project-specific color (no aura glows, no halos, no identity tints). Color only appears inside work screenshots.
 
 ### Typography
 - **Primary Text (`text-primary`):** `#18181B` (Zinc 900)
@@ -73,14 +76,12 @@ Built on **Geist Sans** and **Geist Mono**.
 
 ### Case Study Cards
 - **Wrapper:** `border-t border-b border-surface-2 rounded-none` — structural 1px separators; cards inherit the canvas background
-- **Hover — image hairline:** inset box-shadow on the thumbnail deepens from `rgba(0,0,0,0.06)` to `rgba(0,0,0,0.18)` over `200ms ease-out` — selection signal without card lift
-- **Hover — image shadow:** soft `0 4px 12px rgba(0,0,0,0.06)` drop on the thumbnail container
+- **Rest state:** image (4:3 aspect), then text block below (`gap-3`): meta row → headline → description. **No tag chips at rest** — tags belong to the hover panel.
+- **Hover — bottom panel reveal:** a panel slides up from the image's bottom edge covering ~35% of image height. Panel content: tags as `.type-allcaps` on `bg-canvas`, space-dot separated, no pill border. Panel `translate-y-full` → `translate-y-0` over `200ms ease-out`. Image dims to `brightness-[0.92]` under the panel. Layout outside the tile does not shift.
+- **Hover — image opacity:** subtle opacity dip (`group-hover:opacity-90`) on the thumbnail, stacked with the brightness dim
 - Respect `prefers-reduced-motion` — transitions wrapped in `motion-safe:` Tailwind prefix
-- **Layout:**
-  - Image sits on top at full `px-content-x` width
-  - Text block below at `gap-10`: metadata row → headline
-  - Metadata row: Geist Mono allcaps, `·`-separated — `[Case Study pill] · YEAR · ROLE · DOMAIN`
-  - `Case Study` pill is inverted (filled) when present; other values are tertiary mono text
+- **Meta row (below image, at rest):** Geist Mono allcaps, `·`-separated — `[Case Study pill] · COMPANY · YEAR · ROLE`
+- `Case Study` pill is inverted (filled) when present; other values are tertiary mono text
 
 ---
 
@@ -139,13 +140,13 @@ Strict 8px base system.
 
 ## 7. Case Study Image Modes
 
-Three canonical modes. Never use ad-hoc widths.
+Three canonical modes, driven by tokens in `src/app/globals.css`. Never use ad-hoc widths.
 
-| Mode | Width | Component | Use when |
-|------|-------|-----------|----------|
-| **hero** | 1288px (full frame, full-bleed) | `ProjectHeader` only | The project opener. Bleeds edge-to-edge, `border-y`. One per page. |
-| **content** | 1128px (default) | `CaptionedImage` no `width` | App screenshots, multi-panel composites, wide diagrams. |
-| **column** | 720px | `CaptionedImage width={720}` | Personas, single device mockups, narrow diagrams. |
+| Mode | Width | Token | Component | Use when |
+|------|-------|-------|-----------|----------|
+| **hero** | 1080px (full frame) | `--max-width-frame` | `ProjectHeader` only | The project opener. One per page. |
+| **figure** | 800px (default) | `--max-width-figure` | `CaptionedImage` no `width` | App screenshots, multi-panel composites, wide diagrams. |
+| **column** | 560px | `--max-width-column` | `CaptionedImage width={560}` or text columns | Personas, single device mockups, narrow diagrams, body text columns. |
 
 The `background` flag is orthogonal to width — both modes can be `true` or `false`:
 - `background: true` → `bg-surface-1` + `p-8` + `border border-zinc-200`. For product UI screenshots.
@@ -156,7 +157,7 @@ The `background` flag is orthogonal to width — both modes can be `true` or `fa
 - **No external padding.** CSS applies `p-8` (32px) when `background: true`. Baked-in padding doubles it.
 - **No outer `border-radius`** on the containing frame. Inner corners on UI elements (phone bezels, browser chrome, cards) are fine.
 - **No background color baked in.** The gray surface comes from CSS. Export against white or transparent.
-- **Export at 2×.** Always. Content mode = 2256px wide. Column mode = 1440px wide.
+- **Export at 2×.** Always. Hero = 2160px wide. Figure = 1600px wide. Column = 1120px wide.
 - Composites (multi-panel layouts) use `background: false` — the composite is its own visual frame.
 
 ---
