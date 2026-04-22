@@ -20,7 +20,7 @@ export function CaptionedImage({ src, alt, caption }: CaptionedImageProps) {
   }, [id, src, alt, caption, register, unregister]);
 
   return (
-    <figure className="w-full max-w-column mx-auto flex flex-col items-center">
+    <figure className="w-full max-w-figure mx-auto flex flex-col items-center">
       <button
         type="button"
         className="relative w-full overflow-hidden cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2"
@@ -30,8 +30,8 @@ export function CaptionedImage({ src, alt, caption }: CaptionedImageProps) {
         <Image
           src={src}
           alt={alt ?? ""}
-          width={640}
-          height={Math.round(640 * (2 / 3))}
+          width={800}
+          height={Math.round(800 * (2 / 3))}
           className="w-full h-auto block relative"
           unoptimized
         />

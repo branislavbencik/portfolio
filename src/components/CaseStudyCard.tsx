@@ -4,9 +4,11 @@ import { ProjectMetaRow } from "./ProjectMetaRow";
 
 interface CaseStudyCardProps {
   isCaseStudy?: boolean;
+  company?: string;
   year?: string;
   role?: string;
   headline: string;
+  tags?: readonly string[];
   primaryHref: string;
   image: string;
   imageAlt: string;
@@ -14,31 +16,40 @@ interface CaseStudyCardProps {
 
 export function CaseStudyCard({
   isCaseStudy,
+  company,
   year,
   role,
   headline,
+  tags,
   primaryHref,
   image,
   imageAlt,
 }: CaseStudyCardProps) {
+  const visibleTags = tags?.filter((t) => t && t.trim()).slice(0, 3) ?? [];
+
   return (
     <Link
       href={primaryHref}
       className="group block rounded-none no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
     >
-      <div className="flex flex-col gap-6 pb-detail">
+      <div className="flex flex-col gap-6 pb-8">
         <Image
           src={image}
           alt={imageAlt}
           width={1080}
-          height={628}
+          height={607}
           className="w-full h-auto block motion-safe:transition-opacity motion-safe:duration-150 motion-safe:ease-out group-hover:opacity-90 group-focus-visible:opacity-90"
           unoptimized
         />
 
         <div className="flex flex-col items-start gap-3">
-          <ProjectMetaRow isCaseStudy={isCaseStudy} year={year} role={role} />
-          <h2 className="type-h2 text-text-primary">
+          <ProjectMetaRow
+            isCaseStudy={isCaseStudy}
+            company={company}
+            year={year}
+            role={role}
+          />
+          <h2 className="type-h1 text-text-primary">
             {headline}
             <span
               aria-hidden="true"
@@ -47,6 +58,18 @@ export function CaseStudyCard({
               →
             </span>
           </h2>
+          {visibleTags.length > 0 && (
+            <ul className="flex flex-wrap gap-1.5">
+              {visibleTags.map((t) => (
+                <li
+                  key={t}
+                  className="type-tag px-2 py-0.5 border border-surface-3 text-text-secondary"
+                >
+                  {t}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </Link>

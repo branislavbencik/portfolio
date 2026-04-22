@@ -3,9 +3,11 @@ import { CaseStudyCard } from "./CaseStudyCard";
 interface NextProjectItem {
   slug: string;
   isCaseStudy?: boolean;
+  company?: string;
   year?: string;
   role?: string;
   headline: string;
+  tags?: readonly string[];
   href: string;
   image: string;
   imageAlt: string;
@@ -26,9 +28,11 @@ export function NextProjectSection({ items }: NextProjectSectionProps) {
             <CaseStudyCard
               key={item.slug}
               isCaseStudy={item.isCaseStudy}
+              company={item.company}
               year={item.year}
               role={item.role}
               headline={item.headline}
+              tags={item.tags}
               primaryHref={item.href}
               image={item.image}
               imageAlt={item.imageAlt}

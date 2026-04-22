@@ -62,8 +62,8 @@
   /* ── Layout widths ──────────────────────────────────────────────── */
   --max-width-frame:   1080px;
   --max-width-content: 1128px;
-  --max-width-column:   640px;
-  --max-width-text:     552px;
+  --max-width-figure:   800px;
+  --max-width-column:   560px;
 
   /* ── Typography — font sizes ────────────────────────────────────── */
   --font-size-display: 40px;

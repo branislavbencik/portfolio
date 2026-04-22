@@ -45,6 +45,11 @@ export default config({
 
         // --- Detail page fields ---
 
+        company: fields.text({
+          label: "Company / Product",
+          description: "Short identifier shown in the landing card meta row (e.g. Skoala, TeaTime, NNspect).",
+          validation: { isRequired: false },
+        }),
         role: fields.text({
           label: "Role",
           description: "e.g. Lead Designer, Co-owner",

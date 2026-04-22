@@ -23,9 +23,11 @@ export default async function Home() {
               <CaseStudyCard
                 key={slug}
                 isCaseStudy={entry.type === "case-study"}
+                company={entry.company || undefined}
                 year={entry.year || undefined}
                 role={entry.role || undefined}
                 headline={entry.title}
+                tags={entry.tags}
                 primaryHref={`/${slug}`}
                 image={
                   typeof entry.coverImage === "object" && entry.coverImage !== null

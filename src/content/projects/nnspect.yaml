@@ -1,11 +1,13 @@
-title: Prototyping an ML training platform for material quality inspection
+title: ML training platform for material quality inspection
 description: "ML platform concept · Full pipeline · 3 user roles"
 tags:
+  - Concept
   - Industrial AI
 type: selected
 metric: ""
 coverImage: /images/nnspect/nnspect-thumb.png
 order: 3
+company: NNspect
 role: Solo Designer
 year: "2022"
 domain: Industrial AI

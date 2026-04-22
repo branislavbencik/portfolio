@@ -32,9 +32,11 @@ export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
     return {
       slug: p.slug,
       isCaseStudy: p.entry.type === "case-study",
+      company: p.entry.company || undefined,
       year: p.entry.year || undefined,
       role: p.entry.role || undefined,
       headline: p.entry.title,
+      tags: p.entry.tags,
       href: `/${p.slug}`,
       image,
       imageAlt: `${p.entry.title} thumbnail`,

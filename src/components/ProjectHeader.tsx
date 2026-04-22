@@ -38,15 +38,15 @@ export function ProjectHeader({
         <div className="px-content-x">
           <button
             type="button"
-            className="relative w-full max-w-column mx-auto overflow-hidden rounded-none cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2"
+            className="relative w-full max-w-figure mx-auto overflow-hidden rounded-none cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2"
             aria-label="Open hero image in lightbox"
             onClick={() => open(id)}
           >
             <Image
               src={heroImage}
               alt={heroImageAlt ?? ""}
-              width={640}
-              height={Math.round(640 * (628 / 1080))}
+              width={800}
+              height={Math.round(800 * (628 / 1080))}
               className="w-full h-auto block"
               unoptimized
             />

@@ -1,11 +1,12 @@
 interface ProjectMetaRowProps {
   isCaseStudy?: boolean;
+  company?: string;
   year?: string;
   role?: string;
 }
 
-export function ProjectMetaRow({ isCaseStudy, year, role }: ProjectMetaRowProps) {
-  const values = [year, role].filter((v): v is string => Boolean(v && v.trim()));
+export function ProjectMetaRow({ isCaseStudy, company, year, role }: ProjectMetaRowProps) {
+  const values = [company, year, role].filter((v): v is string => Boolean(v && v.trim()));
   if (!isCaseStudy && values.length === 0) return null;
 
   return (
