@@ -11,7 +11,7 @@ company: TeaTime
 role: Co-owner
 year: "2024–25"
 domain: ""
-intro: "TeaTime is a B2B language school serving 20+ companies for over 15 years. I joined to systematize and scale the business: from client acquisition to a new AI-powered assessment product, modernizing the digital infrastructure along the way."
+intro: "TeaTime is a language training school with a 15-year track record serving corporate clients. I joined to systematize and scale the business: from client acquisition to a new AI-powered assessment product, modernizing the digital infrastructure along the way."
 deliverables:
   - label: LIVE SITE
     url: https://teatime.cz
@@ -36,7 +36,7 @@ impactItems:
 sections:
   - label: "1. ACQUIRE"
     title: "HR managers don't google \"English language training\""
-    description: "Companies buy English training when the right person gets the right pitch at the right time. We could have played the long game on LinkedIn, but instead, I designed a direct outreach pipeline. I treated every touchpoint as a UX challenge, optimizing the inbox preview, the reading experience, and the landing page. The result: a 1.8% sales conversion rate."
+    description: "Companies buy English training when the right person gets the right pitch at the right time. I designed a direct outreach pipeline, treating every touchpoint as a UX challenge. The result: a 1.8% sales conversion rate."
     images:
       - src: /images/teatime/teatime-ws1-i1.png
         alt: TeaTime persona definition
