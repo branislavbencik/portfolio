@@ -72,6 +72,33 @@ export default config({
           validation: { isRequired: false },
         }),
 
+        // Deliverables row — labeled link cards at the top of a case study.
+        // Leave empty for selected projects. Each item needs a non-empty URL
+        // to render (URLs you don't have yet can stay blank — the item is skipped).
+        deliverables: fields.array(
+          fields.object({
+            label: fields.text({
+              label: "Label",
+              description: "Shown in monospace uppercase. e.g. LIVE PLATFORM, GITHUB, BLUEPRINT PRD.",
+            }),
+            url: fields.text({
+              label: "URL",
+              description: "Full URL. Leave blank to hide this item at render time.",
+              validation: { isRequired: false },
+            }),
+            icon: fields.select({
+              label: "Icon",
+              options: [
+                { label: "External link (default)", value: "external" },
+                { label: "GitHub", value: "github" },
+                { label: "Document", value: "document" },
+              ],
+              defaultValue: "external",
+            }),
+          }),
+          { label: "Deliverables" }
+        ),
+
         // Case study specific — leave empty for selected projects
         contributions: fields.array(
           fields.text({ label: "Contribution" }),

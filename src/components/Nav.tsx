@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { ExternalArrow } from "./icons/ExternalArrow";
 
 // Pin zone — nav stays visible while scrollY is within the first PIN_THRESHOLD px.
 // Sized to the nav's own height so that the top of the page has a one-nav-height
@@ -10,25 +11,6 @@ import { useEffect, useRef, useState } from "react";
 // Past the threshold, any downward position change hides; any upward change shows.
 // No velocity/jitter filter: behavior is tied to literal pixel direction.
 const PIN_THRESHOLD = 52;
-
-function ExternalArrow() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="inline-block ml-1 align-[-0.125em]"
-      width="14"
-      height="14"
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.25"
-      strokeLinecap="square"
-    >
-      <line x1="5" y1="15" x2="15" y2="5" />
-      <polyline points="7,5 15,5 15,13" />
-    </svg>
-  );
-}
 
 export default function Nav() {
   const pathname = usePathname();

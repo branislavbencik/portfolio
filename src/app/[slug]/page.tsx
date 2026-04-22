@@ -7,6 +7,7 @@ import { ImpactBar } from "@/components/ImpactBar";
 import { WorkSection } from "@/components/WorkSection";
 import { CaptionedImage } from "@/components/CaptionedImage";
 import { NextProjectCard } from "@/components/NextProjectCard";
+import type { Deliverable } from "@/components/DeliverablesRow";
 
 export async function generateStaticParams() {
   const projects = await reader.collections.projects.all();
@@ -82,6 +83,9 @@ export default async function ProjectPage({
           role={project.role || undefined}
           heroImage={coverImage}
           heroImageAlt={`${project.title} overview`}
+          deliverables={
+            ((project as { deliverables?: readonly Deliverable[] }).deliverables ?? [])
+          }
         />
 
         {isCaseStudy && (project.contributions.length > 0 || project.impactItems.length > 0) && (

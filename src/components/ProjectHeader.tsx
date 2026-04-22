@@ -4,6 +4,7 @@ import { useId, useEffect } from "react";
 import Image from "next/image";
 import { useLightbox } from "./LightboxContext";
 import { ProjectMetaRow } from "./ProjectMetaRow";
+import { DeliverablesRow, type Deliverable } from "./DeliverablesRow";
 
 interface ProjectHeaderProps {
   title: string;
@@ -12,6 +13,7 @@ interface ProjectHeaderProps {
   role?: string;
   heroImage?: string;
   heroImageAlt?: string;
+  deliverables?: readonly Deliverable[];
 }
 
 export function ProjectHeader({
@@ -21,6 +23,7 @@ export function ProjectHeader({
   role,
   heroImage,
   heroImageAlt,
+  deliverables,
 }: ProjectHeaderProps) {
   const id = useId();
   const { register, unregister, open } = useLightbox();
@@ -31,6 +34,8 @@ export function ProjectHeader({
     }
     return () => unregister(id);
   }, [id, heroImage, heroImageAlt, register, unregister]);
+
+  const hasDeliverables = (deliverables ?? []).some((d) => d.url && d.url.trim());
 
   return (
     <section className="w-full py-detail">
@@ -54,7 +59,13 @@ export function ProjectHeader({
         </div>
       )}
 
-      <div className={`px-content-x ${heroImage ? "mt-16 max-md:mt-8" : ""}`}>
+      {hasDeliverables && (
+        <div className={heroImage ? "mt-12 max-md:mt-8" : ""}>
+          <DeliverablesRow items={deliverables ?? []} />
+        </div>
+      )}
+
+      <div className={`px-content-x ${heroImage || hasDeliverables ? "mt-12 max-md:mt-8" : ""}`}>
         <div className="max-w-column mx-auto flex flex-col items-start gap-3">
           <ProjectMetaRow isCaseStudy={isCaseStudy} year={year} role={role} />
           <h1 className="type-display text-text-primary">{title}</h1>

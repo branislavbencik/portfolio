@@ -12,6 +12,16 @@ role: Co-owner
 year: "2024–25"
 domain: ""
 intro: "TeaTime is a B2B language school serving 20+ companies for over 15 years. I joined to systematize and scale the business: from client acquisition to a new AI-powered assessment product, modernizing the digital infrastructure along the way."
+deliverables:
+  - label: LIVE SITE
+    url: https://teatime.cz
+    icon: external
+  - label: BLUEPRINT PRD
+    url: ""
+    icon: document
+  - label: N8N PIPELINE
+    url: ""
+    icon: external
 contributions:
   - "Built client acquisition pipeline: campaign, website, sales materials"
   - "Designed personalized learning system spanning assessment, curriculum planning, and progress measurement"

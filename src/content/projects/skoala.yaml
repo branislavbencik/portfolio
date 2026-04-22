@@ -12,6 +12,10 @@ role: Lead Designer
 year: "2024–25"
 domain: ""
 intro: "Skoala is an education platform focused on financial literacy content. It offers teachers a library of lesson plans, interactive presentations, videos and mini-games, about 150 teaching hours to date. Before the CMS, all of this was built by hand in Figma, requiring developer involvement for every new lesson."
+deliverables:
+  - label: LIVE PLATFORM
+    url: https://skoala.cz
+    icon: external
 contributions:
   - Co-defined product direction in founding Design Sprint.
   - Designed the core platform UX.
