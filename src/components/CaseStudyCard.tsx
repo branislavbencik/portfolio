@@ -25,7 +25,9 @@ export function CaseStudyCard({
   image,
   imageAlt,
 }: CaseStudyCardProps) {
-  const visibleTags = tags?.filter((t) => t && t.trim()).slice(0, 3) ?? [];
+  const panelTokens = [role, ...(tags ?? [])]
+    .filter((t): t is string => Boolean(t && t.trim()))
+    .slice(0, 4);
 
   return (
     <Link
@@ -33,14 +35,26 @@ export function CaseStudyCard({
       className="group block rounded-none no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
     >
       <div className="flex flex-col gap-6 pb-8">
-        <Image
-          src={image}
-          alt={imageAlt}
-          width={1080}
-          height={607}
-          className="w-full h-auto block motion-safe:transition-opacity motion-safe:duration-150 motion-safe:ease-out group-hover:opacity-90 group-focus-visible:opacity-90"
-          unoptimized
-        />
+        <div className="relative overflow-hidden">
+          <Image
+            src={image}
+            alt={imageAlt}
+            width={1080}
+            height={607}
+            className="w-full h-auto block motion-safe:transition-opacity motion-safe:duration-200 motion-safe:ease-out group-hover:opacity-[0.92] group-focus-visible:opacity-[0.92]"
+            unoptimized
+          />
+          {panelTokens.length > 0 && (
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 bottom-0 bg-canvas px-5 py-4 translate-y-full motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out group-hover:translate-y-0 group-focus-visible:translate-y-0"
+            >
+              <p className="type-allcaps text-text-secondary">
+                {panelTokens.join(" · ")}
+              </p>
+            </div>
+          )}
+        </div>
 
         <div className="flex flex-col items-start gap-3">
           <ProjectMetaRow
@@ -58,18 +72,6 @@ export function CaseStudyCard({
               →
             </span>
           </h2>
-          {visibleTags.length > 0 && (
-            <ul className="flex flex-wrap gap-1.5">
-              {visibleTags.map((t) => (
-                <li
-                  key={t}
-                  className="type-tag px-2 py-0.5 border border-surface-3 text-text-secondary"
-                >
-                  {t}
-                </li>
-              ))}
-            </ul>
-          )}
         </div>
       </div>
     </Link>
