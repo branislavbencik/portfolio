@@ -6,23 +6,27 @@ Personal portfolio for Branislav Benčík, Senior Product Designer.
 
 ## Tech Stack
 
-- Next.js 15 with App Router (TypeScript, Tailwind CSS, Geist font — all from `create-next-app`)
-- Static export (`output: 'export'` in next.config.ts)
-- MDX for case study content (`@next/mdx`)
-- `next/image` with `unoptimized: true` (lazy loading without Vercel image server)
+- Next.js 16 with App Router + Turbopack (TypeScript, Tailwind CSS 4, Geist font)
+- Vercel pre-renders every project page at build time via `generateStaticParams` — no SSR, no API for end-users
+- Keystatic (git-backed CMS) for project YAML under `src/content/projects/`; admin UI at `/keystatic` is local-dev only
+- MDX available (`@next/mdx`) for long-form content, though case study body copy currently lives in YAML
+- `next/image` with `unoptimized: true` (images served directly, not via Vercel image CDN)
 - Deployed to Vercel via GitHub
-- No SSR, no API routes, no database, no auth, no CMS
 
 ## Pages
 
-| Route | Template |
-|-------|----------|
+All project pages render from a single `src/app/[slug]/page.tsx` against Keystatic content.
+
+| Route | Type |
+|-------|------|
 | `/` | Landing page |
-| `/skoala` | Case study (MDX) |
-| `/teatime` | Case study (MDX) |
-| `/nnspect` | Selected project (dialog) |
-| `/sakurabook` | Selected project (dialog) |
-| `/resume.pdf` | PDF download (static file) |
+| `/skoala` | Case study |
+| `/teatime` | Case study |
+| `/nnspect` | Selected project (dedicated page) |
+| `/sakurabook` | Selected project (dedicated page) |
+| `/crowdberry` | Selected project (dedicated page) |
+
+`public/resume.pdf` is a static download (linked from Nav + Footer).
 
 ## Design Tokens — Single Source of Truth
 
@@ -93,7 +97,26 @@ These rules apply to EVERY edit. No exceptions.
 
 6. **No new dependencies without explaining why first.**
 
-7. **THE DESIGN BIBLE:** `DESIGN.md` is the absolute source of truth for aesthetics. BEFORE editing any UI component, you MUST read `DESIGN.md`. If you find a discrepancy between `CLAUDE.md`, `globals.css`, and `DESIGN.md`, `DESIGN.md` wins. If you invent a new UI pattern that works, you MUST update `DESIGN.md` to document it.
+7. **Never rewrite, paraphrase, or improve `positioning.md`.** It is locked copy. If you need to propose a change, surface the question; do not invent.
+
+## Source-of-Truth Hierarchy
+
+When these files conflict, the higher layer wins:
+
+1. `positioning.md` — claims, hero copy, proof stack, body-prose caps
+2. `docs/DESIGN.md` — visual system (tokens, components, image modes, spacing)
+3. `.impeccable.md` — design context for `/impeccable`, `/emil-design-eng`, `/playground`
+4. `CLAUDE.md` (this file) — tech stack, session rules, code-quality rules
+5. `README.md` — human intro to the repo
+6. `docs/STATUS.md` — session log
+
+Before a UI change, read `positioning.md` + `docs/DESIGN.md`.
+Before a repo-structure or dependency change, re-read this file.
+If you invent a new UI pattern that works, document it in `docs/DESIGN.md`.
+
+## Updating the positioning
+
+`positioning.md` is locked. To change it: open an explicit positioning session, bump `positioning.md` and its `Last updated` line, then propagate downward — audit `docs/DESIGN.md`, `.impeccable.md`, `README.md`, and code for contradictions in a single follow-up session. Never let two layers silently disagree.
 
 ## Figma Console MCP
 
