@@ -78,7 +78,7 @@ export function CaptionedImage({
         />
       </button>
       {caption && (
-        <figcaption className="w-3/4 max-lg:w-full type-body-s text-text-secondary text-center max-lg:text-left mt-3">
+        <figcaption className="w-full max-w-column type-body-s text-text-secondary text-left mt-3">
           {caption}
         </figcaption>
       )}

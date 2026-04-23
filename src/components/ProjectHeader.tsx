@@ -8,8 +8,7 @@ import { ProjectMetaRow } from "./ProjectMetaRow";
 interface ProjectHeaderProps {
   title: string;
   year?: string;
-  role?: string;
-  domain?: string;
+  tags?: readonly string[];
   intro?: string;
   heroImage?: string;
   heroImageAlt?: string;
@@ -18,8 +17,7 @@ interface ProjectHeaderProps {
 export function ProjectHeader({
   title,
   year,
-  role,
-  domain,
+  tags,
   intro,
   heroImage,
   heroImageAlt,
@@ -35,13 +33,12 @@ export function ProjectHeader({
   }, [id, heroImage, heroImageAlt, register, unregister]);
 
   return (
-    <section className="w-full py-detail">
-      <div className={`px-content-x ${heroImage ? "mb-16 max-md:mb-8" : ""}`}>
+    <section className="w-full pt-detail">
+      <div className={`max-lg:px-content-x ${heroImage ? "mb-16 max-md:mb-8" : ""}`}>
         <div className="max-w-column mx-auto flex flex-col items-start gap-3">
           <ProjectMetaRow
+            tags={tags}
             year={year}
-            role={role}
-            domain={domain}
           />
           <h1 className="type-display text-text-primary">{title}</h1>
           {intro && (
@@ -51,21 +48,23 @@ export function ProjectHeader({
       </div>
 
       {heroImage && (
-        <button
-          type="button"
-          className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2"
-          aria-label="Open hero image in lightbox"
-          onClick={() => open(id)}
-        >
-          <Image
-            src={heroImage}
-            alt={heroImageAlt ?? ""}
-            width={1288}
-            height={748}
-            className="w-full h-auto block"
-            unoptimized
-          />
-        </button>
+        <div className="max-lg:px-content-x">
+          <button
+            type="button"
+            className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 border border-surface-2 rounded-[4px]"
+            aria-label="Open hero image in lightbox"
+            onClick={() => open(id)}
+          >
+            <Image
+              src={heroImage}
+              alt={heroImageAlt ?? ""}
+              width={1288}
+              height={748}
+              className="w-full h-auto block"
+              unoptimized
+            />
+          </button>
+        </div>
       )}
     </section>
   );

@@ -22,7 +22,7 @@ sections:
     images:
       - src: /images/sakurabook/sakurabook-thumb.png
         alt: Sakurabook booking plugin overview
-        caption: ""
+        caption: "A rental space listing: photos, description, per-hour availability, and instant booking in one continuous view."
         background: true
       - src: /images/sakurabook/sakurabook-ws1.png
         alt: Availability states

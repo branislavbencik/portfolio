@@ -21,7 +21,7 @@ export function CaseStudyCard({
   return (
     <Link
       href={primaryHref}
-      className="group block no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-[6px] motion-safe:transition-transform motion-safe:duration-[120ms] motion-safe:ease-out active:scale-[0.99]"
+      className="group block no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-[6px] motion-safe:transition-transform motion-safe:duration-[180ms] motion-safe:ease-out motion-safe:hover:scale-[1.01] active:scale-[0.99]"
     >
       <article className="relative w-full border border-surface-2 rounded-[6px] p-[4px] bg-canvas">
         <div className="overflow-hidden border border-surface-2 rounded-[4px] bg-surface-tile">
@@ -41,7 +41,7 @@ export function CaseStudyCard({
             max-md:flex-col max-md:items-start max-md:gap-2
           "
         >
-          <h2 className="type-card-title text-text-primary flex-1 min-w-0 truncate">
+          <h2 className="type-card-title text-text-primary flex-1 min-w-0 truncate max-md:whitespace-normal max-md:overflow-visible">
             <strong className="font-semibold">{company}</strong>
             <span className="font-normal"> — {tagline}</span>
             <span

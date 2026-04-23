@@ -89,8 +89,7 @@ export default async function ProjectPage({
         <ProjectHeader
           title={project.title}
           year={project.year || undefined}
-          role={project.role || undefined}
-          domain={(project as { domain?: string }).domain || undefined}
+          tags={project.tags ? [...project.tags] : undefined}
           intro={project.intro || undefined}
           heroImage={coverImage}
           heroImageAlt={`${project.title} overview`}
@@ -148,7 +147,7 @@ export default async function ProjectPage({
           // Section without title — flat image gallery (selected projects)
           return (
             <div key={i} className="w-full">
-              <section className="w-full max-w-frame mx-center px-content-x py-section flex flex-col gap-12">
+              <section className="w-full max-w-frame mx-center max-lg:px-content-x pt-section flex flex-col gap-12">
                 {images.map((img, j) => (
                   <CaptionedImage
                     key={j}

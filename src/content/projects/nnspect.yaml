@@ -23,12 +23,13 @@ sections:
     images:
       - src: /images/nnspect/nnspect-thumb.png
         alt: Dataset overview
-        caption: Dataset overview with distribution charts, image metadata, and bounding box annotations for defect labeling.
+        caption: "Dataset overview: class distribution, image metadata, and bounding-box annotations for every labeled sample."
         background: true
       - src: /images/nnspect/nnspect-ws1.png
         alt: Live training
         caption: "Live training with validation metrics, epoch-level precision/loss curves, and progress tracking."
-        background: true
+        background: false
+        borderSides: all
       - src: /images/nnspect/nnspect-ws2.png
         alt: Model evaluation
         caption: Model evaluation comparing ground-truth annotations against predicted defect labels with detection confidence scores.

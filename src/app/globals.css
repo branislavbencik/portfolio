@@ -21,9 +21,9 @@
   /* Accent */
   --accent-live: #22c55e;
 
-  /* Citation link — sober blue from positioning v3 recommended range */
-  --citation-link:       #2F4BB8;
-  --citation-link-hover: #25399A;
+  /* Citation link — Wikipedia editorial blue; affordant but restrained */
+  --citation-link:       #0946D7;
+  --citation-link-hover: #07349F;
 
   /* Legacy alias — still referenced by nav/footer link hover states */
   --foreground: var(--text-primary);
@@ -34,12 +34,13 @@
 
 @media (max-width: 767px) {
   :root {
-    --font-size-display:    32px;
+    --font-size-display:    36px;
     --font-size-section-h2: 32px;
     --font-size-h1:         24px;
+    --font-size-hero-prose: 22px;
     --spacing-content-x:    20px;
-    --spacing-detail:       40px;  /* Down from 60px — frameless cards need less internal pad */
-    --spacing-section:      40px;
+    --spacing-detail:       72px;
+    --spacing-section:      72px;
   }
 }
 
@@ -71,13 +72,13 @@
   /* ── Layout widths ──────────────────────────────────────────────── */
   --max-width-frame:    960px;
   --max-width-content: 1128px;
-  --max-width-column:   720px;
+  --max-width-column:   640px;
   --max-width-text:     552px;
 
   /* ── Typography — font sizes ────────────────────────────────────── */
-  --font-size-display:    64px;
+  --font-size-display:    48px;
   --font-size-section-h2: 40px;  /* WorkSection headlines; 32px on mobile */
-  --font-size-hero-prose: 24px;  /* Landing hero generalist paragraph; uniform across breakpoints */
+  --font-size-hero-prose: 28px;  /* Landing hero generalist paragraph; scales to 22px on mobile */
   --font-size-kicker:     14px;
   --font-size-stat:       32px;
   --font-size-h1:         32px;
@@ -95,7 +96,7 @@
   --font-size-button:  14px;
 
   /* ── Typography — line heights ──────────────────────────────────── */
-  --line-height-display:    1.0;
+  --line-height-display:    1.05;
   --line-height-hero-prose: 1.3;
   --line-height-kicker:     1.4;
   --line-height-h1:         1.1;
@@ -109,8 +110,8 @@
 
 /* ── Spacing — non-inline @theme so :root media-query overrides propagate to utilities */
 @theme {
-  --spacing-section:    64px;
-  --spacing-detail:     64px;
+  --spacing-section:    112px;
+  --spacing-detail:     112px;
   --spacing-content-x:  32px;
 }
 
@@ -227,8 +228,8 @@
     display: inline-block;
     vertical-align: baseline;
     position: relative;
-    top: -0.6em;
-    font-size: 0.53em;
+    top: -0.75em;
+    font-size: 0.5em;
     line-height: 0;
   }
   .citation {
@@ -238,7 +239,7 @@
   .citation:hover,
   .citation:focus-visible {
     color: var(--citation-link-hover);
-    text-decoration: underline;
+    text-decoration: none;
   }
   .citation-arrow {
     display: inline-block;

@@ -130,13 +130,13 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full max-[1320px]:px-content-x">
+    <footer className="w-full max-[1320px]:px-content-x pt-section">
       <div
         ref={containerRef}
         className="w-full max-w-frame mx-center flex items-center justify-between h-13 max-md:flex-col max-md:items-start max-md:h-auto max-md:py-5 max-md:gap-3"
       >
         {/* Left: email */}
-        <div className="flex items-center type-nav text-text-secondary">
+        <div className="flex items-center type-nav text-text-primary">
           <button
             onClick={handleEmailClick}
             aria-label="Copy email address"
@@ -155,7 +155,7 @@ export default function Footer() {
         </div>
 
         {/* Right: external links */}
-        <div className="flex items-center flex-wrap gap-x-3 gap-y-2 type-nav text-text-secondary">
+        <div className="flex items-center flex-wrap gap-x-3 gap-y-2 type-nav text-text-primary">
           <a
             href="https://github.com/branislavbencik/portfolio"
             target="_blank"
@@ -190,7 +190,7 @@ export default function Footer() {
 
         {/* Curiouser text — hidden for now, kept for future use */}
         <p
-          className="hidden type-nav text-text-secondary tracking-wide select-none"
+          className="hidden type-nav text-text-primary tracking-wide select-none"
           aria-label={LABEL}
         >
           {LABEL.split("").map((char, i) => (

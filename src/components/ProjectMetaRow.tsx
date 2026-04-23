@@ -1,15 +1,15 @@
 interface ProjectMetaRowProps {
+  tags?: readonly string[];
   year?: string;
-  role?: string;
-  domain?: string;
 }
 
 export function ProjectMetaRow({
+  tags,
   year,
-  role,
-  domain,
 }: ProjectMetaRowProps) {
-  const values = [year, role, domain].filter((v): v is string => Boolean(v && v.trim()));
+  const tagValues = (tags ?? []).filter((v) => Boolean(v && v.trim()));
+  const yearValue = year && year.trim() ? year : undefined;
+  const values = [...tagValues, ...(yearValue ? [yearValue] : [])];
   if (values.length === 0) return null;
 
   return (
