@@ -80,7 +80,14 @@
       "Bash(./node_modules/.bin/next dev *)",
       "Skill(update-config)",
       "Write(/Users/branislavbencik/repos/portfolio/playground/**)",
-      "Bash(mkdir -p /Users/branislavbencik/repos/portfolio/playground*)"
+      "Bash(mkdir -p /Users/branislavbencik/repos/portfolio/playground*)",
+      "WebFetch(domain:marijanapav.com)",
+      "Bash(git -C /Users/branislavbencik/repos/portfolio/.claude/worktrees/visual status --short)",
+      "Bash(git -C /Users/branislavbencik/repos/portfolio/.claude/worktrees/visual log --oneline -1)",
+      "Bash(git -C /Users/branislavbencik/repos/portfolio/.claude/worktrees/visual fetch origin main)",
+      "Bash(git -C /Users/branislavbencik/repos/portfolio/.claude/worktrees/visual log --oneline HEAD..origin/main)",
+      "Bash(git -C /Users/branislavbencik/repos/portfolio/.claude/worktrees/visual show --stat e677964)",
+      "Bash(git merge *)"
     ]
   },
   "outputStyle": "Explanatory"

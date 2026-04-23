@@ -7,7 +7,6 @@ import { ProjectMetaRow } from "./ProjectMetaRow";
 
 interface ProjectHeaderProps {
   title: string;
-  isCaseStudy?: boolean;
   year?: string;
   role?: string;
   domain?: string;
@@ -18,7 +17,6 @@ interface ProjectHeaderProps {
 
 export function ProjectHeader({
   title,
-  isCaseStudy,
   year,
   role,
   domain,
@@ -41,7 +39,6 @@ export function ProjectHeader({
       <div className={`px-content-x ${heroImage ? "mb-16 max-md:mb-8" : ""}`}>
         <div className="max-w-column mx-auto flex flex-col items-start gap-3">
           <ProjectMetaRow
-            isCaseStudy={isCaseStudy}
             year={year}
             role={role}
             domain={domain}
@@ -56,7 +53,7 @@ export function ProjectHeader({
       {heroImage && (
         <button
           type="button"
-          className="relative w-full overflow-hidden border-y border-surface-2 rounded-none bg-surface-1 cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2"
+          className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2"
           aria-label="Open hero image in lightbox"
           onClick={() => open(id)}
         >

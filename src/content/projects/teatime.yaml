@@ -1,8 +1,11 @@
 title: "B2B language learning system"
+company: TeaTime
+tagline: B2B language learning system
 description: "Built acquisition pipeline (+12 B2B clients) and AI-evaluated speaking test automated with n8n."
 tags:
-  - Case Study
-  - Co-owner
+  - "+12 B2B Clients"
+  - Service Design
+  - Co-founder
 type: case-study
 metric: acquired 12 corporate clients
 coverImage: /images/teatime/teatime-thumb.png

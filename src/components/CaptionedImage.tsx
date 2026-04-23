@@ -44,8 +44,8 @@ export function CaptionedImage({
     "";
 
   const borderClass =
-    resolvedBorder === "all"        ? "border border-surface-2" :
-    resolvedBorder === "no-bottom"  ? "border border-b-0 border-surface-2" :
+    resolvedBorder === "all"        ? "border border-surface-2 rounded-[4px]" :
+    resolvedBorder === "no-bottom"  ? "border border-b-0 border-surface-2 rounded-t-[4px]" :
     "";
 
   const wrapperClass = [
