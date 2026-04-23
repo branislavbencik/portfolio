@@ -1,5 +1,4 @@
 import { CaseStudyCard } from "./CaseStudyCard";
-import { FullWidthDivider } from "./FullWidthDivider";
 
 interface NextProjectSectionProps {
   isCaseStudy?: boolean;
@@ -32,7 +31,9 @@ export function NextProjectSection({
           <p className="type-allcaps text-text-tertiary mb-6">Next Project</p>
         </div>
       </div>
-      <FullWidthDivider />
+      <div className="w-full max-w-frame mx-center">
+        <hr className="border-t border-surface-2 w-full" />
+      </div>
       <div className="w-full max-w-frame mx-center">
         <CaseStudyCard
           isCaseStudy={isCaseStudy}
@@ -44,6 +45,7 @@ export function NextProjectSection({
           primaryHref={href}
           image={image}
           imageAlt={imageAlt}
+          borderless
         />
       </div>
     </div>

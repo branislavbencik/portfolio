@@ -72,7 +72,7 @@ export default function RootLayout({
         <LightboxProvider>
           <div className="min-h-dvh flex flex-col">
             <Nav />
-            <div className="max-w-frame mx-auto w-full flex-1 border-x border-surface-2 bg-canvas">
+            <div className="max-w-frame mx-auto w-full flex-1 bg-canvas">
               {children}
             </div>
             <Footer />

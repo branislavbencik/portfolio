@@ -71,13 +71,16 @@
       "Bash(curl:*)",
       "Bash(xargs -I {} curl -s \"http://localhost:3000{}\")",
       "Bash(file public/images/skoala/*.png public/images/teatime/*.png)",
-s      "Read(//Users/branislavbencik/**)",
-      "Bash(zsh -n ~/.zshrc)"
+      "Read(//Users/branislavbencik/**)",
+      "Bash(zsh -n ~/.zshrc)",
       "Bash(git reset *)",
       "Bash(git cherry-pick *)",
       "Bash(GIT_EDITOR=true git cherry-pick --continue)",
       "Bash(pnpm dev *)",
-      "Bash(./node_modules/.bin/next dev *)"
+      "Bash(./node_modules/.bin/next dev *)",
+      "Skill(update-config)",
+      "Write(/Users/branislavbencik/repos/portfolio/playground/**)",
+      "Bash(mkdir -p /Users/branislavbencik/repos/portfolio/playground*)"
     ]
   },
   "outputStyle": "Explanatory"

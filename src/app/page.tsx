@@ -1,5 +1,4 @@
 import { CaseStudyCard } from "@/components/CaseStudyCard";
-import { FullWidthDivider } from "@/components/FullWidthDivider";
 import HeroStatement from "@/components/HeroStatement";
 import { reader } from "@/lib/keystatic";
 
@@ -13,18 +12,13 @@ export default async function Home() {
 
   return (
     <main id="main-content">
-      <div className="w-full max-w-frame mx-center">
-        <div className="px-content-x">
-          <HeroStatement />
-        </div>
-      </div>
+      <div className="w-full max-w-frame mx-center max-lg:px-content-x">
+        <HeroStatement />
 
-      {/* Unified single-column feed */}
-      <div id="work" className="flex flex-col scroll-mt-20">
-        {projects.map(({ slug, entry }) => (
-          <div key={slug}>
-            <FullWidthDivider />
+        <div id="work" className="flex flex-col gap-16 scroll-mt-20">
+          {projects.map(({ slug, entry }) => (
             <CaseStudyCard
+              key={slug}
               isCaseStudy={entry.type === "case-study"}
               year={entry.year || undefined}
               role={entry.role || undefined}
@@ -39,10 +33,9 @@ export default async function Home() {
               }
               imageAlt={`${entry.title} thumbnail`}
             />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-
     </main>
   );
 }
