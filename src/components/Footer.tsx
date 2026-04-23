@@ -1,30 +1,15 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { ExternalArrow } from "./icons/ExternalArrow";
 
 const LABEL = "Curiouser and curiouser!";
 const RADIUS = 100;
 const FROM_WEIGHT = 300;
 const TO_WEIGHT = 800;
 
-function ExternalArrow() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="inline-block ml-1 align-[-0.125em]"
-      width="12"
-      height="12"
-      viewBox="0 0 20 20"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.25"
-      strokeLinecap="square"
-    >
-      <line x1="5" y1="15" x2="15" y2="5" />
-      <polyline points="7,5 15,5 15,13" />
-    </svg>
-  );
-}
+// Footer arrow is one pixel smaller than Nav's (12 vs 14) — ExternalArrow takes a size prop for this.
+const FOOTER_ARROW_SIZE = 12;
 
 export default function Footer() {
   const [copied, setCopied] = useState(false);
@@ -145,7 +130,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="w-full max-[1320px]:px-content-x border-t border-surface-2">
+    <footer className="w-full max-[1320px]:px-content-x">
       <div
         ref={containerRef}
         className="w-full max-w-frame mx-center flex items-center justify-between h-13 max-md:flex-col max-md:items-start max-md:h-auto max-md:py-5 max-md:gap-3"
@@ -179,9 +164,8 @@ export default function Footer() {
             aria-label="GitHub (opens in new tab)"
           >
             GitHub
-            <ExternalArrow />
+            <ExternalArrow size={FOOTER_ARROW_SIZE} />
           </a>
-          <span aria-hidden="true" className="opacity-40">·</span>
           <a
             href="https://www.linkedin.com/in/branislavbencik/"
             target="_blank"
@@ -190,9 +174,8 @@ export default function Footer() {
             aria-label="LinkedIn (opens in new tab)"
           >
             LinkedIn
-            <ExternalArrow />
+            <ExternalArrow size={FOOTER_ARROW_SIZE} />
           </a>
-          <span aria-hidden="true" className="opacity-40">·</span>
           <a
             href="/resume.pdf"
             target="_blank"
@@ -201,7 +184,7 @@ export default function Footer() {
             aria-label="Resume (opens in new tab)"
           >
             Resume
-            <ExternalArrow />
+            <ExternalArrow size={FOOTER_ARROW_SIZE} />
           </a>
         </div>
 

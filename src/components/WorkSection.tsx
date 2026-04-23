@@ -16,7 +16,7 @@ export function WorkSection({ id, label, title, description, isLast, children }:
           <p className="type-allcaps text-text-secondary mb-4">
             {label}
           </p>
-          <h2 className="type-h1 text-text-primary mb-4">
+          <h2 className="type-section-h2 text-text-primary mb-4">
             {title}
           </h2>
           <p className="type-body-l text-text-secondary">

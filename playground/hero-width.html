@@ -1,0 +1,783 @@
+<!doctype html>
+<html
+  lang="en"
+  data-width="1080"
+  data-hsize="32"
+  data-tone="white"
+  data-hover="offset"
+  data-inset="bounded"
+  data-borders="none"
+  data-cardwidth="edge"
+>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1200, initial-scale=1" />
+<title>Hero + cards — precise site recreation for variant comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    /* ── Real design tokens mirrored from src/app/globals.css ── */
+    --canvas:       #FFFFFF; /* variant-driven */
+    --surface-1:    #F4F4F5; /* Zinc 100 */
+    --surface-2:    #E4E4E7; /* Zinc 200 */
+    --surface-3:    #D4D4D8; /* Zinc 300 */
+
+    --text-primary:   #18181B; /* Zinc 900 */
+    --text-secondary: #52525B; /* Zinc 600 */
+    --text-tertiary:  #71717A; /* Zinc 500 */
+    --text-inverse:   #FFFFFF;
+
+    --accent-live:          #22C55E;
+    --citation-link:        #2F4BB8;
+    --citation-link-hover:  #25399A;
+
+    /* ── Variant vars ── */
+    --frame:       1080px;
+    --hsize:       32px;
+    --card-brand:  #F4F4F5; /* falls back to Zinc 100 */
+
+    /* ── Timing ── */
+    --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+
+    /* ── Playground chrome (separate from site tokens) ── */
+    --pg-panel:         #FAFAFA;
+    --pg-panel-border:  #E4E4E7;
+    --pg-panel-text:    #52525B;
+    --pg-panel-label:   #71717A;
+  }
+
+  /* ── Variant presets ── */
+  html[data-width="1080"] { --frame: 1080px; }
+  html[data-width="1000"] { --frame: 1000px; }
+  html[data-width="960"]  { --frame:  960px; }
+  html[data-width="920"]  { --frame:  920px; }
+
+  html[data-hsize="32"] { --hsize: 32px; }
+  html[data-hsize="28"] { --hsize: 28px; }
+  html[data-hsize="24"] { --hsize: 24px; }
+
+  html[data-tone="white"]    { --canvas: #FFFFFF; }
+  html[data-tone="zinc-50"]  { --canvas: #FAFAFA; }
+  html[data-tone="zinc-100"] { --canvas: #F4F4F5; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--canvas);
+    color: var(--text-primary);
+    font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ────────────────────────── Playground controls ────────────────────────── */
+  .pg-controls {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--pg-panel);
+    border-bottom: 1px solid var(--pg-panel-border);
+    font-family: "Geist Mono", monospace;
+  }
+  .pg-strip {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 24px;
+    border-bottom: 1px solid var(--pg-panel-border);
+    min-height: 44px;
+  }
+  .pg-strip:last-child { border-bottom: none; }
+  .pg-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pg-panel-label);
+    min-width: 118px;
+  }
+  .pg-buttons { display: flex; gap: 4px; flex-wrap: wrap; }
+  .pg-buttons button {
+    font-family: inherit;
+    font-size: 12px;
+    padding: 6px 12px;
+    border: 1px solid var(--surface-3);
+    background: transparent;
+    color: var(--pg-panel-text);
+    cursor: pointer;
+    transition: background 120ms, color 120ms, border-color 120ms;
+  }
+  .pg-buttons button:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+  }
+  .pg-buttons button[aria-pressed="true"] {
+    background: var(--text-primary);
+    color: var(--text-inverse);
+    border-color: var(--text-primary);
+  }
+  .pg-readout {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--pg-panel-label);
+  }
+  .pg-readout a {
+    color: var(--pg-panel-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  /* ────────────────────────── Typography (mirror globals.css) ────────────────────────── */
+  .type-display {
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 1.0;
+    letter-spacing: -0.05em;
+  }
+  .type-h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+  .type-hero-prose {
+    font-size: var(--hsize);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--text-primary);
+    transition: font-size 200ms var(--ease-out);
+  }
+  .type-body-m {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+  .type-nav {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .type-allcaps {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .type-tag {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  /* ────────────────────────── Layout helpers ────────────────────────── */
+  .frame {
+    width: 100%;
+    max-width: var(--frame);
+    margin: 0 auto;
+    transition: max-width 200ms var(--ease-out);
+  }
+
+  /* Full-width divider — behavior flips with [data-cardwidth] */
+  .full-divider {
+    display: block;
+    height: 1px;
+    background: var(--surface-2);
+    width: 100%;
+  }
+
+  /* Work section — either full-viewport (current site) or frame-bound */
+  .work {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: max-width 200ms var(--ease-out);
+  }
+  html[data-cardwidth="frame"] .work {
+    max-width: var(--frame);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ────────────────────────── Nav (real structure from Nav.tsx) ────────────────────────── */
+  .nav-header {
+    position: sticky;
+    top: 88px; /* offset for playground controls (5 strips × ~44px) */
+    z-index: 40;
+    width: 100%;
+    background: var(--canvas);
+    border-bottom: 1px solid var(--surface-2);
+    padding: 0 32px;
+  }
+  .nav {
+    width: 100%;
+    max-width: var(--frame);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: between;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-name { color: var(--text-secondary); transition: color 220ms var(--ease-out); }
+  .nav-name:hover { color: var(--text-primary); }
+  .nav-links { display: flex; align-items: center; gap: 16px; color: var(--text-secondary); }
+  .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-secondary);
+    transition: color 220ms var(--ease-out);
+  }
+  .nav-links a:hover { color: var(--text-primary); }
+  .ext-arrow {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: -0.125em;
+  }
+
+  /* ────────────────────────── Hero ────────────────────────── */
+  .hero-section {
+    padding-bottom: 64px;
+    position: relative;
+  }
+  /* Bounded: 32px inset inside frame (current page.tsx behavior) */
+  html[data-inset="bounded"]   .hero-section { padding-left: 32px; padding-right: 32px; }
+  /* Unbounded: flush with frame edges (source branch behavior) */
+  html[data-inset="unbounded"] .hero-section { padding-left: 0;    padding-right: 0; }
+
+  /* Hero side borders — vertical lines flanking the hero frame */
+  html[data-borders="lines"] .hero-frame {
+    border-left:  1px solid var(--surface-2);
+    border-right: 1px solid var(--surface-2);
+  }
+  .hero-frame {
+    width: 100%;
+    max-width: var(--frame);
+    margin: 0 auto;
+    transition: max-width 200ms var(--ease-out);
+  }
+  .hero-inner {
+    padding: 80px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  html[data-borders="none"] .hero-inner { padding-left: 0; padding-right: 0; }
+  html[data-borders="lines"][data-inset="unbounded"] .hero-inner { padding-left: 32px; padding-right: 32px; }
+
+  /* Citation links (mirror globals.css .citation-sup / .citation) */
+  .citation-sup {
+    display: inline-block;
+    vertical-align: baseline;
+    position: relative;
+    top: -0.6em;
+    font-size: 0.53em;
+    line-height: 0;
+  }
+  .citation {
+    color: var(--citation-link);
+    text-decoration: none;
+    transition: color 160ms ease-out;
+  }
+  .citation:hover,
+  .citation:focus-visible {
+    color: var(--citation-link-hover);
+    text-decoration: underline;
+  }
+  .citation-arrow {
+    display: inline-block;
+    transition: transform 160ms ease-out;
+  }
+  .citation:hover .citation-arrow,
+  .citation:focus-visible .citation-arrow {
+    transform: translate(2px, -2px);
+  }
+
+  /* ────────────────────────── Work cards (real CaseStudyCard structure) ────────────────────────── */
+  .card-link {
+    position: relative;
+    display: block;
+    background: transparent;
+    transition: background 240ms var(--ease-out);
+  }
+  /* The inner block shrinks on hover. Keeps the same width rhythm as the site. */
+  .card-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-bottom: 64px;
+    overflow: hidden;
+    background: var(--canvas);
+    border: 1px solid transparent;
+    transform-origin: center;
+    transition: transform 240ms var(--ease-out), border-color 240ms var(--ease-out);
+  }
+  .card-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--surface-1);
+    z-index: -1;
+  }
+
+  .card-image-wrap {
+    position: relative;
+    border-bottom: 1px solid var(--surface-2);
+    overflow: hidden;
+  }
+  .card-image-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 300ms var(--ease-out);
+  }
+
+  .card-body {
+    padding-left: 32px;
+    padding-right: 32px;
+    z-index: 10;
+    position: relative;
+  }
+  .card-body-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* ProjectMetaRow */
+  .card-meta {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    column-gap: 8px;
+    row-gap: 4px;
+    color: var(--text-tertiary);
+  }
+  .card-pill {
+    background: var(--text-primary);
+    color: rgba(255,255,255,0.8);
+    padding: 4px 10px;
+  }
+  .card-meta-sep { color: var(--text-tertiary); }
+
+  .card-title {
+    color: var(--text-primary);
+  }
+  .card-arrow {
+    display: inline-block;
+    padding-left: 0.25em;
+    font-size: 0.8em;
+    font-weight: 300;
+    transform: translateX(-4px);
+    opacity: 0;
+    transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .card-link:hover .card-arrow {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  .card-desc { color: var(--text-secondary); }
+
+  /* Per-card brand tints (standing in until real hues are chosen) */
+  .card-link[data-brand="skoala"]     { --card-brand: #F7EFEA; }
+  .card-link[data-brand="teatime"]    { --card-brand: #FBF7EA; }
+  .card-link[data-brand="nnspect"]    { --card-brand: #EEF4FB; }
+  .card-link[data-brand="sakurabook"] { --card-brand: #FDF1F5; }
+  .card-link[data-brand="crowdberry"] { --card-brand: #EEF5EC; }
+
+  /* ────────────────────────── Hover variants ────────────────────────── */
+
+  /* A — Offset-reveal (current production behavior, from CaseStudyCard.tsx) */
+  html[data-hover="offset"] .card-link:hover .card-inner,
+  html[data-hover="offset"] .card-link:focus-visible .card-inner {
+    transform: translate(-1.5px, -1.5px);
+    border-color: var(--surface-2);
+  }
+
+  /* B — Levitate · Zinc 100 (user proposal — content shrinks inside a colored row) */
+  html[data-hover="levitate-zinc"] .card-inner::before { background: transparent; }
+  html[data-hover="levitate-zinc"] .card-link:hover {
+    background: var(--surface-1); /* Zinc 100 */
+  }
+  html[data-hover="levitate-zinc"] .card-link:hover .card-inner {
+    transform: scale(0.97);
+  }
+  html[data-hover="levitate-zinc"] .card-link:hover .card-image-wrap img {
+    transform: scale(1.01);
+  }
+
+  /* C — Levitate · Brand tint (per-card hue via data-brand) */
+  html[data-hover="levitate-brand"] .card-inner::before { background: transparent; }
+  html[data-hover="levitate-brand"] .card-link:hover {
+    background: var(--card-brand);
+  }
+  html[data-hover="levitate-brand"] .card-link:hover .card-inner {
+    transform: scale(0.97);
+  }
+  html[data-hover="levitate-brand"] .card-link:hover .card-image-wrap img {
+    transform: scale(1.01);
+  }
+
+  /* Focus ring (site-consistent 2px ring offset-2) */
+  .card-link:focus-visible {
+    outline: none;
+  }
+  .card-link:focus-visible .card-inner {
+    box-shadow: 0 0 0 2px var(--canvas), 0 0 0 4px var(--text-primary);
+  }
+
+  /* ────────────────────────── Footer (real structure from Footer.tsx) ────────────────────────── */
+  .footer {
+    width: 100%;
+    border-top: 1px solid var(--surface-2);
+    padding: 0 32px;
+  }
+  .footer-inner {
+    width: 100%;
+    max-width: var(--frame);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    color: var(--text-secondary);
+  }
+  .footer-email {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    font-family: inherit;
+    padding: 0;
+  }
+  .footer-email:hover { color: var(--text-primary); }
+  .footer-links {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 8px;
+    flex-wrap: wrap;
+  }
+  .footer-links a:hover { color: var(--text-primary); }
+  .footer-sep { opacity: 0.4; }
+
+  /* Reduced motion — kill transforms but keep color transitions */
+  @media (prefers-reduced-motion: reduce) {
+    .frame, .hero-frame, .type-hero-prose,
+    .card-inner, .card-image-wrap img, .citation-arrow {
+      transition: none !important;
+    }
+    .card-link:hover .card-inner,
+    .card-link:hover .card-image-wrap img {
+      transform: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─────────────────────── Playground controls ─────────────────────── -->
+<aside class="pg-controls" aria-label="Playground controls">
+  <div class="pg-strip" data-group="width">
+    <div class="pg-label">Frame width</div>
+    <div class="pg-buttons">
+      <button data-val="1080" aria-pressed="true">1080 (current)</button>
+      <button data-val="1000">1000</button>
+      <button data-val="960">960</button>
+      <button data-val="920">920</button>
+    </div>
+    <span class="pg-readout">max-w-frame</span>
+  </div>
+
+  <div class="pg-strip" data-group="hsize">
+    <div class="pg-label">Hero size</div>
+    <div class="pg-buttons">
+      <button data-val="32" aria-pressed="true">32 (source)</button>
+      <button data-val="28">28</button>
+      <button data-val="24">24</button>
+    </div>
+    <span class="pg-readout">type-hero-prose</span>
+  </div>
+
+  <div class="pg-strip" data-group="tone">
+    <div class="pg-label">Canvas tone</div>
+    <div class="pg-buttons">
+      <button data-val="white" aria-pressed="true">White (current)</button>
+      <button data-val="zinc-50">Zinc 50</button>
+      <button data-val="zinc-100">Zinc 100 (source)</button>
+    </div>
+    <span class="pg-readout">--canvas</span>
+  </div>
+
+  <div class="pg-strip" data-group="hover">
+    <div class="pg-label">Card hover</div>
+    <div class="pg-buttons">
+      <button data-val="offset" aria-pressed="true">Offset-reveal (current)</button>
+      <button data-val="levitate-zinc">Levitate · Zinc 100</button>
+      <button data-val="levitate-brand">Levitate · Brand tint</button>
+    </div>
+    <span class="pg-readout">hover cards to compare</span>
+  </div>
+
+  <div class="pg-strip" data-group="inset">
+    <div class="pg-label">Hero inset</div>
+    <div class="pg-buttons">
+      <button data-val="bounded" aria-pressed="true">Bounded (32px inset)</button>
+      <button data-val="unbounded">Unbounded (flush w/ nav + footer)</button>
+    </div>
+    <span class="pg-readout">horizontal alignment</span>
+  </div>
+
+  <div class="pg-strip" data-group="borders">
+    <div class="pg-label">Hero borders</div>
+    <div class="pg-buttons">
+      <button data-val="none" aria-pressed="true">None</button>
+      <button data-val="lines">Vertical lines</button>
+    </div>
+    <span class="pg-readout">hero column rules</span>
+  </div>
+
+  <div class="pg-strip" data-group="cardwidth">
+    <div class="pg-label">Card width</div>
+    <div class="pg-buttons">
+      <button data-val="edge" aria-pressed="true">Edge-to-edge (current)</button>
+      <button data-val="frame">Frame-bound (aligns w/ hero)</button>
+    </div>
+    <span class="pg-readout"><a id="copy-url">copy URL</a></span>
+  </div>
+</aside>
+
+<!-- ─────────────────────── Real nav ─────────────────────── -->
+<header class="nav-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="nav-name type-nav" href="#">Branislav Benčík</a>
+    <div class="nav-links type-nav">
+      <a href="https://github.com/branislavbencik/portfolio" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">
+        GitHub
+        <svg class="ext-arrow" aria-hidden="true" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"><line x1="5" y1="15" x2="15" y2="5"/><polyline points="7,5 15,5 15,13"/></svg>
+      </a>
+      <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Resume (opens in new tab)">
+        Resume
+        <svg class="ext-arrow" aria-hidden="true" width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"><line x1="5" y1="15" x2="15" y2="5"/><polyline points="7,5 15,5 15,13"/></svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- ─────────────────────── Hero ─────────────────────── -->
+<section class="hero-section">
+  <div class="hero-frame">
+    <div class="hero-inner">
+      <p class="type-hero-prose">
+        Hi, I&rsquo;m Branislav &mdash; a generalist product designer. I happen to be useful anywhere from re-thinking the learning system<sup class="citation-sup"><a class="citation" href="#">(Blueprint<span class="citation-arrow">&nearr;</span>)</a></sup>, to shipping the automations<sup class="citation-sup"><a class="citation" href="#">(n8n<span class="citation-arrow">&nearr;</span>)</a></sup>, prototypes<sup class="citation-sup"><a class="citation" href="#">(Schneider<span class="citation-arrow">&nearr;</span>)</a></sup>, and code<sup class="citation-sup"><a class="citation" href="#">(sideproject<span class="citation-arrow">&nearr;</span>)</a></sup> &mdash; and down the rabbit hole to the mapping of states<sup class="citation-sup"><a class="citation" href="#">(Skoala<span class="citation-arrow">&nearr;</span>)</a></sup> and exceptions
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────── Work feed (real YAML content, real images) ─────────────────────── -->
+<section class="work" aria-label="Case studies and selected projects">
+
+  <hr class="full-divider" />
+
+  <!-- 1. Skoala (case study) -->
+  <a class="card-link" data-brand="skoala" href="#">
+    <div class="card-inner">
+      <div class="card-image-wrap">
+        <img src="../public/images/skoala/skoala-thumb.png" alt="Skoala thumbnail" width="1080" height="628" />
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div class="card-meta">
+            <span class="card-pill type-tag">Case Study</span>
+            <span class="card-meta-sep type-allcaps" aria-hidden="true">·</span>
+            <span class="type-allcaps">2024–25</span>
+            <span aria-hidden="true" class="type-allcaps"> ·</span>
+            <span class="type-allcaps">Lead Designer</span>
+          </div>
+          <h2 class="type-h1 card-title">CMS powering a financial literacy platform<span class="card-arrow" aria-hidden="true">&rarr;</span></h2>
+          <p class="type-body-m card-desc">Serving 3.5K schools. Replaced a Figma-to-developer handoff with direct publishing</p>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <hr class="full-divider" />
+
+  <!-- 2. TeaTime (case study) -->
+  <a class="card-link" data-brand="teatime" href="#">
+    <div class="card-inner">
+      <div class="card-image-wrap">
+        <img src="../public/images/teatime/teatime-thumb.png" alt="TeaTime thumbnail" width="1080" height="628" />
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div class="card-meta">
+            <span class="card-pill type-tag">Case Study</span>
+            <span class="card-meta-sep type-allcaps" aria-hidden="true">·</span>
+            <span class="type-allcaps">2024–25</span>
+            <span aria-hidden="true" class="type-allcaps"> ·</span>
+            <span class="type-allcaps">Co-owner</span>
+          </div>
+          <h2 class="type-h1 card-title">B2B language learning system<span class="card-arrow" aria-hidden="true">&rarr;</span></h2>
+          <p class="type-body-m card-desc">Built acquisition pipeline (+12 B2B clients) and AI-evaluated speaking test automated with n8n.</p>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <hr class="full-divider" />
+
+  <!-- 3. NNspect (selected) -->
+  <a class="card-link" data-brand="nnspect" href="#">
+    <div class="card-inner">
+      <div class="card-image-wrap">
+        <img src="../public/images/nnspect/nnspect-thumb.png" alt="NNspect thumbnail" width="1080" height="628" />
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div class="card-meta">
+            <span class="type-allcaps">2022</span>
+            <span aria-hidden="true" class="type-allcaps"> ·</span>
+            <span class="type-allcaps">Solo Designer</span>
+            <span aria-hidden="true" class="type-allcaps"> ·</span>
+            <span class="type-allcaps">Industrial AI</span>
+          </div>
+          <h2 class="type-h1 card-title">ML training platform for material quality inspection<span class="card-arrow" aria-hidden="true">&rarr;</span></h2>
+          <p class="type-body-m card-desc">ML platform concept · Full pipeline · 3 user roles</p>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <hr class="full-divider" />
+
+  <!-- 4. Sakurabook (selected) -->
+  <a class="card-link" data-brand="sakurabook" href="#">
+    <div class="card-inner">
+      <div class="card-image-wrap">
+        <img src="../public/images/sakurabook/sakurabook-thumb.png" alt="Sakurabook thumbnail" width="1080" height="628" />
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div class="card-meta">
+            <span class="type-allcaps">2021</span>
+            <span aria-hidden="true" class="type-allcaps"> ·</span>
+            <span class="type-allcaps">Solo Designer</span>
+            <span aria-hidden="true" class="type-allcaps"> ·</span>
+            <span class="type-allcaps">Ecommerce</span>
+          </div>
+          <h2 class="type-h1 card-title">Shopify plugin for per-hour booking in Japan<span class="card-arrow" aria-hidden="true">&rarr;</span></h2>
+          <p class="type-body-m card-desc">Shopify plugin · Hourly booking · Shipped in Japanese</p>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <hr class="full-divider" />
+
+  <!-- 5. Crowdberry (selected) -->
+  <a class="card-link" data-brand="crowdberry" href="#">
+    <div class="card-inner">
+      <div class="card-image-wrap">
+        <img src="../public/images/crowdberry/crowdberry-thumb.png" alt="Crowdberry thumbnail" width="1080" height="628" />
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <div class="card-meta">
+            <span class="type-allcaps">2020</span>
+            <span aria-hidden="true" class="type-allcaps"> ·</span>
+            <span class="type-allcaps">Product Designer</span>
+            <span aria-hidden="true" class="type-allcaps"> ·</span>
+            <span class="type-allcaps">Fintech</span>
+          </div>
+          <h2 class="type-h1 card-title">Investor experience for a crowdfunding marketplace<span class="card-arrow" aria-hidden="true">&rarr;</span></h2>
+          <p class="type-body-m card-desc">Fintech investor UX · Usability tested</p>
+        </div>
+      </div>
+    </div>
+  </a>
+
+  <hr class="full-divider" />
+
+</section>
+
+<!-- ─────────────────────── Real footer ─────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <button class="footer-email link-underline type-nav" aria-label="Copy email address">branislav.bencik@gmail.com</button>
+    <div class="footer-links type-nav">
+      <a href="https://github.com/branislavbencik/portfolio" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)">
+        GitHub
+        <svg class="ext-arrow" aria-hidden="true" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"><line x1="5" y1="15" x2="15" y2="5"/><polyline points="7,5 15,5 15,13"/></svg>
+      </a>
+      <span aria-hidden="true" class="footer-sep">·</span>
+      <a href="https://www.linkedin.com/in/branislavbencik/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)">
+        LinkedIn
+        <svg class="ext-arrow" aria-hidden="true" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"><line x1="5" y1="15" x2="15" y2="5"/><polyline points="7,5 15,5 15,13"/></svg>
+      </a>
+      <span aria-hidden="true" class="footer-sep">·</span>
+      <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Resume (opens in new tab)">
+        Resume
+        <svg class="ext-arrow" aria-hidden="true" width="12" height="12" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="square"><line x1="5" y1="15" x2="15" y2="5"/><polyline points="7,5 15,5 15,13"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const root = document.documentElement;
+  const groups = ["width", "hsize", "tone", "hover", "inset", "borders", "cardwidth"];
+
+  function setState(group, val, { push = true } = {}) {
+    root.dataset[group] = val;
+    document.querySelectorAll(`.pg-strip[data-group="${group}"] button`).forEach(b => {
+      b.setAttribute("aria-pressed", String(b.dataset.val === val));
+    });
+    if (push) {
+      const params = new URLSearchParams(window.location.search);
+      params.set(group, val);
+      history.replaceState(null, "", `${window.location.pathname}?${params.toString()}`);
+    }
+  }
+
+  document.querySelectorAll(".pg-strip").forEach(strip => {
+    const group = strip.dataset.group;
+    strip.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", () => setState(group, btn.dataset.val));
+    });
+  });
+
+  // Restore state from URL
+  const params = new URLSearchParams(window.location.search);
+  for (const group of groups) {
+    const val = params.get(group);
+    if (val) setState(group, val, { push: false });
+  }
+
+  // Copy URL
+  document.getElementById("copy-url").addEventListener("click", e => {
+    e.preventDefault();
+    navigator.clipboard.writeText(window.location.href);
+    const el = e.currentTarget;
+    const old = el.textContent;
+    el.textContent = "copied";
+    setTimeout(() => { el.textContent = old; }, 1200);
+  });
+</script>
+
+</body>
+</html>
