@@ -76,7 +76,7 @@
   /* ── Typography — font sizes ────────────────────────────────────── */
   --font-size-display:    64px;
   --font-size-section-h2: 40px;  /* WorkSection headlines; 32px on mobile */
-  --font-size-hero-prose: 28px;  /* Landing hero generalist paragraph; 24px on mobile */
+  --font-size-hero-prose: 24px;  /* Landing hero generalist paragraph; uniform across breakpoints */
   --font-size-kicker:     14px;
   --font-size-stat:       32px;
   --font-size-h1:         32px;
@@ -171,6 +171,7 @@
     line-height: var(--line-height-hero-prose);
     letter-spacing: -0.015em;
     color: var(--text-primary);
+    text-wrap: pretty;
   }
   .type-kicker {
     font-size: var(--font-size-kicker);
