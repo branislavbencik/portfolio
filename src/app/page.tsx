@@ -59,7 +59,7 @@ export default async function Home() {
                 <h2 className="type-allcaps leading-none text-text-secondary shrink-0">
                   Case studies
                 </h2>
-                <div aria-hidden="true" className="h-px bg-surface-2 flex-1" />
+                <div aria-hidden="true" className="relative -top-px h-px bg-surface-2 flex-1" />
               </div>
               <div className="flex flex-col gap-16 max-md:gap-10">
                 {caseStudies.map(renderCard)}
@@ -73,7 +73,7 @@ export default async function Home() {
                 <h2 className="type-allcaps leading-none text-text-secondary shrink-0">
                   Selected projects
                 </h2>
-                <div aria-hidden="true" className="h-px bg-surface-2 flex-1" />
+                <div aria-hidden="true" className="relative -top-px h-px bg-surface-2 flex-1" />
               </div>
               <div className="flex flex-col gap-16 max-md:gap-10">
                 {selectedProjects.map(renderCard)}
