@@ -4,7 +4,7 @@ export default function CaseStudyLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="w-full min-h-full border border-surface-2">
+    <div className="w-full min-h-full">
       {children}
     </div>
   );

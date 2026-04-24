@@ -88,17 +88,15 @@ export default async function ProjectPage({
       <main id="main-content">
         <ProjectHeader
           title={project.title}
-          isCaseStudy={project.type === "case-study"}
           year={project.year || undefined}
-          role={project.role || undefined}
-          domain={(project as { domain?: string }).domain || undefined}
+          tags={project.tags ? [...project.tags] : undefined}
           intro={project.intro || undefined}
           heroImage={coverImage}
           heroImageAlt={`${project.title} overview`}
         />
 
         {isCaseStudy && (project.contributions.length > 0 || project.impactItems.length > 0) && (
-          <div className="border-b border-surface-2">
+          <>
             {project.contributions.length > 0 && (
               <ContributionList items={project.contributions as string[]} />
             )}
@@ -110,11 +108,10 @@ export default async function ProjectPage({
                 }))}
               />
             )}
-          </div>
+          </>
         )}
 
         {project.sections.map((section, i) => {
-          const isLastSection = i === project.sections.length - 1;
           const images = (section.images as unknown as ImageEntry[])
             .filter(img => isCaseStudy || img.src !== coverImage);
 
@@ -130,7 +127,6 @@ export default async function ProjectPage({
                 label={section.label || undefined}
                 title={section.title}
                 description={section.description || undefined}
-                isLast={isLastSection}
               >
                 {images.map((img, j) => (
                   <CaptionedImage
@@ -150,8 +146,8 @@ export default async function ProjectPage({
 
           // Section without title — flat image gallery (selected projects)
           return (
-            <div key={i} className={`w-full${isLastSection ? "" : " border-b border-surface-2"}`}>
-              <section className="w-full max-w-frame mx-center px-content-x py-section flex flex-col gap-12">
+            <div key={i} className="w-full">
+              <section className="w-full max-w-frame mx-center max-lg:px-content-x pt-section flex flex-col gap-12">
                 {images.map((img, j) => (
                   <CaptionedImage
                     key={j}

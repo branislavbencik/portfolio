@@ -5,13 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ExternalArrow } from "./icons/ExternalArrow";
 
-// Pin zone — nav stays visible while scrollY is within the first PIN_THRESHOLD px.
-// Sized to the nav's own height so that the top of the page has a one-nav-height
-// grace zone before hide-on-scroll kicks in. This also prevents a visual artifact
-// where the content column's vertical rules appear to not reach the viewport edge
-// the moment the user nudges-scrolls and the nav briefly slides away.
-// Past the threshold, any downward position change hides; any upward change shows.
-// No velocity/jitter filter: behavior is tied to literal pixel direction.
 const PIN_THRESHOLD = 52;
 
 export default function Nav() {
@@ -19,42 +12,30 @@ export default function Nav() {
   const isDetail = pathname !== "/" && !pathname.startsWith("/keystatic");
 
   const [hidden, setHidden] = useState(false);
-  // Tracks whether the user has scrolled at all. Used to fade in the nav's
-  // border-b on case study detail routes (so nav gains a boundary line when
-  // content starts flowing under it). Tracked for all users, not gated by
-  // reduced-motion — the border is a state indicator, not motion.
-  const [scrolled, setScrolled] = useState(false);
   const lastScrollRef = useRef(0);
   const tickingRef = useRef(false);
 
   useEffect(() => {
     lastScrollRef.current = window.scrollY;
-    setScrolled(window.scrollY > 0);
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const reducedMotion = mq.matches;
+    if (reducedMotion) return;
 
     function onScroll() {
       if (tickingRef.current) return;
       tickingRef.current = true;
       requestAnimationFrame(() => {
         const current = window.scrollY;
+        const last = lastScrollRef.current;
+        const delta = current - last;
 
-        // Border state — always tracked, independent of motion preference.
-        setScrolled(current > 0);
-
-        // Hide-on-scroll — motion behavior only, respects reduced-motion.
-        if (!reducedMotion) {
-          const last = lastScrollRef.current;
-          const delta = current - last;
-
-          if (current <= PIN_THRESHOLD) {
-            setHidden(false);
-          } else if (delta > 0) {
-            setHidden(true);
-          } else if (delta < 0) {
-            setHidden(false);
-          }
+        if (current <= PIN_THRESHOLD) {
+          setHidden(false);
+        } else if (delta > 0) {
+          setHidden(true);
+        } else if (delta < 0) {
+          setHidden(false);
         }
 
         lastScrollRef.current = current;
@@ -66,8 +47,6 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const borderColor = isDetail && scrolled ? "border-surface-2" : "border-transparent";
-
   return (
     <header
       className={`animate-nav-in sticky top-0 z-40 w-full bg-canvas max-[1320px]:px-content-x motion-safe:transition-transform motion-safe:duration-[220ms] motion-safe:ease-[cubic-bezier(0.25,1,0.5,1)] ${
@@ -76,12 +55,12 @@ export default function Nav() {
     >
       <nav
         aria-label="Primary"
-        className={`w-full max-w-frame mx-center flex items-center justify-between h-13 border-b ${borderColor} motion-safe:transition-colors motion-safe:duration-[220ms] motion-safe:ease-[cubic-bezier(0.25,1,0.5,1)]`}
+        className="w-full max-w-frame mx-center flex items-center justify-between h-13"
       >
         {isDetail ? (
           <Link
             href="/"
-            className="link-underline type-nav text-text-secondary hover:text-foreground no-underline inline-flex items-center gap-2"
+            className="link-underline type-nav text-text-primary no-underline inline-flex items-center gap-2"
           >
             <span aria-hidden="true">←</span>
             <span>Back</span>
@@ -89,7 +68,7 @@ export default function Nav() {
         ) : (
           <Link
             href="/"
-            className="link-underline type-nav text-text-secondary hover:text-foreground no-underline inline-flex items-center"
+            className="link-underline type-nav text-text-primary no-underline inline-flex items-center"
           >
             Branislav Benčík
           </Link>

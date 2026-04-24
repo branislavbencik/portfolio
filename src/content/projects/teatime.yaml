@@ -1,8 +1,11 @@
 title: "B2B language learning system"
+company: TeaTime
+tagline: B2B language learning system
 description: "Built acquisition pipeline (+12 B2B clients) and AI-evaluated speaking test automated with n8n."
 tags:
-  - Case Study
-  - Co-owner
+  - "+12 B2B Clients"
+  - Service Design
+  - Co-founder
 type: case-study
 metric: acquired 12 corporate clients
 coverImage: /images/teatime/teatime-thumb.png
@@ -31,7 +34,7 @@ sections:
         alt: TeaTime persona definition
         caption: "Step 0: Define persona. Every design decision in Steps 1–3 traces back to these three drivers."
         background: false
-        width: 720
+        width: 640
       - src: /images/teatime/teatime-ws1-i2.png
         alt: TeaTime inbox view
         caption: "Step 1: Check how the message lands in the inbox. Consider all the other items the message is competing with. Headline max. length limit is 70 characters and it's bold so we want to make it count."
@@ -40,11 +43,13 @@ sections:
       - src: /images/teatime/teatime-ws1-i3.png
         alt: TeaTime outreach email
         caption: "Step 2: The email. Scannable in 30 seconds. No hard sell, just three ways to learn more."
-        background: false
+        background: true
+        paddingSides: none
       - src: /images/teatime/teatime-ws1-i4.png
         alt: TeaTime website and one-pager
         caption: "Step 3: Where she ends up. The website for a quick check. The one-pager she forwards to her boss."
-        background: false
+        background: true
+        paddingSides: none
   - label: "2. DIFFERENTIATE"
     title: Test what you teach. Teach what you test.
     description: "Corporate clients want proof their people are improving. Industry standard is a multiple-choice quiz. Meaningless for real communication and often disconnected from lessons. We designed a closed loop: test results drive the course plan, teaching targets the gaps, and progress test confirms they've been closed."
@@ -53,7 +58,7 @@ sections:
         alt: TeaTime testing and teaching system
         caption: Testing and teaching as a single connected system
         background: false
-        width: 720
+        width: 640
       - src: /images/teatime/teatime-ws2-i2.png
         alt: TeaTime personalized course plan
         caption: Each student receives a personalized plan combining work skills identified by the assessment and personal interests they've selected.

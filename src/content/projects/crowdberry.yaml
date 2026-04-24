@@ -1,8 +1,11 @@
 title: Investor experience for a crowdfunding marketplace
+company: Crowdberry
+tagline: Investor UX for a crowdfunding marketplace
 description: "Fintech investor UX · Usability tested"
 tags:
-  - Fintech
-  - User Testing
+  - "€100M+ invested"
+  - "KYC & AML"
+  - Usability testing
 type: selected
 metric: ""
 coverImage: /images/crowdberry/crowdberry-thumb.png
@@ -20,13 +23,15 @@ sections:
     images:
       - src: /images/crowdberry/crowdberry-thumb.png
         alt: Investment opportunity cards
-        caption: "Each card surfaces key information for quick comparisons: investment type, return rate, and minimum entry."
+        caption: "Investment opportunities at a glance — each card shows type, funding stage, and minimum entry for quick comparison."
         background: true
       - src: /images/crowdberry/crowdberry-ws2.png
         alt: Investment flow
         caption: Split view pairs a guided walkthrough with the actual form.
         background: true
+        paddingSides: none
       - src: /images/crowdberry/crowdberry-ws1.png
         alt: Portfolio dashboard
         caption: "Portfolio Dashboard. An investor sees both where their money is and where each deal stands."
         background: true
+        paddingSides: none

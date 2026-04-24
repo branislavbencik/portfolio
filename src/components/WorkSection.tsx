@@ -3,20 +3,19 @@ interface WorkSectionProps {
   label?: string;
   title: string;
   description?: string;
-  isLast?: boolean;
   children: React.ReactNode;
 }
 
-export function WorkSection({ id, label, title, description, isLast, children }: WorkSectionProps) {
+export function WorkSection({ id, label, title, description, children }: WorkSectionProps) {
   return (
-    <div id={id} className={`w-full${isLast ? "" : " border-b border-surface-2"}`}>
-      <section className="w-full max-w-frame mx-center px-content-x py-section">
+    <div id={id} className="w-full">
+      <section className="w-full max-w-frame mx-center max-lg:px-content-x pt-section">
         {/* Text header — constrained to column width */}
-        <div className="max-w-column mx-auto w-full mb-12">
-          <p className="type-allcaps text-text-secondary mb-4">
+        <div className="max-w-column mx-auto w-full mb-14">
+          <p className="type-allcaps text-text-secondary mb-3">
             {label}
           </p>
-          <h2 className="type-section-h2 text-text-primary mb-4">
+          <h2 className="type-section-h2 text-text-primary mb-5">
             {title}
           </h2>
           <p className="type-body-l text-text-secondary">
@@ -24,7 +23,7 @@ export function WorkSection({ id, label, title, description, isLast, children }:
           </p>
         </div>
 
-        <div className="flex flex-col gap-section">
+        <div className="flex flex-col gap-16">
           {children}
         </div>
       </section>

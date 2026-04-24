@@ -9,15 +9,25 @@ export default config({
       path: "src/content/projects/*",
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
+        company: fields.text({
+          label: "Company",
+          description: "Brand name shown bold before the em dash on landing cards (e.g. 'Skoala').",
+          validation: { isRequired: false },
+        }),
+        tagline: fields.text({
+          label: "Tagline",
+          description: "Short phrase after the em dash on landing cards (e.g. 'CMS for a financial literacy platform').",
+          validation: { isRequired: false },
+        }),
         description: fields.text({
           label: "Description",
-          description: "One-liner shown on the card.",
+          description: "One-liner used on detail pages and as tagline fallback.",
         }),
         tags: fields.array(
           fields.text({ label: "Tag" }),
           {
             label: "Tags",
-            description: "Up to 3 shown on the thumbnail. First tag styled as a pill if 'Case Study'.",
+            description: "2–3 tags shown below the headline on landing cards. Order = importance. Outcome/impact first when applicable.",
           }
         ),
         type: fields.select({

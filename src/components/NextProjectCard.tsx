@@ -21,17 +21,22 @@ export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
       ? (next.entry.coverImage as { src: string }).src
       : (next.entry.coverImage as string) ?? "";
 
+  const entry = next.entry as {
+    company?: string;
+    tagline?: string;
+    tags?: readonly string[];
+    title: string;
+    description?: string;
+  };
+
   return (
     <NextProjectSection
-      isCaseStudy={next.entry.type === "case-study"}
-      year={next.entry.year || undefined}
-      role={next.entry.role || undefined}
-      domain={(next.entry as { domain?: string }).domain || undefined}
-      headline={next.entry.title}
-      description={next.entry.description || undefined}
+      company={entry.company || entry.title}
+      tagline={entry.tagline || entry.description || ""}
+      tags={entry.tags ? [...entry.tags] : undefined}
       href={`/${next.slug}`}
       image={image}
-      imageAlt={`${next.entry.title} thumbnail`}
+      imageAlt={`${entry.title} thumbnail`}
     />
   );
 }

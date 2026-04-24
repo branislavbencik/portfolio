@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card variants · playground</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --canvas:       #FAFAFA;
+  --surface-tile: #FFFFFF;
+  --surface-1:    #F4F4F5;
+  --surface-2:    #E4E4E7;
+  --surface-3:    #D4D4D8;
+  --text-primary:   #18181B;
+  --text-secondary: #52525B;
+  --text-tertiary:  #71717A;
+  --font-sans: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --ease-out-quart: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--canvas);
+  color: var(--text-primary);
+  padding: 40px 48px 140px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Toolbar ───────────────────────────────────────────────────── */
+.toolbar {
+  max-width: 1180px;
+  margin: 0 auto 48px;
+  padding: 20px 24px;
+  background: var(--surface-tile);
+  border: 1px solid var(--surface-2);
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px 32px;
+  align-items: start;
+  position: sticky;
+  top: 20px;
+  z-index: 10;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.toolbar h1 {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  padding-top: 6px;
+}
+
+.toolbar-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.toolbar-group { display: flex; gap: 4px; align-items: center; }
+.toolbar-group .glabel {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 6px;
+}
+.toolbar-group button {
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  background: transparent;
+  border: 1px solid var(--surface-2);
+  border-radius: 3px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: background 120ms, color 120ms, border-color 120ms;
+}
+.toolbar-group button:hover {
+  border-color: var(--surface-3);
+  color: var(--text-primary);
+}
+.toolbar-group button[data-active="true"] {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: #FAFAFA;
+}
+
+.toolbar-note {
+  grid-column: 1 / -1;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  line-height: 1.6;
+  padding-top: 12px;
+  border-top: 1px dashed var(--surface-2);
+}
+.toolbar-note strong { color: var(--text-primary); font-weight: 500; }
+
+/* ── Grid ──────────────────────────────────────────────────────── */
+.grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px 40px;
+}
+
+.variant {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.variant-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding-bottom: 4px;
+}
+
+/* ── Card ─ now Figma-accurate by default ──────────────────────── */
+.card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  --card-radius: 12px;   /* default — Figma value */
+  --card-border: 1px solid var(--surface-2);
+  --card-divider: 1px solid var(--surface-2);  /* the "double border" divider */
+}
+
+.card-inner {
+  background: var(--surface-tile);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image-wrap {
+  overflow: hidden;
+  background: var(--surface-1);
+  min-height: 0;
+  border-bottom: var(--card-divider);  /* internal divider ← the second border */
+}
+.card-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.card-text-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  /* tag pill aligns center with title */
+  gap: 16px;
+  padding: 24px 24px;   /* GENEROUS — matches Figma */
+  flex: 0 0 auto;
+}
+.card-title {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  flex: 1;
+}
+.card-title strong { font-weight: 600; }
+
+/* Tag pill — Figma-accurate: subtle bg + border + pill radius */
+.card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  background: var(--surface-1);
+  border: 1px solid var(--surface-2);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.card-tag .star {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 1;
+  color: #F59E0B;  /* amber — matches emoji rendering */
+}
+
+/* Meta row — small quiet mono allcaps text-tertiary */
+.card-meta-row {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0 24px;
+  flex: 0 0 0px;
+  overflow: hidden;
+  line-height: 1.6;
+  transition: flex-basis 380ms var(--ease-out-quart),
+              padding 380ms var(--ease-out-quart);
+  border-top: 1px dashed transparent;  /* reserved for optional divider on hover */
+}
+
+/* Arrow indicator on title */
+.card-arrow {
+  display: inline-block;
+  padding-left: 0.3em;
+  font-weight: 300;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 300ms var(--ease-out-quart), transform 300ms var(--ease-out-quart);
+}
+.card:hover .card-arrow,
+.card:focus-visible .card-arrow,
+.pin-hover .card-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 4px;
+}
+
+/* ── Radius variant classes ───────────────────────────────────── */
+.r-4  .card { --card-radius: 4px; }
+.r-8  .card { --card-radius: 8px; }
+.r-12 .card { --card-radius: 12px; }
+.r-16 .card { --card-radius: 16px; }
+
+/* ── Star icon toggle ─────────────────────────────────────────── */
+.star-off .card-tag .star { display: none; }
+
+/* ══════════════════════════════════════════════════════════════ */
+/* MECHANIC ALPHA — Image shrinks, text moves up, meta at bottom.
+   Card fixed height; flex redistribution on hover. */
+/* ══════════════════════════════════════════════════════════════ */
+.mech-alpha .card-inner {
+  height: 440px;
+}
+.mech-alpha .card-image-wrap {
+  flex: 1 1 0;
+}
+.mech-alpha .card-meta-row {
+  flex: 0 0 0px;
+}
+.mech-alpha .card:hover .card-meta-row,
+.mech-alpha .card:focus-visible .card-meta-row,
+.mech-alpha.pin-hover .card-meta-row {
+  flex: 0 0 44px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* ══════════════════════════════════════════════════════════════ */
+/* MECHANIC BETA — Image stays, card grows at bottom.
+   Image at aspect-ratio; meta row grows from 0 on hover. */
+/* ══════════════════════════════════════════════════════════════ */
+.mech-beta .card-image-wrap {
+  aspect-ratio: 1080 / 628;
+  flex: 0 0 auto;
+}
+.mech-beta .card-meta-row {
+  flex: 0 0 0px;
+}
+.mech-beta .card:hover .card-meta-row,
+.mech-beta .card:focus-visible .card-meta-row,
+.mech-beta.pin-hover .card-meta-row {
+  flex: 0 0 44px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* ── Responsive fallback ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .toolbar { grid-template-columns: 1fr; position: static; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <h1>Card variants · playground</h1>
+
+  <div class="toolbar-row">
+    <div class="toolbar-group" id="mech-group">
+      <span class="glabel">Hover:</span>
+      <button data-mech="alpha">α · shrink</button>
+      <button data-mech="beta" data-active="true">β · grow</button>
+    </div>
+
+    <div class="toolbar-group" id="radius-group">
+      <span class="glabel">Radius:</span>
+      <button data-radius="4">4px</button>
+      <button data-radius="8">8px</button>
+      <button data-radius="12" data-active="true">12px</button>
+      <button data-radius="16">16px</button>
+    </div>
+
+    <div class="toolbar-group" id="star-group">
+      <span class="glabel">Star:</span>
+      <button data-star="on" data-active="true">⭐ on</button>
+      <button data-star="off">off</button>
+    </div>
+
+    <div class="toolbar-group" id="pin-group">
+      <span class="glabel">Pin hover:</span>
+      <button data-pin="off" data-active="true">off</button>
+      <button data-pin="on">on</button>
+    </div>
+  </div>
+
+  <div class="toolbar-note" id="mech-note"></div>
+</div>
+
+<div class="grid mech-beta r-12" id="grid">
+  <div class="variant">
+    <div class="variant-label">Skoala — lead case study (light app UI)</div>
+    <a class="card" href="#">
+      <div class="card-inner">
+        <div class="card-image-wrap"><img src="../public/images/skoala/skoala-thumb.png" alt="Skoala"></div>
+        <div class="card-text-row">
+          <h2 class="card-title"><strong>Skoala</strong> — CMS for a financial literacy platform<span class="card-arrow">→</span></h2>
+          <span class="card-tag"><span class="star">⭐</span>50% market reach</span>
+        </div>
+        <div class="card-meta-row">Lead Designer · Design Sprint · 2024–25</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="variant">
+    <div class="variant-label">TeaTime — secondary case study (different thumb)</div>
+    <a class="card" href="#">
+      <div class="card-inner">
+        <div class="card-image-wrap"><img src="../public/images/teatime/teatime-thumb.png" alt="TeaTime"></div>
+        <div class="card-text-row">
+          <h2 class="card-title"><strong>TeaTime</strong> — B2B language learning system<span class="card-arrow">→</span></h2>
+          <span class="card-tag"><span class="star">⭐</span>Co-owner</span>
+        </div>
+        <div class="card-meta-row">Co-owner · 2024–25</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="variant">
+    <div class="variant-label">NNspect — selected project (⭐ feels weird here?)</div>
+    <a class="card" href="#">
+      <div class="card-inner">
+        <div class="card-image-wrap"><img src="../public/images/nnspect/nnspect-thumb.png" alt="NNspect"></div>
+        <div class="card-text-row">
+          <h2 class="card-title"><strong>NNspect</strong> — ML training for material quality inspection<span class="card-arrow">→</span></h2>
+          <span class="card-tag"><span class="star">⭐</span>Industrial AI</span>
+        </div>
+        <div class="card-meta-row">Solo Designer · 2022 · Industrial AI</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="variant">
+    <div class="variant-label">Crowdberry — selected project (⭐ on a domain tag)</div>
+    <a class="card" href="#">
+      <div class="card-inner">
+        <div class="card-image-wrap"><img src="../public/images/crowdberry/crowdberry-thumb.png" alt="Crowdberry"></div>
+        <div class="card-text-row">
+          <h2 class="card-title"><strong>Crowdberry</strong> — Investor UX for a crowdfunding marketplace<span class="card-arrow">→</span></h2>
+          <span class="card-tag"><span class="star">⭐</span>Fintech</span>
+        </div>
+        <div class="card-meta-row">Product Designer · 2020 · Fintech</div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<script>
+const NOTES = {
+  alpha: "<strong>α — Image shrinks, text moves up, meta appears at bottom.</strong> Fixed-height card. On hover, image track shrinks, meta row expands into freed space. Title+tag shifts upward visually. Zero page layout shift. Good when vertical space is precious on a long list.",
+  beta:  "<strong>β — Title stays, card grows at bottom, meta appears below.</strong> Image keeps natural aspect ratio. Meta row grows from 0 → 44px pushing card height down. Content below the hovered card shifts. Literal match for your Figma Image #9 and #16. Simpler, more predictable. Cost: ripple on stacked card lists."
+};
+
+function getState() {
+  const grid = document.getElementById('grid');
+  const cls = grid.className;
+  return {
+    mech: cls.match(/mech-(\w+)/)?.[1] || 'beta',
+    radius: cls.match(/r-(\d+)/)?.[1] || '12',
+    star: cls.includes('star-off') ? 'off' : 'on',
+    pin: cls.includes('pin-hover') ? 'on' : 'off'
+  };
+}
+
+function render() {
+  const { mech, radius, star, pin } = getState();
+  const grid = document.getElementById('grid');
+  grid.className = `grid mech-${mech} r-${radius}` +
+                   (star === 'off' ? ' star-off' : '') +
+                   (pin === 'on' ? ' pin-hover' : '');
+
+  document.querySelectorAll('#mech-group button').forEach(b => b.dataset.active = (b.dataset.mech === mech) ? 'true' : 'false');
+  document.querySelectorAll('#radius-group button').forEach(b => b.dataset.active = (b.dataset.radius === radius) ? 'true' : 'false');
+  document.querySelectorAll('#star-group button').forEach(b => b.dataset.active = (b.dataset.star === star) ? 'true' : 'false');
+  document.querySelectorAll('#pin-group button').forEach(b => b.dataset.active = (b.dataset.pin === pin) ? 'true' : 'false');
+
+  document.getElementById('mech-note').innerHTML = NOTES[mech];
+
+  const url = new URL(window.location);
+  url.searchParams.set('hover', mech);
+  url.searchParams.set('radius', radius);
+  url.searchParams.set('star', star);
+  url.searchParams.set('pin', pin);
+  window.history.replaceState({}, '', url);
+}
+
+function setAttr(key, value) {
+  const grid = document.getElementById('grid');
+  let cls = grid.className;
+
+  if (key === 'mech') cls = cls.replace(/mech-\w+/, `mech-${value}`);
+  if (key === 'radius') cls = cls.replace(/r-\d+/, `r-${value}`);
+  if (key === 'star') {
+    cls = cls.replace(/\s*star-off/, '');
+    if (value === 'off') cls += ' star-off';
+  }
+  if (key === 'pin') {
+    cls = cls.replace(/\s*pin-hover/, '');
+    if (value === 'on') cls += ' pin-hover';
+  }
+
+  grid.className = cls.trim();
+  render();
+}
+
+document.querySelectorAll('#mech-group button').forEach(btn => {
+  btn.addEventListener('click', () => setAttr('mech', btn.dataset.mech));
+});
+document.querySelectorAll('#radius-group button').forEach(btn => {
+  btn.addEventListener('click', () => setAttr('radius', btn.dataset.radius));
+});
+document.querySelectorAll('#star-group button').forEach(btn => {
+  btn.addEventListener('click', () => setAttr('star', btn.dataset.star));
+});
+document.querySelectorAll('#pin-group button').forEach(btn => {
+  btn.addEventListener('click', () => setAttr('pin', btn.dataset.pin));
+});
+
+// Init from URL
+const params = new URLSearchParams(window.location.search);
+const initMech = ['alpha', 'beta'].includes(params.get('hover')) ? params.get('hover') : 'beta';
+const initRadius = ['4','8','12','16'].includes(params.get('radius')) ? params.get('radius') : '12';
+const initStar = params.get('star') === 'off' ? 'off' : 'on';
+const initPin = params.get('pin') === 'on' ? 'on' : 'off';
+
+const grid = document.getElementById('grid');
+grid.className = `grid mech-${initMech} r-${initRadius}` +
+                 (initStar === 'off' ? ' star-off' : '') +
+                 (initPin === 'on' ? ' pin-hover' : '');
+render();
+</script>
+
+</body>
+</html>
