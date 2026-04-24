@@ -1,6 +1,6 @@
 # Portfolio Build Status
 
-**Last update:** 2026-04-24 (session 38) · **Deploy:** branislavbencik.com
+**Last update:** 2026-04-24 (session 40) · **Deploy:** branislavbencik.com
 
 ## Pages
 `/` → Done (landing) · `/skoala` → Done · `/teatime` → Done · `/nnspect` → Done · `/sakurabook` → Done · `/crowdberry` → Done · `/reprio` → Done (playground) · `/about` → Stub · `/resume` → Not started
@@ -9,6 +9,8 @@
 Decide whether the 1px section divider weight competes with card frames (lighten or thicken if so); citation-link mobile behavior at very narrow widths (12px sup may collide with line above); Zinc-50 canvas tone follow-up (one-line `--canvas` swap for warmer register now that surface-1 is load-bearing for card tiles); citation-link keyboard focus state (ring/underline on `.citation:focus-visible` in addition to color change); case study content pages scoped /critique (landing is polished, inside should match); audit unused type utilities (`type-display` still used by `/not-found` + `ProjectHeader`, but `type-kicker` may be orphaned after kicker removal); About page; resume page; real favicon monogram (current is placeholder); address pre-existing lint warnings; update `CLAUDE.md` (still claims Next 15 + static export); decide whether to bring back the "Curiouser" footer easter egg or remove it permanently; consider role-based rename of `type-h1` utility (currently means "visual size step #2", confusingly close to the HTML element name); once the worktree workflow has a few sessions of runtime, revisit the deferred `SessionStart` dev-server hook and a `prune-worktrees` alias for automated cleanup of merged worktrees
 
 ## Session Log
+40. TeaTime role + resume refresh (2026-04-24) — unified both TeaTime references in `src/content/projects/teatime.yaml` to `Co-owner`: the header `role` field and the landing-card tag both now read "Co-owner" (replaces the previous mixed state where the tag said "Co-founder" and role said "Co-owner"). Swapped in a fresh `public/resume.pdf` from `~/Desktop/resume.pdf` (854 KB, up from 851 KB — content update, same static route). No component or token changes
+
 39. Caption column token cleanup (2026-04-24) — captions and the 404 body swap from `max-w-text` (552px) to `max-w-column` (640px); the stale `--max-width-text` token is removed from `globals.css`. CLAUDE.md layout-token line updated so the documented design system matches what ships
 
 38. Playground section + Reprio + cursor-follow action labels (2026-04-24) — added a third landing row "Playground" between Case studies and Selected projects, carrying built-and-shipped side projects; Reprio ships as the first playground item with its own thumbnail (`public/images/reprio/reprio-thumb.png`) and YAML content (`src/content/projects/reprio.yaml`, `type: playground`). New `PlaygroundCard` component for the row and new `CursorFollower` component that renders a cursor-tracking action label on hover ("View case study" / "View project" / "Open Reprio ↗") — layered on top of the existing section labels, not replacing them. Keystatic schema extended to accept the playground type. Minor polish on `CaseStudyCard`, `CaptionedImage`, `CitationLink`, `HeroStatement`. README updated to list Reprio under a new Playground line.
