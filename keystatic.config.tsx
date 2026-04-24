@@ -34,6 +34,7 @@ export default config({
           label: "Type",
           options: [
             { label: "Case Study", value: "case-study" },
+            { label: "Playground", value: "playground" },
             { label: "Selected Project", value: "selected" },
           ],
           defaultValue: "selected",

@@ -10,6 +10,7 @@ export default function CitationLink({ label, href, external }: CitationLinkProp
       <a
         href={href}
         className="citation"
+        data-cursor-label=""
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         ({label}

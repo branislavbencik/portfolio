@@ -1,4 +1,5 @@
 import { CaseStudyCard } from "@/components/CaseStudyCard";
+import { PlaygroundCard } from "@/components/PlaygroundCard";
 import HeroStatement from "@/components/HeroStatement";
 import { reader } from "@/lib/keystatic";
 
@@ -22,16 +23,21 @@ export default async function Home() {
   const caseStudies = projects.filter(
     (p) => (p.entry as ProjectEntry).type === "case-study"
   );
-  const selectedProjects = projects.filter(
-    (p) => (p.entry as ProjectEntry).type !== "case-study"
+  const playground = projects.filter(
+    (p) => (p.entry as ProjectEntry).type === "playground"
   );
+  const selectedProjects = projects.filter((p) => {
+    const t = (p.entry as ProjectEntry).type;
+    return t !== "case-study" && t !== "playground";
+  });
 
-  const renderCard = ({ slug, entry }: typeof projects[number]) => {
+  const resolveImage = (e: ProjectEntry) =>
+    typeof e.coverImage === "object" && e.coverImage !== null
+      ? (e.coverImage as { src: string }).src
+      : (e.coverImage as string) ?? "";
+
+  const renderCaseStudyCard = ({ slug, entry }: typeof projects[number]) => {
     const e = entry as ProjectEntry;
-    const image =
-      typeof e.coverImage === "object" && e.coverImage !== null
-        ? (e.coverImage as { src: string }).src
-        : (e.coverImage as string) ?? "";
     return (
       <CaseStudyCard
         key={slug}
@@ -39,7 +45,38 @@ export default async function Home() {
         tagline={e.tagline || e.description || ""}
         tags={e.tags ? [...e.tags] : undefined}
         primaryHref={`/${slug}`}
-        image={image}
+        image={resolveImage(e)}
+        imageAlt={`${e.title} thumbnail`}
+        cursorLabel="View case study"
+      />
+    );
+  };
+
+  const renderSelectedCard = ({ slug, entry }: typeof projects[number]) => {
+    const e = entry as ProjectEntry;
+    return (
+      <CaseStudyCard
+        key={slug}
+        company={e.company || e.title}
+        tagline={e.tagline || e.description || ""}
+        tags={e.tags ? [...e.tags] : undefined}
+        primaryHref={`/${slug}`}
+        image={resolveImage(e)}
+        imageAlt={`${e.title} thumbnail`}
+        cursorLabel="View project"
+      />
+    );
+  };
+
+  const renderPlaygroundCard = ({ slug, entry }: typeof projects[number]) => {
+    const e = entry as ProjectEntry;
+    return (
+      <PlaygroundCard
+        key={slug}
+        title={e.company || e.title}
+        description={e.description || e.tagline || ""}
+        liveHref="https://reprio.vercel.app/"
+        image={resolveImage(e)}
         imageAlt={`${e.title} thumbnail`}
       />
     );
@@ -62,7 +99,21 @@ export default async function Home() {
                 <div aria-hidden="true" className="relative -top-px h-px bg-surface-2 flex-1" />
               </div>
               <div className="flex flex-col gap-16 max-md:gap-10">
-                {caseStudies.map(renderCard)}
+                {caseStudies.map(renderCaseStudyCard)}
+              </div>
+            </section>
+          )}
+
+          {playground.length > 0 && (
+            <section className="pt-section">
+              <div className="flex items-center gap-4 mb-8">
+                <h2 className="type-allcaps leading-none text-text-secondary shrink-0">
+                  Playground
+                </h2>
+                <div aria-hidden="true" className="relative -top-px h-px bg-surface-2 flex-1" />
+              </div>
+              <div className="flex flex-col gap-16 max-md:gap-10">
+                {playground.map(renderPlaygroundCard)}
               </div>
             </section>
           )}
@@ -76,7 +127,7 @@ export default async function Home() {
                 <div aria-hidden="true" className="relative -top-px h-px bg-surface-2 flex-1" />
               </div>
               <div className="flex flex-col gap-16 max-md:gap-10">
-                {selectedProjects.map(renderCard)}
+                {selectedProjects.map(renderSelectedCard)}
               </div>
             </section>
           )}

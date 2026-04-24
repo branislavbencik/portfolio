@@ -30,6 +30,13 @@
 
   /* Inverse color token — used on dark surfaces (e.g. ImpactBar) */
   --text-inverse: var(--canvas);
+
+  /* Playground — the single dark surface exception, for built side projects
+     that inherit their product's native canvas. See DESIGN.md. */
+  --playground-canvas:     #0A0A0C;  /* flat near-black; no nested surfaces */
+  --playground-border:     rgba(255, 255, 255, 0.09);
+  --playground-text:       #E4E4E7;  /* Zinc 200 — softened from pure white to feel less shouty on flat black */
+  --playground-text-dim:   rgba(250, 250, 250, 0.72);  /* bumped from 0.62 for body-m readability */
 }
 
 @media (max-width: 767px) {
@@ -64,6 +71,12 @@
 
   /* Inverse text token */
   --color-text-inverse: var(--text-inverse);
+
+  /* Playground exception — dark surface for built side-projects */
+  --color-playground-canvas:   var(--playground-canvas);
+  --color-playground-border:   var(--playground-border);
+  --color-playground-text:     var(--playground-text);
+  --color-playground-text-dim: var(--playground-text-dim);
 
   /* ── Fonts ──────────────────────────────────────────────────────── */
   --font-sans:  var(--font-geist-sans);
@@ -338,6 +351,7 @@
   @media (prefers-reduced-motion: reduce) {
     .animate-cursor-blink { animation: none; }
   }
+
   .type-button {
     font-size: var(--font-size-button);
     font-weight: 500;

@@ -8,6 +8,7 @@ interface CaseStudyCardProps {
   primaryHref: string;
   image: string;
   imageAlt: string;
+  cursorLabel?: string;
 }
 
 export function CaseStudyCard({
@@ -17,10 +18,12 @@ export function CaseStudyCard({
   primaryHref,
   image,
   imageAlt,
+  cursorLabel,
 }: CaseStudyCardProps) {
   return (
     <Link
       href={primaryHref}
+      data-cursor-label={cursorLabel}
       className="group block no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-[6px] motion-safe:transition-transform motion-safe:duration-[180ms] motion-safe:ease-out motion-safe:hover:scale-[1.01] active:scale-[0.99]"
     >
       <article className="relative w-full border border-surface-2 rounded-[6px] p-[4px] bg-canvas">
