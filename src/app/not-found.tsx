@@ -8,7 +8,7 @@ export default function NotFound() {
     <main id="main-content" className="w-full max-w-frame mx-auto px-content-x py-detail flex flex-col gap-6">
       <p className="type-allcaps text-text-tertiary">404</p>
       <h1 className="type-display text-text-primary">Page not found.</h1>
-      <p className="type-body-m text-text-secondary max-w-text">
+      <p className="type-body-m text-text-secondary max-w-column">
         This page doesn&apos;t exist or was moved.
       </p>
       <Link
