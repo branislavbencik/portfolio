@@ -33,7 +33,7 @@ Do NOT hardcode pixel values, colors, or font sizes anywhere. Always use:
 - Typography utility classes (e.g., `type-h1`, `type-body-m`, `type-allcaps`)
 
 ### What's defined in globals.css:
-- **Layout:** `--width-frame` (1288px), `--width-content` (1128px), `--width-text` (552px), `--spacing-section`, `--spacing-content-x`, `--spacing-nav-x`/`--spacing-nav-y`
+- **Layout:** `--width-frame` (1288px), `--width-content` (1128px), `--max-width-column` (640px, for text blocks and captions), `--spacing-section`, `--spacing-content-x`, `--spacing-nav-x`/`--spacing-nav-y`
 - **Typography:** `type-h1` through `type-body-s`, `type-allcaps`, `type-button` — all as `@layer utilities` classes with font-size, weight, line-height, and letter-spacing baked in
 - **Colors:** Primitive palette (`--black` through `--white`, `--green-500`) and semantic tokens (`--foreground`, `--foreground-secondary`, `--foreground-tertiary`, `--background`, `--background-alt`, `--border-strong`, `--border-light`, `--accent-live`)
 - **Gaps:** `--gap-case-study`, `--gap-selected-project`, `--gap-selected-card`
