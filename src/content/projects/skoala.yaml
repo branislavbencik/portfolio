@@ -38,6 +38,7 @@ sections:
         alt: CMS editor view
         caption: "A quiz question in the CMS and its rendered output on the student's phone. Editors control content. The system controls layout."
         background: true
+        paddingSides: none
   - label: Key design decision
     title: Edit live content without breaking it
     description: "Once a lesson plan is live, teachers build their week around it. You can't just edit stuff under their hands. You don't want them to open a broken slide mid-class. So we borrowed from git version control: edits happen on a branch, the live version stays untouched, and changes merge back only when ready."

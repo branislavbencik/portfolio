@@ -11,6 +11,7 @@ Portfolio of **Branislav Benčík**, Senior Product Designer.
 A static portfolio site: landing page, long-form case studies, and selected project pages.
 
 - **Case studies:** [Skoala](https://branislavbencik.com/skoala), [TeaTime](https://branislavbencik.com/teatime)
+- **Playground:** [Reprio](https://branislavbencik.com/reprio)
 - **Selected projects:** [NNspect](https://branislavbencik.com/nnspect), [Sakurabook](https://branislavbencik.com/sakurabook), [Crowdberry](https://branislavbencik.com/crowdberry)
 
 Live build status and the session-by-session changelog live in [`docs/STATUS.md`](docs/STATUS.md).

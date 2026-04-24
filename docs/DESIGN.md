@@ -99,6 +99,22 @@ Built on **Geist Sans** and **Geist Mono**.
 - **Implementation:** 1px `border-zinc-200` lines at 10–15% opacity
 - **Feel:** Drafting board + paper grain
 
+### Playground Card (dark-surface exception)
+Playground cards host built-and-shipped side projects. They are the **only dark surface** on the portfolio. The exception is justified because Playground pieces inherit their product's native canvas — Reprio's interface is dark-mode-first, and showing it in a light chrome would misrepresent the product's character. Rule 6 ("do not introduce arbitrary colors") still holds: the dark surface is tokenized, semantically named (`--playground-canvas`), and scoped to this card type.
+- **Tokens:** `--playground-canvas` (#0A0A0C, flat near-black — intentionally uniform, no nested surfaces), `--playground-border` (white at 9% alpha), `--playground-text` (#E4E4E7 / Zinc 200 — softened from pure white), `--playground-text-dim` (white at 72% alpha). Primary-to-secondary contrast ratio ≈ 1.24×, intentionally compressed vs the light canvas to feel more editorial and less shouty on flat black
+- **Shape:** Full content-width, `rounded-[12px]` outer radius, `overflow-hidden`. Top/side padding `pt-10 px-10` (with breakpoint step-downs); **bottom padding is zero** — the screenshot bleeds flush to the card's bottom edge. Resulting aspect ≈ 2:1 on desktop — compact enough to read as a featured moment, not a narrative tile
+- **Header:** Two-column desktop (title left, description right) collapsing to stacked on `max-lg`. Title uses `type-h1` (32px, weight 600, -0.04em tracking) — tight and logo-like, appropriate for a one-word product name. Description uses `type-body-m` at `--playground-text-dim`. **No inline link affordance** inside the card — the whole card is a single outbound link (`target="_blank" rel="noopener noreferrer"`), so an inline `(Live↗)` would be redundant and structurally invalid (nested anchors)
+- **Screenshot framing:** The product's screenshot has the browser chrome **baked into the image asset itself**, not drawn in CSS. This keeps the card geometry clean (no nested fills, no fake chrome bars) and lets the screenshot carry its own "this is a live web app" signal. Image wrapper uses `rounded-t-[6px]` (top-only) and no visible border — the flat card canvas is the frame
+- **Hover:** Same scale-only transform-transition as case-study cards, but tighter (`scale-[1.005]` instead of `1.01`) — the larger card surface amplifies motion, so the transform is scaled down accordingly
+- **Scope discipline:** Playground is a **section**, not a tag. New Playground entries use `type: "playground"` in the content schema. Do not apply the dark canvas to any other card type. The single-surface flatness is load-bearing — do not introduce nested fills, gradients, or sub-panels; if a future Playground card needs structure, express it through typography and hairlines, not fills
+
+### Cursor Label (follow-cursor affordance)
+Landing-page cards carry a cursor-follow label that names the click action per card — `"View case study"`, `"View project"`, `"Open Reprio ↗"`. Layered on top of section labels, not replacing them.
+- **Mechanism:** Single `CursorFollower` client component mounted in `layout.tsx` reads `data-cursor-label` from the hovered target's closest ancestor and renders a fixed-position pill following the cursor. rAF-throttled for 60fps
+- **Scope:** Only landing cards carry this attribute. Detail pages and inline links do not. Keeps the affordance purposeful
+- **Hardware gating:** Active only when `(hover: hover) and (pointer: fine)` matches. Touch and pen devices get nothing — the section label still communicates the schema
+- **Why:** Section labels name the **schema** ("these are case studies"); cursor labels name the **action** ("clicking this opens the live app"). Two different jobs; layering is craft, not redundancy
+
 ---
 
 ## 5. Spacing & Rhythm

@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 
 import ConsoleEasterEgg from "@/components/ConsoleEasterEgg";
 import TabAttention from "@/components/TabAttention";
+import CursorFollower from "@/components/CursorFollower";
 import { LightboxProvider } from "@/components/LightboxContext";
 import "./globals.css";
 
@@ -69,6 +70,7 @@ export default function RootLayout({
         </a>
         <ConsoleEasterEgg />
         <TabAttention />
+        <CursorFollower />
         <LightboxProvider>
           <div className="min-h-dvh flex flex-col">
             <Nav />
