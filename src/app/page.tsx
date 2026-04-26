@@ -47,7 +47,7 @@ export default async function Home() {
         primaryHref={`/${slug}`}
         image={resolveImage(e)}
         imageAlt={`${e.title} thumbnail`}
-        cursorLabel="View case study"
+        cursorLabel="Read case study"
       />
     );
   };
@@ -92,7 +92,7 @@ export default async function Home() {
         <div id="work" className="scroll-mt-20">
           {caseStudies.length > 0 && (
             <section>
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-24">
                 <h2 className="type-allcaps leading-none text-text-secondary shrink-0">
                   Case studies
                 </h2>
@@ -106,7 +106,7 @@ export default async function Home() {
 
           {playground.length > 0 && (
             <section className="pt-section">
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-24">
                 <h2 className="type-allcaps leading-none text-text-secondary shrink-0">
                   Playground
                 </h2>
@@ -120,7 +120,7 @@ export default async function Home() {
 
           {selectedProjects.length > 0 && (
             <section className="pt-section">
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-24">
                 <h2 className="type-allcaps leading-none text-text-secondary shrink-0">
                   Selected projects
                 </h2>
