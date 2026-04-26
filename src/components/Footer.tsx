@@ -140,12 +140,12 @@ export default function Footer() {
           <button
             onClick={handleEmailClick}
             aria-label="Copy email address"
-            className="link-underline hover:text-foreground cursor-pointer inline-flex items-center relative outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-xs origin-left motion-safe:transition-transform motion-safe:duration-[180ms] motion-safe:ease-out motion-safe:hover:scale-[1.01] active:scale-[0.99]"
+            className="link-underline hover:text-foreground cursor-pointer inline-flex items-center relative outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-xs"
           >
             branislav.bencik@gmail.com
             <span
               aria-live="polite"
-              className={`pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+8px)] bg-text-primary text-text-inverse type-allcaps px-2 py-1 whitespace-nowrap motion-safe:transition-opacity duration-150 ease-out ${
+              className={`pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+8px)] bg-text-primary text-text-inverse type-caption rounded-full px-3 py-1.5 whitespace-nowrap motion-safe:transition-opacity motion-safe:duration-150 ${
                 copied ? "opacity-100" : "opacity-0"
               }`}
             >

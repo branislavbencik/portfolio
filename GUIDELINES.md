@@ -48,6 +48,9 @@ Easing curves stay smooth-ease-out (`cubic-bezier(0.16, 1, 0.3, 1)` and family).
 **Hover is transform-only, never brightness or shadow.**
 Per project memory: hover gets `scale`/`translate`. No `filter: brightness(...)`, no shadow brightening, no border-color flash. Why: brightness reads as cheap; transform reads as physical. The shipped Levitate hover (CaseStudyCard inner scales 0.97 over 320ms) is the canonical pattern.
 
+**No transform on inline text — only surface-level cards/tiles.**
+Per project memory `feedback_no_hover_scale_on_text`: never apply `hover:scale-*` to inline text links, text-only buttons, or labels. Subpixel rendering at non-1.0 scale factors thickens stroke edges via anti-aliasing — the eye reads it as a font-weight bump even though `font-weight` doesn't change. Cards and tiles are fine because their content is mostly raster (images) and the contextual movement masks the perceptual shift. Discovered via the Footer email button (session 45) — sibling text links used `link-underline` only and felt visually stable; the email button had a 1.01 scale and read as "weight changing" on hover.
+
 ---
 
 ## Accessibility
