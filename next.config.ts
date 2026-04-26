@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
@@ -6,6 +7,9 @@ const nextConfig: NextConfig = {
   // CDN performance. Static export is incompatible with Keystatic's admin UI and API routes.
   images: { unoptimized: true },
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  turbopack: {
+    root: path.join(__dirname),
+  },
 };
 
 const withMDX = createMDX({});

@@ -10,7 +10,11 @@ import { NextProjectCard } from "@/components/NextProjectCard";
 
 export async function generateStaticParams() {
   const projects = await reader.collections.projects.all();
-  return projects.map((p) => ({ slug: p.slug }));
+  // Playground entries live only on the landing page and link to the live
+  // product externally. No detail page is built for them.
+  return projects
+    .filter((p) => p.entry.type !== "playground")
+    .map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -58,6 +62,9 @@ export default async function ProjectPage({
   const { slug } = await params;
   const project = await reader.collections.projects.read(slug);
   if (!project) notFound();
+  // Playground entries don't have detail pages — only landing-page cards
+  // that link out to the live product.
+  if (project.type === "playground") notFound();
 
   const isCaseStudy = project.type === "case-study";
 

@@ -136,7 +136,7 @@ export function Lightbox({
           {/* Close — top right */}
           <button
             ref={closeButtonRef}
-            className="absolute top-4 right-4 p-2.5 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
+            className="absolute top-4 right-4 p-2.5 max-md:p-3 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
             onClick={onClose}
             aria-label="Close image"
           >
@@ -158,7 +158,7 @@ export function Lightbox({
           {showNav && (
             <button
               ref={prevButtonRef}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 max-md:p-3 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
               onClick={(e) => { e.stopPropagation(); onPrev!(); }}
               aria-label="Previous image"
             >
@@ -172,7 +172,7 @@ export function Lightbox({
           {showNav && (
             <button
               ref={nextButtonRef}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 max-md:p-3 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
               onClick={(e) => { e.stopPropagation(); onNext!(); }}
               aria-label="Next image"
             >
@@ -182,9 +182,9 @@ export function Lightbox({
             </button>
           )}
 
-          {/* Image + caption */}
+          {/* Image + caption — max-h-screen + overflow-y-auto so caption scrolls cleanly at 200% browser zoom */}
           <motion.div
-            className="flex flex-col items-center gap-4 max-w-[90vw] cursor-default"
+            className="flex flex-col items-center gap-4 max-w-[90vw] max-h-screen overflow-y-auto py-4 cursor-default"
             initial={{ scale: 0.97, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.97, opacity: 0 }}
