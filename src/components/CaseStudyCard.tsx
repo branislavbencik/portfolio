@@ -45,8 +45,8 @@ export function CaseStudyCard({
           "
         >
           <h2 className="type-card-title text-text-primary flex-1 min-w-0 truncate max-md:whitespace-normal max-md:overflow-visible">
-            <strong className="font-semibold">{company}</strong>
-            <span className="font-normal"> — {tagline}</span>
+            <strong className="font-bold">{company}</strong>
+            <span className="font-medium"> — {tagline}</span>
             <span
               aria-hidden="true"
               className="inline-block pl-[0.3em] font-light opacity-0 -translate-x-1 motion-safe:transition-[transform,opacity] motion-safe:duration-[200ms] motion-safe:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100"

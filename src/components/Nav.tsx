@@ -73,7 +73,7 @@ export default function Nav() {
             Branislav Benčík
           </Link>
         )}
-        <div className="flex items-center gap-x-4 type-nav text-text-secondary">
+        <div className="flex items-center gap-x-4 type-nav text-text-primary">
           <a
             href="https://github.com/branislavbencik/portfolio"
             target="_blank"
