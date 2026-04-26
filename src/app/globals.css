@@ -39,6 +39,17 @@
   --playground-text-dim:   rgba(250, 250, 250, 0.72);  /* bumped from 0.62 for body-m readability */
 }
 
+/* Tablet portrait band — intermediate spacing so iPad-sized viewports
+   don't render as a compressed desktop. Type stays desktop-scale; only
+   horizontal padding and vertical rhythm tighten. */
+@media (max-width: 1023px) {
+  :root {
+    --spacing-content-x:    24px;
+    --spacing-detail:        96px;
+    --spacing-section:      120px;
+  }
+}
+
 @media (max-width: 767px) {
   :root {
     --font-size-display:    36px;
