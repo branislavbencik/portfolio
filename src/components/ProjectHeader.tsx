@@ -40,9 +40,9 @@ export function ProjectHeader({
             tags={tags}
             year={year}
           />
-          <h1 className="type-display text-text-primary">{title}</h1>
+          <h1 className="type-page-title text-text-primary">{title}</h1>
           {intro && (
-            <p className="type-body-l text-text-secondary mt-3">{intro}</p>
+            <p className="type-body text-text-secondary mt-3">{intro}</p>
           )}
         </div>
       </div>
@@ -51,7 +51,7 @@ export function ProjectHeader({
         <div className="max-lg:px-content-x">
           <button
             type="button"
-            className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 border border-surface-2 rounded-[4px]"
+            className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 border border-surface-2 rounded-sm"
             aria-label="Open hero image in lightbox"
             onClick={() => open(id)}
           >

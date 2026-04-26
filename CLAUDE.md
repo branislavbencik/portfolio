@@ -88,3 +88,4 @@ Bridge gotchas: pairing expires in 5 min. REST API is burned (free plan). Comple
 - If Claude gets confused: "Stop. Re-read CLAUDE.md."
 - Don't research, plan, AND build in the same session.
 - Current project status lives in `docs/STATUS.md` — not here.
+- **Always surface the current dev-server URL.** When a Next dev server is running for the active worktree (typically on `:3000`–`:3009` depending on which ports are already taken), include the exact `http://localhost:<port>` at the top of every reply, and re-state it after restarts. The terminal/tmux status line shows the parent session's port and is misleading when multiple worktrees run in parallel — never trust it as a substitute.

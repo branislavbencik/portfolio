@@ -3,7 +3,7 @@ import Link from "next/link";
 
 interface CaseStudyCardProps {
   company: string;
-  tagline: string;
+  title: string;
   tags?: string[];
   primaryHref: string;
   image: string;
@@ -13,7 +13,7 @@ interface CaseStudyCardProps {
 
 export function CaseStudyCard({
   company,
-  tagline,
+  title,
   tags,
   primaryHref,
   image,
@@ -24,10 +24,10 @@ export function CaseStudyCard({
     <Link
       href={primaryHref}
       data-cursor-label={cursorLabel}
-      className="group block no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-[6px] motion-safe:transition-transform motion-safe:duration-[180ms] motion-safe:ease-out motion-safe:hover:scale-[1.01] active:scale-[0.99]"
+      className="group block no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-md motion-safe:transition-transform motion-safe:duration-[180ms] motion-safe:ease-out motion-safe:hover:scale-[1.01] active:scale-[0.99]"
     >
-      <article className="relative w-full border border-surface-2 rounded-[6px] p-[4px] bg-canvas">
-        <div className="overflow-hidden border border-surface-2 rounded-[4px] bg-surface-tile">
+      <article className="relative w-full border border-surface-2 rounded-md p-[4px] bg-canvas">
+        <div className="overflow-hidden border border-surface-2 rounded-sm bg-surface-tile">
           <Image
             src={image}
             alt={imageAlt}
@@ -44,9 +44,9 @@ export function CaseStudyCard({
             max-md:flex-col max-md:items-start max-md:gap-2
           "
         >
-          <h2 className="type-card-title text-text-primary flex-1 min-w-0 truncate max-md:whitespace-normal max-md:overflow-visible">
+          <h2 className="type-label text-text-primary flex-1 min-w-0 truncate max-md:whitespace-normal max-md:overflow-visible">
             <strong className="font-bold">{company}</strong>
-            <span className="font-medium"> — {tagline}</span>
+            <span className="font-normal"> — {title}</span>
             <span
               aria-hidden="true"
               className="inline-block pl-[0.3em] font-light opacity-0 -translate-x-1 motion-safe:transition-[transform,opacity] motion-safe:duration-[200ms] motion-safe:ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100"

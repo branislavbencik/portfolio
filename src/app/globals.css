@@ -33,15 +33,14 @@
 
   /* Playground — the single dark surface exception, for built side projects
      that inherit their product's native canvas. See DESIGN.md. */
-  --playground-canvas:     #0A0A0C;  /* flat near-black; no nested surfaces */
+  --playground-canvas:     #0A0A0C;
   --playground-border:     rgba(255, 255, 255, 0.09);
-  --playground-text:       #E4E4E7;  /* Zinc 200 — softened from pure white to feel less shouty on flat black */
-  --playground-text-dim:   rgba(250, 250, 250, 0.72);  /* bumped from 0.62 for body-m readability */
+  --playground-text:       #E4E4E7;
+  --playground-text-dim:   rgba(250, 250, 250, 0.72);
 }
 
 /* Tablet portrait band — intermediate spacing so iPad-sized viewports
-   don't render as a compressed desktop. Type stays desktop-scale; only
-   horizontal padding and vertical rhythm tighten. */
+   don't render as a compressed desktop. Type stays desktop-scale. */
 @media (max-width: 1023px) {
   :root {
     --spacing-content-x:    24px;
@@ -52,10 +51,11 @@
 
 @media (max-width: 767px) {
   :root {
-    --font-size-display:    36px;
-    --font-size-section-h2: 32px;
-    --font-size-h1:         24px;
-    --font-size-hero-prose: 22px;
+    --font-size-display:    40px;
+    --font-size-byline:     40px;  /* paired with display in masthead */
+    --font-size-page-title: 32px;  /* sits above heading 24, below display 40 — preserves the desktop scale shape */
+    --font-size-heading:    24px;
+    --font-size-lede:       18px;
     --spacing-content-x:    20px;
     --spacing-detail:       72px;
     --spacing-section:      96px;
@@ -92,158 +92,187 @@
   /* ── Fonts ──────────────────────────────────────────────────────── */
   --font-sans:  var(--font-geist-sans);
   --font-mono:  var(--font-geist-mono);
+  --font-serif: var(--font-vc-honey, Georgia, serif);
+  /* VC Honey is loaded via next/font/local in layout.tsx and exposed
+     as --font-vc-honey. Falls back to Georgia until the file lands. */
 
   /* ── Layout widths ──────────────────────────────────────────────── */
   --max-width-frame:    960px;
   --max-width-content: 1128px;
   --max-width-column:   640px;
 
-  /* ── Typography — font sizes ────────────────────────────────────── */
-  --font-size-display:    48px;
-  --font-size-section-h2: 40px;  /* WorkSection headlines; 32px on mobile */
-  --font-size-hero-prose: 28px;  /* Landing hero generalist paragraph; scales to 22px on mobile */
-  --font-size-kicker:     14px;
-  --font-size-stat:       32px;
-  --font-size-h1:         32px;
-  --font-size-h2:      24px;
-  --font-size-h3:      20px;
-  --font-size-h4:      17px;
-  --font-size-h5:      15px;
-  --font-size-body-l:  18px;
-  --font-size-body-m:  16px;
-  --font-size-body-s:  14px;
-  --font-size-label:   14px;
-  --font-size-tag:     12px;
-  --font-size-code:    14px;
-  --font-size-allcaps: 12px;
-  --font-size-button:  14px;
+  /* ── Typography — font sizes (9 tokens; 50% reduction from 18) ─── */
+  --max-width-lede:    842px;  /* Lede paragraph beneath Display — wider than reading column, narrower than content */
 
-  /* ── Typography — line heights ──────────────────────────────────── */
-  --line-height-display:    1.05;
-  --line-height-hero-prose: 1.3;
-  --line-height-kicker:     1.4;
-  --line-height-h1:         1.1;
-  --line-height-h2:      1.15;
-  --line-height-h3:      1.2;
-  --line-height-h4:      1.3;
-  --line-height-h5:      1.3;
-  --line-height-body:    1.6;
-  --line-height-tag:     1.4;
+  /* ── Typography — font sizes (9 tokens; 50% reduction from 18) ─── */
+  --font-size-display:    56px;
+  --font-size-byline:     56px;  /* Serif personal byline above Display in masthead pattern — paired size */
+  --font-size-page-title: 42px;  /* Case study detail H1 — geometrically uniform between Display 56 and Heading 32 (1.333× both directions) */
+  --font-size-heading:    32px;  /* All major block headings; absorbs section-h2 40 + h1 32 */
+  --font-size-lede:       20px;  /* Lede paragraph beneath any Display */
+  --font-size-subheading: 24px;  /* Inline subsections, supporting block headings */
+  --font-size-body:       18px;  /* All body prose; absorbs body-m 16 */
+  --font-size-label:      15px;  /* Card titles + descriptions */
+  --font-size-caption:    13px;  /* Nav, status, tag-chip, ImpactBar labels, captions */
+  --font-size-allcaps:    12px;  /* Mono allcaps tags / metadata pills */
+
+  /* ── Letter-spacing tokens (4 values; collapses 9 hardcoded) ─── */
+  --tracking-display: -0.036em;  /* Display + heading; lands at -2px on 56px display */
+  --tracking-tight:   -0.025em;  /* subheading, lede */
+  --tracking-normal:  0;          /* body, label, caption */
+  --tracking-loose:   +0.04em;    /* allcaps mono */
+
+  /* ── Radius tokens (3 values; collapses 3 hardcoded) ─────────── */
+  --radius-xs: 2px;  /* Focus rings, tooltips, small badges */
+  --radius-sm: 4px;  /* Buttons, chips, image insets */
+  --radius-md: 6px;  /* Cards, dialogs */
 }
 
 /* ── Spacing — non-inline @theme so :root media-query overrides propagate to utilities */
 @theme {
-  --spacing-section:    144px;
-  --spacing-detail:     112px;
-  --spacing-content-x:  32px;
+  --spacing-section:    128px;  /* was 144 — pulled to 4px geometric ladder 32·64·96·128 */
+  --spacing-detail:      96px;  /* was 112 — pulled to ladder + matches mobile (no responsive shift) */
+  --spacing-content-x:   32px;
 }
 
 @layer utilities {
-  /* ── Headings ───────────────────────────────────────────────────── */
+  /* ── Headings (all weight 700 bold) ────────────────────────────── */
   .type-display {
     font-size: var(--font-size-display);
-    font-weight: 600;
-    line-height: var(--line-height-display);
-    letter-spacing: -0.05em;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: var(--tracking-display);
   }
-  /* Landing card title — "Company — tagline"; editorial register at 15px (component classes set bold/medium weights) */
-  .type-card-title {
-    font-size: 15px;
-    font-weight: 500;
+  /* Page title — case study / detail-page H1.
+     Quieter than hero Display (56→42); sits as a chapter opener, not a
+     brand declaration. Single-channel size differentiation: same weight 700
+     and tracking as Display + Heading, only size varies. Tighter line-height
+     (1.1 vs Display's 1.15) reflects the shorter wrap typical of detail titles. */
+  .type-page-title {
+    font-size: var(--font-size-page-title);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: var(--tracking-display);
+  }
+  .type-heading {
+    font-size: var(--font-size-heading);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: var(--tracking-display);
+  }
+  .type-subheading {
+    font-size: var(--font-size-subheading);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: var(--tracking-tight);
+  }
+  /* Stat: numerical display. Same size as heading, weight 700, with
+     tabular-nums for digit alignment in ImpactBar. */
+  .type-stat {
+    font-size: var(--font-size-heading);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: var(--tracking-display);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Byline (serif, voice-tier) ─────────────────────────────────
+     Used only for the masthead personal-intro line above a Display.
+     E.g. landing hero: "Hi, I'm Branislav," above "Generalist Product Designer." */
+  .type-byline {
+    font-family: var(--font-vc-honey), Georgia, serif;
+    font-size: var(--font-size-byline);
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Lede paragraph (sans, sits beneath a Display) ───────────────
+     Sans because lede content is enumeration (a list of evidence items),
+     which is read by scanning, not by chanting. Regular 400 (not Light 300)
+     because UX wins when UX and UI conflict: 400 is more readable at 20px
+     and more consistent with body copy elsewhere. The visual "mirrored
+     two-weight" symmetry argument loses to legibility. */
+  .type-lede {
+    font-size: var(--font-size-lede);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: var(--tracking-normal);
+    color: var(--text-primary);
+    text-wrap: pretty;
+  }
+
+  /* ── Body ───────────────────────────────────────────────────────── */
+  .type-body {
+    font-size: var(--font-size-body);
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  /* ── Label (card titles + descriptions; weight applied at use site)
+     Default 400; use site applies 700 inline for "label-strong" (project names) */
+  .type-label {
+    font-size: var(--font-size-label);
+    font-weight: 400;
     line-height: 1.5;
     letter-spacing: -0.01em;
   }
-  /* Tag pill — landing card highlight tag; subtle bg + border + pill radius */
-  .type-tag-pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 11px;
-    background: var(--surface-1);
-    border: 1px solid var(--surface-2);
-    border-radius: 999px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    letter-spacing: 0.01em;
-    white-space: nowrap;
+
+  /* ── Caption (nav, status, tag-chip, ImpactBar labels, captions) ─ */
+  .type-caption {
+    font-size: var(--font-size-caption);
+    font-weight: 400;
+    line-height: 1.4;
   }
-  /* Tag chip — boxed highlight on landing cards; devtool-register, sharp radius */
+
+  /* ── Nav + footer links — caption tier with line-height 1 for tight underline */
+  .type-nav {
+    font-size: var(--font-size-caption);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  /* ── Live status readout — mono caption, terminal-line register ── */
+  .type-status {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-caption);
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: var(--tracking-loose);
+    text-transform: uppercase;
+  }
+
+  /* ── Tag chip — boxed highlight on landing cards; devtool register ── */
   .type-tag-chip {
     display: inline-flex;
     align-items: center;
     padding: 3px 8px;
     background: var(--surface-tile);
     border: 1px solid var(--surface-2);
-    border-radius: 3px;
+    border-radius: var(--radius-xs);
     font-family: var(--font-sans);
-    font-size: 13px;
-    font-weight: 500;
+    font-size: var(--font-size-caption);
+    font-weight: 400;
     line-height: 1.5;
     color: var(--text-primary);
     letter-spacing: -0.005em;
     white-space: nowrap;
   }
-  .type-stat {
-    font-size: var(--font-size-stat);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-  }
-  /* Body-section H2 — carries the insight; ~40px desktop, 32px mobile */
-  .type-section-h2 {
-    font-size: var(--font-size-section-h2);
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.03em;
-  }
-  .type-h1 {
-    font-size: var(--font-size-h1);
-    font-weight: 600;
-    line-height: var(--line-height-h1);
-    letter-spacing: -0.04em;
-  }
-  .type-h2 {
-    font-size: var(--font-size-h2);
-    font-weight: 500;
-    line-height: var(--line-height-h2);
-    letter-spacing: -0.03em;
-  }
-  .type-h3 {
-    font-size: var(--font-size-h3);
-    font-weight: 500;
-    line-height: var(--line-height-h3);
-    letter-spacing: -0.02em;
-  }
-  .type-h4 {
-    font-size: var(--font-size-h4);
-    font-weight: 500;
-    line-height: var(--line-height-h4);
-    letter-spacing: -0.01em;
-  }
-  .type-h5 {
-    font-size: var(--font-size-h5);
-    font-weight: 500;
-    line-height: var(--line-height-h5);
-  }
 
-  /* ── Hero prose (landing page generalist paragraph) ─────────────── */
-  .type-hero-prose {
-    font-size: var(--font-size-hero-prose);
+  /* ── Allcaps mono — tags, metadata pills (absorbed tag-pill 11) ── */
+  .type-allcaps {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-allcaps);
     font-weight: 400;
-    line-height: var(--line-height-hero-prose);
-    letter-spacing: -0.015em;
-    color: var(--text-primary);
-    text-wrap: pretty;
-  }
-  .type-kicker {
-    font-size: var(--font-size-kicker);
-    font-weight: 400;
-    line-height: var(--line-height-kicker);
-    color: var(--text-tertiary);
+    letter-spacing: var(--tracking-loose);
+    text-transform: uppercase;
   }
 
   /* ── Citation link (hero superscripts only; two-tier color) ─────── */
+  /* font-family forced to MONO so citations read as UI metadata in any
+     parent context (including serif prose). Mono also draws arrow glyphs
+     as part of the family — sans inherits ↗ from a system fallback that
+     looks too thin/long at the citation's small size. */
   .citation-sup {
     display: inline-block;
     vertical-align: baseline;
@@ -251,6 +280,7 @@
     top: -0.75em;
     font-size: 0.5em;
     line-height: 0;
+    font-family: var(--font-mono);
   }
   .citation {
     color: var(--citation-link);
@@ -275,78 +305,6 @@
     .citation:focus-visible .citation-arrow { transform: none; }
   }
 
-  /* ── Body ───────────────────────────────────────────────────────── */
-  .type-subheadline {
-    font-size: var(--font-size-body-l);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-  }
-  .type-body-l {
-    font-size: var(--font-size-body-l);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-  }
-  .type-body-m {
-    font-size: var(--font-size-body-m);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-  }
-  .type-body-s {
-    font-size: var(--font-size-body-s);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-  }
-
-  /* ── Link text — line-height 1 so the underline sits tight under the text */
-  .type-link {
-    font-size: var(--font-size-body-s);
-    font-weight: 400;
-    line-height: 1;
-  }
-  /* ── Nav + footer links — quieter register than body links ────── */
-  .type-nav {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1;
-  }
-
-  /* ── Interface type ─────────────────────────────────────────────── */
-  .type-label {
-    font-size: var(--font-size-label);
-    font-weight: 500;
-    line-height: var(--line-height-body);
-  }
-  .type-tag {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-tag);
-    font-weight: 500;
-    line-height: var(--line-height-tag);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .type-code {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-code);
-    font-weight: 400;
-    line-height: var(--line-height-body);
-  }
-  .type-allcaps {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-allcaps);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  /* ── Live status readout — mono caption, terminal-line register ── */
-  .type-status {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
   /* ── Cursor blink — binary visibility flip, only while parked ── */
   .animate-cursor-blink {
     animation: cursor-blink 1s infinite;
@@ -359,11 +317,6 @@
     .animate-cursor-blink { animation: none; }
   }
 
-  .type-button {
-    font-size: var(--font-size-button);
-    font-weight: 500;
-    line-height: var(--line-height-body);
-  }
   .grain-overlay {
     filter: url(#grain);
   }
@@ -508,4 +461,3 @@ body {
   background-color: var(--canvas);
   color: var(--text-primary);
 }
-

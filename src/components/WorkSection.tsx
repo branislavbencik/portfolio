@@ -15,10 +15,10 @@ export function WorkSection({ id, label, title, description, children }: WorkSec
           <p className="type-allcaps text-text-secondary mb-3">
             {label}
           </p>
-          <h2 className="type-section-h2 text-text-primary mb-5">
+          <h2 className="type-heading text-text-primary mb-5">
             {title}
           </h2>
-          <p className="type-body-l text-text-secondary">
+          <p className="type-body text-text-secondary">
             {description}
           </p>
         </div>

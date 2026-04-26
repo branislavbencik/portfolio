@@ -200,7 +200,7 @@ export function Lightbox({
               }`}
             />
             {caption && (
-              <p className="type-body-m text-text-inverse text-center max-w-[600px]">
+              <p className="type-body text-text-inverse text-center max-w-[600px]">
                 {caption}
               </p>
             )}

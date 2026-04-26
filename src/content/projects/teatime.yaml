@@ -1,6 +1,5 @@
-title: "B2B language learning system"
+title: Redesigning a B2B Language School
 company: TeaTime
-tagline: B2B language learning system
 description: "Built acquisition pipeline (+12 B2B clients) and AI-evaluated speaking test automated with n8n."
 tags:
   - "+12 B2B Clients"
@@ -13,7 +12,7 @@ order: 2
 role: Co-owner
 year: "2025"
 domain: ""
-intro: "TeaTime is a B2B language school serving 20+ companies for over 15 years. I joined to systematize and scale the business: from client acquisition to a new AI-powered assessment product, modernizing the digital infrastructure along the way."
+intro: "I joined Teatime to systematize and scale the business: from client acquisition to a new AI-powered assessment product, modernizing the digital infrastructure along the way."
 contributions:
   - "Built client acquisition pipeline: campaign, website, sales materials"
   - "Designed personalized learning system spanning assessment, curriculum planning, and progress measurement"
