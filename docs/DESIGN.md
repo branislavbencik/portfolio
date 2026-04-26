@@ -115,15 +115,29 @@ Landing-page cards carry a cursor-follow label that names the click action per c
 - **Hardware gating:** Active only when `(hover: hover) and (pointer: fine)` matches. Touch and pen devices get nothing — the section label still communicates the schema
 - **Why:** Section labels name the **schema** ("these are case studies"); cursor labels name the **action** ("clicking this opens the live app"). Two different jobs; layering is craft, not redundancy
 
+### Citation Link (hero superscript references)
+Inline numbered references in the hero prose, styled as Wikipedia-style superscripts. The hero's generalist paragraph cites 5 supporting artifacts (Blueprint PDF, n8n, Schneider Figma, Sideproject, Skoala Figma) by superscript number.
+- **Tokens:** `--citation-link` (`#0946D7` — editorial blue, 7.4:1 contrast on white) and `--citation-link-hover` (`#07349F` — darker on hover/focus). The blue is rare on this site and reserved for citation use only
+- **Utilities (`globals.css`):** `.citation-sup` (positioned superscript: `top: -0.75em`, `font-size: 0.5em`, `line-height: 0` — keeps line height stable), `.citation` (the anchor: blue, no underline), `.citation-arrow` (the trailing `↗`: `translate(2px, -2px)` on hover, `160ms ease-out`)
+- **Reduced motion:** `.citation-arrow` transition cleared inside `prefers-reduced-motion: reduce`
+- **Component:** `<CitationLink href={…} label="…" number={1} />` renders the full pattern
+- **Scope:** Hero prose only. Not for inline body links elsewhere — those use the standard `.link-underline` utility
+
 ---
 
 ## 5. Spacing & Rhythm
 
-Strict 8px base system.
+Strict 8px base system. Three named tiers map to the live tokens in `src/app/globals.css`.
 
-- **Micro:** `4px`, `8px`
-- **Component:** `16px`, `24px`, `32px`
-- **Section:** `80px`, `120px`
+| Tier | Token | Desktop | Mobile (`max-md`) | Use |
+|---|---|---|---|---|
+| **Micro** | (Tailwind scale) | `4px` / `8px` | inherits | Inline / element gaps |
+| **Component** | (Tailwind scale) | `16px` / `24px` / `32px` | inherits | Card padding, internal layout |
+| **Content-x** | `--spacing-content-x` | `32px` | `20px` | Horizontal padding inside `max-w-frame` |
+| **Detail** | `--spacing-detail` | `112px` | `72px` | Intra-page section breaks (work-section spacing inside a case study) |
+| **Section** | `--spacing-section` | `144px` | `96px` | Inter-page rhythm — landing rows, page-level breaks |
+
+The `--spacing-section` value follows a 1.5× modular scale on desktop (cards 64 / header→first 96 / section→section 144) — see STATUS.md session 41 for the rationale. Earlier docs cited 80/120; those values were superseded.
 
 ---
 

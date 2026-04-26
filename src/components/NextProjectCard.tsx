@@ -7,9 +7,12 @@ interface NextProjectCardProps {
 
 export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
   const allProjects = await reader.collections.projects.all();
-  const sorted = [...allProjects].sort(
-    (a, b) => (a.entry.order ?? 99) - (b.entry.order ?? 99)
-  );
+  // Playground entries (e.g. Reprio) live only on the landing page and link
+  // out to the live product. They have no detail page, so they're excluded
+  // from the next-project rotation.
+  const sorted = [...allProjects]
+    .filter((p) => p.entry.type !== "playground")
+    .sort((a, b) => (a.entry.order ?? 99) - (b.entry.order ?? 99));
 
   const currentIdx = sorted.findIndex((p) => p.slug === currentSlug);
   const next = sorted[(currentIdx + 1) % sorted.length];

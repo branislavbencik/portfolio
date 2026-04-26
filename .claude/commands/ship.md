@@ -34,6 +34,66 @@ Read `README.md` in full. Compare every factual claim against the current repo s
 
 If any claim is stale, wrong, or missing (e.g. a new page shipped this session, a dependency was added/removed, a script was renamed), update `README.md` in place before proceeding. Do NOT rewrite the tone or structure — only fix factual drift. If nothing is stale, note "README verified" and continue.
 
+## 1.7 Docs sync — the four-file architecture
+
+The repo has four design docs with single ownership. They drift the moment code changes if no one re-syncs. This step enforces sync at the choke point of every ship.
+
+**The four docs:**
+| File | Owns | Owner |
+|------|------|-------|
+| `CLAUDE.md` | Code conventions, session workflow, doc-map | manual / Claude-drafted |
+| `.impeccable.md` | Brand: audience, voice, design principles | `/impeccable teach` |
+| `docs/DESIGN.md` | Visual system: tokens, type, color, layout | `/impeccable document` (or hand) |
+| `GUIDELINES.md` | Behavior: interactions, motion, a11y, perf, microcopy | manual / Claude-drafted |
+
+### Step A — Branch-change classification
+
+Run `git diff main...HEAD --name-only` to list the files this branch changed. For each pattern, check the matching doc:
+
+| If the branch touched… | Then check / propose update to… |
+|---|---|
+| `src/app/globals.css` (any `--*` token) | `docs/DESIGN.md` |
+| New `src/components/*.tsx` (visual primitive) | `docs/DESIGN.md` § Component Architecture |
+| New `src/components/*.tsx` (behavior pattern: keyboard handler, focus mgmt, motion) | `GUIDELINES.md` |
+| New `prefers-reduced-motion` block | `GUIDELINES.md` § Motion |
+| New focus-visible / a11y pattern | `GUIDELINES.md` § Accessibility |
+| New route in `src/app/` | `CLAUDE.md` Pages table (and `README.md` per step 1.5) |
+| `package.json` deps changed | `CLAUDE.md` Tech Stack (and `README.md` per step 1.5) |
+| Voice register shift in `src/content/projects/*.yaml` MDX (rare; only if obvious) | `.impeccable.md` Aesthetic Direction |
+
+### Step B — Propose specific diffs
+
+For each doc identified in Step A, draft the specific minimal edit needed. Show each proposed diff in chat with file:line context. Do NOT apply yet. Format:
+
+```
+proposed: docs/DESIGN.md § Spacing & Rhythm
+  - existing: "Section: 80px, 120px"
+  + proposed: "Section: 144px desktop, 96px mobile (per session 41 rhythm pass)"
+  reason: globals.css --spacing-section is 144 / 96; doc cites old values
+```
+
+### Step C — User approves each proposal
+
+The user reviews each proposed diff and replies: approve / edit / reject. Apply only approved diffs (with edits if requested). Commit them in the same commit as the code (Step 3) so docs and code ship together — no separate "doc fix" commits.
+
+### Step D — Empty turns are normal
+
+If no doc updates are needed, say:
+> "Docs sync: CLAUDE.md / .impeccable.md / docs/DESIGN.md / GUIDELINES.md — no updates needed for this branch."
+and continue to Step 2.
+
+### Step E — PR description tag
+
+When opening the PR (Step 7), include a "Docs touched" line in the PR body listing which of the four docs this branch updated:
+
+```
+## Docs touched
+- docs/DESIGN.md (spacing tokens)
+- GUIDELINES.md (new motion rule)
+```
+
+If none were touched, say `Docs touched: none`. This lets reviewers see drift status at a glance and lets future audits trace which branches affected which docs.
+
 ## 2. Stage all changes
 Run `git add -A`. This catches images and binary files that selective staging misses.
 
@@ -64,6 +124,9 @@ gh pr create --base main --head "$(git branch --show-current)" \
   --body "$(cat <<'EOF'
 ## Summary
 <1-3 bullet points describing the session's work>
+
+## Docs touched
+<list of docs updated in step 1.7, or "none">
 
 ## Test plan
 - [ ] <user-facing verification steps>

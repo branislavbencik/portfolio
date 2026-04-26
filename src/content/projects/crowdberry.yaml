@@ -23,7 +23,7 @@ sections:
     images:
       - src: /images/crowdberry/crowdberry-thumb.png
         alt: Investment opportunity cards
-        caption: "Investment opportunities at a glance — each card shows type, funding stage, and minimum entry for quick comparison."
+        caption: "Investment opportunities at a glance. Each card shows type, funding stage, and minimum entry for quick comparison."
         background: true
       - src: /images/crowdberry/crowdberry-ws2.png
         alt: Investment flow
