@@ -55,7 +55,7 @@ export default function Nav() {
     >
       <nav
         aria-label="Primary"
-        className="w-full max-w-frame mx-center flex items-center justify-between h-13"
+        className="w-full max-w-frame mx-center flex items-center justify-between gap-x-3 h-13 whitespace-nowrap"
       >
         {isDetail ? (
           <Link
