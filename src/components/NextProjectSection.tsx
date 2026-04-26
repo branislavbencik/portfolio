@@ -2,7 +2,7 @@ import { CaseStudyCard } from "./CaseStudyCard";
 
 interface NextProjectSectionProps {
   company: string;
-  tagline: string;
+  title: string;
   tags?: string[];
   href: string;
   image: string;
@@ -11,7 +11,7 @@ interface NextProjectSectionProps {
 
 export function NextProjectSection({
   company,
-  tagline,
+  title,
   tags,
   href,
   image,
@@ -24,10 +24,10 @@ export function NextProjectSection({
         className="relative w-screen h-px bg-surface-2 left-1/2 -translate-x-1/2"
       />
       <div className="w-full max-w-frame mx-center max-lg:px-content-x pt-section">
-        <p className="type-body-m text-text-tertiary mb-8">Next project</p>
+        <p className="type-caption text-text-tertiary mb-8">Next project</p>
         <CaseStudyCard
           company={company}
-          tagline={tagline}
+          title={title}
           tags={tags}
           primaryHref={href}
           image={image}

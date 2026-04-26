@@ -5,7 +5,6 @@ import { reader } from "@/lib/keystatic";
 
 type ProjectEntry = {
   company?: string;
-  tagline?: string;
   tags?: readonly string[];
   type?: string;
   title: string;
@@ -42,7 +41,7 @@ export default async function Home() {
       <CaseStudyCard
         key={slug}
         company={e.company || e.title}
-        tagline={e.tagline || e.description || ""}
+        title={e.title || e.description || ""}
         tags={e.tags ? [...e.tags] : undefined}
         primaryHref={`/${slug}`}
         image={resolveImage(e)}
@@ -58,7 +57,7 @@ export default async function Home() {
       <CaseStudyCard
         key={slug}
         company={e.company || e.title}
-        tagline={e.tagline || e.description || ""}
+        title={e.title || e.description || ""}
         tags={e.tags ? [...e.tags] : undefined}
         primaryHref={`/${slug}`}
         image={resolveImage(e)}
@@ -74,7 +73,7 @@ export default async function Home() {
       <PlaygroundCard
         key={slug}
         title={e.company || e.title}
-        description={e.description || e.tagline || ""}
+        description={e.description || ""}
         liveHref="https://reprio.vercel.app/"
         image={resolveImage(e)}
         imageAlt={`${e.title} thumbnail`}

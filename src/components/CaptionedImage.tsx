@@ -44,8 +44,8 @@ export function CaptionedImage({
     "";
 
   const borderClass =
-    resolvedBorder === "all"        ? "border border-surface-2 rounded-[4px]" :
-    resolvedBorder === "no-bottom"  ? "border border-b-0 border-surface-2 rounded-t-[4px]" :
+    resolvedBorder === "all"        ? "border border-surface-2 rounded-sm" :
+    resolvedBorder === "no-bottom"  ? "border border-b-0 border-surface-2 rounded-t-sm" :
     "";
 
   const wrapperClass = [
@@ -78,7 +78,7 @@ export function CaptionedImage({
         />
       </button>
       {caption && (
-        <figcaption className="w-full max-w-column type-body-s text-text-secondary text-center self-center mt-3">
+        <figcaption className="w-full max-w-column type-caption text-text-secondary text-center self-center mt-3">
           {caption}
         </figcaption>
       )}

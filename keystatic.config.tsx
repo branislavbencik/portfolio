@@ -8,20 +8,20 @@ export default config({
       slugField: "title",
       path: "src/content/projects/*",
       schema: {
-        title: fields.slug({ name: { label: "Title" } }),
+        title: fields.slug({
+          name: {
+            label: "Title",
+            description: "One field shown both as the H1 on the detail page AND after the em-dash on the landing card (e.g. 'Designing CMS for financial literacy platform'). One source of truth — eliminates drift between card and detail.",
+          },
+        }),
         company: fields.text({
           label: "Company",
           description: "Brand name shown bold before the em dash on landing cards (e.g. 'Skoala').",
           validation: { isRequired: false },
         }),
-        tagline: fields.text({
-          label: "Tagline",
-          description: "Short phrase after the em dash on landing cards (e.g. 'CMS for a financial literacy platform').",
-          validation: { isRequired: false },
-        }),
         description: fields.text({
           label: "Description",
-          description: "One-liner used on detail pages and as tagline fallback.",
+          description: "One-liner used as fallback when title isn't available.",
         }),
         tags: fields.array(
           fields.text({ label: "Tag" }),

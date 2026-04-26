@@ -26,7 +26,6 @@ export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
 
   const entry = next.entry as {
     company?: string;
-    tagline?: string;
     tags?: readonly string[];
     title: string;
     description?: string;
@@ -35,7 +34,7 @@ export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
   return (
     <NextProjectSection
       company={entry.company || entry.title}
-      tagline={entry.tagline || entry.description || ""}
+      title={entry.title || entry.description || ""}
       tags={entry.tags ? [...entry.tags] : undefined}
       href={`/${next.slug}`}
       image={image}
