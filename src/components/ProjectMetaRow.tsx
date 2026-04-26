@@ -17,7 +17,7 @@ export function ProjectMetaRow({
       {values.map((v, i) => (
         <span
           key={`v-${i}`}
-          className="type-allcaps text-text-tertiary whitespace-nowrap"
+          className="type-allcaps text-text-secondary whitespace-nowrap"
         >
           {v}
           {i < values.length - 1 && <span aria-hidden="true"> ·</span>}

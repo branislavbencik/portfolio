@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Page not found" };
 export default function NotFound() {
   return (
     <main id="main-content" className="w-full max-w-frame mx-auto px-content-x py-detail flex flex-col gap-6">
-      <p className="type-allcaps text-text-tertiary">404</p>
+      <p className="type-allcaps text-text-secondary">404</p>
       <h1 className="type-display text-text-primary">Page not found.</h1>
       <p className="type-body text-text-secondary max-w-column">
         This page doesn&apos;t exist or was moved.

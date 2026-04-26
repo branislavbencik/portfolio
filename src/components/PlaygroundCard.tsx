@@ -30,7 +30,7 @@ export function PlaygroundCard({
           <h3 className="flex-1 type-heading text-playground-text">
             {title}
           </h3>
-          <p className="flex-1 type-body text-playground-text-dim">
+          <p className="flex-1 type-body text-playground-text-dim leading-[1.45]!">
             {description}
           </p>
         </header>

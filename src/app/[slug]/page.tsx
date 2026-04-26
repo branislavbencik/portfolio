@@ -90,6 +90,15 @@ export default async function ProjectPage({
   const toBorderSides = (v?: string | null): BorderSides | undefined =>
     v === "all" || v === "no-bottom" || v === "none" ? v : undefined;
 
+  // Selected projects duplicate the cover image as their first section image to attach
+  // a caption that ProjectHeader didn't previously render. The image gets filtered out
+  // of the gallery below; surface its caption on the hero.
+  const coverCaption = !isCaseStudy
+    ? project.sections
+        .flatMap((s) => s.images as unknown as ImageEntry[])
+        .find((img) => img.src === coverImage)?.caption || undefined
+    : undefined;
+
   return (
     <>
       <main id="main-content">
@@ -100,6 +109,7 @@ export default async function ProjectPage({
           intro={project.intro || undefined}
           heroImage={coverImage}
           heroImageAlt={`${project.title} overview`}
+          coverCaption={coverCaption}
         />
 
         {isCaseStudy && (project.contributions.length > 0 || project.impactItems.length > 0) && (
@@ -113,6 +123,7 @@ export default async function ProjectPage({
                   value: item.value,
                   label: item.label,
                 }))}
+                tight={project.contributions.length > 0}
               />
             )}
           </>
@@ -154,7 +165,7 @@ export default async function ProjectPage({
           // Section without title — flat image gallery (selected projects)
           return (
             <div key={i} className="w-full">
-              <section className="w-full max-w-frame mx-center max-lg:px-content-x pt-section flex flex-col gap-12">
+              <section className="w-full max-w-frame mx-center max-lg:px-content-x pt-detail flex flex-col gap-24">
                 {images.map((img, j) => (
                   <CaptionedImage
                     key={j}

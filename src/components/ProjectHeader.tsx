@@ -12,6 +12,7 @@ interface ProjectHeaderProps {
   intro?: string;
   heroImage?: string;
   heroImageAlt?: string;
+  coverCaption?: string;
 }
 
 export function ProjectHeader({
@@ -21,6 +22,7 @@ export function ProjectHeader({
   intro,
   heroImage,
   heroImageAlt,
+  coverCaption,
 }: ProjectHeaderProps) {
   const id = useId();
   const { register, unregister, open } = useLightbox();
@@ -42,13 +44,13 @@ export function ProjectHeader({
           />
           <h1 className="type-page-title text-text-primary">{title}</h1>
           {intro && (
-            <p className="type-body text-text-secondary mt-3">{intro}</p>
+            <p className="type-body text-text-primary mt-3">{intro}</p>
           )}
         </div>
       </div>
 
       {heroImage && (
-        <div className="max-lg:px-content-x">
+        <figure className="max-lg:px-content-x w-full flex flex-col items-start">
           <button
             type="button"
             className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 border border-surface-2 rounded-sm"
@@ -64,7 +66,12 @@ export function ProjectHeader({
               unoptimized
             />
           </button>
-        </div>
+          {coverCaption && (
+            <figcaption className="w-full max-w-column type-label text-text-secondary text-center self-center mt-3">
+              {coverCaption}
+            </figcaption>
+          )}
+        </figure>
       )}
     </section>
   );

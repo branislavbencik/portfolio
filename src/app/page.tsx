@@ -91,13 +91,13 @@ export default async function Home() {
         <div id="work" className="scroll-mt-20">
           {caseStudies.length > 0 && (
             <section>
-              <div className="flex items-center gap-4 mb-24">
+              <div className="flex items-center gap-4 mb-16">
                 <h2 className="type-allcaps leading-none text-text-secondary shrink-0">
                   Case studies
                 </h2>
                 <div aria-hidden="true" className="relative -top-px h-px bg-surface-2 flex-1" />
               </div>
-              <div className="flex flex-col gap-16 max-md:gap-10">
+              <div className="flex flex-col gap-24 max-md:gap-10">
                 {caseStudies.map(renderCaseStudyCard)}
               </div>
             </section>
@@ -105,13 +105,13 @@ export default async function Home() {
 
           {playground.length > 0 && (
             <section className="pt-section">
-              <div className="flex items-center gap-4 mb-24">
+              <div className="flex items-center gap-4 mb-16">
                 <h2 className="type-allcaps leading-none text-text-secondary shrink-0">
                   Playground
                 </h2>
                 <div aria-hidden="true" className="relative -top-px h-px bg-surface-2 flex-1" />
               </div>
-              <div className="flex flex-col gap-16 max-md:gap-10">
+              <div className="flex flex-col gap-24 max-md:gap-10">
                 {playground.map(renderPlaygroundCard)}
               </div>
             </section>
@@ -119,13 +119,13 @@ export default async function Home() {
 
           {selectedProjects.length > 0 && (
             <section className="pt-section">
-              <div className="flex items-center gap-4 mb-24">
+              <div className="flex items-center gap-4 mb-16">
                 <h2 className="type-allcaps leading-none text-text-secondary shrink-0">
                   Selected projects
                 </h2>
                 <div aria-hidden="true" className="relative -top-px h-px bg-surface-2 flex-1" />
               </div>
-              <div className="flex flex-col gap-16 max-md:gap-10">
+              <div className="flex flex-col gap-24 max-md:gap-10">
                 {selectedProjects.map(renderSelectedCard)}
               </div>
             </section>

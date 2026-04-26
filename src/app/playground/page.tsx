@@ -61,11 +61,11 @@ function VariantSection({ id, name, spec, caveat, children }: VariantSectionProp
     <section className="border-b border-surface-2">
       <div className="max-w-frame mx-center max-lg:px-content-x py-section">
         <header className="mb-12 max-w-column">
-          <p className="type-allcaps text-text-tertiary mb-2">Variant {id}</p>
+          <p className="type-allcaps text-text-secondary mb-2">Variant {id}</p>
           <h2 className="type-subheading text-text-primary mb-2">{name}</h2>
           <p className="type-caption text-text-secondary font-mono">{spec}</p>
           {caveat && (
-            <p className="type-caption text-text-tertiary mt-2 italic">⚠ {caveat}</p>
+            <p className="type-caption text-text-secondary mt-2 italic">⚠ {caveat}</p>
           )}
         </header>
         <div>{children}</div>
@@ -79,7 +79,7 @@ export default function PlaygroundPage() {
     <main>
       {/* Page intro */}
       <header className="max-w-frame mx-center max-lg:px-content-x pt-section pb-section">
-        <p className="type-allcaps text-text-tertiary mb-3">Design lab</p>
+        <p className="type-allcaps text-text-secondary mb-3">Design lab</p>
         <h1 className="type-heading text-text-primary mb-4">Hero variants</h1>
         <p className="type-body text-text-secondary max-w-column">
           Seven typographic treatments of the landing-page hero, after pruning rejected variants.
@@ -318,7 +318,7 @@ export default function PlaygroundPage() {
       <section className="border-b border-surface-2">
         <div className="max-w-frame mx-center max-lg:px-content-x py-section">
           <header className="mb-8 max-w-column">
-            <p className="type-allcaps text-text-tertiary mb-2">Convergence</p>
+            <p className="type-allcaps text-text-secondary mb-2">Convergence</p>
             <h2 className="type-subheading text-text-primary mb-2">Decision: pick from B / B-Light / B-Light-2</h2>
             <p className="type-caption text-text-secondary">
               All three share the same head-up-body-down anatomy: serif byline + sans bold display + sans lede + mono citations.

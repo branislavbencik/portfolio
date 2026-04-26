@@ -5,11 +5,12 @@ interface ImpactItem {
 
 interface ImpactBarProps {
   items: ImpactItem[];
+  tight?: boolean;
 }
 
-export function ImpactBar({ items }: ImpactBarProps) {
+export function ImpactBar({ items, tight }: ImpactBarProps) {
   return (
-    <div className="w-full max-w-frame mx-center max-lg:px-content-x pt-section">
+    <div className={`w-full max-w-frame mx-center max-lg:px-content-x ${tight ? "pt-16" : "pt-section"}`}>
       <div className="max-w-column mx-auto w-full">
         <div className="flex border border-surface-2 rounded-sm max-md:flex-col">
           {items.map((item, i) => (
@@ -20,7 +21,7 @@ export function ImpactBar({ items }: ImpactBarProps) {
               <span className="type-stat text-text-primary">
                 {item.value}
               </span>
-              <span className="type-caption text-text-secondary">{item.label}</span>
+              <span className="type-caption text-text-primary">{item.label}</span>
             </div>
           ))}
         </div>

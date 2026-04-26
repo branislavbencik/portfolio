@@ -21,7 +21,6 @@ This portfolio operates like a high-end architectural CAD tool or a technical bl
 ### Typography
 - **Primary Text (`text-primary`):** `#18181B` (Zinc 900)
 - **Secondary Text (`text-secondary`):** `#52525B` (Zinc 600)
-- **Metadata/Tags (`text-tertiary`):** `#71717A` (Zinc 500)
 
 ### Structure, Borders & Radii
 - **Borders:**  
@@ -118,7 +117,7 @@ Landing-page cards carry a cursor-follow label that names the click action per c
 ### Citation Link (hero superscript references)
 Inline numbered references in the hero prose, styled as Wikipedia-style superscripts. The hero's generalist paragraph cites 5 supporting artifacts (Blueprint PDF, n8n, Schneider Figma, Sideproject, Skoala Figma) by superscript number.
 - **Tokens:** `--citation-link` (`#0946D7` — editorial blue, 7.4:1 contrast on white) and `--citation-link-hover` (`#07349F` — darker on hover/focus). The blue is rare on this site and reserved for citation use only
-- **Utilities (`globals.css`):** `.citation-sup` (positioned superscript: `top: -0.75em`, `font-size: 0.5em`, `line-height: 0` — keeps line height stable), `.citation` (the anchor: blue, no underline), `.citation-arrow` (the trailing `↗`: `translate(2px, -2px)` on hover, `160ms ease-out`)
+- **Utilities (`globals.css`):** `.citation-sup` (positioned superscript: `top: -0.75em`, `font-size: 12px`, `line-height: 0` — fixed px so it doesn't shrink with parent lede at mobile breakpoints; keeps line height stable), `.citation` (the anchor: blue, no underline), `.citation-arrow` (the trailing `↗`: `translate(2px, -2px)` on hover, `160ms ease-out`)
 - **Reduced motion:** `.citation-arrow` transition cleared inside `prefers-reduced-motion: reduce`
 - **Component:** `<CitationLink href={…} label="…" number={1} />` renders the full pattern
 - **Scope:** Hero prose only. Not for inline body links elsewhere — those use the standard `.link-underline` utility
@@ -134,10 +133,17 @@ Strict 8px base system. Three named tiers map to the live tokens in `src/app/glo
 | **Micro** | (Tailwind scale) | `4px` / `8px` | inherits | Inline / element gaps |
 | **Component** | (Tailwind scale) | `16px` / `24px` / `32px` | inherits | Card padding, internal layout |
 | **Content-x** | `--spacing-content-x` | `32px` | `20px` | Horizontal padding inside `max-w-frame` |
-| **Detail** | `--spacing-detail` | `112px` | `72px` | Intra-page section breaks (work-section spacing inside a case study) |
-| **Section** | `--spacing-section` | `144px` | `96px` | Inter-page rhythm — landing rows, page-level breaks |
+| **Detail** | `--spacing-detail` | `96px` | `96px` (tablet) / `72px` (mobile) | Intra-section sub-grouping (text→text, image→image inside a section) |
+| **Section** | `--spacing-section` | `192px` | `160px` (tablet) / `128px` (mobile) | Section breaks — landing rows, case-study section→section |
 
-The `--spacing-section` value follows a 1.5× modular scale on desktop (cards 64 / header→first 96 / section→section 144) — see STATUS.md session 41 for the rationale. Earlier docs cited 80/120; those values were superseded.
+Ladder: `32·64·96·128·192`. Three named tiers in use:
+- **Subhead → first item:** `64` (heading-binds-tight pattern)
+- **Intra-section:** `96` (image→image, image→text within a section)
+- **Section break:** `192` (1:2 confident-double of intra-section)
+
+**Text-vs-image gap distinction:** within a section, text→text uses `64` instead of `96` (see `feedback_text_gap_vs_image_gap` memory). Text tiers are tightly readable — the eye flows between them at close range without needing extra space. Images need the looser 96 because they're visually dense blocks.
+
+Earlier docs cited 80/120 then 144/96 — those values were superseded.
 
 ---
 
