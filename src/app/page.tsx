@@ -84,9 +84,7 @@ export default async function Home() {
   return (
     <main id="main-content">
       <div className="w-full max-w-frame mx-center max-lg:px-content-x">
-        <div className="max-md:px-content-x">
-          <HeroStatement />
-        </div>
+        <HeroStatement />
 
         <div id="work" className="scroll-mt-20">
           {caseStudies.length > 0 && (

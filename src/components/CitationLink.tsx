@@ -14,8 +14,8 @@ export default function CitationLink({ label, href, external, cursorLabel }: Cit
         data-cursor-label={cursorLabel ?? ""}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
-        ({label}
-        <span className="citation-arrow" aria-hidden="true">↗</span>)
+        {label}
+        <span className="citation-arrow" aria-hidden="true">↗</span>
       </a>
     </sup>
   );

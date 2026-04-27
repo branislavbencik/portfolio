@@ -36,6 +36,11 @@
   --playground-border:     rgba(255, 255, 255, 0.09);
   --playground-text:       #E4E4E7;
   --playground-text-dim:   rgba(250, 250, 250, 0.72);
+
+  /* Geist OpenType — ss08 enables rounded full stops (period, etc.) across
+     Sans + Mono. Subtle warmth on every "." mark; most visible at the hero
+     headline's terminal period ("Designer."). */
+  font-feature-settings: "ss08" on;
 }
 
 /* Tablet portrait band — intermediate spacing so iPad-sized viewports
@@ -58,6 +63,12 @@
     --spacing-content-x:    20px;
     --spacing-detail:       72px;
     --spacing-section:      128px;
+
+    /* Display tier eases off desktop's -0.036em on mobile — at 40px, full
+       desktop tightness lands cramped; -0.025em (=-1px) reads more open
+       while staying in display register. Affects display, page-title,
+       heading (all consume --tracking-display). */
+    --tracking-display: -0.025em;
   }
 }
 
@@ -275,7 +286,11 @@
   /* font-family forced to MONO so citations read as UI metadata in any
      parent context (including serif prose). Mono also draws arrow glyphs
      as part of the family — sans inherits ↗ from a system fallback that
-     looks too thin/long at the citation's small size. */
+     looks too thin/long at the citation's small size.
+
+     Parens live as ::before/::after pseudo-elements (not literal text in
+     JSX) so they can be removed cleanly on mobile, where citations drop
+     the superscript register and render inline at body size. */
   .citation-sup {
     display: inline-block;
     vertical-align: baseline;
@@ -285,6 +300,37 @@
     line-height: 0;
     font-family: var(--font-mono);
   }
+  /* Parens live on .citation (the <a>) not on .citation-sup so they
+     inherit the link color (blue) and become part of the clickable
+     area, matching the original JSX-text behavior before the refactor. */
+  .citation::before { content: "("; }
+  .citation::after  { content: ")"; }
+
+  /* Mobile (≤767px): drop the editorial superscript treatment but KEEP
+     the parens. The hero lede tightens at this width and clusters of
+     lifted citations break reading flow — switching to inline body-size
+     resolves that. Parens stay because they (a) scope the citation as
+     a parenthetical aside, (b) provide visual separation from the
+     preceding word that a font-only treatment can't. Desktop + tablet
+     retain the full superscript register; only positioning + sizing
+     drop on mobile.
+
+     margin-left mimics the prose-standard space before an opening
+     paren — JSX collapses whitespace before <CitationLink>, so without
+     the margin the rendering reads "system(PRD↗)" function-call-style
+     rather than "system (PRD↗)". Desktop is unaffected because the
+     superscript paren is lifted off-baseline. */
+  @media (max-width: 767px) {
+    .citation-sup {
+      position: static;
+      top: 0;
+      font-size: inherit;
+      line-height: inherit;
+      font-family: inherit;
+      margin-left: 0.25em;
+    }
+  }
+
   .citation {
     color: var(--citation-link);
     text-decoration: none;
@@ -306,6 +352,19 @@
     .citation-arrow { transition: none; }
     .citation:hover .citation-arrow,
     .citation:focus-visible .citation-arrow { transform: none; }
+  }
+
+  /* ── Mobile line-height for display + byline ─────────────────────
+     At 40px mobile font-size, desktop's tight 1.15 leading lands at
+     46px — cramped when the headline wraps to two lines (likely on
+     ≤480px viewports for "Generalist Product Designer."). 1.2 yields
+     48px between baselines, opening multi-line wraps without affecting
+     the desktop 56px stack (which still uses 1.15). Scoped to display +
+     byline only; deeper headings keep their existing leading because
+     their copy is shorter and rarely wraps. */
+  @media (max-width: 767px) {
+    .type-display { line-height: 1.2; }
+    .type-byline  { line-height: 1.2; }
   }
 
   /* ── Cursor blink — binary visibility flip, only while parked ── */
