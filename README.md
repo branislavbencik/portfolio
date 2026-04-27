@@ -84,6 +84,16 @@ Skills are named, reusable playbooks the AI can invoke — they keep decisions c
 - The **Vercel plugin** auto-loads current platform guidance at session start (Edge Functions deprecated, Fluid Compute default, Node 24 LTS, `vercel.ts` config) and ships skills like `vercel:react-best-practices` that auto-trigger after multi-file TSX edits with a focused checklist
 - [`/ship`](.claude/commands/ship.md) closes out a session: build → commit → push → update STATUS.md → open PR
 
+### The status line is the dashboard
+
+A custom statusline script (`~/.claude/statusline.sh`, ~95 lines of bash) renders three readouts on every prompt:
+
+1. **Model + working dir + branch** — so I always know which worktree this session is in
+2. **Context-window progress bar** — 15-block bar, green under 50%, yellow 50–75%, red over 75%. Tells me when to `/compact` or end the session before the auto-compact ruins the working memory
+3. **Live dev-server segment** — `lsof` finds any `next-server` / `vite` / `astro dev` / `nuxt dev` / `bun dev` process listening on TCP, filters to ones whose `cwd` is inside this repo, and prints `:port branch-it's-running-for`. Empty when no server is up.
+
+The dev-server segment matters more than it sounds. I run multiple worktrees in parallel (one per task), each on its own port (`:3000`, `:3001`, …). The terminal / tmux status bar shows the port of *the parent shell*, which is misleading the second a sibling worktree starts a server. The custom statusline reads from `lsof` directly, so it can't lie. Combined with the convention that **the AI starts a dev server for any visual work and surfaces `http://localhost:<port>` at the top of every reply**, the bar makes "is the URL I'm telling you to open actually live, on the right branch?" answerable at a glance — closes the gap where an AI claims "ship it, looks great" without having actually rendered it.
+
 ### Practices worth stealing
 
 - **Quantified comparison tables.** Multi-option decisions go through a scored 0–10 table with an honest "status quo" column, so the bar to change is visible.
