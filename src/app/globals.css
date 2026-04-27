@@ -59,7 +59,7 @@
     --font-size-byline:     40px;  /* paired with display in masthead */
     --font-size-page-title: 32px;  /* sits above heading 24, below display 40 — preserves the desktop scale shape */
     --font-size-heading:    24px;
-    --font-size-lede:       18px;
+    --font-size-lede:       17px;
     --spacing-content-x:    20px;
     --spacing-detail:       72px;
     --spacing-section:      128px;
@@ -111,7 +111,7 @@
   --max-width-column:   640px;
 
   /* ── Typography — font sizes (9 tokens; 50% reduction from 18) ─── */
-  --max-width-lede:    842px;  /* Lede paragraph beneath Display — wider than reading column, narrower than content */
+  --max-width-lede:    872px;  /* Lede paragraph beneath Display — wider than reading column, narrower than content */
 
   /* ── Typography — font sizes (9 tokens; 50% reduction from 18) ─── */
   --font-size-display:    56px;
