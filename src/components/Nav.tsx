@@ -9,7 +9,11 @@ const PIN_THRESHOLD = 52;
 
 export default function Nav() {
   const pathname = usePathname();
-  const isDetail = pathname !== "/" && !pathname.startsWith("/keystatic");
+  // Peer pages (/, /about, /resume) show the wordmark; project detail pages
+  // (/skoala, /teatime, …) show a Back affordance. /keystatic stays unchrome'd.
+  const PEER_PAGES = ["/", "/about", "/resume"];
+  const isDetail =
+    !PEER_PAGES.includes(pathname) && !pathname.startsWith("/keystatic");
 
   const [hidden, setHidden] = useState(false);
   const lastScrollRef = useRef(0);
@@ -74,6 +78,12 @@ export default function Nav() {
           </Link>
         )}
         <div className="flex items-center gap-x-4 type-nav text-text-primary">
+          <Link
+            href="/about"
+            className="link-underline hover:text-foreground no-underline inline-flex items-center"
+          >
+            About
+          </Link>
           <a
             href="https://github.com/branislavbencik/portfolio"
             target="_blank"
