@@ -35,7 +35,7 @@ This portfolio operates like a high-end architectural CAD tool or a technical bl
 
 ## 3. Typography Scale
 
-Built on **Geist Sans** and **Geist Mono**.
+Built on **Geist Sans** and **Geist Mono**, with **VC Honey** (serif) reserved for voice-tier moments (currently the hero byline only).
 
 ### Global Rules
 - Negative tracking is **only allowed on Display and H1**
@@ -50,6 +50,7 @@ Built on **Geist Sans** and **Geist Mono**.
 | Role | Family | Size | Weight | Tracking | Line Height | Usage |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Display** | Geist Sans | 48px | 600 | `-0.05em` | `1.1–1.15` | Hero |
+| **Byline** | VC Honey (serif) | 56px (40 mobile) | 400 | `0` | `1.15` | Hero personal-intro line above Display |
 | **H1** | Geist Sans | 32px | 600 | `-0.04em` | `1.15–1.2` | Case titles |
 | **H2** | Geist Sans | 24px | 500 | `0` | `1.2–1.3` | Sections |
 | **Body Large** | Geist Sans | 18px | 400 | `0` | `1.5` | Context |
