@@ -2,21 +2,27 @@ interface CitationLinkProps {
   label: string;
   href: string;
   external?: boolean;
-  cursorLabel?: string;
+  previewSrc?: string;
+  previewCaption?: string;
 }
 
-export default function CitationLink({ label, href, external, cursorLabel }: CitationLinkProps) {
+export default function CitationLink({
+  label,
+  href,
+  external,
+  previewSrc,
+  previewCaption,
+}: CitationLinkProps) {
   return (
-    <sup className="citation-sup">
-      <a
-        href={href}
-        className="citation"
-        data-cursor-label={cursorLabel ?? ""}
-        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      >
-        {label}
-        <span className="citation-arrow" aria-hidden="true">↗</span>
-      </a>
-    </sup>
+    <a
+      href={href}
+      className="chip-link chip-color-blue link-underline"
+      {...(previewSrc ? { "data-hover-preview-src": previewSrc } : {})}
+      {...(previewCaption ? { "data-hover-preview-caption": previewCaption } : {})}
+      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+    >
+      {label}
+      <span className="chip-arrow" aria-hidden="true">↗</span>
+    </a>
   );
 }

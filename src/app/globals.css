@@ -1,5 +1,30 @@
 @import "tailwindcss";
 
+/* ── Tailwind 4 candidate retention ───────────────────────────────
+   Tailwind 4's content scanner purges user-defined classes inside
+   @layer utilities unless it detects them in source. Classes built
+   via template literals (e.g. `thumb-${w}`) or with double-dash BEM
+   modifiers (e.g. `chip-link--primary`) aren't reliably detected.
+   Force-keep the playground classes here. */
+@source inline("chip-link");
+@source inline("chip-arrow");
+@source inline("chip-color-primary");
+@source inline("chip-color-secondary");
+@source inline("chip-color-tertiary");
+@source inline("chip-color-blue");
+@source inline("chip-underline");
+@source inline("text-prose-primary");
+@source inline("text-prose-secondary");
+@source inline("text-prose-tertiary");
+@source inline("thumb-240");
+@source inline("thumb-280");
+@source inline("thumb-320");
+@source inline("card-style-light");
+@source inline("card-style-museum");
+@source inline("card-style-casestudy");
+@source inline("shadow-on");
+@source inline("shadow-off");
+
 /* ── Responsive breakpoint variants ──────────────────────────────── */
 @custom-variant max-lg (@media (max-width: 1024px));
 @custom-variant max-md (@media (max-width: 767px));
@@ -16,6 +41,7 @@
   /* Typography */
   --text-primary:   #18181B;  /* Zinc 900 */
   --text-secondary: #52525B;  /* Zinc 600 */
+  --text-tertiary:  #71717A;  /* Zinc 500 — playground exploration; promote to docs after lede lock */
 
   /* Accent */
   --accent-live: #22c55e;
@@ -111,7 +137,7 @@
   --max-width-column:   640px;
 
   /* ── Typography — font sizes (9 tokens; 50% reduction from 18) ─── */
-  --max-width-lede:    872px;  /* Lede paragraph beneath Display — wider than reading column, narrower than content */
+  --max-width-lede:    800px;  /* Lede paragraph beneath Display — pinned at ~57ch for 3-line desktop rhythm at 28px (sentence-break aligns with line-break) */
 
   /* ── Typography — font sizes (9 tokens; 50% reduction from 18) ─── */
   --font-size-display:    56px;
@@ -212,7 +238,6 @@
     font-weight: 400;
     line-height: 1.45;
     letter-spacing: var(--tracking-normal);
-    color: var(--text-primary);
     text-wrap: pretty;
   }
 
@@ -282,76 +307,160 @@
     text-transform: uppercase;
   }
 
-  /* ── Citation link (hero superscripts only; two-tier color) ─────── */
-  /* font-family forced to MONO so citations read as UI metadata in any
-     parent context (including serif prose). Mono also draws arrow glyphs
-     as part of the family — sans inherits ↗ from a system fallback that
-     looks too thin/long at the citation's small size.
+  /* ── Hero chip-link + hover preview ──────────────────────────────
+     Live hero (HeroStatement.tsx) and the parametrized playground
+     (/playground/hero-citations) share these rules. Wrapper class on
+     the hero <section> selects thumb width × card style × shadow;
+     chip className composes color + optional underline. Hover preview
+     card is rendered by HoverPreview.tsx (FOLLOW on desktop, SLOT on
+     touch via .preview-slot-mobile). */
 
-     Parens live as ::before/::after pseudo-elements (not literal text in
-     JSX) so they can be removed cleanly on mobile, where citations drop
-     the superscript register and render inline at body size. */
-  .citation-sup {
-    display: inline-block;
-    vertical-align: baseline;
-    position: relative;
-    top: -0.75em;
-    font-size: 12px;
-    line-height: 0;
-    font-family: var(--font-mono);
-  }
-  /* Parens live on .citation (the <a>) not on .citation-sup so they
-     inherit the link color (blue) and become part of the clickable
-     area, matching the original JSX-text behavior before the refactor. */
-  .citation::before { content: "("; }
-  .citation::after  { content: ")"; }
+  /* Prose color utilities — set color on the lede <p>. .type-lede no
+     longer bakes in color, so any of these (or a Tailwind text-text-*
+     theme utility) decides the prose tone. */
+  .text-prose-primary   { color: var(--text-primary); }
+  .text-prose-secondary { color: var(--text-secondary); }
+  .text-prose-tertiary  { color: var(--text-tertiary); }
 
-  /* Mobile (≤767px): drop the editorial superscript treatment but KEEP
-     the parens. The hero lede tightens at this width and clusters of
-     lifted citations break reading flow — switching to inline body-size
-     resolves that. Parens stay because they (a) scope the citation as
-     a parenthetical aside, (b) provide visual separation from the
-     preceding word that a font-only treatment can't. Desktop + tablet
-     retain the full superscript register; only positioning + sizing
-     drop on mobile.
-
-     margin-left mimics the prose-standard space before an opening
-     paren — JSX collapses whitespace before <CitationLink>, so without
-     the margin the rendering reads "system(PRD↗)" function-call-style
-     rather than "system (PRD↗)". Desktop is unaffected because the
-     superscript paren is lifted off-baseline. */
-  @media (max-width: 767px) {
-    .citation-sup {
-      position: static;
-      top: 0;
-      font-size: inherit;
-      line-height: inherit;
-      font-family: inherit;
-      margin-left: 0.25em;
-    }
-  }
-
-  .citation {
-    color: var(--citation-link);
+  /* Chip link — color set by chip-color-* (live hero uses
+     chip-color-blue, the project's editorial-blue accent token);
+     animated traveling underline delegated to .link-underline (same
+     gesture as nav + footer). white-space: nowrap keeps each chip
+     atomic across line wraps. */
+  .chip-link {
+    color: inherit;
     text-decoration: none;
+    white-space: nowrap;
   }
-  .citation:hover,
-  .citation:focus-visible {
-    color: var(--citation-link-hover);
-    text-decoration: none;
+  .chip-color-primary   { color: var(--text-primary); }
+  .chip-color-secondary { color: var(--text-secondary); }
+  .chip-color-tertiary  { color: var(--text-tertiary); }
+  .chip-color-blue      { color: var(--citation-link); }
+
+  /* Static underline — playground only. Live hero uses .link-underline
+     for the traveling animated underline (nav/footer parity). */
+  .chip-underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: currentColor;
   }
-  .citation-arrow {
-    display: inline-block;
-    transition: transform 160ms ease-out;
+
+  /* Thumb width — wrapper classes set CSS vars consumed by
+     .hover-preview-img. Heights computed at 16:9 source ratio. */
+  .thumb-240 { --thumb-w: 240px; --thumb-h: 135px; }
+  .thumb-280 { --thumb-w: 280px; --thumb-h: 158px; }
+  .thumb-320 { --thumb-w: 320px; --thumb-h: 180px; }
+
+  /* Hover-preview card — Style A "Light chrome" (default).
+     1px border + 6px outer radius (.impeccable.md surface convention).
+     Image edge-to-edge inside card; caption strip with top-border
+     separator. */
+  .hover-preview-card {
+    border-radius: 6px;
+    border: 1px solid var(--surface-2);
+    background: var(--canvas);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+    transform-origin: center top;
+    transition:
+      opacity 320ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .citation:hover .citation-arrow,
-  .citation:focus-visible .citation-arrow {
-    transform: translate(2px, -2px);
+  .hover-preview-card[data-visible="true"] {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
   @media (prefers-reduced-motion: reduce) {
-    .citation-arrow { transition: none; }
-    .citation:hover .citation-arrow,
-    .citation:focus-visible .citation-arrow { transform: none; }
+    .hover-preview-card {
+      transform: none;
+      transition: opacity 120ms linear;
+    }
+    .hover-preview-card[data-visible="true"] {
+      transform: none;
+    }
+  }
+  .hover-preview-img {
+    display: block;
+    width: var(--thumb-w, 320px);
+    height: var(--thumb-h, 180px);
+    object-fit: cover;
+  }
+  .hover-preview-caption {
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--text-primary);
+    border-top: 1px solid var(--surface-2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Card Style B "Museum label" — strips card chrome. Image gets a
+     thin frame; caption hangs below in whitespace as if labeling an
+     artifact. Editorial / Warmly Precise register. */
+  .card-style-museum .hover-preview-card {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    overflow: visible;
+  }
+  .card-style-museum .hover-preview-img {
+    border: 1px solid var(--surface-2);
+    border-radius: 4px;
+  }
+  .card-style-museum .hover-preview-caption {
+    border-top: none;
+    background: transparent;
+    padding: 12px 0 0 0;
+  }
+
+  /* Card Style C "Case study" — replicates the matted-artwork
+     pattern from CaseStudyCard.tsx on `/`. Outer 1px border + 4px
+     internal padding + inner image with its own 1px border. Caption
+     lives inside the same outer container. */
+  .card-style-casestudy .hover-preview-card {
+    border: 1px solid var(--surface-2);
+    border-radius: 6px;
+    background: var(--canvas);
+    padding: 4px;
+    overflow: visible;
+  }
+  .card-style-casestudy .hover-preview-img {
+    border: 1px solid var(--surface-2);
+    border-radius: 4px;
+  }
+  .card-style-casestudy .hover-preview-caption {
+    border-top: none;
+    background: transparent;
+    padding: 12px 8px 4px 8px;
+  }
+
+  /* Shadow toggle — overrides card chrome shadow. Museum has no
+     visible shadow regardless (no card border to sit under). */
+  .shadow-off .hover-preview-card {
+    box-shadow: none;
+  }
+
+  /* Mobile inline external-link arrow — when hover is unavailable the
+     hover-preview card can't fire, so chips render with a small ↗
+     glyph signaling "this opens in a new tab" before the tap commits.
+     Rendered as a real <span> in CitationLink (not ::after pseudo)
+     because .link-underline already uses ::after for the traveling
+     line — only one pseudo per element wins. Default hidden; toggled
+     on by (hover: none) media query. */
+  .chip-arrow {
+    display: none;
+    margin-left: 0.15em;
+    font-size: 0.85em;
+    line-height: 1;
+  }
+  @media (hover: none) {
+    .chip-arrow { display: inline-block; }
   }
 
   /* ── Mobile line-height for display + byline ─────────────────────

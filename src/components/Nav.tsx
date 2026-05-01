@@ -78,7 +78,7 @@ export default function Nav() {
             href="https://github.com/branislavbencik/portfolio"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline hover:text-foreground no-underline inline-flex items-center"
+            className="link-underline no-underline inline-flex items-center"
             aria-label="GitHub (opens in new tab)"
           >
             GitHub
@@ -88,7 +88,7 @@ export default function Nav() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline hover:text-foreground no-underline inline-flex items-center"
+            className="link-underline no-underline inline-flex items-center"
             aria-label="Resume (opens in new tab)"
           >
             Resume

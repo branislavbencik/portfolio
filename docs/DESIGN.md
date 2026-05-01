@@ -115,13 +115,23 @@ Landing-page cards carry a cursor-follow label that names the click action per c
 - **Hardware gating:** Active only when `(hover: hover) and (pointer: fine)` matches. Touch and pen devices get nothing — the section label still communicates the schema
 - **Why:** Section labels name the **schema** ("these are case studies"); cursor labels name the **action** ("clicking this opens the live app"). Two different jobs; layering is craft, not redundancy
 
-### Citation Link (hero superscript references)
-Inline numbered references in the hero prose, styled as Wikipedia-style superscripts. The hero's generalist paragraph cites 5 supporting artifacts (Blueprint PDF, n8n, Schneider Figma, Sideproject, Skoala Figma) by superscript number.
-- **Tokens:** `--citation-link` (`#0946D7` — editorial blue, 7.4:1 contrast on white) and `--citation-link-hover` (`#07349F` — darker on hover/focus). The blue is rare on this site and reserved for citation use only
-- **Utilities (`globals.css`):** `.citation-sup` (positioned superscript: `top: -0.75em`, `font-size: 12px`, `line-height: 0` — fixed px so it doesn't shrink with parent lede at mobile breakpoints; keeps line height stable), `.citation` (the anchor: blue, no underline), `.citation-arrow` (the trailing `↗`: `translate(2px, -2px)` on hover, `160ms ease-out`)
-- **Reduced motion:** `.citation-arrow` transition cleared inside `prefers-reduced-motion: reduce`
-- **Component:** `<CitationLink href={…} label="…" number={1} />` renders the full pattern
-- **Scope:** Hero prose only. Not for inline body links elsewhere — those use the standard `.link-underline` utility
+### Citation Link (hero inline chips)
+Inline word-chips in the hero lede that link to the artifact each chip names. The lede paragraph cites 4 artifacts (Service design FigJam, n8n flow, Schneider prototype, Reprio app) by replacing prose words with linked chips: "mapping `systems`, through shipping `automations`, `prototypes`, and `code`."
+- **Tokens:** `--citation-link` (`#0946D7` — editorial blue, 7.4:1 contrast on white). The blue is rare on this site and reserved for chip use only
+- **Utilities (`globals.css`):** `.chip-link` (base anchor: inherits color, `text-decoration: none`, `white-space: nowrap`), `.chip-color-blue` (sets color to `--citation-link`), `.link-underline` (shared with nav/footer: `::after` 1px line at `bottom: -2px`, scaleX 0→1 with origin flip, 320ms `cubic-bezier(0.65, 0, 0.35, 1)`), `.chip-arrow` (mobile-only inline ↗ via `@media (hover: none)`)
+- **Reduced motion:** `.link-underline::after` transition cleared inside `prefers-reduced-motion: reduce`
+- **Component:** `<CitationLink href={…} label="…" external previewSrc="…" previewCaption="…" />` renders the chip plus wires data-attributes consumed by the `<HoverPreview />` overlay
+- **Scope:** Hero prose only. Not for inline body links elsewhere — those use the standard `.link-underline` utility on its own (no chip wrapper)
+
+### Hover Preview Card (cursor-following artifact preview)
+A 320×180 image card that follows the cursor when hovering a chip (or any element with `data-hover-preview-src`). Reveals what's behind the chip before commit. Desktop-only — mobile gets the inline ↗ glyph instead.
+- **Chrome (case-study variant):** outer 1px `var(--surface-2)` border + 6px radius + 4px mat padding + inner image with its own 1px border + caption strip inside the same outer container. Same pattern as landing-page case-study cards
+- **Sizing:** Image 320×180 (16:9). Wrapper class `.thumb-280` sets CSS vars (`--thumb-w: 280px; --thumb-h: 158px`) consumed by `.hover-preview-img`; `.thumb-280` is the live size, `.thumb-240` and `.thumb-320` exist in playground only
+- **Mounting:** `<HoverPreview />` mounted once inside the hero `<section>`. Scans the DOM for `[data-hover-preview-src]` on every mousemove; renders an always-mounted card pre-staged at `opacity: 0; transform: translateY(20px) scale(0.97)` and toggles `data-visible="true"` to animate it in
+- **Entrance animation:** translateY(20px)→0 + scale(0.97)→1 + opacity 0→1, 320ms `cubic-bezier(0.16, 1, 0.3, 1)`, `transform-origin: center top`. Always-mounted + attribute-toggle pattern (NOT `@keyframes` on conditional render — the wrapper's cursor-tracking transform races element creation)
+- **Reduced motion:** transform suppressed; opacity-only fade at 120ms linear
+- **Hardware gating:** Active only when `(hover: hover) and (pointer: fine)` matches via `useSyncExternalStore`. Touch and pen devices get nothing — they get the inline ↗ on the chip text via `@media (hover: none)` instead
+- **Why this pattern:** desktop hover capability earns a rich preview; mobile gets the platform-native one-tap-navigates with expectation-setting glyph. Hybrid is more honest than forced symmetry
 
 ---
 

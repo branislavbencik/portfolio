@@ -45,6 +45,9 @@ Every CSS animation in `globals.css` has a reduced-motion fallback (12+ guards t
 **No bounce, no overshoot, no spring.**
 Easing curves stay smooth-ease-out (`cubic-bezier(0.16, 1, 0.3, 1)` and family). Bouncy easing reads as toy-like and dates a product. Real objects decelerate; they don't recoil.
 
+**Cursor-following overlays use always-mounted + attribute toggle, never @keyframes on conditional render.**
+Per project memory `feedback_attribute_toggle_for_cursor_overlays`. When the wrapper has imperative cursor-tracking (`element.style.transform = translate3d(x, y, 0)` on mousemove), `@keyframes`/`@starting-style` on a conditionally-mounted child fires before the wrapper transform updates → animation plays at stale (0,0) and you never see it. Pre-stage the inner element in DOM at hidden state, toggle `data-visible="true"` on hover, animate via CSS `transition` on the attribute selector. Live use: `<HoverPreview />` (320ms entrance, see `docs/DESIGN.md` § Hover Preview Card).
+
 **Hover is transform-only, never brightness or shadow.**
 Per project memory: hover gets `scale`/`translate`. No `filter: brightness(...)`, no shadow brightening, no border-color flash. Why: brightness reads as cheap; transform reads as physical. The shipped Levitate hover (CaseStudyCard inner scales 0.97 over 320ms) is the canonical pattern.
 
@@ -111,8 +114,8 @@ Page titles, MDX bodies, Keystatic content, tooltips, alt text, aria-labels — 
 **Microcopy uses verbs, never marketing nouns.**
 "Read case study" not "Case Study" as a button. "View project" not "Project". "Open Reprio ↗" not "Reprio". Why: a button names what happens when you click it; the *thing* is already in the surrounding context.
 
-**Citation links use the established two-tier color.**
-`#0946D7` at rest, `#07349F` on hover. Trailing `↗` arrow that translates `(2px, -2px)` on hover. Component: `<CitationLink>`. Scope: hero prose only. Don't reach for citation styling on body links elsewhere; use `.link-underline` for those.
+**Hero chips are editorial blue with traveling-underline on hover.**
+`#0946D7` (`--citation-link`) at rest, no rest underline. `.link-underline::after` 1px line traveling left-to-right on hover (320ms, `cubic-bezier(0.65, 0, 0.35, 1)`). On hover-capable devices, a 320×180 hover-preview card lands from below alongside the underline. On touch devices (`@media (hover: none)`), an inline ↗ glyph appears next to the chip text instead — direct navigation, no preview. Component: `<CitationLink>`. Scope: hero prose only. Don't reach for chip styling on body links elsewhere; use `.link-underline` on its own for those.
 
 **Sacred copy: the case-study text is not editable.**
 Case studies, project descriptions, hero prose — character-for-character what the author wrote. Microcopy (alt text, button labels, error states, 404, tooltips) is in scope for editing; everything else is not. Why: voice is the most fragile thing on a portfolio; one paraphrase erodes it.
