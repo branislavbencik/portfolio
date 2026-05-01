@@ -140,7 +140,7 @@ export default function Footer() {
           <button
             onClick={handleEmailClick}
             aria-label="Copy email address"
-            className="link-underline hover:text-foreground cursor-pointer inline-flex items-center relative outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-xs"
+            className="link-underline cursor-pointer inline-flex items-center relative outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-xs"
           >
             branislav.bencik@gmail.com
             <span
@@ -160,7 +160,7 @@ export default function Footer() {
             href="https://github.com/branislavbencik/portfolio"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline hover:text-foreground inline-flex items-center"
+            className="link-underline inline-flex items-center"
             aria-label="GitHub (opens in new tab)"
           >
             GitHub
@@ -170,7 +170,7 @@ export default function Footer() {
             href="https://www.linkedin.com/in/branislavbencik/"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline hover:text-foreground inline-flex items-center"
+            className="link-underline inline-flex items-center"
             aria-label="LinkedIn (opens in new tab)"
           >
             LinkedIn
@@ -180,7 +180,7 @@ export default function Footer() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline hover:text-foreground inline-flex items-center"
+            className="link-underline inline-flex items-center"
             aria-label="Resume (opens in new tab)"
           >
             Resume
