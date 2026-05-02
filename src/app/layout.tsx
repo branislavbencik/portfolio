@@ -42,30 +42,23 @@ import "./globals.css";
 const siteUrl = "https://branislavbencik.com";
 
 export const metadata: Metadata = {
-  title: "Branislav Benčík | Product Designer",
-  description: "Portfolio of Branislav Benčík. Product designer fluent in B2B systems and code.",
+  title: "Branislav Benčík — Product Designer",
+  description: "I design complex systems and ship code.",
   metadataBase: new URL(siteUrl),
   openGraph: {
-    title: "Branislav Benčík | Product Designer",
-    description: "Portfolio of Branislav Benčík. Product designer fluent in B2B systems and code.",
+    title: "Branislav Benčík — Product Designer",
+    description: "I design complex systems and ship code.",
     url: siteUrl,
     siteName: "Branislav Benčík",
     locale: "en_US",
     type: "website",
-    images: [
-      {
-        url: "/images/avatar.jpg",
-        width: 400,
-        height: 400,
-        alt: "Branislav Benčík",
-      },
-    ],
+    // og:image is auto-supplied by the colocated app/opengraph-image.tsx file.
   },
   twitter: {
-    card: "summary",
-    title: "Branislav Benčík | Product Designer",
-    description: "Portfolio of Branislav Benčík. Product designer fluent in B2B systems and code.",
-    images: ["/images/avatar.jpg"],
+    card: "summary_large_image",
+    title: "Branislav Benčík — Product Designer",
+    description: "I design complex systems and ship code.",
+    // twitter:image is auto-supplied by the colocated app/opengraph-image.tsx file.
   },
   icons: {
     icon: "/favicon.svg",

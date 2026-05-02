@@ -26,13 +26,22 @@ export async function generateMetadata({
   const project = await reader.collections.projects.read(slug);
   if (!project) return {};
 
-  const coverImage =
-    typeof project.coverImage === "object" && project.coverImage !== null
-      ? (project.coverImage as { src: string }).src
-      : (project.coverImage as string) ?? "";
-
-  const title = `${project.title} | Branislav Benčík`;
+  // Title is just the project title — name is already in the OG image (wordmark)
+  // and in the root site title chain. Repeating it here forces iMessage truncation
+  // earlier and adds no information.
+  //
+  // og:image is the same site-wide signature wordmark from app/opengraph-image.tsx.
+  // We have to reference it explicitly here because Next's metadata merging replaces
+  // (not deep-merges) the openGraph object when a child generateMetadata returns one,
+  // so the parent layout's auto-resolved colocated image would otherwise be dropped.
+  const title = project.title;
   const description = project.description || `${project.title} case study`;
+  const ogImage = {
+    url: "/opengraph-image",
+    width: 1200,
+    height: 630,
+    alt: "Branislav Benčík",
+  };
 
   return {
     title,
@@ -41,15 +50,13 @@ export async function generateMetadata({
       title,
       description,
       type: "article",
-      images: coverImage
-        ? [{ url: coverImage, width: 1288, height: 748, alt: project.title }]
-        : [],
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: coverImage ? [coverImage] : [],
+      images: [ogImage.url],
     },
   };
 }
