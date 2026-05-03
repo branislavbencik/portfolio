@@ -24,6 +24,13 @@ impactItems:
     label: new clients
   - value: 300+
     label: active students
+deliverables:
+  - label: teatime.cz
+    href: https://teatime.cz
+    caption: ""
+  - label: n8n workflow for speech evaluation with AI
+    href: https://share-n8n.com/shared/888fkQf1zCAc
+    caption: ""
 sections:
   - label: "1. ACQUIRE"
     title: "HR managers don't google \"English language training\""

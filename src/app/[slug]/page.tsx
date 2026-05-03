@@ -4,6 +4,7 @@ import { reader } from "@/lib/keystatic";
 import { ProjectHeader } from "@/components/ProjectHeader";
 import { ContributionList } from "@/components/ContributionList";
 import { ImpactBar } from "@/components/ImpactBar";
+import { DeliverablesBar } from "@/components/DeliverablesBar";
 import { WorkSection } from "@/components/WorkSection";
 import { CaptionedImage } from "@/components/CaptionedImage";
 import { NextProjectCard } from "@/components/NextProjectCard";
@@ -119,7 +120,11 @@ export default async function ProjectPage({
           coverCaption={coverCaption}
         />
 
-        {isCaseStudy && (project.contributions.length > 0 || project.impactItems.length > 0) && (
+        {isCaseStudy && (
+          project.contributions.length > 0 ||
+          project.impactItems.length > 0 ||
+          project.deliverables.length > 0
+        ) && (
           <>
             {project.contributions.length > 0 && (
               <ContributionList items={project.contributions as string[]} />
@@ -131,6 +136,15 @@ export default async function ProjectPage({
                   label: item.label,
                 }))}
                 tight={project.contributions.length > 0}
+              />
+            )}
+            {project.deliverables.length > 0 && (
+              <DeliverablesBar
+                items={project.deliverables.map((d) => ({
+                  label: d.label,
+                  href: d.href,
+                  caption: d.caption || undefined,
+                }))}
               />
             )}
           </>

@@ -38,6 +38,18 @@
   --surface-2:    #E4E4E7;  /* Zinc 200 */
   --surface-3:    #D4D4D8;  /* Zinc 300 */
 
+  /* Borders — semantic stroke aliases. Match Figma design system:
+     Border Light = Grey 200, Border Strong = Grey 300. Same colors as
+     --surface-2/--surface-3 but namespaced for stroke-color use sites,
+     so future readers don't wonder why a "surface" token is on a border.
+     Consumed via arbitrary-value syntax (border-[var(--border-light)]) —
+     not exposed via @theme inline to avoid the doubled border-border-* name. */
+  --border-light:       var(--surface-2);  /* Zinc 200 — default rest stroke */
+  --border-strong:      var(--surface-3);  /* Zinc 300 — emphasized stroke (no current consumer) */
+  --border-light-hover: #A1A1AA;           /* Zinc 400 — hover companion to --border-light.
+                                                Not yet in Figma; sync there before adopting
+                                                in components beyond DeliverablesBar. */
+
   /* Typography */
   --text-primary:   #18181B;  /* Zinc 900 */
   --text-secondary: #52525B;  /* Zinc 600 */

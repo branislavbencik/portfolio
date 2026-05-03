@@ -90,6 +90,27 @@ export default config({
           }),
           { label: "Impact Items" }
         ),
+        deliverables: fields.array(
+          fields.object({
+            label: fields.text({
+              label: "Label",
+              description: "e.g. skoala.cz, n8n workflow",
+            }),
+            href: fields.text({
+              label: "URL",
+              description: "Full URL including https://",
+            }),
+            caption: fields.text({
+              label: "Caption",
+              description: "Optional secondary line below the label.",
+              validation: { isRequired: false },
+            }),
+          }),
+          {
+            label: "Deliverables",
+            description: "Live products and process artifacts. Renders below the Impact Bar on case studies. Leave empty for selected projects.",
+          }
+        ),
 
         // Sections — unified for both types.
         // Case studies: multiple sections with label + title + description + images.

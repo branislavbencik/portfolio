@@ -23,9 +23,11 @@ This portfolio operates like a high-end architectural CAD tool or a technical bl
 - **Secondary Text (`text-secondary`):** `#52525B` (Zinc 600)
 
 ### Structure, Borders & Radii
-- **Borders:**  
-  - Primary: `border-zinc-300` (1px)  
-  - Secondary: `border-zinc-200` (1px)
+- **Borders:**
+  - **Primary** — `--border-light` = Zinc 200 (default rest stroke; Figma "Border Light")
+  - **Strong** — `--border-strong` = Zinc 300 (emphasized rest stroke; Figma "Border Strong"; reserved, no current consumer)
+  - **Light Hover** — `--border-light-hover` = Zinc 400 / `#A1A1AA` (companion to `--border-light` for hover transitions on text-only tiles where the no-hover-scale-on-text rule blocks transform-only). Not yet in Figma — sync there before adopting beyond `DeliverablesBar`.
+  - All three are CSS custom properties consumed via arbitrary-value syntax (`border-[var(--border-light)]`, `hover:border-[var(--border-light-hover)]`) and intentionally **not** exposed through `@theme inline` to keep the Tailwind utility namespace clean.
 
 - **Radii Rule:**
   - Layout surfaces: `rounded-none` (0px)
@@ -132,6 +134,18 @@ A 320×180 image card that follows the cursor when hovering a chip (or any eleme
 - **Reduced motion:** transform suppressed; opacity-only fade at 120ms linear
 - **Hardware gating:** Active only when `(hover: hover) and (pointer: fine)` matches via `useSyncExternalStore`. Touch and pen devices get nothing — they get the inline ↗ on the chip text via `@media (hover: none)` instead
 - **Why this pattern:** desktop hover capability earns a rich preview; mobile gets the platform-native one-tap-navigates with expectation-setting glyph. Hybrid is more honest than forced symmetry
+
+### Deliverables Bar (case-study artifact tiles)
+Stack of 1–N flat tiles below the Impact Bar on case studies, surfacing the concrete artifacts the case produced — live products, automation flows, FigJam boards. Skoala has 2 (`skoala.cz`, Design Sprint Figjam); TeaTime has 2 (`teatime.cz`, n8n speech-evaluation workflow). Component: `<DeliverablesBar items={…} />`.
+- **Layout:** `max-w-column` text-frame width, separated tiles (`flex flex-col gap-2`) — not a joined toolbar. Each tile is a single `<a>` with label-left, `<ExternalArrow size={14}>` right
+- **Tile dimensions:** `px-6 py-3` (47px total height with 15px label) on desktop; `px-4` on mobile. Optional 12px caption renders below the label
+- **Rest border:** `border border-[var(--border-light)]` — Zinc 200. Same hairline weight as Case Study Cards
+- **Hover — border darken:** `hover:border-[var(--border-light-hover)]` (Zinc 400) over 200ms `ease-out`. Real `border-color` transition, not an inset shadow — the tile has no image asset to carry an inset hairline, and the visible stroke swap reads as supporting confirmation rather than a "selected" state
+- **Hover — arrow translate:** `<ExternalArrow>` shifts `(2px, -2px)` on group-hover via 200ms `cubic-bezier(0.16, 1, 0.3, 1)`. The arrow is the **primary** affordance carrier (transform-tier per `GUIDELINES.md` § Motion); the border darken is the **supporting** hairline
+- **Focus:** `focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-inset` — independent of hover treatment. Arrow translate also fires on `:focus-visible` so keyboard users get the same affordance
+- **a11y:** `aria-label="Open {label} (opens in new tab)"`; `target="_blank" rel="noopener noreferrer"`
+- **Reduced motion:** Both transitions wrapped in `motion-safe:` — color shift and arrow translate suppressed; tile still functions, just without the hover affordances
+- **Why border-color (not inset shadow):** existing case-study cards and Boxed Trio cells use inset-shadow hairline emphasis because they have content (images, dividers) underneath. DeliverablesBar tiles are pure text + 1 icon — an inset shadow on a flat tile reads as faint ringing artefact. A real border-color swap is cleaner on bare surfaces
 
 ---
 
