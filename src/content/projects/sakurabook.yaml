@@ -3,6 +3,7 @@ company: Sakurabook
 description: "Shopify plugin · Hourly booking · Shipped in Japanese"
 tags:
   - i18n
+  - Polaris Design System
   - Ecosystem of multiple apps
 type: selected
 metric: ""
@@ -20,12 +21,12 @@ sections:
     description: ""
     images:
       - src: /images/sakurabook/sakurabook-thumb.png
-        alt: Sakurabook booking plugin overview
-        caption: "A rental space listing: photos, description, per-hour availability, and instant booking in one continuous view."
-        background: true
-      - src: /images/sakurabook/sakurabook-ws1.png
         alt: Availability states
         caption: "Availability states use Japanese convention: ○ available, △ limited, ✕ taken. Time picker handles overnight spans across two calendar days."
+        background: true
+      - src: /images/sakurabook/sakurabook-ws1.png
+        alt: Sakurabook booking plugin overview
+        caption: "A rental space listing: photos, description, per-hour availability, and instant booking in one continuous view."
         background: true
       - src: /images/sakurabook/sakurabook-ws2.png
         alt: Localization
