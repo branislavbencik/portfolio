@@ -4,7 +4,6 @@ description: "Shopify plugin · Hourly booking · Shipped in Japanese"
 tags:
   - i18n
   - Polaris Design System
-  - Ecosystem of multiple apps
 type: selected
 metric: ""
 coverImage: /images/sakurabook/sakurabook-thumb.png
@@ -12,7 +11,7 @@ order: 4
 role: Solo Designer
 year: "2021"
 domain: Ecommerce
-intro: "Hourly booking is common in Japan not just for services but also for rental spaces. I built a booking plugin for Shopify that handles hourly availability, two storefront templates (one for booking, another for browsing), and the full flow from merchant setup to customer checkout."
+intro: "Hourly booking is common in Japan not just for services but also for rental spaces. I built a booking plugin for Shopify that handles hourly availability, two storefront templates (one for rental spaces, the other for staff like therapists), and the full flow from merchant setup to customer checkout."
 contributions: []
 impactItems: []
 sections:
@@ -27,7 +26,8 @@ sections:
       - src: /images/sakurabook/sakurabook-ws1.png
         alt: Sakurabook booking plugin overview
         caption: "A rental space listing: photos, description, per-hour availability, and instant booking in one continuous view."
-        background: true
+        background: false
+        borderSides: all
       - src: /images/sakurabook/sakurabook-ws2.png
         alt: Localization
         caption: Designed in English for easier workflow, localized and shipped in Japanese. Japanese text runs shorter, so layouts are held without overflow adjustment.
