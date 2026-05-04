@@ -1,5 +1,5 @@
 import CitationLink from "./CitationLink";
-import HoverPreview from "./playground/HoverPreview";
+import HoverPreview from "./HoverPreview";
 
 export default function HeroStatement() {
   return (
