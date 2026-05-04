@@ -26,7 +26,8 @@ sections:
       - src: /images/sakurabook/sakurabook-ws1.png
         alt: Sakurabook booking plugin overview
         caption: "A rental space listing: photos, description, per-hour availability, and instant booking in one continuous view."
-        background: true
+        background: false
+        borderSides: all
       - src: /images/sakurabook/sakurabook-ws2.png
         alt: Localization
         caption: Designed in English for easier workflow, localized and shipped in Japanese. Japanese text runs shorter, so layouts are held without overflow adjustment.
