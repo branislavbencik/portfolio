@@ -11,7 +11,7 @@ const N8N = {
   description: "n8n workflow for speech evaluation",
 };
 const SCHNEIDER = {
-  href: "https://www.figma.com/proto/YqwEFpw4xULPZhkk8G71rp/Schneider-Electric-%7C-Design-Sprint-Prototype?node-id=28343-3731&p=f&t=Au2ICcuaAsHIp6ET-1&scaling=min-zoom&content-scaling=fixed&page-id=28260%3A4&starting-point-node-id=28343%3A3731&show-proto-sidebar=1",
+  href: "https://www.figma.com/proto/OosDm8xoUEJolO4lzpfcVC/Schneider-Electric-%7C-Design-Sprint--version-241010---Copy-?node-id=28343-3731&viewport=5034%2C-559%2C0.09&t=ZIff6YC9W14ngFdk-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=28343%3A3731&show-proto-sidebar=1&page-id=28260%3A4",
   chipLabel: "Schneider",
   description: "Configurator for Electrical Panels",
 };

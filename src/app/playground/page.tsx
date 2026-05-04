@@ -4,7 +4,7 @@ const PRD_HREF =
   "https://clever-statistic-860.notion.site/PRD-Personalized-English-Learning-System-34ee84d8cf3f808cbff3d01f55d39e49?pvs=73";
 const N8N_HREF = "https://share-n8n.com/shared/888fkQf1zCAc";
 const SCHNEIDER_HREF =
-  "https://www.figma.com/proto/YqwEFpw4xULPZhkk8G71rp/Schneider-Electric-%7C-Design-Sprint-Prototype?node-id=28343-3731&p=f&t=Au2ICcuaAsHIp6ET-1&scaling=min-zoom&content-scaling=fixed&page-id=28260%3A4&starting-point-node-id=28343%3A3731&show-proto-sidebar=1";
+  "https://www.figma.com/proto/OosDm8xoUEJolO4lzpfcVC/Schneider-Electric-%7C-Design-Sprint--version-241010---Copy-?node-id=28343-3731&viewport=5034%2C-559%2C0.09&t=ZIff6YC9W14ngFdk-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=28343%3A3731&show-proto-sidebar=1&page-id=28260%3A4";
 const SIDEPROJECT_HREF = "https://reprio.vercel.app/";
 const SKOALA_HREF =
   "https://www.figma.com/design/ElwxrYVb8YgqCfU1P6aIWE/Skoala-%7C-Teacher-Platform-Beta--Copy-?node-id=15633-97847&t=eetrjMXtBwq4OG2Q-1";
