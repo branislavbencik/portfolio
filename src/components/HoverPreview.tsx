@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { ExternalArrow } from "../icons/ExternalArrow";
+import { ExternalArrow } from "./icons/ExternalArrow";
 
 interface PreviewData {
   src: string;

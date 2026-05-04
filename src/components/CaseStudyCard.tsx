@@ -24,7 +24,7 @@ export function CaseStudyCard({
     <Link
       href={primaryHref}
       data-cursor-label={cursorLabel}
-      className="group block no-underline outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-md motion-safe:transition-transform motion-safe:duration-[180ms] motion-safe:ease-out motion-safe:hover:scale-[1.01] active:scale-[0.99]"
+      className="group block no-underline outline-none focus-ring-card rounded-md motion-safe:transition-transform motion-safe:duration-[180ms] motion-safe:ease-out motion-safe:hover:scale-[1.01] active:scale-[0.99]"
     >
       <article className="relative w-full border border-surface-2 rounded-md p-[4px] bg-canvas">
         <div className="overflow-hidden border border-surface-2 rounded-sm bg-surface-tile">

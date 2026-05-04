@@ -128,7 +128,7 @@ Inline word-chips in the hero lede that link to the artifact each chip names. Th
 ### Hover Preview Card (cursor-following artifact preview)
 A 320×180 image card that follows the cursor when hovering a chip (or any element with `data-hover-preview-src`). Reveals what's behind the chip before commit. Desktop-only — mobile gets the inline ↗ glyph instead.
 - **Chrome (case-study variant):** outer 1px `var(--surface-2)` border + 6px radius + 4px mat padding + inner image with its own 1px border + caption strip inside the same outer container. Same pattern as landing-page case-study cards
-- **Sizing:** Image 320×180 (16:9). Wrapper class `.thumb-280` sets CSS vars (`--thumb-w: 280px; --thumb-h: 158px`) consumed by `.hover-preview-img`; `.thumb-280` is the live size, `.thumb-240` and `.thumb-320` exist in playground only
+- **Sizing:** Image 280×158 (16:9). Wrapper class `.thumb-280` sets CSS vars (`--thumb-w: 280px; --thumb-h: 158px`) consumed by `.hover-preview-img`; live hero is the only consumer
 - **Mounting:** `<HoverPreview />` mounted once inside the hero `<section>`. Scans the DOM for `[data-hover-preview-src]` on every mousemove; renders an always-mounted card pre-staged at `opacity: 0; transform: translateY(20px) scale(0.97)` and toggles `data-visible="true"` to animate it in
 - **Entrance animation:** translateY(20px)→0 + scale(0.97)→1 + opacity 0→1, 320ms `cubic-bezier(0.16, 1, 0.3, 1)`, `transform-origin: center top`. Always-mounted + attribute-toggle pattern (NOT `@keyframes` on conditional render — the wrapper's cursor-tracking transform races element creation)
 - **Reduced motion:** transform suppressed; opacity-only fade at 120ms linear
@@ -146,6 +146,13 @@ Stack of 1–N flat tiles below the Impact Bar on case studies, surfacing the co
 - **a11y:** `aria-label="Open {label} (opens in new tab)"`; `target="_blank" rel="noopener noreferrer"`
 - **Reduced motion:** Both transitions wrapped in `motion-safe:` — color shift and arrow translate suppressed; tile still functions, just without the hover affordances
 - **Why border-color (not inset shadow):** existing case-study cards and Boxed Trio cells use inset-shadow hairline emphasis because they have content (images, dividers) underneath. DeliverablesBar tiles are pure text + 1 icon — an inset shadow on a flat tile reads as faint ringing artefact. A real border-color swap is cleaner on bare surfaces
+
+### Focus States (canonical primitives)
+Two utility classes own all keyboard-focus affordance in the system. Pick by surface type, not by component:
+- **`.chip-link:focus-visible`** (outline-based, ~3-color stack): `outline: 2px solid var(--citation-link); outline-offset: 2px; border-radius: 2px`. Use on **inline prose elements** — chips embedded in text, citation links, anything where a `box-shadow` ring would push surrounding glyphs off baseline. Live consumer: `CitationLink.tsx`
+- **`.focus-ring-card`** (double box-shadow, canvas-spaced): `box-shadow: 0 0 0 2px var(--canvas), 0 0 0 4px var(--text-primary); outline: none`. Use on **block-level interactive surfaces** — clickable cards, lightbox triggers, image buttons. The element's own `border-radius` governs the curve, so the ring follows whatever rounding the surface already has. Live consumers: `CaseStudyCard.tsx`, `PlaygroundCard.tsx`, `CaptionedImage.tsx`, `ProjectHeader.tsx` (lightbox trigger)
+- **Why two primitives, not one:** outlines don't follow `border-radius` reliably across browsers and they clip on overflow:hidden surfaces — fine for inline text, broken for cards. Box-shadow rings respect radius and overflow but force a layout-shift-free spacer that's pointless on inline glyphs. Match the primitive to the surface
+- **Component-specific exceptions:** `DeliverablesBar` uses `focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-inset` (inset variant) because the tile has its own border that the focus ring must sit *inside*, not float above
 
 ---
 

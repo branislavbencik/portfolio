@@ -77,7 +77,7 @@ export function ProjectHeader({
         <figure className="max-lg:px-content-x w-full flex flex-col items-start">
           <button
             type="button"
-            className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 border border-surface-2 rounded-sm"
+            className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-ring-card border border-surface-2 rounded-sm"
             aria-label="Open hero image in lightbox"
             onClick={() => open(id)}
           >

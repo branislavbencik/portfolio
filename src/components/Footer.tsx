@@ -140,7 +140,7 @@ export default function Footer() {
           <button
             onClick={handleEmailClick}
             aria-label="Copy email address"
-            className="link-underline cursor-pointer inline-flex items-center relative outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2 focus-visible:ring-offset-canvas rounded-xs"
+            className="link-underline cursor-pointer inline-flex items-center relative outline-none focus-ring-card rounded-xs"
           >
             branislav.bencik@gmail.com
             <span

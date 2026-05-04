@@ -49,7 +49,7 @@ export function CaptionedImage({
     "";
 
   const wrapperClass = [
-    "relative w-full overflow-hidden cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary focus-visible:ring-offset-2",
+    "relative w-full overflow-hidden cursor-zoom-in focus-ring-card",
     background ? "bg-surface-1" : "",
     paddingClass,
     borderClass,
