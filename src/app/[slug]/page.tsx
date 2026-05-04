@@ -112,6 +112,7 @@ export default async function ProjectPage({
       <main id="main-content">
         <ProjectHeader
           title={project.title}
+          company={project.company || undefined}
           year={project.year || undefined}
           tags={project.tags ? [...project.tags] : undefined}
           intro={project.intro || undefined}
