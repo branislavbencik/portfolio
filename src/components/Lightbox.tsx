@@ -10,7 +10,7 @@ interface LightboxProps {
   isOpen: boolean;
   onClose: () => void;
   caption?: string;
-  background?: boolean;
+  lightboxBackground?: "surface-1" | "canvas";
   currentIndex?: number;
   total?: number;
   onPrev?: () => void;
@@ -23,7 +23,7 @@ export function Lightbox({
   isOpen,
   onClose,
   caption,
-  background = true,
+  lightboxBackground,
   currentIndex,
   total,
   onPrev,
@@ -195,8 +195,12 @@ export function Lightbox({
             <img
               src={src}
               alt={alt}
-              className={`max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block p-6 box-border ${
-                background ? "bg-surface-1" : "bg-canvas"
+              className={`max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block ${
+                lightboxBackground === "surface-1"
+                  ? "p-6 box-border bg-surface-1"
+                  : lightboxBackground === "canvas"
+                  ? "p-6 box-border bg-canvas"
+                  : ""
               }`}
             />
             {caption && (

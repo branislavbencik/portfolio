@@ -83,6 +83,8 @@ export default async function ProjectPage({
 
   type PaddingSides = "all" | "no-bottom" | "top-left" | "none";
   type BorderSides = "all" | "no-bottom" | "none";
+  type CornerRadius = "sm" | "md";
+  type LightboxBackground = "surface-1" | "canvas";
   type ImageEntry = {
     src: string;
     alt: string;
@@ -90,6 +92,8 @@ export default async function ProjectPage({
     background: boolean;
     paddingSides?: string | null;
     borderSides?: string | null;
+    cornerRadius?: string | null;
+    lightboxBackground?: string | null;
     width?: number | null;
   };
 
@@ -97,6 +101,10 @@ export default async function ProjectPage({
     v === "all" || v === "no-bottom" || v === "top-left" || v === "none" ? v : undefined;
   const toBorderSides = (v?: string | null): BorderSides | undefined =>
     v === "all" || v === "no-bottom" || v === "none" ? v : undefined;
+  const toCornerRadius = (v?: string | null): CornerRadius | undefined =>
+    v === "sm" || v === "md" ? v : undefined;
+  const toLightboxBackground = (v?: string | null): LightboxBackground | undefined =>
+    v === "surface-1" || v === "canvas" ? v : undefined;
 
   // Selected projects duplicate the cover image as their first section image to attach
   // a caption that ProjectHeader didn't previously render. The image gets filtered out
@@ -177,6 +185,8 @@ export default async function ProjectPage({
                     background={img.background}
                     paddingSides={toPaddingSides(img.paddingSides)}
                     borderSides={toBorderSides(img.borderSides)}
+                    cornerRadius={toCornerRadius(img.cornerRadius)}
+                    lightboxBackground={toLightboxBackground(img.lightboxBackground)}
                     width={img.width ?? undefined}
                   />
                 ))}
@@ -197,6 +207,8 @@ export default async function ProjectPage({
                     background={img.background}
                     paddingSides={toPaddingSides(img.paddingSides)}
                     borderSides={toBorderSides(img.borderSides)}
+                    cornerRadius={toCornerRadius(img.cornerRadius)}
+                    lightboxBackground={toLightboxBackground(img.lightboxBackground)}
                     width={img.width ?? undefined}
                   />
                 ))}
@@ -204,6 +216,18 @@ export default async function ProjectPage({
             </div>
           );
         })}
+
+        {!isCaseStudy && project.deliverables.length > 0 && (
+          <div className="pt-detail">
+            <DeliverablesBar
+              items={project.deliverables.map((d) => ({
+                label: d.label,
+                href: d.href,
+                caption: d.caption || undefined,
+              }))}
+            />
+          </div>
+        )}
       </main>
 
       <NextProjectCard currentSlug={slug} />

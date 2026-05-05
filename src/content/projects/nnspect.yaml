@@ -7,7 +7,7 @@ tags:
 type: selected
 metric: ""
 coverImage: /images/nnspect/nnspect-thumb.png
-order: 3
+order: 4
 role: Solo Designer
 year: "2022"
 domain: Industrial AI
@@ -32,3 +32,4 @@ sections:
         alt: Model evaluation
         caption: Model evaluation comparing ground-truth annotations against predicted defect labels with detection confidence scores.
         background: true
+        lightboxBackground: surface-1

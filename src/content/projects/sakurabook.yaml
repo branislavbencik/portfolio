@@ -7,7 +7,7 @@ tags:
 type: selected
 metric: ""
 coverImage: /images/sakurabook/sakurabook-thumb.png
-order: 4
+order: 5
 role: Solo Designer
 year: "2021"
 domain: Ecommerce
@@ -32,6 +32,7 @@ sections:
         alt: Localization
         caption: Designed in English for easier workflow, localized and shipped in Japanese. Japanese text runs shorter, so layouts are held without overflow adjustment.
         background: true
+        lightboxBackground: surface-1
       - src: /images/sakurabook/sakurabook-ws3.png
         alt: Merchant plugin
         caption: "The merchant-facing plugin, built with Shopify's Polaris Design System and modeled after Google Calendar. Space detail on the left, multi-space dashboard on the right."

@@ -166,6 +166,26 @@ export default config({
                   ],
                   defaultValue: "",
                 }),
+                cornerRadius: fields.select({
+                  label: "Corner Radius",
+                  description: "Optional. Adds a corner radius when there's no border. Useful for images with a baked-in background. Ignored when a border is set, because the border already carries a matching radius.",
+                  options: [
+                    { label: "None", value: "" },
+                    { label: "Small", value: "sm" },
+                    { label: "Medium", value: "md" },
+                  ],
+                  defaultValue: "",
+                }),
+                lightboxBackground: fields.select({
+                  label: "Lightbox Background",
+                  description: "Optional cushion behind the image when opened in the lightbox. Leave empty to float the image bare on the dark backdrop (default).",
+                  options: [
+                    { label: "None (default — bare on dark)", value: "" },
+                    { label: "Surface-1 (subtle off-white)", value: "surface-1" },
+                    { label: "Canvas (#FAFAFA — lighter)", value: "canvas" },
+                  ],
+                  defaultValue: "",
+                }),
                 width: fields.integer({
                   label: "Max Width (px)",
                   description: "Optional. Leave blank for full width.",
