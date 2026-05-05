@@ -1,0 +1,43 @@
+title: Configurator for electrical panel builders
+company: Schneider Electric
+description: "Panel configurator · Priced BOM · 5-day sprint"
+tags:
+  - Design Sprint
+  - Energy Infrastructure
+  - Prototype
+type: selected
+metric: ""
+coverImage: /images/schneider/schneider-thumb.png
+order: 3
+role: ""
+year: "2024"
+domain: Energy Infrastructure
+intro: "Electrical panels are getting more complex as buildings add solar, EV charging, and battery storage. This tool guides panel builders through component selection and generates a priced bill of materials. Prototyped in a 5-day sprint."
+contributions: []
+impactItems: []
+deliverables:
+  - label: Figma Prototype
+    href: "https://www.figma.com/proto/YqwEFpw4xULPZhkk8G71rp/Schneider-Electric-%7C-Design-Sprint-Prototype?node-id=28343-3731&viewport=7608%2C-993%2C0.13&t=50NCJ3luWWtMDvgp-1&scaling=contain&content-scaling=fixed&starting-point-node-id=28343%3A3731&show-proto-sidebar=1&page-id=28260%3A4"
+    caption: ""
+  - label: Figjam Design Sprint
+    href: "https://www.figma.com/board/c4lxTNmm21PBrFpzA2cKKw/Schneider-Electric-%E2%80%93-Design-Sprint--Copy-?node-id=0-1&t=ZUzRi9SEdIq8zqCc-1"
+    caption: ""
+sections:
+  - label: ""
+    title: ""
+    description: ""
+    images:
+      - src: /images/schneider/schneider-thumb.png
+        alt: Recommended panel configuration
+        caption: "Recommended configuration based on questionnaire answers. Each component in the panel view opens its detail."
+        background: true
+      - src: /images/schneider/schneider-ws1.png
+        alt: Questionnaire flow
+        caption: "Questionnaire narrows down installation type, grid setup, and required components before generating a recommendation."
+        background: false
+        cornerRadius: sm
+      - src: /images/schneider/schneider-ws2.png
+        alt: Priced bill of materials
+        caption: "Priced component list with export. The actual deliverable panel builders take to their clients."
+        background: true
+        paddingSides: none

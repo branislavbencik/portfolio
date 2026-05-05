@@ -54,6 +54,7 @@ sections:
         caption: "Content lifecycle: from first draft to archive, with branching for safe edits."
         background: false
         width: 640
+        lightboxBackground: canvas
       - src: /images/skoala/skoala-ws2-i2.png
         alt: Lesson editor with status
         caption: Lesson plan list with status, ownership, and version history.

@@ -65,11 +65,13 @@ sections:
         caption: Testing and teaching as a single connected system
         background: false
         width: 640
+        lightboxBackground: canvas
       - src: /images/teatime/teatime-ws2-i2.png
         alt: TeaTime personalized course plan
         caption: Each student receives a personalized plan combining work skills identified by the assessment and personal interests they've selected.
         background: true
         paddingSides: "top-left"
+        lightboxBackground: surface-1
   - label: "3. AUTOMATE"
     title: "Here's how a 15-minute conversation becomes a 2-page report and a personalized course plan"
     description: "Once the teacher records a 15-minute speaking test, the system takes over. It transcribes the audio, identifies speakers, assesses specific skills, and instantly delivers a student report and updated course plan."
@@ -78,6 +80,7 @@ sections:
         alt: TeaTime n8n automation pipeline
         caption: "6 key steps from a 50+ node pipeline: transcription, AI scoring, report generation, and course plan update, fully automated in n8n"
         background: true
+        lightboxBackground: surface-1
       - src: /images/teatime/teatime-ws3-i2.png
         alt: TeaTime course plan with skill gaps
         caption: "'Developing' and 'Needs Attention' skills feed directly into the course plan, closing the loop"

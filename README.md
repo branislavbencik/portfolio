@@ -12,7 +12,7 @@ A static portfolio site: landing page, long-form case studies, and selected proj
 
 - **Case studies:** [Skoala](https://branislavbencik.com/skoala), [TeaTime](https://branislavbencik.com/teatime)
 - **Playground:** [Reprio](https://reprio.vercel.app/) (live product, linked from the landing page)
-- **Selected projects:** [NNspect](https://branislavbencik.com/nnspect), [Sakurabook](https://branislavbencik.com/sakurabook), [Crowdberry](https://branislavbencik.com/crowdberry)
+- **Selected projects:** [Schneider](https://branislavbencik.com/schneider), [NNspect](https://branislavbencik.com/nnspect), [Sakurabook](https://branislavbencik.com/sakurabook), [Crowdberry](https://branislavbencik.com/crowdberry)
 
 Live build status and the session-by-session changelog live in [`docs/STATUS.md`](docs/STATUS.md).
 

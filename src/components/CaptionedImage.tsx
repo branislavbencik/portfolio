@@ -6,6 +6,8 @@ import { useLightbox } from "./LightboxContext";
 
 type PaddingSides = "all" | "no-bottom" | "top-left" | "none";
 type BorderSides = "all" | "no-bottom" | "none";
+type CornerRadius = "sm" | "md";
+type LightboxBackground = "surface-1" | "canvas";
 
 interface CaptionedImageProps {
   src: string;
@@ -14,6 +16,8 @@ interface CaptionedImageProps {
   background?: boolean;
   paddingSides?: PaddingSides;
   borderSides?: BorderSides;
+  cornerRadius?: CornerRadius;
+  lightboxBackground?: LightboxBackground;
   width?: number; // max-width in px; defaults to full content width
 }
 
@@ -24,15 +28,17 @@ export function CaptionedImage({
   background = true,
   paddingSides,
   borderSides,
+  cornerRadius,
+  lightboxBackground,
   width,
 }: CaptionedImageProps) {
   const id = useId();
   const { register, unregister, open } = useLightbox();
 
   useEffect(() => {
-    register({ id, src, alt: alt ?? "", caption, background });
+    register({ id, src, alt: alt ?? "", caption, background, lightboxBackground });
     return () => unregister(id);
-  }, [id, src, alt, caption, background, register, unregister]);
+  }, [id, src, alt, caption, background, lightboxBackground, register, unregister]);
 
   const resolvedPadding: PaddingSides = paddingSides ?? (background ? "all" : "none");
   const resolvedBorder: BorderSides = borderSides ?? (background ? "all" : "none");
@@ -48,11 +54,19 @@ export function CaptionedImage({
     resolvedBorder === "no-bottom"  ? "border border-b-0 border-surface-2 rounded-t-sm" :
     "";
 
+  // cornerRadius opts in to a radius when there's no border. Ignored when a
+  // border is present because borderClass already carries the matching radius.
+  const cornerRadiusClass =
+    resolvedBorder === "none" && cornerRadius === "sm" ? "rounded-sm" :
+    resolvedBorder === "none" && cornerRadius === "md" ? "rounded-md" :
+    "";
+
   const wrapperClass = [
     "relative w-full overflow-hidden cursor-zoom-in focus-ring-card",
     background ? "bg-surface-1" : "",
     paddingClass,
     borderClass,
+    cornerRadiusClass,
   ]
     .filter(Boolean)
     .join(" ");
