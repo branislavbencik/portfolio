@@ -3,8 +3,6 @@ import CitationLink from "@/components/CitationLink";
 const PRD_HREF =
   "https://clever-statistic-860.notion.site/PRD-Personalized-English-Learning-System-34ee84d8cf3f808cbff3d01f55d39e49?pvs=73";
 const N8N_HREF = "https://share-n8n.com/shared/888fkQf1zCAc";
-const SCHNEIDER_HREF =
-  "https://www.figma.com/proto/YqwEFpw4xULPZhkk8G71rp/Schneider-Electric-%7C-Design-Sprint-Prototype?node-id=28343-3731&p=f&t=Au2ICcuaAsHIp6ET-1&scaling=min-zoom&content-scaling=fixed&page-id=28260%3A4&starting-point-node-id=28343%3A3731&show-proto-sidebar=1";
 const SIDEPROJECT_HREF = "https://reprio.vercel.app/";
 const SKOALA_HREF =
   "https://www.figma.com/design/ElwxrYVb8YgqCfU1P6aIWE/Skoala-%7C-Teacher-Platform-Beta--Copy-?node-id=15633-97847&t=eetrjMXtBwq4OG2Q-1";
@@ -14,8 +12,7 @@ function LedeBody() {
     <>
       I tend to be useful anywhere from re-thinking the learning system
       <CitationLink label="PRD" href={PRD_HREF} external />, through shipping the automations
-      <CitationLink label="n8n" href={N8N_HREF} external />, prototypes
-      <CitationLink label="Schneider" href={SCHNEIDER_HREF} external />, and code
+      <CitationLink label="n8n" href={N8N_HREF} external />, prototypes, and code
       <CitationLink label="Sideproject" href={SIDEPROJECT_HREF} external />. Sometimes I go all the way down the rabbit hole to map states
       <CitationLink label="Skoala" href={SKOALA_HREF} external /> and exceptions.
     </>
@@ -27,8 +24,7 @@ function SingleParagraphBody() {
     <>
       Hi, I&apos;m Branislav – a generalist product designer. I tend to be useful anywhere from re-thinking the learning system
       <CitationLink label="PRD" href={PRD_HREF} external />, through shipping the automations
-      <CitationLink label="n8n" href={N8N_HREF} external />, prototypes
-      <CitationLink label="Schneider" href={SCHNEIDER_HREF} external />, and code
+      <CitationLink label="n8n" href={N8N_HREF} external />, prototypes, and code
       <CitationLink label="Sideproject" href={SIDEPROJECT_HREF} external />. Sometimes I go all the way down the rabbit hole to map states
       <CitationLink label="Skoala" href={SKOALA_HREF} external /> and exceptions.
     </>
@@ -40,8 +36,7 @@ function EVariantBody() {
     <>
       Hi, I&apos;m Branislav. I tend to be useful anywhere from re-thinking the learning system
       <CitationLink label="PRD" href={PRD_HREF} external />, through shipping the automations
-      <CitationLink label="n8n" href={N8N_HREF} external />, prototypes
-      <CitationLink label="Schneider" href={SCHNEIDER_HREF} external />, and code
+      <CitationLink label="n8n" href={N8N_HREF} external />, prototypes, and code
       <CitationLink label="Sideproject" href={SIDEPROJECT_HREF} external />. Sometimes I go all the way down the rabbit hole to map states
       <CitationLink label="Skoala" href={SKOALA_HREF} external /> and exceptions.
     </>

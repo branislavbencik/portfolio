@@ -79,6 +79,9 @@ Current ratios on the light canvas: primary text 16.5:1, secondary 7.5:1, tertia
 **Status-of-color-blind viewers is part of the test.**
 The site is achromatic by design, so color-blindness is mostly a non-issue. The one exception: the `--accent-live` green status dot in the hero. It's paired with a pulse animation and the literal word "OPEN" — never relies on color alone to communicate state. Why: ~8% of men have some form of color-vision difference.
 
+**NDA-gated artifacts use a locked-card pattern, not silent removal.**
+Inline chips that point at NDA-protected work (e.g., the hero `prototypes` chip → Schneider configurator) render via `<CitationLink disabled />`: the anchor still exists with `aria-label="{label} — link gated under NDA"` for screen-reader transparency, the click is a no-op (`onClick={preventDefault}`), and the visual locked-state lives in the hover card overlay (NDA pill + 0.05 scrim — see `docs/DESIGN.md` § Hover Preview Card § Locked variant). On touch devices and viewports ≤ 1023px the chip renders as plain prose (no chip styling, no `↗` glyph) since the hover card can't fire and there's no destination. Deliverable buttons (`<DeliverablesBar items=[…disabled…] />`) carry the same affordance with an inline NDA + lock badge replacing the trailing `↗`. Why: silently removing NDA references erases the work itself; the locked-card pattern is honest *and* respects the agreement.
+
 ---
 
 ## Performance

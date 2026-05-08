@@ -29,8 +29,9 @@ deliverables:
     href: https://skoala.cz
     caption: ""
   - label: Design Sprint Figjam
-    href: "https://www.figma.com/board/1SMhgaQVBxP5Md51IkMenJ/Skoala-%7C-DesignSprint?node-id=0-1&t=c3QrtnujD2iRzANR-1"
+    href: ""
     caption: ""
+    disabled: true
 sections:
   - label: Key design decision
     title: One content model, four outputs

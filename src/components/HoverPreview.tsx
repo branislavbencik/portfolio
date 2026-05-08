@@ -3,10 +3,15 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ExternalArrow } from "./icons/ExternalArrow";
+import { Lock } from "./icons/Lock";
 
 interface PreviewData {
   src: string;
   caption: string;
+  // When true, render the NDA + lock corner badge over the image.
+  // The chip itself is styled identically to active chips; the locked
+  // state lives entirely in this card.
+  locked: boolean;
 }
 
 const HOVER_QUERY = "(hover: hover) and (pointer: fine)";
@@ -26,11 +31,12 @@ function useHoverCapable(): boolean {
 }
 
 // Cursor-following 320×180 image card mounted to body. Reads
-// data-hover-preview-* attributes from the element under the cursor and
-// renders a card that translates with the pointer. Edge-aware: flips
-// quadrants near viewport edges. Hover-only by design — touch devices
-// (`hover: none`) get a CSS-only inline ↗ arrow on chips and direct
-// navigation; no SLOT-mode preview.
+// data-hover-preview-* (active) or data-locked-preview-* (NDA-locked)
+// attributes from the element under the cursor and renders a card
+// that translates with the pointer. Edge-aware: flips quadrants near
+// viewport edges. Hover-only by design — touch devices (`hover: none`)
+// get the inline ↗ arrow on chips; mobile tap-to-card pattern is a
+// future symmetric extension (Phase 2).
 export default function HoverPreview() {
   const [data, setData] = useState<PreviewData | null>(null);
   const hoverCapable = useHoverCapable();
@@ -59,9 +65,26 @@ export default function HoverPreview() {
 
     const resolve = () => {
       const el = document.elementFromPoint(pos.current.x, pos.current.y);
-      const host = (el as HTMLElement | null)?.closest<HTMLElement>(
-        "[data-hover-preview-src]"
+      const target = el as HTMLElement | null;
+      const lockedHost = target?.closest<HTMLElement>(
+        "[data-locked-preview-src]"
       );
+      if (lockedHost) {
+        const next: PreviewData = {
+          src: lockedHost.dataset.lockedPreviewSrc!,
+          caption: lockedHost.dataset.lockedPreviewCaption ?? "",
+          locked: true,
+        };
+        setData((prev) =>
+          prev?.src === next.src &&
+          prev?.caption === next.caption &&
+          prev?.locked === next.locked
+            ? prev
+            : next
+        );
+        return;
+      }
+      const host = target?.closest<HTMLElement>("[data-hover-preview-src]");
       if (!host) {
         setData((prev) => (prev === null ? prev : null));
         return;
@@ -69,8 +92,15 @@ export default function HoverPreview() {
       const next: PreviewData = {
         src: host.dataset.hoverPreviewSrc!,
         caption: host.dataset.hoverPreviewCaption ?? "",
+        locked: false,
       };
-      setData((prev) => (prev?.src === next.src ? prev : next));
+      setData((prev) =>
+        prev?.src === next.src &&
+        prev?.caption === next.caption &&
+        prev?.locked === next.locked
+          ? prev
+          : next
+      );
     };
 
     const onMove = (e: MouseEvent) => {
@@ -103,18 +133,53 @@ export default function HoverPreview() {
       >
         {data && (
           <>
-            <Image
-              src={data.src}
-              alt=""
-              width={320}
-              height={180}
-              className="hover-preview-img"
-              priority
-            />
+            <div className="relative">
+              <Image
+                src={data.src}
+                alt=""
+                width={320}
+                height={180}
+                className="hover-preview-img"
+                priority
+              />
+              {data.locked && (
+                <>
+                  {/* Baseline 0.05 black scrim — keeps pill contrast
+                      stable across bright/busy thumbnail areas without
+                      visibly veiling the image. */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{ background: "oklch(0% 0 0 / 0.05)" }}
+                  />
+                  <div
+                    className="locked-card-badge-enter absolute pointer-events-none flex items-center gap-1.5"
+                    style={{
+                      top: 12,
+                      right: 12,
+                      padding: "6px 10px",
+                      borderRadius: 6,
+                      background: "oklch(99% 0 0 / 0.92)",
+                      border: "1px solid var(--surface-2)",
+                      backdropFilter: "blur(2px)",
+                    }}
+                  >
+                    <span
+                      className="text-[10px] font-mono uppercase text-text-primary"
+                      style={{ letterSpacing: "0.12em", lineHeight: 1 }}
+                    >
+                      NDA
+                    </span>
+                    <span className="locked-card-lock-snap inline-flex">
+                      <Lock size={12} className="text-text-primary" />
+                    </span>
+                  </div>
+                </>
+              )}
+            </div>
             {data.caption && (
               <p className="hover-preview-caption">
                 {data.caption}
-                <ExternalArrow size={12} />
+                {!data.locked && <ExternalArrow size={12} />}
               </p>
             )}
           </>

@@ -98,12 +98,18 @@ export default config({
             }),
             href: fields.text({
               label: "URL",
-              description: "Full URL including https://",
+              description: "Full URL including https://. Leave empty when disabled (NDA-locked).",
+              validation: { isRequired: false },
             }),
             caption: fields.text({
               label: "Caption",
               description: "Optional secondary line below the label.",
               validation: { isRequired: false },
+            }),
+            disabled: fields.checkbox({
+              label: "Disabled (NDA-locked)",
+              description: "Render as a non-interactive button with an NDA + lock annotation. Use for artifacts that can't be linked publicly.",
+              defaultValue: false,
             }),
           }),
           {
