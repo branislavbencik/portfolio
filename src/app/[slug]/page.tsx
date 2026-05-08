@@ -153,6 +153,7 @@ export default async function ProjectPage({
                   label: d.label,
                   href: d.href,
                   caption: d.caption || undefined,
+                  disabled: d.disabled,
                 }))}
               />
             )}
@@ -224,6 +225,7 @@ export default async function ProjectPage({
                 label: d.label,
                 href: d.href,
                 caption: d.caption || undefined,
+                disabled: d.disabled,
               }))}
             />
           </div>

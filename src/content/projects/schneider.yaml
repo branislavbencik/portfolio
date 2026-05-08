@@ -17,11 +17,13 @@ contributions: []
 impactItems: []
 deliverables:
   - label: Figma Prototype
-    href: "https://www.figma.com/proto/YqwEFpw4xULPZhkk8G71rp/Schneider-Electric-%7C-Design-Sprint-Prototype?node-id=28343-3731&viewport=7608%2C-993%2C0.13&t=50NCJ3luWWtMDvgp-1&scaling=contain&content-scaling=fixed&starting-point-node-id=28343%3A3731&show-proto-sidebar=1&page-id=28260%3A4"
+    href: ""
     caption: ""
+    disabled: true
   - label: Figjam Design Sprint
-    href: "https://www.figma.com/board/c4lxTNmm21PBrFpzA2cKKw/Schneider-Electric-%E2%80%93-Design-Sprint--Copy-?node-id=0-1&t=ZUzRi9SEdIq8zqCc-1"
+    href: ""
     caption: ""
+    disabled: true
 sections:
   - label: ""
     title: ""

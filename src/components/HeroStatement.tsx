@@ -29,10 +29,10 @@ export default function HeroStatement() {
             />,{" "}
             <CitationLink
               label="prototypes"
-              href="https://www.figma.com/proto/YqwEFpw4xULPZhkk8G71rp/Schneider-Electric-%7C-Design-Sprint-Prototype?node-id=28343-3731&p=f&t=Au2ICcuaAsHIp6ET-1&scaling=min-zoom&content-scaling=fixed&page-id=28260%3A4&starting-point-node-id=28343%3A3731&show-proto-sidebar=1"
-              external
-              previewSrc="/images/hero-previews/schneider.png"
-              previewCaption="Configurator for Electrical Panels"
+              href=""
+              disabled
+              lockedPreviewSrc="/images/hero-previews/schneider.png"
+              lockedPreviewCaption="Schneider Electric configurator"
             />, and{" "}
             <CitationLink
               label="code"

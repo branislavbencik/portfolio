@@ -428,6 +428,23 @@
   @media (hover: none) {
     .chip-arrow { display: inline-block; }
   }
+  /* Locked chips on phones / tablets / narrow viewports: the locked
+     hover card can't fire without hover, and the chip can't navigate
+     (NDA), so render the word as plain prose instead of a chip.
+     Strips the chip color and the ↗ arrow — the word reads as part
+     of the lede. Active chips (with real navigation targets) keep
+     their styling. Gated by EITHER (hover: none) OR max-width 1023px
+     so devtools mobile simulation also flips to the prose treatment.
+     Selector uses tag prefix (a.…) to outrank browser default a:link
+     specificity (0,1,1). */
+  @media (hover: none), (max-width: 1023px) {
+    a.chip-link.chip-locked {
+      color: inherit;
+    }
+    a.chip-link.chip-locked .chip-arrow {
+      display: none;
+    }
+  }
 
   /* ── Mobile line-height for display + byline ─────────────────────
      At 40px mobile font-size, desktop's tight 1.15 leading lands at
@@ -559,6 +576,35 @@
   }
 }
 
+
+/* ── Locked hover-card entrance (M3+ — see HoverPreview.tsx) ────────
+   Pill mounts synchronously with the card chrome (no delay) and rides
+   the card's own fade-in. Lock icon does a small rotation as the pill
+   becomes visible — subtle "click" without making the user wait for
+   the affordance. Fires once per chip-hover. */
+@keyframes locked-card-badge-enter-kf {
+  from { opacity: 0; transform: translateY(-2px) scale(0.92); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+.locked-card-badge-enter {
+  animation: locked-card-badge-enter-kf 220ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@keyframes locked-card-lock-snap-kf {
+  from { transform: rotate(-10deg) scale(0.88); }
+  to   { transform: rotate(0)      scale(1);    }
+}
+.locked-card-lock-snap {
+  animation: locked-card-lock-snap-kf 240ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  transform-origin: 50% 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locked-card-badge-enter,
+  .locked-card-lock-snap {
+    animation: none;
+  }
+}
 
 /* ── Hero animations ─────────────────────────────────────────────── */
 @keyframes hero-content-in {
