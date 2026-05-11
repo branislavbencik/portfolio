@@ -4,44 +4,27 @@ import { useId, useEffect } from "react";
 import Image from "next/image";
 import { useLightbox } from "./LightboxContext";
 
-type PaddingSides = "all" | "no-bottom" | "top-left" | "none";
-type BorderSides = "all" | "no-bottom" | "none";
-type CornerRadius = "sm" | "md";
-type LightboxBackground = "surface-1" | "canvas";
+export type PaddingSides = "all" | "no-bottom" | "top-left" | "none";
+export type BorderSides = "all" | "no-bottom" | "none";
+export type CornerRadius = "sm" | "md";
+export type BackgroundShade = "1" | "white";
 
-interface CaptionedImageProps {
-  src: string;
-  alt?: string;
-  caption?: string;
+export interface FramingOpts {
   background?: boolean;
+  backgroundShade?: BackgroundShade;
   paddingSides?: PaddingSides;
   borderSides?: BorderSides;
   cornerRadius?: CornerRadius;
-  lightboxBackground?: LightboxBackground;
-  width?: number; // max-width in px; defaults to full content width
 }
 
-export function CaptionedImage({
-  src,
-  alt,
-  caption,
-  background = true,
-  paddingSides,
-  borderSides,
-  cornerRadius,
-  lightboxBackground,
-  width,
-}: CaptionedImageProps) {
-  const id = useId();
-  const { register, unregister, open } = useLightbox();
-
-  useEffect(() => {
-    register({ id, src, alt: alt ?? "", caption, background, lightboxBackground });
-    return () => unregister(id);
-  }, [id, src, alt, caption, background, lightboxBackground, register, unregister]);
-
-  const resolvedPadding: PaddingSides = paddingSides ?? (background ? "all" : "none");
-  const resolvedBorder: BorderSides = borderSides ?? (background ? "all" : "none");
+// Shared between body (CaptionedImage) and lightbox so the two render paths
+// can never drift. Lightbox parity is a locked rule — see
+// feedback_lightbox_mirrors_detail_one_to_one in memory.
+export function framingClass(opts: FramingOpts): string {
+  const background = opts.background ?? true;
+  const backgroundShade: BackgroundShade = opts.backgroundShade ?? "1";
+  const resolvedPadding: PaddingSides = opts.paddingSides ?? (background ? "all" : "none");
+  const resolvedBorder: BorderSides = opts.borderSides ?? (background ? "all" : "none");
 
   const paddingClass =
     resolvedPadding === "all"        ? "p-8 max-md:p-4" :
@@ -54,19 +37,72 @@ export function CaptionedImage({
     resolvedBorder === "no-bottom"  ? "border border-b-0 border-surface-2 rounded-t-sm" :
     "";
 
-  // cornerRadius opts in to a radius when there's no border. Ignored when a
-  // border is present because borderClass already carries the matching radius.
   const cornerRadiusClass =
-    resolvedBorder === "none" && cornerRadius === "sm" ? "rounded-sm" :
-    resolvedBorder === "none" && cornerRadius === "md" ? "rounded-md" :
+    resolvedBorder === "none" && opts.cornerRadius === "sm" ? "rounded-sm" :
+    resolvedBorder === "none" && opts.cornerRadius === "md" ? "rounded-md" :
     "";
 
-  const wrapperClass = [
-    "relative w-full overflow-hidden cursor-zoom-in focus-ring-card",
-    background ? "bg-surface-1" : "",
+  return [
+    background ? (backgroundShade === "white" ? "bg-surface-tile" : "bg-surface-1") : "",
     paddingClass,
     borderClass,
     cornerRadiusClass,
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
+interface CaptionedImageProps extends FramingOpts {
+  src: string;
+  alt?: string;
+  caption?: string;
+  width?: number; // max-width in px; defaults to full content width
+}
+
+export function CaptionedImage({
+  src,
+  alt,
+  caption,
+  background = true,
+  backgroundShade = "1",
+  paddingSides,
+  borderSides,
+  cornerRadius,
+  width,
+}: CaptionedImageProps) {
+  const id = useId();
+  const { register, unregister, open } = useLightbox();
+
+  useEffect(() => {
+    register({
+      id,
+      src,
+      alt: alt ?? "",
+      caption,
+      background,
+      backgroundShade,
+      paddingSides,
+      borderSides,
+      cornerRadius,
+    });
+    return () => unregister(id);
+  }, [
+    id,
+    src,
+    alt,
+    caption,
+    background,
+    backgroundShade,
+    paddingSides,
+    borderSides,
+    cornerRadius,
+    register,
+    unregister,
+  ]);
+
+  const wrapperClass = [
+    "relative w-full overflow-hidden cursor-zoom-in focus-ring-card",
+    framingClass({ background, backgroundShade, paddingSides, borderSides, cornerRadius }),
   ]
     .filter(Boolean)
     .join(" ");

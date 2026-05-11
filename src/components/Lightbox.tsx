@@ -3,6 +3,13 @@
 import { useEffect, useCallback, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
+import {
+  framingClass,
+  type PaddingSides,
+  type BorderSides,
+  type CornerRadius,
+  type BackgroundShade,
+} from "./CaptionedImage";
 
 interface LightboxProps {
   src: string;
@@ -10,7 +17,11 @@ interface LightboxProps {
   isOpen: boolean;
   onClose: () => void;
   caption?: string;
-  lightboxBackground?: "surface-1" | "canvas";
+  background?: boolean;
+  backgroundShade?: BackgroundShade;
+  paddingSides?: PaddingSides;
+  borderSides?: BorderSides;
+  cornerRadius?: CornerRadius;
   currentIndex?: number;
   total?: number;
   onPrev?: () => void;
@@ -23,7 +34,11 @@ export function Lightbox({
   isOpen,
   onClose,
   caption,
-  lightboxBackground,
+  background,
+  backgroundShade,
+  paddingSides,
+  borderSides,
+  cornerRadius,
   currentIndex,
   total,
   onPrev,
@@ -118,7 +133,7 @@ export function Lightbox({
           role="dialog"
           aria-modal="true"
           aria-label="Image viewer"
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-text-primary cursor-zoom-out"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-canvas cursor-zoom-out"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -128,7 +143,7 @@ export function Lightbox({
         >
           {/* Counter — top left */}
           {showCounter && (
-            <span className="absolute top-5 left-5 type-allcaps text-text-inverse opacity-75">
+            <span className="absolute top-5 left-5 type-allcaps text-text-secondary">
               {currentIndex! + 1} / {total}
             </span>
           )}
@@ -136,7 +151,7 @@ export function Lightbox({
           {/* Close — top right */}
           <button
             ref={closeButtonRef}
-            className="absolute top-4 right-4 p-2.5 max-md:p-3 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
+            className="absolute top-4 right-4 p-2.5 max-md:p-3 text-text-primary opacity-60 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:opacity-100"
             onClick={onClose}
             aria-label="Close image"
           >
@@ -158,7 +173,7 @@ export function Lightbox({
           {showNav && (
             <button
               ref={prevButtonRef}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 max-md:p-3 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 max-md:p-3 text-text-primary opacity-60 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:opacity-100"
               onClick={(e) => { e.stopPropagation(); onPrev!(); }}
               aria-label="Previous image"
             >
@@ -172,7 +187,7 @@ export function Lightbox({
           {showNav && (
             <button
               ref={nextButtonRef}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 max-md:p-3 text-text-inverse opacity-80 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/60 focus-visible:opacity-100"
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 max-md:p-3 text-text-primary opacity-60 hover:opacity-100 motion-safe:transition-opacity cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas focus-visible:opacity-100"
               onClick={(e) => { e.stopPropagation(); onNext!(); }}
               aria-label="Next image"
             >
@@ -191,20 +206,25 @@ export function Lightbox({
             transition={{ duration: 0.2 }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt={alt}
-              className={`max-w-[90vw] max-h-[80vh] w-auto h-auto object-contain block ${
-                lightboxBackground === "surface-1"
-                  ? "p-6 box-border bg-surface-1"
-                  : lightboxBackground === "canvas"
-                  ? "p-6 box-border bg-canvas"
-                  : ""
-              }`}
-            />
+            {/* Wrapper mirrors body framing 1:1 — same bg/padding/border/radius as the
+                detail-page image. See feedback_lightbox_mirrors_detail_one_to_one. */}
+            <div
+              className={[
+                "max-w-[90vw] block",
+                framingClass({ background, backgroundShade, paddingSides, borderSides, cornerRadius }),
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={alt}
+                className="max-w-full max-h-[88vh] w-auto h-auto object-contain block"
+              />
+            </div>
             {caption && (
-              <p className="type-body text-text-inverse text-center max-w-[600px]">
+              <p className="type-body text-text-primary text-center max-w-[600px]">
                 {caption}
               </p>
             )}

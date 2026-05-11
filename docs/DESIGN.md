@@ -218,7 +218,10 @@ Three canonical modes. Never use ad-hoc widths.
 
 The `background` flag is orthogonal to width — both modes can be `true` or `false`:
 - `background: true` → `bg-surface-1` + `p-8` + `border border-zinc-200`. For product UI screenshots.
+  - `backgroundShade: "white"` overrides the fill to `bg-surface-tile` (#FFFFFF) for images whose own content reads as grey/dark and need explicit white framing. These are the only two allowed shades — never `surface-2`, `surface-3`, or `canvas`.
 - `background: false` → transparent, no padding, no border. For self-contained Figma composites and diagrams that have their own visual frame.
+
+**Lightbox parity:** When an image opens in the lightbox, the wrapper renders the **same `framingClass()` output** as the body — identical bg, padding, border, corner radius. There is no lightbox-only cushion knob; if a bare image needs cushion when zoomed, give it cushion in the body and both views inherit it. The lightbox backdrop itself is `bg-canvas`, so framing reads exactly as it does on the page.
 
 ### Figma Export Contract
 

@@ -7,6 +7,8 @@ import { ImpactBar } from "@/components/ImpactBar";
 import { DeliverablesBar } from "@/components/DeliverablesBar";
 import { WorkSection } from "@/components/WorkSection";
 import { CaptionedImage } from "@/components/CaptionedImage";
+import { LogoRow } from "@/components/LogoRow";
+import { AwardList } from "@/components/AwardList";
 import { NextProjectCard } from "@/components/NextProjectCard";
 
 export async function generateStaticParams() {
@@ -84,17 +86,41 @@ export default async function ProjectPage({
   type PaddingSides = "all" | "no-bottom" | "top-left" | "none";
   type BorderSides = "all" | "no-bottom" | "none";
   type CornerRadius = "sm" | "md";
-  type LightboxBackground = "surface-1" | "canvas";
   type ImageEntry = {
     src: string;
     alt: string;
     caption?: string | null;
+    variant?: string | null;
     background: boolean;
+    backgroundShade?: string | null;
     paddingSides?: string | null;
     borderSides?: string | null;
     cornerRadius?: string | null;
-    lightboxBackground?: string | null;
     width?: number | null;
+  };
+
+  // Group adjacent logo-variant images into a single LogoRow block so they
+  // render side-by-side instead of stacked inside the section's flex-col.
+  type RenderBlock =
+    | { kind: "image"; img: ImageEntry }
+    | { kind: "logo-row"; logos: ImageEntry[] };
+  const groupBlocks = (imgs: ImageEntry[]): RenderBlock[] => {
+    const blocks: RenderBlock[] = [];
+    let i = 0;
+    while (i < imgs.length) {
+      if (imgs[i].variant === "logo") {
+        const run: ImageEntry[] = [];
+        while (i < imgs.length && imgs[i].variant === "logo") {
+          run.push(imgs[i]);
+          i++;
+        }
+        blocks.push({ kind: "logo-row", logos: run });
+      } else {
+        blocks.push({ kind: "image", img: imgs[i] });
+        i++;
+      }
+    }
+    return blocks;
   };
 
   const toPaddingSides = (v?: string | null): PaddingSides | undefined =>
@@ -103,8 +129,8 @@ export default async function ProjectPage({
     v === "all" || v === "no-bottom" || v === "none" ? v : undefined;
   const toCornerRadius = (v?: string | null): CornerRadius | undefined =>
     v === "sm" || v === "md" ? v : undefined;
-  const toLightboxBackground = (v?: string | null): LightboxBackground | undefined =>
-    v === "surface-1" || v === "canvas" ? v : undefined;
+  const toBackgroundShade = (v?: string | null): "1" | "white" | undefined =>
+    v === "1" || v === "white" ? v : undefined;
 
   // Selected projects duplicate the cover image as their first section image to attach
   // a caption that ProjectHeader didn't previously render. The image gets filtered out
@@ -177,20 +203,33 @@ export default async function ProjectPage({
                 title={section.title}
                 description={section.description || undefined}
               >
-                {images.map((img, j) => (
-                  <CaptionedImage
-                    key={j}
-                    src={img.src}
-                    alt={img.alt}
-                    caption={img.caption || undefined}
-                    background={img.background}
-                    paddingSides={toPaddingSides(img.paddingSides)}
-                    borderSides={toBorderSides(img.borderSides)}
-                    cornerRadius={toCornerRadius(img.cornerRadius)}
-                    lightboxBackground={toLightboxBackground(img.lightboxBackground)}
-                    width={img.width ?? undefined}
+                {groupBlocks(images).map((block, j) =>
+                  block.kind === "logo-row" ? (
+                    <LogoRow key={j} logos={block.logos.map((l) => ({ src: l.src, alt: l.alt }))} />
+                  ) : (
+                    <CaptionedImage
+                      key={j}
+                      src={block.img.src}
+                      alt={block.img.alt}
+                      caption={block.img.caption || undefined}
+                      background={block.img.background}
+                      backgroundShade={toBackgroundShade(block.img.backgroundShade)}
+                      paddingSides={toPaddingSides(block.img.paddingSides)}
+                      borderSides={toBorderSides(block.img.borderSides)}
+                      cornerRadius={toCornerRadius(block.img.cornerRadius)}
+                      width={block.img.width ?? undefined}
+                    />
+                  )
+                )}
+                {section.awards && section.awards.length > 0 && (
+                  <AwardList
+                    items={section.awards.map((a) => ({
+                      logo: a.logo || undefined,
+                      name: a.name,
+                      description: a.description || undefined,
+                    }))}
                   />
-                ))}
+                )}
               </WorkSection>
             );
           }
@@ -206,10 +245,10 @@ export default async function ProjectPage({
                     alt={img.alt}
                     caption={img.caption || undefined}
                     background={img.background}
+                    backgroundShade={toBackgroundShade(img.backgroundShade)}
                     paddingSides={toPaddingSides(img.paddingSides)}
                     borderSides={toBorderSides(img.borderSides)}
                     cornerRadius={toCornerRadius(img.cornerRadius)}
-                    lightboxBackground={toLightboxBackground(img.lightboxBackground)}
                     width={img.width ?? undefined}
                   />
                 ))}

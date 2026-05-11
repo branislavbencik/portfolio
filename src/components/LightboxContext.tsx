@@ -9,6 +9,12 @@ import {
   ReactNode,
 } from "react";
 import { Lightbox } from "./Lightbox";
+import type {
+  PaddingSides,
+  BorderSides,
+  CornerRadius,
+  BackgroundShade,
+} from "./CaptionedImage";
 
 type ImageEntry = {
   id: string;
@@ -16,7 +22,10 @@ type ImageEntry = {
   alt: string;
   caption?: string;
   background?: boolean;
-  lightboxBackground?: "surface-1" | "canvas";
+  backgroundShade?: BackgroundShade;
+  paddingSides?: PaddingSides;
+  borderSides?: BorderSides;
+  cornerRadius?: CornerRadius;
 };
 
 type LightboxContextValue = {
@@ -76,7 +85,11 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
           src={current.src}
           alt={current.alt}
           caption={current.caption}
-          lightboxBackground={current.lightboxBackground}
+          background={current.background}
+          backgroundShade={current.backgroundShade}
+          paddingSides={current.paddingSides}
+          borderSides={current.borderSides}
+          cornerRadius={current.cornerRadius}
           currentIndex={currentIndex}
           total={images.length}
           onPrev={images.length > 1 ? prev : undefined}
