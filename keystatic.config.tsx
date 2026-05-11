@@ -148,7 +148,25 @@ export default config({
                   label: "Caption",
                   validation: { isRequired: false },
                 }),
+                variant: fields.select({
+                  label: "Variant",
+                  description: "Image (default) renders full-width with frame controls. Logo renders constrained-height, centered, no lightbox; adjacent logos group into a single row.",
+                  options: [
+                    { label: "Image (default)", value: "image" },
+                    { label: "Logo", value: "logo" },
+                  ],
+                  defaultValue: "image",
+                }),
                 background: fields.checkbox({ label: "Background", defaultValue: true }),
+                backgroundShade: fields.select({
+                  label: "Background Shade",
+                  description: "Shade of the framed surface when Background is on. '1' is the default subtle off-white (#F4F4F5). 'Pure white' (#FFFFFF) is for images whose own background reads as grey/dark and need an explicit white frame. These are the only two allowed shades.",
+                  options: [
+                    { label: "1 — Subtle off-white (default, #F4F4F5)", value: "1" },
+                    { label: "Pure white (#FFFFFF)", value: "white" },
+                  ],
+                  defaultValue: "1",
+                }),
                 paddingSides: fields.select({
                   label: "Padding Sides",
                   description: "Which sides get 32px padding. 'Default' follows Background (on = all sides, off = none).",
@@ -182,16 +200,6 @@ export default config({
                   ],
                   defaultValue: "",
                 }),
-                lightboxBackground: fields.select({
-                  label: "Lightbox Background",
-                  description: "Optional cushion behind the image when opened in the lightbox. Leave empty to float the image bare on the dark backdrop (default).",
-                  options: [
-                    { label: "None (default — bare on dark)", value: "" },
-                    { label: "Surface-1 (subtle off-white)", value: "surface-1" },
-                    { label: "Canvas (#FAFAFA — lighter)", value: "canvas" },
-                  ],
-                  defaultValue: "",
-                }),
                 width: fields.integer({
                   label: "Max Width (px)",
                   description: "Optional. Leave blank for full width.",
@@ -199,6 +207,24 @@ export default config({
                 }),
               }),
               { label: "Images" }
+            ),
+            awards: fields.array(
+              fields.object({
+                logo: fields.text({
+                  label: "Logo Path",
+                  description: "e.g. /images/skoala/skoala-award-eifle.png. Leave empty to render the row text-only.",
+                  validation: { isRequired: false },
+                }),
+                name: fields.text({ label: "Name" }),
+                description: fields.text({
+                  label: "Description",
+                  validation: { isRequired: false },
+                }),
+              }),
+              {
+                label: "Awards",
+                description: "Rendered as a vertical list of bordered rows inside the section, after the description. Use for award/recognition lists.",
+              }
             ),
           }),
           { label: "Sections" }

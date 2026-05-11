@@ -32,4 +32,3 @@ sections:
         alt: Model evaluation
         caption: Model evaluation comparing ground-truth annotations against predicted defect labels with detection confidence scores.
         background: true
-        lightboxBackground: surface-1

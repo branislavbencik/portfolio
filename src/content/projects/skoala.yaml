@@ -1,6 +1,6 @@
 title: Designing CMS for financial literacy platform
 company: Skoala
-description: "Serving 3.5K schools. Replaced a Figma-to-developer handoff with direct publishing"
+description: "Skoala helps Czech teachers bring financial literacy to classrooms. It provides structured plans, activities, and materials for topics like debt, scams, and budgeting."
 tags:
   - 50% market reach
   - Lead Designer
@@ -12,11 +12,11 @@ order: 1
 role: Lead Designer
 year: "2025"
 domain: ""
-intro: "Skoala is an education platform focused on financial literacy content. It offers teachers a library of lesson plans, interactive presentations, videos and mini-games, about 150 teaching hours to date. Before the CMS, all of this was built by hand in Figma, requiring developer involvement for every new lesson."
+intro: "Skoala helps Czech teachers bring financial literacy to classrooms. It provides structured plans, activities, and materials for topics like debt, scams, and budgeting."
 contributions:
-  - Co-defined product direction in founding Design Sprint.
-  - Designed the core platform UX.
-  - "Led CMS design: information architecture, component specification, content versioning."
+  - Co-defined product direction during the founding Design Sprint.
+  - Designed the core platform flows and around half of the interface screens.
+  - Architected logic & solo designed the CMS end-to-end.
 impactItems:
   - value: "3,5K"
     label: Czech schools
@@ -33,31 +33,78 @@ deliverables:
     caption: ""
     disabled: true
 sections:
-  - label: Key design decision
-    title: One content model, four outputs
-    description: "When the project started, we were building lessons in Figma and handing them off to developers one by one. Total design freedom, but it was slow, inconsistent, and wouldn't scale. None of the existing CMS platforms could help either. A lesson plan isn't a blog post. It's a set of interconnected content blocks that need to work as a classroom projection, a teaching brief, a student quiz, and a printed worksheet. So we built our own CMS around that idea."
+  - label: Context
+    title: A growing content library needed a production system
+    description: "Early lessons were hand-crafted in Figma and coded one by one. As the curriculum scaled, this manual handoff became a production bottleneck. We built a CMS so editors could publish independently without developer intervention."
     images:
-      - src: /images/skoala/skoala-ws1-i1.png
-        alt: Four curriculum formats
-        caption: One lesson plan, four outputs. Each pulls its own subset of content blocks.
+      - src: /images/skoala/skoala-1.png
+        alt: Curriculum roadmap with four distinct content types
+        caption: "The content roadmap required four distinct content types, each with its own interactive logic and production constraints."
+        background: true
+        paddingSides: all
+        borderSides: all
+  - label: Core content model
+    title: The teaching module was our primary building block
+    description: "It is the \"full package\" for the classroom. Teachers open a single module and find everything needed for a lesson: no hunting for files or on-the-fly preparation required."
+    images:
+      - src: /images/skoala/skoala-2.png
+        alt: MVP slide taxonomy — system-generated, static, inputs, outputs
+        caption: ""
         background: false
-      - src: /images/skoala/skoala-ws1-i2.png
+        paddingSides: none
+        borderSides: all
+      - src: /images/skoala/skoala-3.png
+        alt: Module breakdown — presentation, teaching guidance, student activity, print materials
+        caption: ""
+        background: false
+        borderSides: none
+  - label: Key design decision
+    title: Start constrained, expand intentionally
+    description: "To build the classroom presenter, we needed a set of reusable slides. A fully flexible slide builder would have invited scope creep. I deliberately lobbied for as few initial building blocks as possible, only adding new components when the constraints became genuine blockers. This enforced focus kept the project lean and ensured the codebase remained maintainable."
+    images:
+      - src: /images/skoala/skoala-4.png
+        alt: Teaching module — published Předlužení detail page
+        caption: "MVP slide taxonomy designed to prioritize reuse over component bloat."
+        background: true
+        paddingSides: all
+        borderSides: all
+        width: 640
+      - src: /images/skoala/skoala-5.png
+        alt: Slide editor in the CMS
+        caption: "Slide editor in CMS: composing presentations from predefined slide types."
+        background: true
+        paddingSides: none
+      - src: /images/skoala/skoala-6.png
         alt: CMS editor view
-        caption: "A quiz question in the CMS and its rendered output on the student's phone. Editors control content. The system controls layout."
+        caption: "I designed the building blocks to handle layout and styling automatically. Editors focus purely on content while the system maintains visual consistency."
         background: true
         paddingSides: none
   - label: Key design decision
     title: Edit live content without breaking it
-    description: "Once a lesson plan is live, teachers build their week around it. You can't just edit stuff under their hands. You don't want them to open a broken slide mid-class. So we borrowed from git version control: edits happen on a branch, the live version stays untouched, and changes merge back only when ready."
+    description: "Live lessons cannot change unpredictably while teachers are planning. I architected a Git-inspired lifecycle: editors branch into drafts and review changes before merging to \"Published.\" This ensures safe updates without technical overhead."
     images:
-      - src: /images/skoala/skoala-ws2-i1.png
+      - src: /images/skoala/skoala-7.png
         alt: Content lifecycle diagram
         caption: "Content lifecycle: from first draft to archive, with branching for safe edits."
         background: false
         width: 640
-        lightboxBackground: canvas
-      - src: /images/skoala/skoala-ws2-i2.png
+      - src: /images/skoala/skoala-8.png
         alt: Lesson editor with status
-        caption: Lesson plan list with status, ownership, and version history.
+        caption: "Status, ownership and version history made the production state visible to everyone involved."
         background: false
         borderSides: all
+  - label: Outcome
+    title: From volume to coverage
+    description: "Skoala grew into 150+ hours of content covering primary and secondary school years. The library now includes 140 lesson plans and 20 interactive games."
+    images: []
+    awards:
+      - logo: /images/skoala/skoala-award-eifle.png
+        name: EIFLE Award
+        description: Won Children's Education Program of the Year
+      - logo: /images/skoala/skoala-award-maia.png
+        name: MAIA Award
+        description: Nominated in top 16
+  - label: Reflection
+    title: Systems as guardrails
+    description: "I’ve learned that hard constraints drive invention. Restricting the block library didn’t slow us down, and the results never lacked variety. The content team handled the constraints with grace, proving we could be very inventive with the building blocks we already had."
+    images: []
