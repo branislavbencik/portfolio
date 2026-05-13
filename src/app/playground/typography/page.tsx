@@ -38,7 +38,7 @@ function HeroBlock({ fontFeatureSettings }: HeroBlockProps) {
     <div className="flex flex-col gap-6" style={{ fontFeatureSettings }}>
       <div className="flex flex-col gap-0">
         <p className="type-byline text-text-primary">Hi, I&apos;m Branislav,</p>
-        <h3 className="type-display text-text-primary">Generalist Product Designer.</h3>
+        <h3 className="type-display text-text-primary">Technical Product Designer.</h3>
       </div>
       <p className="type-lede text-text-primary max-w-lede">
         <LedeBody />
@@ -96,7 +96,7 @@ function ForcedMobileDisplay({ letterSpacing, lineHeight }: ForcedDisplayProps) 
         letterSpacing,
       }}
     >
-      Generalist Product Designer.
+      Technical Product Designer.
     </h3>
   );
 }
@@ -203,7 +203,7 @@ export default function TypographyPlaygroundPage() {
         id="C"
         name="ss06 — Alt G (single-story)"
         spec='font-feature-settings: "ss06" on, "ss08" off'
-        note="Switches double-story g → single-story g. Visible in 'Generalist'."
+        note="Switches double-story g → single-story g. Visible in 'Designer'."
       >
         <HeroBlock fontFeatureSettings='"ss06" on, "ss08" off' />
       </VariantSection>

@@ -81,22 +81,9 @@
       "Skill(update-config)",
       "Write(/Users/branislavbencik/repos/portfolio/playground/**)",
       "Bash(mkdir -p /Users/branislavbencik/repos/portfolio/playground*)",
-      "Bash(cp /Users/branislavbencik/Desktop/skoala-context.png public/images/skoala/skoala-context.png)",
-      "Bash(cp /Users/branislavbencik/Desktop/skoala-core-content-model-2.png public/images/skoala/skoala-content-library.png)",
-      "Bash(cp /Users/branislavbencik/Desktop/skoala-dd-1-1.png public/images/skoala/skoala-teaching-module-1.png)",
-      "Bash(cp /Users/branislavbencik/Desktop/skoala-dd-1-2.png public/images/skoala/skoala-teaching-module-2.png)",
-      "Bash(cp /Users/branislavbencik/Desktop/skoala-core-content-model-1.png public/images/skoala/skoala-content-model.png)",
-      "Bash(lsof -ti:3000-3010)",
-      "Bash(tee /tmp/skoala-dev.log)",
-      "Bash(PORT=3011 npm run dev)",
-      "Bash(mv public/images/skoala/skoala-content-model.png public/images/skoala/skoala-slide-taxonomy.png)",
-      "Bash(cp /Users/branislavbencik/Desktop/skoala-core-content-model-2.png public/images/skoala/skoala-content-model.png)",
-      "Bash(rm public/images/skoala/skoala-content-library.png)",
-      "Bash(mv skoala-context.png skoala-1.png)",
-      "Bash(mv skoala-slide-taxonomy.png skoala-2.png)",
-      "Bash(mv skoala-content-model.png skoala-3.png)",
-      "Bash(mv skoala-teaching-module-1.png skoala-4.png)",
-      "Bash(mv skoala-teaching-module-2.png skoala-5.png)"
+      "Bash(lsof -nP -iTCP -sTCP:LISTEN)",
+      "Bash(echo \"exit=$?\")",
+      "Bash(kill 28940 36518 71890)"
     ]
   },
   "outputStyle": "Explanatory"

@@ -9,7 +9,7 @@ export default function HeroStatement() {
         <div className="animate-hero-content-in flex flex-col gap-6">
           <div className="flex flex-col gap-0">
             <p className="type-byline text-text-primary">Hi, I&apos;m Branislav,</p>
-            <h1 className="type-display text-text-primary">Generalist Product Designer.</h1>
+            <h1 className="type-display text-text-primary">Technical Product Designer.</h1>
           </div>
           <p className="type-lede text-text-primary max-w-lede">
             I tend to be useful anywhere from mapping{" "}
