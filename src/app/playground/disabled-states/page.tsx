@@ -641,7 +641,7 @@ function MobileFrame({ variant, overlayVariant = "corner" }: MobileFrameProps) {
         <div className="px-5 pt-4">
           <p className="type-byline text-text-primary text-[16px] mb-1">Hi, I&apos;m Branislav,</p>
           <h3 className="type-display text-text-primary text-[28px] leading-[1.15] mb-4">
-            Generalist Product Designer.
+            Technical Product Designer.
           </h3>
           <p className="text-text-primary text-[15px] leading-[1.45]">
             I tend to be useful anywhere from mapping{" "}

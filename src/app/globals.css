@@ -212,7 +212,7 @@
 
   /* ── Byline (serif, voice-tier) ─────────────────────────────────
      Used only for the masthead personal-intro line above a Display.
-     E.g. landing hero: "Hi, I'm Branislav," above "Generalist Product Designer."
+     E.g. landing hero: "Hi, I'm Branislav," above "Technical Product Designer."
      Regular 400 (not Light 300) because at 56px the byline must read as a spoken
      greeting, not editorial flourish; book weight matches the Warmly Precise voice
      and holds at the 40px mobile floor of VC Honey's Banner cut.
@@ -449,7 +449,7 @@
   /* ── Mobile line-height for display + byline ─────────────────────
      At 40px mobile font-size, desktop's tight 1.15 leading lands at
      46px — cramped when the headline wraps to two lines (likely on
-     ≤480px viewports for "Generalist Product Designer."). 1.2 yields
+     ≤480px viewports for "Technical Product Designer."). 1.2 yields
      48px between baselines, opening multi-line wraps without affecting
      the desktop 56px stack (which still uses 1.15). Scoped to display +
      byline only; deeper headings keep their existing leading because

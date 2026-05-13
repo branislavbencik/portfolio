@@ -103,7 +103,7 @@ export default function PlaygroundPage() {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-0">
             <p className="type-byline text-text-primary">Hi, I&apos;m Branislav,</p>
-            <h3 className="type-display text-text-primary">Generalist Product Designer.</h3>
+            <h3 className="type-display text-text-primary">Technical Product Designer.</h3>
           </div>
           <p className="type-lede text-text-primary max-w-lede">
             <LedeBody />
@@ -131,7 +131,7 @@ export default function PlaygroundPage() {
             >
               Hi, I&apos;m Branislav,
             </p>
-            <h3 className="type-display text-text-primary">Generalist Product Designer.</h3>
+            <h3 className="type-display text-text-primary">Technical Product Designer.</h3>
           </div>
           <p className="type-lede text-text-primary max-w-lede">
             <LedeBody />
@@ -159,7 +159,7 @@ export default function PlaygroundPage() {
             >
               Hi, I&apos;m Branislav,
             </p>
-            <h3 className="type-display text-text-primary">Generalist Product Designer.</h3>
+            <h3 className="type-display text-text-primary">Technical Product Designer.</h3>
           </div>
           <p
             className="type-lede text-text-primary max-w-lede"
@@ -190,7 +190,7 @@ export default function PlaygroundPage() {
             >
               Hi, I&apos;m Branislav,
             </p>
-            <h3 className="type-display text-text-primary">Generalist Product Designer.</h3>
+            <h3 className="type-display text-text-primary">Technical Product Designer.</h3>
           </div>
           <p
             className="type-lede text-text-primary max-w-lede"
@@ -221,7 +221,7 @@ export default function PlaygroundPage() {
             >
               Hi, I&apos;m Branislav,
             </p>
-            <h3 className="type-display text-text-primary">Generalist Product Designer.</h3>
+            <h3 className="type-display text-text-primary">Technical Product Designer.</h3>
           </div>
           <p
             className="type-lede text-text-primary max-w-lede"
@@ -240,7 +240,7 @@ export default function PlaygroundPage() {
         caveat='Kept for reference. User: "Hi I&apos;m Branislav in the middle interrupts the chain between role claim and explanation." Chain-break problem.'
       >
         <div className="flex flex-col gap-8">
-          <h3 className="type-display text-text-primary">Generalist Product Designer.</h3>
+          <h3 className="type-display text-text-primary">Technical Product Designer.</h3>
           <p
             className="text-text-primary max-w-[720px]"
             style={{
@@ -276,7 +276,7 @@ export default function PlaygroundPage() {
             >
               Hi, I&apos;m Branislav,
             </p>
-            <h3 className="type-display text-text-primary">Generalist Product Designer.</h3>
+            <h3 className="type-display text-text-primary">Technical Product Designer.</h3>
           </div>
           <p
             className="text-text-primary max-w-[720px]"
