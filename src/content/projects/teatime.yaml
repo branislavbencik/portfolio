@@ -34,7 +34,7 @@ deliverables:
 sections:
   - label: "1. ACQUIRE"
     title: "HR managers don't google \"English language training\""
-    description: "Companies buy English training when the right person gets the right pitch at the right time. We could have played the long game on LinkedIn, but instead, I designed a direct outreach pipeline. I treated every touchpoint as a UX challenge, optimizing the inbox preview, the reading experience, and the landing page. The result: a 1.8% sales conversion rate."
+    description: "Companies buy English training when the right person gets the right pitch at the right time. We could have played the long game on LinkedIn, but instead, I designed a direct outreach pipeline. I treated every touchpoint as a UX challenge, optimizing the inbox preview, the reading experience, and the landing page. The result: a 1% sales conversion rate (vs ~0.5% B2B SaaS outbound average)."
     images:
       - src: /images/teatime/teatime-ws1-i1.png
         alt: TeaTime persona definition
