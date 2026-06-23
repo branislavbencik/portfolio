@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ProjectVideo } from "./ProjectVideo";
 
 interface CaseStudyCardProps {
   company: string;
@@ -8,7 +9,13 @@ interface CaseStudyCardProps {
   primaryHref: string;
   image: string;
   imageAlt: string;
+  /** Optional 16:9 MP4. When set, the frame plays it on hover (desktop) or
+   *  in-view (touch); `image` becomes the poster/fallback. */
+  video?: string;
   cursorLabel?: string;
+  /** Cursor-label pill tone. "inverted" (light pill) for dark-background
+   *  thumbnails like the playground video tile. */
+  cursorTone?: "default" | "inverted";
 }
 
 export function CaseStudyCard({
@@ -18,24 +25,38 @@ export function CaseStudyCard({
   primaryHref,
   image,
   imageAlt,
+  video,
   cursorLabel,
+  cursorTone,
 }: CaseStudyCardProps) {
   return (
     <Link
       href={primaryHref}
       data-cursor-label={cursorLabel}
+      data-cursor-label-tone={cursorTone}
       className="group block no-underline outline-none focus-ring-card rounded-md motion-safe:transition-transform motion-safe:duration-[180ms] motion-safe:ease-out motion-safe:hover:scale-[1.01] active:scale-[0.99]"
     >
       <article className="relative w-full border border-surface-2 rounded-md p-[4px] bg-canvas">
         <div className="overflow-hidden border border-surface-2 rounded-sm bg-surface-tile">
-          <Image
-            src={image}
-            alt={imageAlt}
-            width={952}
-            height={535}
-            className="w-full h-auto block"
-            unoptimized
-          />
+          {video ? (
+            <ProjectVideo
+              src={video}
+              poster={image}
+              alt={imageAlt}
+              width={952}
+              height={535}
+              className="w-full h-auto block"
+            />
+          ) : (
+            <Image
+              src={image}
+              alt={imageAlt}
+              width={952}
+              height={535}
+              className="w-full h-auto block"
+              unoptimized
+            />
+          )}
         </div>
 
         <div

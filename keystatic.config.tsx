@@ -49,6 +49,12 @@ export default config({
           directory: "public/images",
           publicPath: "/images",
         }),
+        thumbnailVideo: fields.text({
+          label: "Thumbnail Video",
+          description:
+            "Optional. Path to a 16:9 MP4 (e.g. /images/reprio/reprio-demo.mp4). When set, the landing card plays it on hover (desktop) or in-view (touch), and the detail page uses it as the hero — Cover Image is the poster/fallback. Leave empty for a static image tile.",
+          validation: { isRequired: false },
+        }),
         order: fields.integer({
           label: "Display Order",
           description: "1 = first on landing page",

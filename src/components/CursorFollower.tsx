@@ -76,7 +76,7 @@ export default function CursorFollower() {
       <span
         className={`inline-block translate-x-4 translate-y-4 rounded-full type-caption px-3 py-1.5 whitespace-nowrap ${
           tone === "inverted"
-            ? "bg-text-inverse text-text-primary"
+            ? "bg-text-inverse text-text-primary border border-surface-2"
             : "bg-text-primary text-text-inverse"
         }`}
       >

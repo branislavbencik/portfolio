@@ -45,6 +45,9 @@ Every CSS animation in `globals.css` has a reduced-motion fallback (12+ guards t
 **No bounce, no overshoot, no spring.**
 Easing curves stay smooth-ease-out (`cubic-bezier(0.16, 1, 0.3, 1)` and family). Bouncy easing reads as toy-like and dates a product. Real objects decelerate; they don't recoil.
 
+**Prototype thumbnails play on hover; detail heroes autoplay once and never stop on mouseout.**
+`<ProjectVideo>` (`src/components/ProjectVideo.tsx`) plays a muted clip once and holds the last frame (no loop). Thumbnail mode: hover starts from 0, mouseleave resets to poster, touch triggers in-view once. Hero mode: in-view autoplay once + hover-restart, with NO mouseleave handler — autoplay-initiated playback must finish uninterrupted, so an unrelated mouseout never freezes it mid-clip. Both modes honor `prefers-reduced-motion` and `navigator.connection.saveData` (static poster, no playback). Use `hero` prop to select the mode.
+
 **Cursor-following overlays use always-mounted + attribute toggle, never @keyframes on conditional render.**
 Per project memory `feedback_attribute_toggle_for_cursor_overlays`. When the wrapper has imperative cursor-tracking (`element.style.transform = translate3d(x, y, 0)` on mousemove), `@keyframes`/`@starting-style` on a conditionally-mounted child fires before the wrapper transform updates → animation plays at stale (0,0) and you never see it. Pre-stage the inner element in DOM at hidden state, toggle `data-visible="true"` on hover, animate via CSS `transition` on the attribute selector. Live use: `<HoverPreview />` (320ms entrance, see `docs/DESIGN.md` § Hover Preview Card).
 

@@ -3,6 +3,7 @@
 import { useId, useEffect } from "react";
 import Image from "next/image";
 import { useLightbox } from "./LightboxContext";
+import { ProjectVideo } from "./ProjectVideo";
 
 interface ProjectHeaderProps {
   title: string;
@@ -12,6 +13,9 @@ interface ProjectHeaderProps {
   intro?: string;
   heroImage?: string;
   heroImageAlt?: string;
+  /** Optional 16:9 MP4. When set, the hero plays it once in-view (no lightbox,
+   *  no controls) and `heroImage` is the poster/fallback. */
+  heroVideo?: string;
   coverCaption?: string;
 }
 
@@ -23,13 +27,15 @@ export function ProjectHeader({
   intro,
   heroImage,
   heroImageAlt,
+  heroVideo,
   coverCaption,
 }: ProjectHeaderProps) {
   const id = useId();
   const { register, unregister, open } = useLightbox();
 
   useEffect(() => {
-    if (heroImage) {
+    // Video heroes are not lightboxed; only register static images.
+    if (heroImage && !heroVideo) {
       register({
         id,
         src: heroImage,
@@ -40,7 +46,7 @@ export function ProjectHeader({
       });
     }
     return () => unregister(id);
-  }, [id, heroImage, heroImageAlt, register, unregister]);
+  }, [id, heroImage, heroVideo, heroImageAlt, register, unregister]);
 
   const kickerValues = [company, year].filter(
     (v): v is string => Boolean(v && v.trim()),
@@ -82,21 +88,35 @@ export function ProjectHeader({
 
       {heroImage && (
         <figure className="max-lg:px-content-x w-full flex flex-col items-start">
-          <button
-            type="button"
-            className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-ring-card border border-surface-2 rounded-sm"
-            aria-label="Open hero image in lightbox"
-            onClick={() => open(id)}
-          >
-            <Image
-              src={heroImage}
-              alt={heroImageAlt ?? ""}
-              width={1288}
-              height={748}
-              className="w-full h-auto block"
-              unoptimized
-            />
-          </button>
+          {heroVideo ? (
+            <div className="relative w-full overflow-hidden bg-surface-1 block border border-surface-2 rounded-sm">
+              <ProjectVideo
+                src={heroVideo}
+                poster={heroImage}
+                alt={heroImageAlt ?? ""}
+                width={1920}
+                height={1080}
+                hero
+                className="w-full h-auto block"
+              />
+            </div>
+          ) : (
+            <button
+              type="button"
+              className="relative w-full overflow-hidden bg-surface-1 cursor-zoom-in block focus-ring-card border border-surface-2 rounded-sm"
+              aria-label="Open hero image in lightbox"
+              onClick={() => open(id)}
+            >
+              <Image
+                src={heroImage}
+                alt={heroImageAlt ?? ""}
+                width={1288}
+                height={748}
+                className="w-full h-auto block"
+                unoptimized
+              />
+            </button>
+          )}
           {coverCaption && (
             <figcaption className="w-full max-w-column type-label text-text-secondary text-center self-center mt-3">
               {coverCaption}
