@@ -1,5 +1,4 @@
 import { CaseStudyCard } from "@/components/CaseStudyCard";
-import { PlaygroundCard } from "@/components/PlaygroundCard";
 import HeroStatement from "@/components/HeroStatement";
 import { reader } from "@/lib/keystatic";
 
@@ -10,6 +9,7 @@ type ProjectEntry = {
   title: string;
   description?: string;
   coverImage: unknown;
+  thumbnailVideo?: string;
 };
 
 export default async function Home() {
@@ -46,6 +46,7 @@ export default async function Home() {
         primaryHref={`/${slug}`}
         image={resolveImage(e)}
         imageAlt={`${e.title} thumbnail`}
+        video={e.thumbnailVideo || undefined}
         cursorLabel="Read case study"
       />
     );
@@ -62,21 +63,30 @@ export default async function Home() {
         primaryHref={`/${slug}`}
         image={resolveImage(e)}
         imageAlt={`${e.title} thumbnail`}
+        video={e.thumbnailVideo || undefined}
         cursorLabel="View project"
       />
     );
   };
 
+  // Playground tiles use the standardized card and link to their own detail
+  // page. Card label === detail H1 === `title` (single source of truth, same
+  // rule as every other project). The hover cursor is inverted because the
+  // thumbnail video's app background is dark.
   const renderPlaygroundCard = ({ slug, entry }: typeof projects[number]) => {
     const e = entry as ProjectEntry;
     return (
-      <PlaygroundCard
+      <CaseStudyCard
         key={slug}
-        title={e.company || e.title}
-        description={e.description || ""}
-        liveHref="https://reprio.vercel.app/"
+        company={e.company || e.title}
+        title={e.title || e.description || ""}
+        tags={e.tags ? [...e.tags] : undefined}
+        primaryHref={`/${slug}`}
         image={resolveImage(e)}
         imageAlt={`${e.title} thumbnail`}
+        video={e.thumbnailVideo || undefined}
+        cursorLabel="View project"
+        cursorTone="inverted"
       />
     );
   };

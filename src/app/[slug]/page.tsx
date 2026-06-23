@@ -10,14 +10,11 @@ import { CaptionedImage } from "@/components/CaptionedImage";
 import { LogoRow } from "@/components/LogoRow";
 import { AwardList } from "@/components/AwardList";
 import { NextProjectCard } from "@/components/NextProjectCard";
+import { Learnings } from "@/components/Learnings";
 
 export async function generateStaticParams() {
   const projects = await reader.collections.projects.all();
-  // Playground entries live only on the landing page and link to the live
-  // product externally. No detail page is built for them.
-  return projects
-    .filter((p) => p.entry.type !== "playground")
-    .map((p) => ({ slug: p.slug }));
+  return projects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -72,11 +69,9 @@ export default async function ProjectPage({
   const { slug } = await params;
   const project = await reader.collections.projects.read(slug);
   if (!project) notFound();
-  // Playground entries don't have detail pages — only landing-page cards
-  // that link out to the live product.
-  if (project.type === "playground") notFound();
 
   const isCaseStudy = project.type === "case-study";
+  const isPlayground = project.type === "playground";
 
   const coverImage =
     typeof project.coverImage === "object" && project.coverImage !== null
@@ -152,6 +147,7 @@ export default async function ProjectPage({
           intro={project.intro || undefined}
           heroImage={coverImage}
           heroImageAlt={`${project.title} overview`}
+          heroVideo={project.thumbnailVideo || undefined}
           coverCaption={coverCaption}
         />
 
@@ -186,7 +182,7 @@ export default async function ProjectPage({
           </>
         )}
 
-        {project.sections.map((section, i) => {
+        {!isPlayground && project.sections.map((section, i) => {
           const images = (section.images as unknown as ImageEntry[])
             .filter(img => isCaseStudy || img.src !== coverImage);
 
@@ -257,7 +253,7 @@ export default async function ProjectPage({
           );
         })}
 
-        {!isCaseStudy && project.deliverables.length > 0 && (
+        {!isPlayground && !isCaseStudy && project.deliverables.length > 0 && (
           <div className="pt-detail">
             <DeliverablesBar
               items={project.deliverables.map((d) => ({
@@ -268,6 +264,50 @@ export default async function ProjectPage({
               }))}
             />
           </div>
+        )}
+
+        {/* Playground build-notes body — rendered directly (not WorkSection,
+            whose mb-detail would stack to ~192px) for a tight 96px rhythm:
+            TL;DR → links → Learnings. */}
+        {isPlayground && (
+          <>
+            {project.sections[0]?.title && (
+              <section className="w-full max-w-frame mx-center max-lg:px-content-x pt-section">
+                <div className="max-w-column mx-auto w-full">
+                  {project.sections[0].label && (
+                    <p className="type-allcaps text-text-secondary mb-3">
+                      {project.sections[0].label}
+                    </p>
+                  )}
+                  <h2 className="type-heading text-text-primary mb-5">
+                    {project.sections[0].title}
+                  </h2>
+                  {project.sections[0].description && (
+                    <p className="type-body text-text-primary">
+                      {project.sections[0].description}
+                    </p>
+                  )}
+                </div>
+              </section>
+            )}
+
+            {project.deliverables.length > 0 && (
+              <div className="pt-detail">
+                <DeliverablesBar
+                  items={project.deliverables.map((d) => ({
+                    label: d.label,
+                    href: d.href,
+                    caption: d.caption || undefined,
+                    disabled: d.disabled,
+                  }))}
+                />
+              </div>
+            )}
+
+            {/* Learnings — rich inline content the structured schema can't
+                hold. Reprio-specific, so gated by slug. */}
+            {slug === "reprio" && <Learnings />}
+          </>
         )}
       </main>
 

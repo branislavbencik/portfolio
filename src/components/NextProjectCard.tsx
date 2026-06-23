@@ -7,12 +7,15 @@ interface NextProjectCardProps {
 
 export async function NextProjectCard({ currentSlug }: NextProjectCardProps) {
   const allProjects = await reader.collections.projects.all();
-  // Playground entries (e.g. Reprio) live only on the landing page and link
-  // out to the live product. They have no detail page, so they're excluded
-  // from the next-project rotation.
-  const sorted = [...allProjects]
-    .filter((p) => p.entry.type !== "playground")
-    .sort((a, b) => (a.entry.order ?? 99) - (b.entry.order ?? 99));
+  // Next-project rotation follows the landing's visual order: case studies,
+  // then playground, then selected — by `order` within each band. So
+  // TeaTime → Reprio → Schneider, matching the page grouping.
+  const typeRank = (t?: string) =>
+    t === "case-study" ? 0 : t === "playground" ? 1 : 2;
+  const sorted = [...allProjects].sort((a, b) => {
+    const r = typeRank(a.entry.type) - typeRank(b.entry.type);
+    return r !== 0 ? r : (a.entry.order ?? 99) - (b.entry.order ?? 99);
+  });
 
   const currentIdx = sorted.findIndex((p) => p.slug === currentSlug);
   const next = sorted[(currentIdx + 1) % sorted.length];

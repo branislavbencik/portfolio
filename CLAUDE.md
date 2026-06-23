@@ -35,7 +35,7 @@ All project pages render from a single `src/app/[slug]/page.tsx` template agains
 | `/` | `src/app/page.tsx` | Landing page (hero + sectioned cards) |
 | `/skoala`, `/teatime` | `[slug]/page.tsx` | Case studies (long-form) |
 | `/schneider`, `/nnspect`, `/sakurabook`, `/crowdberry` | `[slug]/page.tsx` | Selected projects |
-| `/reprio` | `[slug]/page.tsx` | Playground (built side-projects, dark surface) |
+| `/reprio` | `[slug]/page.tsx` | Playground build-notes (standardized card; off-white prototype video baked into the mp4) |
 | `/about`, `/resume` | TBD | Stub / not started |
 | `/resume.pdf` | `public/resume.pdf` | Static download |
 | `/keystatic` | `src/app/keystatic/` | Local content editor (dev only) |

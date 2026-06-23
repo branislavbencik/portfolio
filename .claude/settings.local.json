@@ -83,7 +83,9 @@
       "Bash(mkdir -p /Users/branislavbencik/repos/portfolio/playground*)",
       "Bash(lsof -nP -iTCP -sTCP:LISTEN)",
       "Bash(echo \"exit=$?\")",
-      "Bash(kill 28940 36518 71890)"
+      "Bash(kill 28940 36518 71890)",
+      "Bash(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,duration,r_frame_rate,nb_frames -show_entries format=duration -of default=noprint_wrappers=1 \"/Users/branislavbencik/Desktop/Recording at 2026-06-17 14.35.26-Edited.mov\")",
+      "Bash(PORT=3000 npm run dev)"
     ]
   },
   "outputStyle": "Explanatory"

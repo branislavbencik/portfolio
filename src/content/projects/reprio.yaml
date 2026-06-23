@@ -1,15 +1,32 @@
-title: Reprio
+title: To-do list app where LLM scores and re-ranks your tasks
 company: Reprio
-description: "Another to-do list app, until an LLM scores each task on impact, confidence, and ease and then proposes a new order. Keystroke friendly."
-tags: []
+description: "A to-do app where an LLM scores and re-ranks tasks against the ICE framework — built to explore Claude Code and AI-assisted product development."
+tags:
+  - Claude Code
+  - Workflow design
 type: playground
 metric: ""
-coverImage: /images/reprio/reprio-thumb.png
+coverImage: /images/reprio/reprio-poster.png
+thumbnailVideo: /images/reprio/reprio-demo.mp4
 order: 10
 role: Designed and built
 year: "2026"
 domain: ""
-intro: ""
+intro: "I built Reprio to deep dive into Claude Code and AI-assisted product development. The app itself is a simple experiment: tasks are evaluated against the ICE framework (impact, confidence, ease) and automatically reordered based on the result."
 contributions: []
 impactItems: []
-sections: []
+deliverables:
+  - label: Live
+    href: https://reprio.vercel.app/
+    caption: ""
+    disabled: false
+  - label: Github
+    href: https://github.com/branislavbencik/reprio
+    caption: ""
+    disabled: false
+sections:
+  - label: "TL;DR"
+    title: "Workflow Design > Prompt Engineering"
+    description: "Tweaking MDs, skills, commands, and project conventions improved the quality far more than iteration #10 in a prompt session."
+    images: []
+    awards: []
